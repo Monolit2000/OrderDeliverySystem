@@ -30,10 +30,5 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
             return new PhoneNumber(inputNumebr);
         }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Number;
-        }
     }
 }
