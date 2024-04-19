@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.CommonModule.Domain
+namespace OrderDeliverySystem.UserAccess.Domain.Users
 {
-    public interface IAggregateRoot
+    public interface IUserRepository
     {
+        Task AddAsync(User user);
     }
 }
