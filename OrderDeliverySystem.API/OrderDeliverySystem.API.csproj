@@ -8,11 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Новая папка\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
