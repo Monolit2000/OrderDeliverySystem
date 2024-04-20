@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.UserAccess.Domain.DomainEvents
+namespace OrderDeliverySystem.UserAccess.Domain.Users.DomainEvents
 {
     public class UserActivatedDomainEvent : DomainEventBase
     {

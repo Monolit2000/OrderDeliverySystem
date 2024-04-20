@@ -26,9 +26,6 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         private UserRole() { }
 
-        //protected override IEnumerable<object> GetEqualityComponents()
-        //{
-        //    throw new NotImplementedException();
-        //}
+     
     }
 }

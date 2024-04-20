@@ -1,0 +1,34 @@
+﻿using OrderDeliverySystem.CommonModule.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OrderDeliverySystem.Ordering.Domain.Order
+{
+    public class OrderStatus : ValueObject
+    {
+        public static OrderStatus Submitted => new OrderStatus(nameof(Submitted));
+
+        public static OrderStatus AwaitingValidation => new OrderStatus(nameof(AwaitingValidation));
+
+        public static OrderStatus Paid => new OrderStatus(nameof(Paid));
+
+        public static OrderStatus Shipped => new OrderStatus(nameof(Shipped));
+
+        public static OrderStatus Cancelled => new OrderStatus(nameof(Cancelled));
+
+        public string Value { get; }
+
+        private OrderStatus(string value)
+        {
+            Value = value;
+        }
+
+        private OrderStatus() { }
+
+
+
+    }
+}

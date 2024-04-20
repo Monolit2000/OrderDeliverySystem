@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public UserRole Role;
 
-        public bool IsActivated;
+        public bool IsActivated = false;
 
         public long ChatId;
 
@@ -67,7 +67,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         }
 
 
-        public static User CreateUser(
+        public static User CreateCustomer(
            PhoneNumber phoneNumber, string firstName, string LastName, string name)
         {
             return new User(
@@ -77,6 +77,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
                 LastName,
                 name,
                 UserRole.Customer);
+
+            
         }
 
         public static User CreateDeliverer(

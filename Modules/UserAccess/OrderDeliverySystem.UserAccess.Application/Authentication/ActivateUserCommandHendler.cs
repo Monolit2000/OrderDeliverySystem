@@ -31,6 +31,8 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
                 Role = user.Role
             };
 
+            await _userRepository.SaveChangesAsync();
+
             return new ActivateResult(userDto);   
         }
     }

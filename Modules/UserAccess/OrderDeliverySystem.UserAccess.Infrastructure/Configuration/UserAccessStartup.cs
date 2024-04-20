@@ -13,6 +13,7 @@ using Serilog;
 using Autofac.Core;
 using IContainer = Autofac.IContainer;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess;
+using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Processing;
 
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 {
@@ -60,8 +61,8 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 
             UserAccessCompositionRoot.SetContainer(_container);
 
-            //containerBuilder.RegisterModule(new ProcessingModule());
-           // containerBuilder.RegisterModule(new OutboxModule(new BiDictionary<string, Type>()));
+            containerBuilder.RegisterModule(new ProcessingModule());
+            //containerBuilder.RegisterModule(new OutboxModule(new BiDictionary<string, Type>()));
 
             //containerBuilder.RegisterModule(new QuartzModule());
             //containerBuilder.RegisterModule(new EmailModule(emailsConfiguration, emailSender));

@@ -22,11 +22,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
         public async Task AddAsync(User user)
         {
             await _userAccessContext.Users.AddAsync(user);
-        }
-
-        public Task AddAsyncAsync(User user)
-        {
-            throw new NotImplementedException();
+            await _userAccessContext.SaveChangesAsync();
         }
 
         public Task GetUserAsync(User user)
@@ -45,6 +41,11 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
                 .FirstOrDefaultAsync(u => u.PhoneNumber.Number == phoneNumber);
 
             return user;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _userAccessContext.SaveChangesAsync();   
         }
 
         public Task UpdateAsync(User user)

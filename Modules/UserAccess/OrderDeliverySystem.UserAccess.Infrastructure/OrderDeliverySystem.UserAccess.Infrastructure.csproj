@@ -24,12 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.Application\OrderDeliverySystem.UserAccess.Application.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Persistence\InternalCommands\" />
   </ItemGroup>
 
 </Project>
