@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.CommonModule.Infrastructure
 {
-    public class ServiceProviderWrapper
+    public class ServiceProviderWrapper : IServiceProvider
     {
         private readonly ILifetimeScope lifeTimeScope;
 

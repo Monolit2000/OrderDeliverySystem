@@ -10,7 +10,9 @@ using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Logging;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Mediation;
 using Serilog;
+using Autofac.Core;
 using IContainer = Autofac.IContainer;
+using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess;
 
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 {
@@ -46,13 +48,19 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
         {
             var containerBuilder = new ContainerBuilder();
 
+
             containerBuilder.RegisterModule(new LoggingModule(logger.ForContext("Module", "UserAccess")));
 
-           // var loggerFactory = new Serilog.Extensions.Logging.SerilogLoggerFactory(logger);
-           // containerBuilder.RegisterModule(new DataAccessModule(connectionString, loggerFactory));
-            //containerBuilder.RegisterModule(new ProcessingModule());
+            var loggerFactory = new Serilog.Extensions.Logging.SerilogLoggerFactory(logger);
+            containerBuilder.RegisterModule(new DataAccessModule(connectionString, loggerFactory));
             containerBuilder.RegisterModule(new EventsBusModule(eventsBus));
             containerBuilder.RegisterModule(new MediatorModule());
+
+            _container = containerBuilder.Build();
+
+            UserAccessCompositionRoot.SetContainer(_container);
+
+            //containerBuilder.RegisterModule(new ProcessingModule());
            // containerBuilder.RegisterModule(new OutboxModule(new BiDictionary<string, Type>()));
 
             //containerBuilder.RegisterModule(new QuartzModule());
@@ -61,9 +69,6 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 
             //containerBuilder.RegisterInstance(executionContextAccessor);
 
-            _container = containerBuilder.Build();
-
-            UserAccessCompositionRoot.SetContainer(_container);
         }
     }
 }

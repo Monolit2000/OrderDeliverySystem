@@ -12,20 +12,21 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 {
     public class User : Entity, IAggregateRoot
     {
-
         public Guid UserId { get; private set; }
 
-        private string FirstName;
+        public string FirstName;
 
-        private string LastName;
+        public string LastName;
 
-        private string Name;
+        public string Name;
 
-        private PhoneNumber PhoneNumber;
+        public PhoneNumber PhoneNumber;
 
-        private List<UserRole> Reoles;
+        public List<UserRole> Reoles;
 
-        private bool _isActivated;
+        public bool IsActivated;
+
+        public long ChatId;
 
         private User()
         {
@@ -45,22 +46,23 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }
 
-        public void ActivateUser()
+        public void ActivateUser(long chatId)
         {
-            if (_isActivated)
+            if (IsActivated)
                 throw new Exception("User already activated");
 
-            _isActivated = true;
+            ChatId = chatId;
+            IsActivated = true;
 
             AddDomainEvent(new UserActivatedDomainEvent(UserId));
         }
 
         public void DeactivateUser()
         {
-            if (!_isActivated) 
+            if (!IsActivated) 
                 throw new Exception("User already deactivated");
 
-            _isActivated = false;
+            IsActivated = false;
             AddDomainEvent(new UserActivatedDomainEvent(UserId));
         }
 
