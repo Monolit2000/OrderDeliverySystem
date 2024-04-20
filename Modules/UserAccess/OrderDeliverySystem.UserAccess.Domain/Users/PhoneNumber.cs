@@ -20,15 +20,15 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             Number = number;    
         }
 
-        public static Result<PhoneNumber> Create(string inputNumebr)
+        public static Result<PhoneNumber> Create(string inputNumber)
         {
-            if(string.IsNullOrWhiteSpace(inputNumebr))
+            if(string.IsNullOrWhiteSpace(inputNumber))
                 return Result.Fail(new Error("ValueIsInvalid"));
 
-            if(Regex.IsMatch(inputNumebr, phoneRegex) == false)
+            if(Regex.IsMatch(inputNumber, phoneRegex) == false)
                 return Result.Fail(new Error("ValueIsInvalid"));
-
-            return new PhoneNumber(inputNumebr);
+                
+            return new PhoneNumber(inputNumber);
         }
     }
 }

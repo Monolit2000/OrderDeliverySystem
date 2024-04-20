@@ -28,7 +28,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
                 ChatId = user.ChatId,
                 IsActivated = user.IsActivated,
                 Name = user.Name,
-                Role = user.Reoles
+                Role = user.Roles
             };
 
             return new ActivateResult(userDto);   
