@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
 
         public string Name { get; set; }
 
-        public List<UserRole> Role { get; set; }
+        public UserRole Role { get; set; }
 
     }
 }

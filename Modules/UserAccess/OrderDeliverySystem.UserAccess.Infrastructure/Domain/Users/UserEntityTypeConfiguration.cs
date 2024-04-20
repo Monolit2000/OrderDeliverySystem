@@ -40,16 +40,38 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
 
             builder.HasKey(x => x.UserId);
 
-            builder.Property(p => p.PhoneNumber).HasColumnName("PhoneNumber");
             builder.Property(p => p.IsActivated).HasColumnName("IsActivated");
             builder.Property(p => p.FirstName).HasColumnName("FirstName");
             builder.Property(p => p.LastName).HasColumnName("LastName");
             builder.Property(p => p.Name).HasColumnName("Name");
 
-            builder.HasMany(p => p.Roles)
-                   .WithMany()
-                   .UsingEntity(j => j.ToTable("UserRoles", "users"));
+            //builder.Property(p => p.PhoneNumber).HasColumnName("PhoneNumber");
+
+           // builder.Property(x => x.PhoneNumber)
+           //.HasColumnName("PhoneNumber")
+           //.HasConversion(
+           //    phoneNumber => phoneNumber.Number, // Преобразование PhoneNumber в строку
+           //    number => PhoneNumber.Create(number).Value // Преобразование строки обратно в PhoneNumber
+           //);
+
+            builder.ComplexProperty(c => c.PhoneNumber, b =>
+            {
+                b.IsRequired();
+                b.Property(p => p.Number).HasColumnName("PhoneNumber");
+            });
+
+
+            builder.ComplexProperty(c => c.Role, b =>
+            {
+                b.IsRequired();
+                b.Property(p => p.Value).HasColumnName("Role");
+            });
         }
 
     }
 }
+
+
+            //builder.HasMany(p => p.Roles)
+            //       .WithMany()
+            //       .UsingEntity(j => j.ToTable("UserRoles", "users"));

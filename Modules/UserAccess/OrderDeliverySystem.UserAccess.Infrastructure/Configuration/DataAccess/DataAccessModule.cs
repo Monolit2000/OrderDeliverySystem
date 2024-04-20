@@ -27,7 +27,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess
             builder.Register(c =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<UserAccessContext>();
-                optionsBuilder.UseSqlServer(_databaseConnectionString);
+                optionsBuilder.UseSqlServer(_databaseConnectionString, b => b.MigrationsAssembly("OrderDeliverySystem.UserAccess.Infrastructure"));
                 optionsBuilder.UseLoggerFactory(_loggerFactory);
                 return new UserAccessContext(optionsBuilder.Options);
             }).AsSelf().InstancePerLifetimeScope();

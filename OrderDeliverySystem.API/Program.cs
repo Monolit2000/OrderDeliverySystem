@@ -1,10 +1,15 @@
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Infrastructure;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration;
+using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<UserAccessContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 // Add services to the container.

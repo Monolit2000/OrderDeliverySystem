@@ -22,7 +22,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public PhoneNumber PhoneNumber;
 
-        public List<UserRole> Roles;
+        public UserRole Role;
 
         public bool IsActivated;
 
@@ -41,7 +41,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             FirstName = firstName;  
             LastName = lastName;
             Name = name;
-            Roles = [role];
+            Role = role;
 
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }
