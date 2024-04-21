@@ -3,6 +3,7 @@ using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.UserAccess.Domain.Users.DomainEvents;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }
 
-        public void ActivateUser(long chatId)
+        public void ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)
         {
             if (IsActivated)
                 throw new Exception("User already activated");
@@ -54,7 +55,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             ChatId = chatId;
             IsActivated = true;
 
-            AddDomainEvent(new UserActivatedDomainEvent(UserId));
+            AddDomainEvent(new UserActivatedDomainEvent(UserId, phoneNumber, chatId, firstName,  lastName,  name));
         }
 
         public void DeactivateUser()
@@ -63,7 +64,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
                 throw new Exception("User already deactivated");
 
             IsActivated = false;
-            AddDomainEvent(new UserActivatedDomainEvent(UserId));
+            //AddDomainEvent(new UserActivatedDomainEvent(UserId));
         }
 
 

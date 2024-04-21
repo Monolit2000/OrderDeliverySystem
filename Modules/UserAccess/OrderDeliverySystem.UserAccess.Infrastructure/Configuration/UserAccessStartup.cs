@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Logging;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Mediation;
@@ -14,6 +13,7 @@ using Autofac.Core;
 using IContainer = Autofac.IContainer;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Processing;
+using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 {
@@ -21,14 +21,14 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
     {
         private static IContainer _container;
 
-        public static void Initialize( string connectionString, ILogger logger,  IEventsBus eventsBus,
+        public static void Initialize( string connectionString, ILogger logger, IAsyncEventBus eventsBus,
             long? internalProcessingPoolingInterval = null)
         {
 
             ConfigureCompositionRoot( connectionString, logger,   eventsBus);
 
             var moduleLogger = logger.ForContext("Module", "UserAccess");
-            EventsBusStartup.Initialize(moduleLogger);
+           // EventsBusStartup.Initialize(moduleLogger);
 
             //QuartzStartup.Initialize(moduleLogger, internalProcessingPoolingInterval);
         }
@@ -36,7 +36,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
         private static void ConfigureCompositionRoot(
             string connectionString,
             ILogger logger,
-            IEventsBus eventsBus)
+            IAsyncEventBus eventsBus)
         {
             var containerBuilder = new ContainerBuilder();
 

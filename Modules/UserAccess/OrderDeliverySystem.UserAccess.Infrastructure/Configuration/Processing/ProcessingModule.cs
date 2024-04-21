@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using MediatR;
 using OrderDeliverySystem.CommonModule.Infrastructure;
+using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,27 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.Processing
         protected override void Load(ContainerBuilder builder)
         {
 
+            //builder.RegisterType<UnitOfWork>()
+            //    .As<IUnitOfWork>()
+            //    .InstancePerLifetimeScope();
+
+            //builder.RegisterType<AsyncEventBus>()
+            //    .As<IAsyncEventBus>() 
+            //    .SingleInstance();
 
 
-            builder.RegisterType<UnitOfWork>()
-                .As<IUnitOfWork>()
-                .InstancePerLifetimeScope();
+            //    builder.RegisterType<InMemoryMessageQueue>()
+            //    .SingleInstance();
 
-            builder.RegisterGenericDecorator(
-                typeof(UnitOfWorkCommandHandlerDecorator<>),
-                typeof(IRequestHandler<>));
+            //builder.RegisterGenericDecorator(
+            //    typeof(UnitOfWorkCommandHandlerDecorator<>),
+            //    typeof(IRequestHandler<>));
 
-           
+            //builder.RegisterGenericDecorator(
+            //     typeof(UnitOfWorkCommandHandlerWithResultDecorator<,>),
+            //     typeof(IRequestHandler<,>));
+
+
         }
     }
 }

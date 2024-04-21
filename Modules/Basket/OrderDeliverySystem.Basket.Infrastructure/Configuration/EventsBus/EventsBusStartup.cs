@@ -1,4 +1,7 @@
 ﻿using Autofac;
+using MediatR;
+using Microsoft.EntityFrameworkCore.Storage.Json;
+using OrderDeliverySystem.Basket.Application.IntegrationEventsHandler;
 using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.IntegrationEvents;
 using System;
@@ -21,15 +24,26 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Configuration.EventsBus
         {
             var eventBus = BasketCompositionRoot.BeginLifetimeScope().Resolve<IEventsBus>();
 
-            SubscribeToIntegrationEvent<ConsumerCreatedIntegretionEvent>(eventBus, logger);
+
         }
 
         private static void SubscribeToIntegrationEvent<T>(IEventsBus eventBus, Serilog.ILogger logger)
             where T : IntegrationEvent
         {
             logger.Information("Subscribe to {@IntegrationEvent}", typeof(T).FullName);
-            eventBus.Subscribe(
-                new IntegrationEventGenericHandler<T>());
+
+            eventBus.Subscribe( new IntegrationEventGenericHandler<T>());
+        }
+
+        private static void SubscribeToIntegrationEventHandler<T>( IIntegrationEventHandler<T> integrationEventHandler,  IEventsBus eventBus, Serilog.ILogger logger)
+          where T : IntegrationEvent
+        {
+            logger.Information("Subscribe to {@IntegrationEvent}", typeof(T).FullName);
+
+            eventBus.Subscribe<T>(integrationEventHandler);
+
+
+           // eventBus.Subscribe(new IntegrationEventGenericHandler<T>());
         }
     }
 }

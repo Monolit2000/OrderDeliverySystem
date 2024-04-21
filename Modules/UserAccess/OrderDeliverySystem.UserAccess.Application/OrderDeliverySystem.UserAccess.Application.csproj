@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

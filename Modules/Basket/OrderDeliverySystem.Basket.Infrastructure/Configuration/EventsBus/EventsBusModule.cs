@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Hosting;
+using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using System;
 using System.Collections.Generic;
@@ -25,9 +27,17 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Configuration.EventsBus
             }
             else
             {
-                builder.RegisterType<InMemoryEventBusClient>()
-                    .As<IEventsBus>()
+
+                builder.RegisterType<InMemoryMessageQueue>()
                     .SingleInstance();
+
+                builder.RegisterType<AsyncEventBus>()
+                    .As<IAsyncEventBus>()
+                    .SingleInstance();
+
+                builder.RegisterType<IntegrationEventProcessorJob>()
+                    .As<IHostedService>()
+                    .InstancePerLifetimeScope();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 
@@ -19,12 +20,21 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<DispatchDomainEventsInterceptor>()
+                .As<ISaveChangesInterceptor>()
+                .InstancePerLifetimeScope();
+
 
             builder.Register(c =>
             {
                 var optionsBuilder = new DbContextOptionsBuilder<UserAccessContext>();
                 optionsBuilder.UseSqlServer(_databaseConnectionString, b => b.MigrationsAssembly("OrderDeliverySystem.UserAccess.Infrastructure"));
                 optionsBuilder.UseLoggerFactory(_loggerFactory);
+              
+
+                var interceptor = c.Resolve<ISaveChangesInterceptor>();
+                optionsBuilder.AddInterceptors(interceptor);
+
                 return new UserAccessContext(optionsBuilder.Options);
             }).AsSelf().InstancePerLifetimeScope();
 

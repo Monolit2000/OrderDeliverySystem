@@ -19,7 +19,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
             if (user == null)
                 return new ActivateResult( $"A user with this '{request.PhoneNumber.Number}' phone number does not exist ");
 
-            user.ActivateUser(request.ChatId);
+            user.ActivateUser(request.ChatId, user.PhoneNumber.Number, user.FirstName, user.LastName, user.Name);
 
             var userDto = new UserDto()
             {

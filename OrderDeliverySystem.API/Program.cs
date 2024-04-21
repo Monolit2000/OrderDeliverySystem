@@ -1,17 +1,24 @@
 using Autofac;
+using Autofac.Core;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Basket.Infrastructure;
+using OrderDeliverySystem.Basket.Infrastructure.Persistence;
+using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
+using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Infrastructure;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<UserAccessContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<BasketContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -19,6 +26,18 @@ builder.Services.AddControllers();
 // Add Swagger/OpenAPI services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//builder.Services.AddMediatR(cfg =>
+//{
+//    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+//});
+
+
+
+
+
+
 
 builder.Services.AddScoped<IUserAccessModule, UserAccessModule>();
 
@@ -54,9 +73,29 @@ containerBuilder.RegisterInstance(builder.Configuration).As<IConfiguration>();
 var container = containerBuilder.Build();
 
 // Set the Autofac container as the default dependency resolver for ASP.NET Core
+
+
+
 builder.Services.AddSingleton(container);
 
+//builder.Services.AddHostedService<IntegrationEventProcessorJob>();
+
+
+
 InitializeModules(container, logger, builder.Configuration.GetConnectionString("DefaultConnection"));
+
+//builder.Services.AddMediatR(cfg =>
+//{
+//    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+//});
+
+//builder.Services.AddScoped<InMemoryMessageQueue>();
+
+//builder.Services.AddScoped<IAsyncEventBus, AsyncEventBus>();
+
+//builder.Services.AddScoped<IntegrationEventProcessorJob>();
+
+
 
 var app = builder.Build();
 
@@ -77,7 +116,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
 
 static void InitializeModules(ILifetimeScope container, Serilog.ILogger logger, string connectionString)
 {

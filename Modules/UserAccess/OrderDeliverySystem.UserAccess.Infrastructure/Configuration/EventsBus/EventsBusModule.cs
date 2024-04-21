@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
+using Microsoft.Extensions.Hosting;
+using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus
 {
     internal class EventsBusModule : Module
     {
-        private readonly IEventsBus _eventsBus;
+        private readonly IAsyncEventBus _eventsBus;
 
-        public EventsBusModule(IEventsBus eventsBus)
+        public EventsBusModule(IAsyncEventBus eventsBus)
         {
             _eventsBus = eventsBus;
         }
@@ -25,9 +26,18 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus
             }
             else
             {
-                builder.RegisterType<InMemoryEventBusClient>()
-                    .As<IEventsBus>()
+                builder.RegisterType<InMemoryMessageQueue>()
                     .SingleInstance();
+
+                builder.RegisterType<AsyncEventBus>()
+                    .As<IAsyncEventBus>()
+                    .SingleInstance();
+
+                builder.RegisterType<IntegrationEventProcessorJob>()
+                    .As<IHostedService>()
+                    .InstancePerLifetimeScope();
+
+                //builder.Services.AddScoped<IHostedService, IntegrationEventProcessorJob>();
             }
         }
     }

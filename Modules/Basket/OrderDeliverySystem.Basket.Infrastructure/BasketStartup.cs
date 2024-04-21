@@ -36,7 +36,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure
 
                 //QuartzStartup.Initialize(moduleLogger, internalProcessingPoolingInterval);
 
-                EventsBusStartup.Initialize(moduleLogger);
+               // EventsBusStartup.Initialize(moduleLogger);
             }
 
             private static void ConfigureCompositionRoot(

@@ -9,7 +9,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
     {
         public DbSet<User> Users { get; set; }
 
-        public UserAccessContext(DbContextOptions options)
+        public UserAccessContext(DbContextOptions<UserAccessContext> options)
            : base(options)
         {
         
@@ -17,7 +17,9 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+            modelBuilder.HasDefaultSchema("userAccess");
+
+           modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
         }
 
     }

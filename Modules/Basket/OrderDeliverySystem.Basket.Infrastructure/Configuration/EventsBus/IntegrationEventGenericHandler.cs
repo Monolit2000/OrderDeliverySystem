@@ -14,7 +14,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Configuration.EventsBus
         {
             using (var scope = BasketCompositionRoot.BeginLifetimeScope())
             {
-               
+                await Console.Out.WriteLineAsync("IntegrationEventGenericHandler");
             }
         }
     }

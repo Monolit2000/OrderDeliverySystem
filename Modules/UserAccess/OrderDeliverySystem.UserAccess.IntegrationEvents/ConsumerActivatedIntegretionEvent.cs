@@ -1,4 +1,4 @@
-﻿using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
+﻿using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 {
-    public class ConsumerCreatedIntegretionEvent : IntegrationEvent
+    public class ConsumerActivatedIntegretionEvent : IntegrationEvent
     {
 
         public Guid UserId { get; }
@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 
         public string Name { get; }
 
-        public ConsumerCreatedIntegretionEvent(Guid userId, string phoneNumber, long chatId, string firstName, string lastName, string name, 
+        public ConsumerActivatedIntegretionEvent(Guid userId, string phoneNumber, long chatId, string firstName, string lastName, string name, 
             Guid id, DateTime occurredOn) 
             : base(id, occurredOn)
         {

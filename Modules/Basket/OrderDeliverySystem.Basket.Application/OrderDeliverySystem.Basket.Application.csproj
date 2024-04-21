@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Baskeds\IntegrationEventHandler\" />
   </ItemGroup>
 
 </Project>
