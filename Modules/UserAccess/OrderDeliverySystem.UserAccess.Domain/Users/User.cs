@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
-using OrderDeliverySystem.UserAccess.Domain.DomainEvents;
+using OrderDeliverySystem.UserAccess.Domain.Users.DomainEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;

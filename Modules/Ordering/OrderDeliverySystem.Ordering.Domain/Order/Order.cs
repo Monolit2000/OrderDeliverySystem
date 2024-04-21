@@ -17,9 +17,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Order
         [Required]
         public Address Address { get; private set; }
 
-        public int? BuyerId { get; private set; }
+        public Guid BuyerId { get; private set; }
 
-        public  Buyer buyer { get; private set;}
+        public  Guid buyer { get; private set;}
 
         public OrderStatus OrderStatus { get; private set; }
 

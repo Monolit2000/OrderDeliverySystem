@@ -1,10 +1,14 @@
 ﻿using Autofac;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 
-
-namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess
+namespace OrderDeliverySystem.Basket.Infrastructure.Configuration.DataAccess
 {
     public class DataAccessModule : Autofac.Module
     {
@@ -22,14 +26,14 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess
 
             builder.Register(c =>
             {
-                var optionsBuilder = new DbContextOptionsBuilder<UserAccessContext>();
+                var optionsBuilder = new DbContextOptionsBuilder<BasketContext>();
                 optionsBuilder.UseSqlServer(_databaseConnectionString, b => b.MigrationsAssembly("OrderDeliverySystem.UserAccess.Infrastructure"));
                 optionsBuilder.UseLoggerFactory(_loggerFactory);
-                return new UserAccessContext(optionsBuilder.Options);
+                return new BasketContext(optionsBuilder.Options);
             }).AsSelf().InstancePerLifetimeScope();
 
 
-            var infrastructureAssembly = typeof(UserAccessContext).Assembly;
+            var infrastructureAssembly = typeof(BasketContext).Assembly;
 
             builder.RegisterAssemblyTypes(infrastructureAssembly)
                 .Where(type => type.Name.EndsWith("Repository"))

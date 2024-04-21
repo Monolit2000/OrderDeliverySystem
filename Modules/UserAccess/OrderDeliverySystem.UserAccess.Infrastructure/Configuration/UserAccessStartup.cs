@@ -21,30 +21,21 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
     {
         private static IContainer _container;
 
-        public static void Initialize(
-            string connectionString,
-            ILogger logger,
-            //string textEncryptionKey,
-            IEventsBus eventsBus,
+        public static void Initialize( string connectionString, ILogger logger,  IEventsBus eventsBus,
             long? internalProcessingPoolingInterval = null)
         {
-            var moduleLogger = logger.ForContext("Module", "UserAccess");
 
-            ConfigureCompositionRoot(
-                connectionString,
-                logger,
-                //textEncryptionKey,
-                eventsBus);
+            ConfigureCompositionRoot( connectionString, logger,   eventsBus);
+
+            var moduleLogger = logger.ForContext("Module", "UserAccess");
+            EventsBusStartup.Initialize(moduleLogger);
 
             //QuartzStartup.Initialize(moduleLogger, internalProcessingPoolingInterval);
-
-            EventsBusStartup.Initialize(moduleLogger);
         }
 
         private static void ConfigureCompositionRoot(
             string connectionString,
             ILogger logger,
-            //string textEncryptionKey,
             IEventsBus eventsBus)
         {
             var containerBuilder = new ContainerBuilder();
@@ -57,11 +48,12 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
             containerBuilder.RegisterModule(new EventsBusModule(eventsBus));
             containerBuilder.RegisterModule(new MediatorModule());
 
+            containerBuilder.RegisterModule(new ProcessingModule());
+
             _container = containerBuilder.Build();
 
             UserAccessCompositionRoot.SetContainer(_container);
 
-            containerBuilder.RegisterModule(new ProcessingModule());
             //containerBuilder.RegisterModule(new OutboxModule(new BiDictionary<string, Type>()));
 
             //containerBuilder.RegisterModule(new QuartzModule());

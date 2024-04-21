@@ -1,5 +1,6 @@
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Basket.Infrastructure;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Infrastructure;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration;
@@ -91,6 +92,13 @@ static void InitializeModules(ILifetimeScope container, Serilog.ILogger logger, 
         connectionString,
         logger,
         null);
+
+    BasketStartup.Initialize(
+        connectionString,
+        logger,
+        null);
+
+
 }
 
 static void ConfigureContainer(ContainerBuilder containerBuilder)
