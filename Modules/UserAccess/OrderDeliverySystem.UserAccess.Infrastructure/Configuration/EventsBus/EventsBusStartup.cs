@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus
 
         private static void SubscribeToIntegrationEvents(Serilog.ILogger logger)
         {
-            var eventBus = UserAccessCompositionRoot.BeginLifetimeScope().Resolve<IEventsBus>();
+            //var eventBus = UserAccessCompositionRoot.BeginLifetimeScope().Resolve<IEventsBus>();
 
             //SubscribeToIntegrationEvent<BuyerCreatedIntegrationEvent>(eventBus, logger);
         }

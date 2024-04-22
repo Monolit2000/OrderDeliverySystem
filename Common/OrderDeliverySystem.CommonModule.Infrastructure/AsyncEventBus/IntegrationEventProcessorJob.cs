@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Client;
 
@@ -13,22 +14,46 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
 {
     public class IntegrationEventProcessorJob : BackgroundService
     {
-        private IPublisher _publisher;
+        //private IPublisher _publisher;
+        private readonly IServiceProvider _serviceProvider;
         private InMemoryMessageQueue _inMemoryMessageQueue;
 
-        public IntegrationEventProcessorJob(IPublisher publisher, InMemoryMessageQueue inMemoryMessageQueue)
+        public IntegrationEventProcessorJob(/*IPublisher publisher,*/ IServiceProvider serviceProvider, InMemoryMessageQueue inMemoryMessageQueue)
         {
-            _publisher = publisher;
+            //_publisher = publisher;
+            _serviceProvider = serviceProvider; 
             _inMemoryMessageQueue = inMemoryMessageQueue;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+           
+            using var scope = _serviceProvider.CreateScope();
 
-            await foreach(IIntegrationEvent @event in _inMemoryMessageQueue.Reder.ReadAllAsync(stoppingToken))
+            var mediatr = GetMediatorServices(scope);
+
+            await Console.Out.WriteLineAsync("ExecuteAsync Start IntegrationEventProcessorJob");
+
+            await foreach (IIntegrationEvent @event in _inMemoryMessageQueue.Reder.ReadAllAsync(stoppingToken))
             {
-                await _publisher.Publish(@event, stoppingToken);
+                await Console.Out.WriteLineAsync($"_publisher.Publish {@event.Id}");
+                await mediatr.Publish(@event, stoppingToken);
             }
+
+              
+            
         }
+
+
+        private IMediator GetMediatorServices(IServiceScope scope)
+        {
+
+            var mediator = scope.ServiceProvider.GetService<IMediator>();
+            if (mediator == null)
+                throw new ArgumentNullException(nameof(IMediator), "Cant resolve IMediator from service provider");
+
+            return mediator;
+        }
+
     }
 }

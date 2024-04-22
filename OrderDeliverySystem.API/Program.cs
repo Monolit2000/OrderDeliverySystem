@@ -8,14 +8,18 @@ using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Infrastructure;
 using OrderDeliverySystem.UserAccess.Infrastructure.Configuration;
+using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 using Serilog;
 using System.Reflection;
+using OrderDeliverySystem.UserAccess.Infrastructure.Startup;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<UserAccessContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<UserAccessContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddDbContext<BasketContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -28,18 +32,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//builder.Services.AddMediatR(cfg =>
-//{
-//    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-//});
 
 
 
-
-
-
-
-builder.Services.AddScoped<IUserAccessModule, UserAccessModule>();
 
 
 // Configure Serilog
@@ -55,14 +50,29 @@ var logger = new LoggerConfiguration()
 // Add Serilog logger
 builder.Logging.AddSerilog();
 
+
+
+
+builder.Services.AddUserAccessModule(builder.Configuration);
+
+//builder.Services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
+
+builder.Services.AddHostedService<IntegrationEventProcessorJob>();
+
+
 // Configure Autofac
-var containerBuilder = new ContainerBuilder();
+//var containerBuilder = new ContainerBuilder();
 
-// Register dependencies
-containerBuilder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
+//containerBuilder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
 
-// Register IConfiguration
-containerBuilder.RegisterInstance(builder.Configuration).As<IConfiguration>();
+//containerBuilder.RegisterInstance(builder.Configuration).As<IConfiguration>();
+//var container = containerBuilder.Build();
+//builder.Services.AddSingleton(container);
+
+
+
+
+
 
 // Register UserAccessAutofacModule
 //containerBuilder.RegisterModule(new UserAccessAutofacModule());
@@ -70,28 +80,31 @@ containerBuilder.RegisterInstance(builder.Configuration).As<IConfiguration>();
 //ConfigureContainer(containerBuilder);
 
 // Build the Autofac container
-var container = containerBuilder.Build();
 
 // Set the Autofac container as the default dependency resolver for ASP.NET Core
 
 
 
-builder.Services.AddSingleton(container);
 
 //builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
 
+//services.AddScoped<IHostedService, ReceiverService>();
 
-InitializeModules(container, logger, builder.Configuration.GetConnectionString("DefaultConnection"));
 
-//builder.Services.AddMediatR(cfg =>
-//{
-//    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-//});
+//InitializeModules(container, logger, builder.Configuration.GetConnectionString("DefaultConnection"));
 
-//builder.Services.AddScoped<InMemoryMessageQueue>();
 
-//builder.Services.AddScoped<IAsyncEventBus, AsyncEventBus>();
+
+//builder.Services.AddEventBusModule();
+
+//builder.Services.AddScoped<IUserAccessModule, UserAccessModule>();
+
+
+
+//builder.Services.AddEventBusModule();
+
+
 
 //builder.Services.AddScoped<IntegrationEventProcessorJob>();
 
@@ -117,27 +130,27 @@ app.MapControllers();
 
 app.Run();
 
-static void InitializeModules(ILifetimeScope container, Serilog.ILogger logger, string connectionString)
-{
-    var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
-    // var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
+//static void InitializeModules(ILifetimeScope container, Serilog.ILogger logger, string connectionString)
+//{
+//    var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
+//    // var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
 
-    // Resolve IConfiguration
-    //var configuration = container.Resolve<IConfiguration>();
+//    // Resolve IConfiguration
+//    //var configuration = container.Resolve<IConfiguration>();
 
-    // Initialize modules with resolved dependencies
-    UserAccessStartup.Initialize(
-        connectionString,
-        logger,
-        null);
+//    // Initialize modules with resolved dependencies
+//    UserAccessStartup.Initialize(
+//        connectionString,
+//        logger,
+//        null);
 
-    BasketStartup.Initialize(
-        connectionString,
-        logger,
-        null);
+//    BasketStartup.Initialize(
+//        connectionString,
+//        logger,
+//        null);
 
 
-}
+//}
 
 static void ConfigureContainer(ContainerBuilder containerBuilder)
 {

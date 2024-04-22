@@ -33,9 +33,14 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus
                     .As<IAsyncEventBus>()
                     .SingleInstance();
 
-                builder.RegisterType<IntegrationEventProcessorJob>()
-                    .As<IHostedService>()
-                    .InstancePerLifetimeScope();
+                //builder.RegisterType<IntegrationEventProcessorJob>()
+                //    .As<IHostedService>()
+                //    .InstancePerLifetimeScope();
+
+                //builder.RegisterType<IntegrationEventProcessorJob>()
+                //.As<IHostedService>()  // Сначала указываем, что это хост-сервис
+                //.SingleInstance();
+
 
                 //builder.Services.AddScoped<IHostedService, IntegrationEventProcessorJob>();
             }

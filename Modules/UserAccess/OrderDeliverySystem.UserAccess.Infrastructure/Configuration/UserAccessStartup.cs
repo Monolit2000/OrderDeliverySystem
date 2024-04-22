@@ -45,8 +45,8 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration
 
             var loggerFactory = new Serilog.Extensions.Logging.SerilogLoggerFactory(logger);
             containerBuilder.RegisterModule(new DataAccessModule(connectionString, loggerFactory));
-            containerBuilder.RegisterModule(new EventsBusModule(eventsBus));
             containerBuilder.RegisterModule(new MediatorModule());
+            containerBuilder.RegisterModule(new EventsBusModule(eventsBus));
 
             containerBuilder.RegisterModule(new ProcessingModule());
 

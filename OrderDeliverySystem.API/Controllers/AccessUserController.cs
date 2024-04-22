@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
@@ -11,19 +12,23 @@ namespace OrderDeliverySystem.API.Controllers
     public class AccessUserController : ControllerBase
     {
         private readonly IUserAccessModule _userAccessModule;
+        private readonly IMediator _mediator;
 
-        public AccessUserController(IUserAccessModule userAccessModule)
+        public AccessUserController(IUserAccessModule userAccessModule, IMediator mediator)
         {
             _userAccessModule = userAccessModule;
+            _mediator = mediator;
         }
 
 
         [HttpPost("ActivateUser")]
         public async Task<IActionResult> UserActivation(ActivateUserRequest activateRequest)
         {
-            var user = await _userAccessModule.ExecuteCommandAsync(new ActivateUserCommand(
+            var user = await _mediator.Send(new ActivateUserCommand(
                 PhoneNumber.Create(activateRequest.PhoneNumber).Value,
                 activateRequest.ChatId));
+
+            //_userAccessModule.ExecuteCommandAsync
 
             return Ok(user);
         }
@@ -31,7 +36,7 @@ namespace OrderDeliverySystem.API.Controllers
         [HttpPost("CreateNewCustomer")]
         public async Task<IActionResult> CreateCustomer(CreateUserRequest createRequest)
         {
-            var user = await _userAccessModule.ExecuteCommandAsync(new CreateConsumerCommand(
+            var user = await _mediator.Send(new CreateConsumerCommand(
                 PhoneNumber.Create(createRequest.PhoneNumber).Value,
                 createRequest.FirstName,
                 createRequest.LastName,
