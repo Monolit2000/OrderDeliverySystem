@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Basket.Application.IntegrationEventsHandler
+namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
 {
     public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<ConsumerActivatedIntegretionEvent>
     {
         public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            await Console.Out.WriteLineAsync("ConsumerActivatedIntegretionEventHandler");
+            await Console.Out.WriteLineAsync("ConsumerActivatedIntegretionEventHandler Basket");
         }
     }
 }

@@ -7,14 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
-    <ProjectReference Include="..\OrderDeliverySystem.Basket.Application\OrderDeliverySystem.Basket.Application.csproj" />
-    <ProjectReference Include="..\OrderDeliverySystem.Basket.Domain\OrderDeliverySystem.Basket.Domain.csproj" />
+    <Compile Remove="Domain\Basketss\**" />
+    <EmbeddedResource Remove="Domain\Basketss\**" />
+    <None Remove="Domain\Basketss\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Basketss\" />
+    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Basket.Application\OrderDeliverySystem.Basket.Application.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Basket.Domain\OrderDeliverySystem.Basket.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

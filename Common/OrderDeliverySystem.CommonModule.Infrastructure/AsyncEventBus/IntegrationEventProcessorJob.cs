@@ -37,6 +37,7 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
             await foreach (IIntegrationEvent @event in _inMemoryMessageQueue.Reder.ReadAllAsync(stoppingToken))
             {
                 await Console.Out.WriteLineAsync($"_publisher.Publish {@event.Id}");
+
                 await mediatr.Publish(@event, stoppingToken);
             }
 

@@ -8,10 +8,8 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
 {
     public interface IAsyncEventBus
     {
-
        public Task PublishAsync<T>(T integrationEvent, CancellationToken cancellationToken = default) 
             where T : class, IIntegrationEvent;
-
     }
 
 }

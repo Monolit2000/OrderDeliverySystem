@@ -12,4 +12,9 @@
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authentication\IntegrationEvents\" />
+    <Folder Include="Users\IntegrationEvents\" />
+  </ItemGroup>
+
 </Project>

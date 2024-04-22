@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderDeliverySystem.CommonModule.Infrastructure.Domain;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Domain.Users;
-using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess;
-using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
+using OrderDeliverySystem.UserAccess.Infrastructure.Startup.EventBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;

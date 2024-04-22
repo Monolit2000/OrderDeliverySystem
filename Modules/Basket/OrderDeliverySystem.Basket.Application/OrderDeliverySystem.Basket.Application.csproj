@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
-    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+    <Compile Remove="Baskeds\**" />
+    <EmbeddedResource Remove="Baskeds\**" />
+    <None Remove="Baskeds\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Baskeds\IntegrationEventHandler\" />
+    <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Basket.Domain\OrderDeliverySystem.Basket.Domain.csproj" />
   </ItemGroup>
 
 </Project>

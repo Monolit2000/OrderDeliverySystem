@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.UserAccess.Infrastructure.Configuration.DataAccess
+namespace OrderDeliverySystem.CommonModule.Infrastructure.Domain
 {
     public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
     {

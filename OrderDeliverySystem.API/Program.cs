@@ -7,13 +7,12 @@ using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Infrastructure;
-using OrderDeliverySystem.UserAccess.Infrastructure.Configuration;
-using OrderDeliverySystem.UserAccess.Infrastructure.Configuration.EventsBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 using Serilog;
 using System.Reflection;
 using OrderDeliverySystem.UserAccess.Infrastructure.Startup;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using OrderDeliverySystem.Basket.Infrastructure.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +52,8 @@ builder.Logging.AddSerilog();
 
 
 
-builder.Services.AddUserAccessModule(builder.Configuration);
+builder.Services.AddUserAccessModule(builder.Configuration)
+    .AddBasketModule(builder.Configuration);
 
 //builder.Services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
 

@@ -24,11 +24,13 @@ namespace OrderDeliverySystem.API.Controllers
         [HttpPost("ActivateUser")]
         public async Task<IActionResult> UserActivation(ActivateUserRequest activateRequest)
         {
-            var user = await _mediator.Send(new ActivateUserCommand(
-                PhoneNumber.Create(activateRequest.PhoneNumber).Value,
-                activateRequest.ChatId));
+            //var user = await _mediator.Send(new ActivateUserCommand(
+            //    PhoneNumber.Create(activateRequest.PhoneNumber).Value,
+            //    activateRequest.ChatId));
 
-            //_userAccessModule.ExecuteCommandAsync
+            var user = await _userAccessModule.ExecuteCommandAsync(
+                new ActivateUserCommand(PhoneNumber.Create(activateRequest.PhoneNumber).Value,
+                activateRequest.ChatId));
 
             return Ok(user);
         }
@@ -36,8 +38,14 @@ namespace OrderDeliverySystem.API.Controllers
         [HttpPost("CreateNewCustomer")]
         public async Task<IActionResult> CreateCustomer(CreateUserRequest createRequest)
         {
-            var user = await _mediator.Send(new CreateConsumerCommand(
-                PhoneNumber.Create(createRequest.PhoneNumber).Value,
+            //var user = await _mediator.Send(new CreateConsumerCommand(
+            //    PhoneNumber.Create(createRequest.PhoneNumber).Value,
+            //    createRequest.FirstName,
+            //    createRequest.LastName,
+            //    createRequest.Name));
+
+            var user = await _userAccessModule.ExecuteCommandAsync(
+                new CreateConsumerCommand(PhoneNumber.Create(createRequest.PhoneNumber).Value,
                 createRequest.FirstName,
                 createRequest.LastName,
                 createRequest.Name));

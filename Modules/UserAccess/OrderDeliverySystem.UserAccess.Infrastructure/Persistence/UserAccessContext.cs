@@ -9,11 +9,8 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
     {
         public DbSet<User> Users { get; set; }
 
-        public UserAccessContext(DbContextOptions<UserAccessContext> options)
-           : base(options)
-        {
-        
-        }
+        public UserAccessContext(DbContextOptions<UserAccessContext> options) : base(options)
+        {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

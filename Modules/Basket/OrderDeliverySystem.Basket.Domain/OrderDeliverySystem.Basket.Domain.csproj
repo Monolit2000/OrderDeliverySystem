@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
+    <Compile Remove="Basketss\**" />
+    <EmbeddedResource Remove="Basketss\**" />
+    <None Remove="Basketss\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Basketss\" />
+    <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
   </ItemGroup>
 
 </Project>
