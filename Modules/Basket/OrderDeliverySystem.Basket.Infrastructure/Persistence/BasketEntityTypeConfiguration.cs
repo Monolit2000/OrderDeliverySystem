@@ -13,12 +13,28 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
     {
         public void Configure(EntityTypeBuilder<CustomerBasket> builder)
         {
+
+            builder.ToTable("Basket", "Basket");
+
             // Установка ключа
             builder.HasKey(cb => cb.BasketId); // Assuming `Id` is inherited from `Entity`
 
-            // Указание свойства для BuyerId
-            builder.Property(cb => cb.BuyerId)
-                   .IsRequired(); // Показывает, что это обязательное поле
+            builder.Property(p => p.BuyerId).HasColumnName("BuyerId").IsRequired(); 
+           // builder.Property(p => p.BuyerChatId).HasColumnName("BuyerChatId");
+  
+            
+            //// Указание свойства для BuyerId
+            //builder.Property(cb => cb.BuyerId)
+            //       .IsRequired(); // Показывает, что это обязательное поле
+
+
+            //builder.Property(c => c.BuyerChatId);
+
+
+
+           
+
+
 
             // Конфигурация связи один-ко-многим
             //builder.HasMany(cb => cb.Items)

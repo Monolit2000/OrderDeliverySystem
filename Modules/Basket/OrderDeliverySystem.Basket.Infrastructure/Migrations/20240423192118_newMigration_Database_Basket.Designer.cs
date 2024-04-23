@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketContext))]
-    partial class BasketContextModelSnapshot : ModelSnapshot
+    [Migration("20240423192118_newMigration_Database_Basket")]
+    partial class newMigration_Database_Basket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +32,15 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<long>("BuyerChatId")
+                        .HasColumnType("bigint");
+
                     b.Property<Guid>("BuyerId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("BuyerId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("BasketId");
 
-                    b.ToTable("Basket", "Basket");
+                    b.ToTable("Baskets", "basket");
                 });
 #pragma warning restore 612, 618
         }

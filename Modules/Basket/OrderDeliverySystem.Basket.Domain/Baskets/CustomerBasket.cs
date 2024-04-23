@@ -10,28 +10,39 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
     public class CustomerBasket : Entity, IAggregateRoot
     {
-     
-        public Guid BasketId { get; private set; }
 
-        public long BuyerChatId { get; private set; }    
+        [Key]
+        public Guid BasketId { get;  set; }
 
-        public Guid BuyerId { get; private set; }
+        //[Required]
+        //public long BuyerChatId { get;  set; }
+
+        [Required]
+        public Guid BuyerId { get;  set; }
 
         //public List<BasketItem> Items { get; set; } = [];
 
-        private CustomerBasket()
+        public CustomerBasket()
         {
 
         }
 
         //public CustomerBasket() { }
 
-        public CustomerBasket(Guid buyerId, long buyerChatId)
+        public CustomerBasket(Guid buyerId/*, long buyerChatId*/)
         {
             BasketId = Guid.NewGuid();
             BuyerId = buyerId;  
-            BuyerChatId = buyerChatId;
+            //BuyerChatId = buyerChatId;
            // Items = new List<BasketItem>(); 
+        }
+
+        public CustomerBasket(Guid buyerId, Guid basketId/*, long buyerChatId*/)
+        {
+            BasketId = basketId;
+            BuyerId = buyerId;
+            //BuyerChatId = buyerChatId;
+            // Items = new List<BasketItem>(); 
         }
     }
 }

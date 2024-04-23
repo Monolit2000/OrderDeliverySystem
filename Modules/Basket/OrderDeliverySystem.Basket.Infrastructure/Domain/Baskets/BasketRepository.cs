@@ -23,8 +23,6 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
         {
             await _basketContext.Baskets.AddAsync(basket);
 
-            //await _basketContext.SaveChangesAsync();
-
             //var test = await GetBasketAsync(basket.BuyerChatId);
             //await Console.Out.WriteLineAsync($"REPO - {test.BuyerChatId}");
         }
@@ -36,10 +34,11 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
 
         public async Task<CustomerBasket> GetBasketAsync(long customerChatId)
         {
-            var customerBasket = await _basketContext.Baskets
-                .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
+            //var customerBasket = await _basketContext.Baskets
+            //    .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
 
-            return customerBasket;
+            throw new NotImplementedException();
+            //return customerBasket;
         }
 
         public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)

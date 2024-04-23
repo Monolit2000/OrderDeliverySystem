@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketContext))]
-    partial class BasketContextModelSnapshot : ModelSnapshot
+    [Migration("20240423203604_new_TestMigration__DatabaseTesBasketTestnewTEssdfdfgsjfsag")]
+    partial class new_TestMigration__DatabaseTesBasketTestnewTEssdfdfgsjfsag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

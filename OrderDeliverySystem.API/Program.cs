@@ -14,6 +14,8 @@ using OrderDeliverySystem.UserAccess.Infrastructure.Startup;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using OrderDeliverySystem.Basket.Infrastructure.Startup;
 
+using OrderDeliverySystem.Catalog.Infrastructure.Startup;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -44,7 +46,8 @@ builder.Logging.AddSerilog();
 
 
 builder.Services.AddUserAccessModule(builder.Configuration)
-    .AddBasketModule(builder.Configuration); 
+    .AddBasketModule(builder.Configuration)
+    .AddCatalogModule(builder.Configuration); 
 
 //builder.Services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
 

@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
         {
             await Console.Out.WriteLineAsync("ConsumerActivatedIntegretionEventHandler Basket");
 
-            var test = await _mediator.Send(new CreateBasketCommand(notification.UserId, notification.ChatId));
+            await _mediator.Send(new CreateBasketCommand(notification.UserId, notification.ChatId));
 
             await Console.Out.WriteLineAsync("ETSTESTESTSETSETSETSESTESETSET");
         }
