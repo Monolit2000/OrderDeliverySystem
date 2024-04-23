@@ -9,5 +9,14 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 {
     public class CreateBasketCommand : IRequest<CreateBasketResult>
     {
+        public Guid BuyerId { get; set; }
+
+        public long BuyerChatId { get; set; }
+
+        public CreateBasketCommand(Guid buyerId, long buyerChatId)
+        {
+            BuyerId = buyerId;
+            BuyerChatId = buyerChatId;
+        }
     }
 }

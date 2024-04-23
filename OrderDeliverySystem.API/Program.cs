@@ -16,12 +16,6 @@ using OrderDeliverySystem.Basket.Infrastructure.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddDbContext<UserAccessContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
-builder.Services.AddDbContext<BasketContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -29,9 +23,6 @@ builder.Services.AddControllers();
 // Add Swagger/OpenAPI services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-
 
 
 
@@ -53,7 +44,7 @@ builder.Logging.AddSerilog();
 
 
 builder.Services.AddUserAccessModule(builder.Configuration)
-    .AddBasketModule(builder.Configuration);
+    .AddBasketModule(builder.Configuration); 
 
 //builder.Services.AddSingleton<IAsyncEventBus, AsyncEventBus>();
 

@@ -12,7 +12,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Contracts
     {
         Task<TResult> ExecuteCommandAsync<TResult>(IRequest<TResult> command);
 
-        Task ExecuteCommandAsync(ICommand command);
+        //Task ExecuteCommandAsync(ICommand command);
 
         Task<TResult> ExecuteQueryAsync<TResult>(IRequest<TResult> query);
     }

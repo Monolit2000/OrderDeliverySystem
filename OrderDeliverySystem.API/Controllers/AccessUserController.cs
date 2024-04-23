@@ -48,7 +48,8 @@ namespace OrderDeliverySystem.API.Controllers
                 new CreateConsumerCommand(PhoneNumber.Create(createRequest.PhoneNumber).Value,
                 createRequest.FirstName,
                 createRequest.LastName,
-                createRequest.Name));
+                createRequest.Name,
+                createRequest.ChatId));
 
             return Ok(user);
         }

@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Basket.Domain.Baskets;
 using OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets;
+
 
 namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
 {
     public class BasketContext : DbContext
     {
-
-        public DbSet<CustomerBasket> Baskets { get; set; }
-
-        public BasketContext(DbContextOptions options)
+        public BasketContext(DbContextOptions<BasketContext> options)
            : base(options)
         {
 
         }
+        public DbSet<CustomerBasket> Baskets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("basket");
 
-            //modelBuilder.ApplyConfiguration(new BasketEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new BasketEntityTypeConfiguration());
 
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           // modelBuilder.ApplyConfiguration(new BasketItemEntityTypeConfiguration());
+            
 
-            base.OnModelCreating(modelBuilder);
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            //base.OnModelCreating(modelBuilder);
         }
 
     }

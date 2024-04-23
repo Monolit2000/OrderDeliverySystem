@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
+namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
 {
     public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {

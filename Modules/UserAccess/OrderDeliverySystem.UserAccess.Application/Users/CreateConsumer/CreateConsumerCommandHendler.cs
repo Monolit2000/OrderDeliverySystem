@@ -32,6 +32,8 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
                 request.FirstName,
                 request.LastName);
 
+            newUser.ActivateUser(request.ChatId, newUser.PhoneNumber.Number, newUser.FirstName, newUser.LastName, newUser.Name);
+
             await _userRepository.AddAsync(newUser);
 
             var userDto = new UserDto()

@@ -8,5 +8,6 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 {
     public class CreateBasketResult
     {
+        public Guid BasketId { get; set; }
     }
 }

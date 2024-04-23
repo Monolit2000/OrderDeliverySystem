@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.UserAccess.Domain.Users;
-using OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users;
 
 
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence

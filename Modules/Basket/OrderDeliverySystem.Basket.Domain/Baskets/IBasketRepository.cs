@@ -8,8 +8,12 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
     public interface IBasketRepository
     {
-        Task<CustomerBasket> GetBasketAsync(string customerId);
+        Task<CustomerBasket> GetBasketAsync(long customerChatId);
+
+        Task AddBasketAsync(CustomerBasket basket);
+
         Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
+
         Task<bool> DeleteBasketAsync(string id);
     }
 }

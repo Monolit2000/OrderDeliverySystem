@@ -19,14 +19,16 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
 
         public string Name { get; }
 
+        public long ChatId { get; }    
 
         public CreateConsumerCommand(
-            PhoneNumber phoneNumber, string firstName, string lastName, string name) 
+            PhoneNumber phoneNumber, string firstName, string lastName, string name, long chatId) 
         {
             FirstName = firstName;
             LastName = lastName;
             Name = name;
             PhoneNumber = phoneNumber;
+            ChatId = chatId;
         }  
     }
 }

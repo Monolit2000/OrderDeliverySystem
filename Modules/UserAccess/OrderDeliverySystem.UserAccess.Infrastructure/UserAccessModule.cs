@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure
 
         public async Task ExecuteCommandAsync(ICommand command)
         {
-            //await CommandsExecutor.Execute(command);
+            await _mediator.Send(command);
         }
 
         public async Task<TResult> ExecuteQueryAsync<TResult>(IRequest<TResult> query)
