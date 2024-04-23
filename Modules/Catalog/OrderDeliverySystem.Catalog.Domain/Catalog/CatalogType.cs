@@ -9,6 +9,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
     public class CatalogType
     {
+        
         public int Id { get; set; }
 
         [Required]

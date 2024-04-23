@@ -17,16 +17,16 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
         public async Task<CreateBasketResult> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
             var basket = new CustomerBasket(
-                request.BuyerId
-                );
+                request.BuyerId);
 
             await Console.Out.WriteLineAsync($"BasketId - {basket.BasketId}");
 
             //await Task.Delay(TimeSpan.FromSeconds(30));
 
-            var newbasket = new CustomerBasket(request.BuyerId, basket.BasketId);
+        
 
-            await _basketRepository.AddBasketAsync(newbasket);
+
+            await _basketRepository.AddBasketAsync(basket);
 
             //var ExistBascket = await _basketRepository.GetBasketAsync(request.BuyerChatId);
 

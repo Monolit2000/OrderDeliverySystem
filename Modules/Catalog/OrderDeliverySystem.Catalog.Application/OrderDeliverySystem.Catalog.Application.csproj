@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Catalog.Domain\OrderDeliverySystem.Catalog.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

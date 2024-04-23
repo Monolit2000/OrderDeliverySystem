@@ -20,7 +20,6 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
 
         public IntegrationEventProcessorJob(/*IPublisher publisher,*/ IServiceProvider serviceProvider, InMemoryMessageQueue inMemoryMessageQueue)
         {
-            //_publisher = publisher;
             _serviceProvider = serviceProvider; 
             _inMemoryMessageQueue = inMemoryMessageQueue;
         }

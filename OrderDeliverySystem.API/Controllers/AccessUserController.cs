@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
+using OrderDeliverySystem.Catalog.Application.AddCatalog;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer;
@@ -53,5 +55,27 @@ namespace OrderDeliverySystem.API.Controllers
 
             return Ok(user);
         }
+
+        [HttpPost("AddType")]
+        public async Task<IActionResult> CreateCatalogType(ActivateUserRequest activateRequest)
+        {
+            await _mediator.Send(new AddCatalogCommand());
+
+            return Ok();
+        }
+
+
+        [HttpPost("AddBasket")]
+        public async Task<IActionResult> CreateBusket(ActivateUserRequest activateRequest)
+        {
+            await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), activateRequest.ChatId));
+
+            return Ok();
+        }
+
+
+        
+
     }
+
 }

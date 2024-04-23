@@ -11,6 +11,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public Task<CatalogItem> GetCatalogItemAsync(Guid ItemId);
 
+        public Task AddCatalogItemAsync(CatalogType catalogItem);
+
 
     }
 }
