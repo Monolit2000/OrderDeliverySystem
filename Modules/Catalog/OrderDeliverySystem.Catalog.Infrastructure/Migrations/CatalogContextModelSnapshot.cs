@@ -29,12 +29,15 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CatalogTypeId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CatalogTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EstablishmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -60,24 +63,20 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
 
                     b.HasKey("CatalogItemId");
 
-                    b.HasIndex("CatalogTypeId");
-
                     b.ToTable("Catalog", "catalog");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("CatalogTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CatalogTypeId");
 
                     b.ToTable("CatalogTypes", "catalog");
                 });
@@ -88,45 +87,13 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CatalogItemId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EstablishmentId");
 
-                    b.HasIndex("CatalogItemId")
-                        .IsUnique();
-
                     b.ToTable("Establishments", "catalog");
-                });
-
-            modelBuilder.Entity("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogItem", b =>
-                {
-                    b.HasOne("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogType", "CatalogType")
-                        .WithMany()
-                        .HasForeignKey("CatalogTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CatalogType");
-                });
-
-            modelBuilder.Entity("OrderDeliverySystem.Catalog.Domain.Catalog.Establishment", b =>
-                {
-                    b.HasOne("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogItem", null)
-                        .WithOne("Establishment")
-                        .HasForeignKey("OrderDeliverySystem.Catalog.Domain.Catalog.Establishment", "CatalogItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogItem", b =>
-                {
-                    b.Navigation("Establishment")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

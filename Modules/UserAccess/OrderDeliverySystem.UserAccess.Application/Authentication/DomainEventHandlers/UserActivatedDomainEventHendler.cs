@@ -24,6 +24,10 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication.DomainEventH
         {
            await Console.Out.WriteLineAsync(notification.PhoneNumber);
 
+
+           await _eventBus.PublishAsync(new CatalogItemAddIntegretionEvent(Guid.NewGuid(), DateTime.UtcNow));
+
+
            await _eventBus.PublishAsync(new ConsumerActivatedIntegretionEvent(
                 notification.UserId,
                 notification.PhoneNumber,

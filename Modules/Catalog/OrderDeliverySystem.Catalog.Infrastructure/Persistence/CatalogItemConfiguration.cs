@@ -25,7 +25,9 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
             //builder.Property(p => p.Establishment).HasColumnName("Establishment");
      
 
-
+            //builder.HasOne(c => c.Establishment)
+            //    .WithMany()
+            //    .HasForeignKey(c => c.)
 
         }
     }

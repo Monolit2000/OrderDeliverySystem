@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
         { }
 
-        public DbSet<CatalogItem> Baskets { get; set; }
+        public DbSet<CatalogItem> CatalogItems { get; set; }
 
         public DbSet<CatalogType> CatalogTypes { get; set; }
 
@@ -25,6 +25,13 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
         {
             modelBuilder.HasDefaultSchema("catalog");
 
+            //modelBuilder.Entity<CatalogItem>().HasKey(k => k.CatalogItemId);
+
+            modelBuilder.Entity<CatalogType>().HasKey(k => k.CatalogTypeId);
+
+            modelBuilder.Entity<Establishment>().HasKey(e => e.EstablishmentId);
+
+            //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CatalogItemConfiguration());
         }
     }

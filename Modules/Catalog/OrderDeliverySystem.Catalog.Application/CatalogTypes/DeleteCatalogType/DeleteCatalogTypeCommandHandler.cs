@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediatR;
-namespace OrderDeliverySystem.Catalog.Application.AddCatalog
+
+namespace OrderDeliverySystem.Catalog.Application.CatalogTypes.DeleteCatalogType
 {
-    public class AddCatalogCommand : IRequest
+    internal class DeleteCatalogTypeCommandHandler
     {
     }
 }

@@ -14,14 +14,13 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
     public class CatalogItem : Entity, IAggregateRoot
     {
+      
         public Guid CatalogItemId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         public Guid ProductId { get; set; }
-
-        public Establishment Establishment { get; private set; }
 
         public string Description { get; set; }
 
@@ -31,10 +30,14 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public string PictureUri { get; set; }
 
-        public int CatalogTypeId { get; set; }
+        //public Establishment Establishment { get; private set; }
 
-        public CatalogType CatalogType { get; set; }
+        //public CatalogType CatalogType { get; set; }
 
+
+        public Guid EstablishmentId { get; set; }
+
+        public Guid CatalogTypeId { get; set; }
 
         private CatalogItem() 
         {
@@ -44,28 +47,30 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public CatalogItem( 
             string name,
-            Guid productId,
-            Establishment establishment, 
+            Guid establishmentId, 
+            Guid catalogTypeId,
             string description, 
-            decimal price, 
-            string pictureFileName, 
-            string pictureUri, 
-            int catalogTypeId, 
-            CatalogType catalogType)
+            decimal price)
         {
             CatalogItemId = Guid.NewGuid();
             SetName(name);
-            ProductId = productId;
-            Establishment = establishment;
+            EstablishmentId = establishmentId;
             Description = description;
             Price = price;
-            PictureFileName = pictureFileName;
-            PictureUri = pictureUri;
             CatalogTypeId = catalogTypeId;
-            CatalogType = catalogType;
+
+            //ProductId = productId;
+            //PictureFileName = pictureFileName;
+            //PictureUri = pictureUri;
+            //CatalogType = catalogType;
         }
 
-       
+        public void ChangeCatalogType(Guid catalogTypeId)
+        {
+            CatalogTypeId = catalogTypeId;
+        }
+
+
         private void SetName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -89,9 +94,9 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             PictureUri = uri;
         }
 
-        public void ChangeEstablishment(Establishment establishment)
+        public void ChangeEstablishment(Guid establishmentId)
         {
-            Establishment = establishment;
+            EstablishmentId = establishmentId;
         }
 
     }

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
-using OrderDeliverySystem.Catalog.Application.AddCatalog;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer;
@@ -59,7 +59,7 @@ namespace OrderDeliverySystem.API.Controllers
         [HttpPost("AddType")]
         public async Task<IActionResult> CreateCatalogType(ActivateUserRequest activateRequest)
         {
-            await _mediator.Send(new AddCatalogCommand());
+            await _mediator.Send(new AddCatalogItemCommand());
 
             return Ok();
         }

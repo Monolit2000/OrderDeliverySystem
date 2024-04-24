@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\" />
+    <Folder Include="Modules\UserAccess\" />
+    <Folder Include="Modules\Ordering\" />
+    <Folder Include="Modules\Basket\" />
+    <Folder Include="Modules\Payments\" />
+    <Folder Include="Modules\Administration\" />
     <Folder Include="Новая папка\" />
   </ItemGroup>
 
