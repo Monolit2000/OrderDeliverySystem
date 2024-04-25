@@ -60,7 +60,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             return ItemsQueryable;
         }
 
-        public async Task<bool> CatalogTypeExistByTypeAsync(string Type)
+        public async Task<bool> GetCatalogTypeExistByTypeAsync(string Type)
         {
             return await _catalogContext.CatalogTypes.AnyAsync(type => type.Type == Type);
         }
@@ -99,6 +99,16 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
         public async Task<List<Establishment>> GetOllEstablishment()
         {
             return await _catalogContext.Establishments.ToListAsync();
+        }
+
+        public async Task<CatalogType> GetCatalogTypeByIdAsync(Guid id)
+        {
+            return await _catalogContext.CatalogTypes.FirstOrDefaultAsync(ct => ct.CatalogTypeId == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _catalogContext.SaveChangesAsync();   
         }
     }
 }

@@ -36,13 +36,15 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         #region CatalogType
         public Task AddCatalogTypeAsync(CatalogType catalogItem);
 
-        public Task<bool> CatalogTypeExistByTypeAsync(string Type);
+        public Task<bool> GetCatalogTypeExistByTypeAsync(string Type);
 
         public Task<CatalogType> GeCatalogTypeByType(string name);
 
+        Task<CatalogType> GetCatalogTypeByIdAsync(Guid id);
+
         #endregion
 
-
+        Task SaveChangesAsync();
 
 
 

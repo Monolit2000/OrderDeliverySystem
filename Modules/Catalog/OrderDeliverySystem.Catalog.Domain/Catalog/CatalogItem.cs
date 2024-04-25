@@ -30,9 +30,9 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public string PictureUri { get; set; }
 
-        //public Establishment Establishment { get; private set; }
+        public Establishment Establishment { get; private set; }
 
-        //public CatalogType CatalogType { get; set; }
+        public CatalogType CatalogType { get; set; }
 
 
         public Guid EstablishmentId { get; set; }
@@ -68,6 +68,11 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public void ChangeCatalogType(Guid catalogTypeId)
         {
             CatalogTypeId = catalogTypeId;
+        }
+
+        public void ChangeCatalogType(CatalogType catalogType)
+        {
+            CatalogTypeId = CatalogType;
         }
 
 
