@@ -26,18 +26,29 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItem
 
             var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
 
+            var oldType = catalogItem.CatalogType;
+
+            //var oldType = await _catalogRepository.GetCatalogTypeByIdAsync(catalogItem.CatalogTypeId);
+
             if (catalogItem == null)
-                return Result.Fail("Item not found");
+                return Result.Fail("Catalog Item not found");
 
             if (catalogType == null)
-                return Result.Fail("Item not found");
+                return Result.Fail("Catalog type not found");
 
             catalogItem.ChangeCatalogType(catalogType);
 
             await _catalogRepository.SaveChangesAsync();
-            //CatalogItem
 
-            throw new NotImplementedException();
+
+            return new ChangeCatalogItemDto()
+            {
+                OldTypeId = oldType.CatalogTypeId,
+                OldType = oldType.Type,
+
+                NewTypeId = catalogItem.CatalogTypeId,
+                NewType = catalogType.Type
+            };
         }
     }
 }

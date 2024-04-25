@@ -15,12 +15,12 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         public Guid BasketId { get;  set; }
 
         //[Required]
-        //public long BuyerChatId { get;  set; }
+        public long BuyerChatId { get;  set; }
 
         [Required]
         public Guid BuyerId { get;  set; }
 
-        //public List<BasketItem> Items { get; set; } = [];
+        public List<BasketItem> Items { get; set; } = [];
 
         public CustomerBasket()
         {

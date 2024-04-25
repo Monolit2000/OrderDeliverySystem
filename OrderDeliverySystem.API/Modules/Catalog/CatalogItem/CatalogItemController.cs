@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItemType;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
@@ -18,12 +20,44 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
             _mediator = mediator;
         }
 
-        [HttpPost("AddType")]
-        public async Task<IActionResult> AddCatalogItem(AddCatalogItemRequest addCatalogItemRequest)
+        [HttpPost("AddCatalogItem")]
+        public async Task<IActionResult> AddCatalogItem(AddCatalogItemCommand addCatalogItemRequest)
         {
-            await _mediator.Send(new AddCatalogItemCommand());
+           var result = await _mediator.Send(addCatalogItemRequest);
 
-            return Ok();
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+
+        [HttpPut("ChangeCatalogItemType")]
+        public async Task<IActionResult> ChangeCatalogItemType(ChangeCatalogItemTypeCommand changeCatalogItemType)
+        {
+            var result = await _mediator.Send(changeCatalogItemType);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpDelete("DeleteCatalogItem")]
+        public async Task<IActionResult> ChangeCatalogItemType(DeleteCatalogItemCommand deleteCatalogItemCommand)
+        {
+            var result = await _mediator.Send(deleteCatalogItemCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
         }
 
     }

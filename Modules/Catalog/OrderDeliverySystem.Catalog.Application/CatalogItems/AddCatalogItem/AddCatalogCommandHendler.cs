@@ -10,7 +10,7 @@ using FluentResults;
 
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 {
-    public class AddCatalogCommandHendler : IRequestHandler<AddCatalogItemCommand, Result<CatalogItemDto>>
+    public class AddCatalogCommandHendler : IRequestHandler<AddCatalogItemCommand, Result<SmallCatalogItemDto>>
     {
         private readonly ICatalogRepository _catalogRepository;
 
@@ -19,26 +19,30 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
             _catalogRepository = catalogRepository;
         }
 
-        public async Task<Result<CatalogItemDto>> Handle(AddCatalogItemCommand request, CancellationToken cancellationToken)
+        public async Task<Result<SmallCatalogItemDto>> Handle(AddCatalogItemCommand request, CancellationToken cancellationToken)
         {
 
-            if (!await _catalogRepository.CatalogTypeExistByIdAsync(request.CatalogTypeId))
-                return Result.Fail("The catalog type does not exist");
+            var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
 
-            if (!await _catalogRepository.EstablishmentExistByIdAsync(request.EstablishmentId))
-                return Result.Fail("The Establishmen does not exist");
+            if (catalogType == null)
+                return Result.Fail("Catalog type not found");
+
+            var establishment = await _catalogRepository.GetEstablishmentById(request.EstablishmentId);
+
+            if(establishment == null)
+                return Result.Fail("Establishment not found");
 
 
             var catalogItem = new CatalogItem(
                 request.Name,
-                request.EstablishmentId,
-                request.CatalogTypeId,
+                establishment,
+                catalogType,
                 request.Description,
                 request.Price);
 
             await _catalogRepository.AddCatalogItemAsync(catalogItem);
 
-            var catalogItemDto = new CatalogItemDto(
+            var catalogItemDto = new SmallCatalogItemDto(
                 catalogItem.CatalogItemId, 
                 catalogItem.Name);
 

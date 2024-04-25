@@ -33,11 +33,11 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
 
         public async Task<CustomerBasket> GetBasketAsync(long customerChatId)
         {
-            //var customerBasket = await _basketContext.Baskets
-            //    .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
+            var customerBasket = await _basketContext.Baskets
+                .Include(b => b.Items)
+                .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
 
-            throw new NotImplementedException();
-            //return customerBasket;
+            return customerBasket;
         }
 
         public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)

@@ -15,6 +15,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Task AddCatalogItemAsync(CatalogItem catalogItem);
         public Task<CatalogItem> GetCatalogItemByIdAsync(Guid ItemId);
 
+      
+
         #endregion 
 
 
@@ -41,6 +43,9 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Task<CatalogType> GeCatalogTypeByType(string name);
 
         Task<CatalogType> GetCatalogTypeByIdAsync(Guid id);
+
+        public Task<List<CatalogType>> GetOllCatalogTypeAsync();
+
 
         #endregion
 

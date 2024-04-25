@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 {
-    public class CatalogItemDto
+    public class SmallCatalogItemDto
     {
         public Guid CatalogItemId { get; set; }
 
         public string Name { get; set; }
 
-        public CatalogItemDto(Guid catalogItemId, string name)
+        public SmallCatalogItemDto(Guid catalogItemId, string name)
         {
             CatalogItemId = catalogItemId;  
             Name = name;

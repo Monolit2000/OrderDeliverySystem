@@ -18,5 +18,6 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         public string PictureUrl { get; set; }
 
 
+        public Delivery delivery { get; set; } = default;
     }
 }

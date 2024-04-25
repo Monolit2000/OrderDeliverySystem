@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
 using OrderDeliverySystem.Basket.Application.Basket.UpdateBaske;
 using OrderDeliverySystem.Basket.Domain.Baskets;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 {
-    public class CreateBasketCommandHandler : IRequestHandler<CreateBasketCommand, CreateBasketResult>
+    public class CreateBasketCommandHandler : IRequestHandler<CreateBasketCommand, Result<BasketDto>>
     {
         private readonly IBasketRepository _basketRepository;
 
@@ -14,18 +16,16 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
             _basketRepository = userRepository;
         }
 
-        public async Task<CreateBasketResult> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Result<BasketDto>> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
             var basket = new CustomerBasket(
                 request.BuyerId);
-
-            await Console.Out.WriteLineAsync($"BasketId - {basket.BasketId}");
 
             await _basketRepository.AddBasketAsync(basket);
 
             await _basketRepository.SaveChangesAsync();
 
-            return new CreateBasketResult { BasketId = basket.BasketId };
+            return new BasketDto { BasketId = basket.BasketId };
 
         }
     }

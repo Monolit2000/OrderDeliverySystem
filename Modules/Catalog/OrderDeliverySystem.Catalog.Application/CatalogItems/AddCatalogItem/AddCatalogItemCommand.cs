@@ -7,7 +7,7 @@ using FluentResults;
 using MediatR;
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 {
-    public class AddCatalogItemCommand : IRequest<Result<CatalogItemDto>> 
+    public class AddCatalogItemCommand : IRequest<Result<SmallCatalogItemDto>> 
     {
         public string Name { get; set; }
 

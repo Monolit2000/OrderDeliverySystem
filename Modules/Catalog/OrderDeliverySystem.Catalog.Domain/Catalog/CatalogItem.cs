@@ -26,14 +26,13 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public decimal Price { get; set; }
 
-        public string PictureFileName { get; set; }
+        public string PictureFileName { get; set; } = string.Empty;
 
-        public string PictureUri { get; set; }
+        public string PictureUri { get; set; } = string.Empty;
 
         public Establishment Establishment { get; private set; }
 
         public CatalogType CatalogType { get; set; }
-
 
         public Guid EstablishmentId { get; set; }
 
@@ -47,10 +46,32 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public CatalogItem( 
             string name,
-            Guid establishmentId, 
-            Guid catalogTypeId,
+            Establishment establishment,
+            CatalogType catalogType,
             string description, 
             decimal price)
+        {
+            CatalogItemId = Guid.NewGuid();
+            SetName(name);
+            Establishment = establishment;
+            Description = description;
+            Price = price;
+            CatalogType = catalogType;
+
+            //ProductId = productId;
+            //PictureFileName = pictureFileName;
+            //PictureUri = pictureUri;
+            //CatalogType = catalogType;
+        }
+
+
+
+        public CatalogItem(
+           string name,
+           Guid establishmentId,
+           Guid catalogTypeId,
+           string description,
+           decimal price)
         {
             CatalogItemId = Guid.NewGuid();
             SetName(name);
@@ -65,6 +86,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             //CatalogType = catalogType;
         }
 
+
         public void ChangeCatalogType(Guid catalogTypeId)
         {
             CatalogTypeId = catalogTypeId;
@@ -72,7 +94,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public void ChangeCatalogType(CatalogType catalogType)
         {
-            CatalogTypeId = CatalogType;
+            CatalogType = catalogType;
         }
 
 

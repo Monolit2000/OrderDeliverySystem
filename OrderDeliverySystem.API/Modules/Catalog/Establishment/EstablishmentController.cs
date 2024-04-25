@@ -47,6 +47,9 @@ namespace OrderDeliverySystem.API.Modules.Catalog.Establishment
             return Ok(result.Value);
         }
 
+   
+
+        
 
     }
 }

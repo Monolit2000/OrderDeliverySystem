@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using OrderDeliverySystem.Catalog.Infrastructure.Persistence;
@@ -43,9 +44,16 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             return await _catalogContext.Establishments.AnyAsync(e => e.EstablishmentId == Id);
         }
 
-        public Task<CatalogItem> GetCatalogItemByIdAsync(Guid ItemId)
+        public async Task<CatalogItem> GetCatalogItemByIdAsync(Guid ItemId)
         {
-            throw new NotImplementedException();
+
+            var catalogItem = await _catalogContext.CatalogItems
+                .Include(ci => ci.CatalogType) 
+                .FirstOrDefaultAsync(ci => ci.CatalogItemId == ItemId);
+
+            return catalogItem;
+
+            //return await _catalogContext.CatalogItems.FirstOrDefaultAsync(ci => ci.CatalogItemId == ItemId);
         }
 
         public async Task<Establishment> GetEstablishmentById(Guid Id)
@@ -109,6 +117,11 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
         public async Task SaveChangesAsync()
         {
             await _catalogContext.SaveChangesAsync();   
+        }
+
+        public async Task<List<CatalogType>> GetOllCatalogTypeAsync()
+        {
+            return await _catalogContext.CatalogTypes.ToListAsync();
         }
     }
 }
