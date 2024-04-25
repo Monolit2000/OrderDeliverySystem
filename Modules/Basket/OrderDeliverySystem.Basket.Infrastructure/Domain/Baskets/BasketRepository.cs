@@ -23,8 +23,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
         {
             await _basketContext.Baskets.AddAsync(basket);
 
-            //var test = await GetBasketAsync(basket.BuyerChatId);
-            //await Console.Out.WriteLineAsync($"REPO - {test.BuyerChatId}");
+            await _basketContext.SaveChangesAsync();
         }
 
         public Task<bool> DeleteBasketAsync(string id)

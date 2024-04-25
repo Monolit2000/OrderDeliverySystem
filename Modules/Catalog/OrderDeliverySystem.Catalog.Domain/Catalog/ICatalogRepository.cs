@@ -28,6 +28,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public Task<Establishment> GetEstablishmentByName(string name);
 
+        public Task<List<Establishment>> GetOllEstablishment();
+
         #endregion 
 
 
@@ -35,6 +37,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Task AddCatalogTypeAsync(CatalogType catalogItem);
 
         public Task<bool> CatalogTypeExistByTypeAsync(string Type);
+
+        public Task<CatalogType> GeCatalogTypeByType(string name);
 
         #endregion
 

@@ -6,7 +6,7 @@ using OrderDeliverySystem.UserAccess.Application.Contracts;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {
-    [Route("api")]
+    [Route("api/Catalog/CatalogItem")]
     [ApiController]
     public class CatalogItemController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         }
 
         [HttpPost("AddType")]
-        public async Task<IActionResult> AddCatalogItem(ActivateUserRequest activateRequest)
+        public async Task<IActionResult> AddCatalogItem(AddCatalogItemRequest addCatalogItemRequest)
         {
             await _mediator.Send(new AddCatalogItemCommand());
 

@@ -23,8 +23,8 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogTypes.AddCatalogType
         public async Task<Result<CatalogTypeDto>> Handle(AddCatalogTypeCommand request, CancellationToken cancellationToken)
         {
 
-            //if (!await _catalogRepository.CatalogTypeExistByIdAsync(request.CatalogTypeId))
-            //    return Result.Fail("The catalog type does not exist");
+            if (await _catalogRepository.CatalogTypeExistByTypeAsync(request.Type))
+                return Result.Fail( $"Catalog type '{request.Type} already exists'");
 
             var cutalogItem = new CatalogType(request.Type);
             

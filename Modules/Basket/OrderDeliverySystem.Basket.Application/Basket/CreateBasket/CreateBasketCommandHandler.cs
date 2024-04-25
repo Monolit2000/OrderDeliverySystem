@@ -21,40 +21,12 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 
             await Console.Out.WriteLineAsync($"BasketId - {basket.BasketId}");
 
-            //await Task.Delay(TimeSpan.FromSeconds(30));
+            await _basketRepository.AddBasketAsync(basket);
 
-        
+            await _basketRepository.SaveChangesAsync();
 
+            return new CreateBasketResult { BasketId = basket.BasketId };
 
-          //  await _basketRepository.AddBasketAsync(basket);
-
-            //var ExistBascket = await _basketRepository.GetBasketAsync(request.BuyerChatId);
-
-            //await Console.Out.WriteLineAsync($"{ExistBascket.BuyerChatId} -> BasketId {ExistBascket.BasketId}");
-
-            Console.WriteLine("-------");
-            await Console.Out.WriteLineAsync($" {basket.BasketId}");
-            //await Console.Out.WriteLineAsync($" {basket.BuyerChatId}");
-            await Console.Out.WriteLineAsync($" {basket.BuyerId}");
-
-            try 
-            {
-
-                await _basketRepository.SaveChangesAsync();
-
-            }
-            catch (DbUpdateException dbEx)
-            {
-                // Обработка исключений, связанных с базой данных
-                Console.WriteLine("Database update error: " + dbEx.Message);
-            }
-            catch (Exception ex)
-            {
-                // Общая обработка исключений
-                Console.WriteLine("An error occurred: " + ex.Message);
-            }
-
-            return new CreateBasketResult {BasketId = basket.BasketId};
         }
     }
 }

@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Catalog.Application.Establishments.AddEstablishment;
+using OrderDeliverySystem.Catalog.Application.Establishments.GetOllEstablishment;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.Establishment
 {
 
-    [Route("api/Establishment")]
+    [Route("api/Catalog/Establishment")]
     [ApiController]
     public class EstablishmentController : ControllerBase
     {
@@ -24,7 +25,28 @@ namespace OrderDeliverySystem.API.Modules.Catalog.Establishment
         {
             var result = await _mediator.Send(new AddEstablishmentCommand(addEstablishmentRequest.Name));
 
-            return Ok(result);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
         }
+
+
+        [HttpPost("GetOllEstablishment")]
+        public async Task<IActionResult> GetOllEstablishment(/*GetOllEstablishmentRequest getOllEstablishmentRequest*/)
+        {
+            var result = await _mediator.Send(new GetOllEstablishmentQuery());
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+
     }
 }

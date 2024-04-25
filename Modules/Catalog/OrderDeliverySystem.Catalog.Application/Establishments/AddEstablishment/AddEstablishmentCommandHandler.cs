@@ -38,7 +38,7 @@ namespace OrderDeliverySystem.Catalog.Application.Establishments.AddEstablishmen
                 Name = establishment.Name
             };
 
-            return addEstablishmentDto;
+            return Result.Ok(addEstablishmentDto);
 
           
         }

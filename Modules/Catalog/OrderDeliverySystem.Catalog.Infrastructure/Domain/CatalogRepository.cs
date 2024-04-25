@@ -90,5 +90,15 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
 
             await _catalogContext.SaveChangesAsync();
         }
+
+        public async Task<CatalogType> GeCatalogTypeByType(string type)
+        {
+            return await _catalogContext.CatalogTypes.FirstOrDefaultAsync(ct => ct.Type == type);
+        }
+
+        public async Task<List<Establishment>> GetOllEstablishment()
+        {
+            return await _catalogContext.Establishments.ToListAsync();
+        }
     }
 }
