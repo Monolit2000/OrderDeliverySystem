@@ -9,7 +9,7 @@ using OrderDeliverySystem.UserAccess.Domain.Users;
 
 namespace OrderDeliverySystem.API.Controllers
 {
-    [Route("api")]
+    [Route("api/userAccess")]
     [ApiController]
     public class AccessUserController : ControllerBase
     {

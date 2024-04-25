@@ -8,7 +8,7 @@ namespace OrderDeliverySystem.CommonModule.Domain
 {
     public abstract class Entity
     {
-        private List<IDomainEvent> _domainEvents;
+        private List<IDomainEvent> _domainEvents = [];
 
         /// <summary>
         /// Domain events occurred.

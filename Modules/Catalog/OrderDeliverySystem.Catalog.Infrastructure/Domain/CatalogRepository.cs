@@ -38,9 +38,9 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
         }
 
 
-        public async Task<bool> EstablishmentExistByIdAsync(Guid id)
+        public async Task<bool> EstablishmentExistByIdAsync(Guid Id)
         {
-            return await _catalogContext.Establishments.AnyAsync(e => e.EstablishmentId == id);
+            return await _catalogContext.Establishments.AnyAsync(e => e.EstablishmentId == Id);
         }
 
         public Task<CatalogItem> GetCatalogItemByIdAsync(Guid ItemId)
@@ -48,9 +48,9 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             throw new NotImplementedException();
         }
 
-        public Task GetEstablishmentById(Guid Id)
+        public async Task<Establishment> GetEstablishmentById(Guid Id)
         {
-            throw new NotImplementedException();
+            return await _catalogContext.Establishments.FirstOrDefaultAsync(e => e.EstablishmentId == Id);
         }
 
         public IQueryable<CatalogItem> GetOllCatalogItemQueryable()
@@ -65,7 +65,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             return await _catalogContext.CatalogTypes.AnyAsync(type => type.Type == Type);
         }
 
-        public async Task<bool> RemoveByIdCatalogItemAsync(Guid catalogItemId)
+        public async Task<bool> RemoveCatalogItemByIdAsync(Guid catalogItemId)
         {
             var item = await _catalogContext.CatalogItems.FindAsync(catalogItemId);
 
@@ -77,6 +77,18 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             await _catalogContext.SaveChangesAsync();
 
             return true; 
+        }
+
+        public async Task<Establishment> GetEstablishmentByName(string name)
+        {
+            return await _catalogContext.Establishments.FirstOrDefaultAsync(e => e.Name == name);
+        }
+
+        public async Task AddEstablishmentAsync(Establishment establishment)
+        {
+            await _catalogContext.AddAsync(establishment);
+
+            await _catalogContext.SaveChangesAsync();
         }
     }
 }

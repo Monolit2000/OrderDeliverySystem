@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem
         public async Task<Result<DeleteCatalogItemDto>> Handle(DeleteCatalogItemCommand request, CancellationToken cancellationToken)
         {
 
-            var result = await _catalogRepository.RemoveByIdCatalogItemAsync(request.CatalogItemId);
+            var result = await _catalogRepository.RemoveCatalogItemByIdAsync(request.CatalogItemId);
 
             if (!result)
                 return Result.Fail("Item not found");
@@ -29,7 +29,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem
             var deleteCatalogItemDto = new DeleteCatalogItemDto() {CatalogItemId = request.CatalogItemId };
 
             return deleteCatalogItemDto;
-
         }
     }
 }
