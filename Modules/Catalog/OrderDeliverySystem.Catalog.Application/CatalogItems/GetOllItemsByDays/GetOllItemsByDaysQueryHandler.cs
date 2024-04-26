@@ -33,20 +33,58 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
 
 
 
+            //var itemsByDays = root
+            //   .Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
+            //.GroupBy(item => item.TimeToItemExist.Date)
+            //.Select(group => new ItemsByDaysDto
+            //{
+            //    Day = group.Key,
+            //    Items = group.Select(item => new CatalogItemDto
+            //    {
+            //        Name = item.Name,
+            //        Price = item.Price,
+            //        Description = item.Description
+            //    }).ToList()
+            //})
+            //.ToList();
+
+
+
+
+
+
             var itemsByDays = root
-            .Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
-            .GroupBy(item => item.TimeToItemExist.Date)
-            .Select(group => new ItemsByDaysDto
-            {
-                Day = group.Key,
-                Items = group.Select(item => new CatalogItemDto
+                .Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
+                .GroupBy(item => item.TimeToItemExist.Date)
+                .OrderBy(g => g.Key)
+                .Select(group => new ItemsByDaysDto
                 {
-                    Name = item.Name,
-                    Price = item.Price,
-                    Description = item.Description
-                }).ToList()
-            })
-            .ToList();
+                    Day = group.Key,
+                    Items = group.Select(item => new CatalogItemDto
+                    {
+                        Name = item.Name,
+                        Price = item.Price,
+                        Description = item.Description
+                    }).ToList()
+                })
+                .ToList();
+
+
+
+
+            //.Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
+            //.GroupBy(item => item.TimeToItemExist.Date)
+            //.Select(group => new ItemsByDaysDto
+            //{
+            //    Day = group.Key,
+            //    Items = group.Select(item => new CatalogItemDto
+            //    {
+            //        Name = item.Name,
+            //        Price = item.Price,
+            //        Description = item.Description
+            //    }).ToList()
+            //})
+            //.ToList();
 
 
 
