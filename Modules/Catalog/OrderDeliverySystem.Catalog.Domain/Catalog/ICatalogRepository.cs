@@ -10,6 +10,9 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
     {
         #region CatalogItem
         public IQueryable<CatalogItem> GetOllCatalogItemQueryable();
+
+        public Task<List<CatalogItem>> GetOllCatalogItems();
+
         public Task<bool> RemoveCatalogItemByIdAsync(Guid catalogItemId);
         public Task<bool> CatalogTypeExistByIdAsync(Guid id);
         public Task AddCatalogItemAsync(CatalogItem catalogItem);

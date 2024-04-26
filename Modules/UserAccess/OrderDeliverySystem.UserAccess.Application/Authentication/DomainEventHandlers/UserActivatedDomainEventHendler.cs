@@ -22,11 +22,6 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication.DomainEventH
 
         public async Task Handle(UserActivatedDomainEvent notification, CancellationToken cancellationToken)
         {
-           await Console.Out.WriteLineAsync(notification.PhoneNumber);
-
-
-           await _eventBus.PublishAsync(new CatalogItemAddIntegretionEvent(Guid.NewGuid(), DateTime.UtcNow));
-
 
            await _eventBus.PublishAsync(new ConsumerActivatedIntegretionEvent(
                 notification.UserId,

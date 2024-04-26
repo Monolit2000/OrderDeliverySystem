@@ -22,8 +22,6 @@ namespace OrderDeliverySystem.Catalog.Application.IntegrationEvents
         {
            
 
-            await Console.Out.WriteLineAsync("test IntegretionEvent");
-
         }
     }
 }

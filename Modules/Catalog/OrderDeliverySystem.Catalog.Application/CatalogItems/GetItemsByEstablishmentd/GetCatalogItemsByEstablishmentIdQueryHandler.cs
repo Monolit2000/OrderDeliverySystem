@@ -22,26 +22,28 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByEstabli
 
         public async Task<Result<List<CatalogItemDto>>> Handle(GetCatalogItemsByEstablishmentdQuery request, CancellationToken cancellationToken)
         {
-            var root = _catalogRepository.GetOllCatalogItemQueryable();
+            //var root = _catalogRepository.GetOllCatalogItemQueryable();
 
-            root = root.Where(ci => ci.EstablishmentId == request.EstablishmentId);
+            //root = root.Where(ci => ci.EstablishmentId == request.EstablishmentId);
 
-            if (!root.Any())
-                return Result.Fail("No products found");
+            //if (!root.Any())
+            //    return Result.Fail("No products found");
 
-            var catalogItems = await root.ToListAsync(cancellationToken);
+            //var catalogItems = await root.ToListAsync(cancellationToken);
 
-            var catalogItemDtos = catalogItems.Select(ci => new CatalogItemDto
-            {
-                Id = ci.CatalogItemId,
-                Name = ci.Name,
-                Description = ci.Description,
-                ImageUri = ci.PictureFileName, 
-                Price = ci.Price,
-                PictureUri = ci.PictureUri
-            }).ToList();
+            //var catalogItemDtos = catalogItems.Select(ci => new CatalogItemDto
+            //{
+            //    Id = ci.CatalogItemId,
+            //    Name = ci.Name,
+            //    Description = ci.Description,
+            //    ImageUri = ci.PictureFileName, 
+            //    Price = ci.Price,
+            //    PictureUri = ci.PictureUri
+            //}).ToList();
 
-            return Result.Ok(catalogItemDtos);
+            //return Result.Ok(catalogItemDtos);
+
+            throw new NotImplementedException();
         }
 
     }

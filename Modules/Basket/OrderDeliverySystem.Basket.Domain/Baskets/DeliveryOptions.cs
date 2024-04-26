@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
-    public class Delivery 
+    public class DeliveryOptions
     {
+        public Guid DeliveryOptionsId { get; set; }
+
         public DateTime FeedTime { get; set; }
 
         public decimal Price { get; set; } = 20; 
-
     }
 }

@@ -10,11 +10,11 @@ using FluentResults;
 
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 {
-    public class AddCatalogCommandHendler : IRequestHandler<AddCatalogItemCommand, Result<SmallCatalogItemDto>>
+    public class AddCatalogItemCommandHendler : IRequestHandler<AddCatalogItemCommand, Result<SmallCatalogItemDto>>
     {
         private readonly ICatalogRepository _catalogRepository;
 
-        public AddCatalogCommandHendler(ICatalogRepository catalogRepository)
+        public AddCatalogItemCommandHendler(ICatalogRepository catalogRepository)
         {
             _catalogRepository = catalogRepository;
         }
@@ -22,21 +22,21 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
         public async Task<Result<SmallCatalogItemDto>> Handle(AddCatalogItemCommand request, CancellationToken cancellationToken)
         {
 
-            var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
+            //var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
 
-            if (catalogType == null)
-                return Result.Fail("Catalog type not found");
+            //if (catalogType == null)
+            //    return Result.Fail("Catalog type not found");
 
-            var establishment = await _catalogRepository.GetEstablishmentById(request.EstablishmentId);
+            //var establishment = await _catalogRepository.GetEstablishmentById(request.EstablishmentId);
 
-            if(establishment == null)
-                return Result.Fail("Establishment not found");
+            //if(establishment == null)
+            //    return Result.Fail("Establishment not found");
 
 
             var catalogItem = new CatalogItem(
                 request.Name,
-                establishment,
-                catalogType,
+                request.TimeToExist,
+           //     establishment,
                 request.Description,
                 request.Price);
 

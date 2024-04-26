@@ -8,10 +8,10 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItem
 {
     public class ChangeCatalogItemDto
     {
-        public Guid OldTypeId { get; set; }
-        public string OldType { get; set; }
+        //public Guid OldTypeId { get; set; }
+        //public string OldType { get; set; }
 
-        public Guid NewTypeId { get; set; }
-        public string NewType { get; set; }
+        //public Guid NewTypeId { get; set; }
+        //public string NewType { get; set; }
     }
 }

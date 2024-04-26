@@ -10,6 +10,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
     public class BasketItem 
     {
         public int ProductId { get; set; }
+        public Guid BasketItemId { get; set; }  
         public Guid BasketId { get; set; }
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
@@ -18,6 +19,6 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         public string PictureUrl { get; set; }
 
 
-        public Delivery delivery { get; set; } = default;
+        public DeliveryOptions delivery { get; set; } = default;
     }
 }

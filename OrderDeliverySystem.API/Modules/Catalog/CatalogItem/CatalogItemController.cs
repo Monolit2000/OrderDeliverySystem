@@ -4,6 +4,7 @@ using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItemType;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
@@ -48,9 +49,22 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         }
 
         [HttpDelete("DeleteCatalogItem")]
-        public async Task<IActionResult> ChangeCatalogItemType(DeleteCatalogItemCommand deleteCatalogItemCommand)
+        public async Task<IActionResult> DeleteCatalogItem(DeleteCatalogItemCommand deleteCatalogItemCommand)
         {
             var result = await _mediator.Send(deleteCatalogItemCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpPost("GetOllItemsByDays")]
+        public async Task<IActionResult> DeleteCatalogItem(/*[FromBody]*/ GetOllItemsByDaysQuery getOllItemsByDaysQuery)
+        {
+            var result = await _mediator.Send(getOllItemsByDaysQuery);
 
             if (!result.IsSuccess)
             {

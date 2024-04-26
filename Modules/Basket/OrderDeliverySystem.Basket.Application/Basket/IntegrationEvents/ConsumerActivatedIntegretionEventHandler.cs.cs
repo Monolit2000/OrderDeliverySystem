@@ -22,11 +22,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
         }
         public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            await Console.Out.WriteLineAsync("ConsumerActivatedIntegretionEventHandler Basket");
-
             await _mediator.Send(new CreateBasketCommand(notification.UserId, notification.ChatId));
-
-            await Console.Out.WriteLineAsync("ETSTESTESTSETSETSETSESTESETSET");
         }
     }
 }

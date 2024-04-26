@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 
             await _basketRepository.AddBasketAsync(basket);
 
-            await _basketRepository.SaveChangesAsync();
+            await Console.Out.WriteLineAsync("Basket created");
 
             return new BasketDto { BasketId = basket.BasketId };
 

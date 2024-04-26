@@ -58,6 +58,19 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             AddDomainEvent(new UserActivatedDomainEvent(UserId, phoneNumber, chatId, firstName,  lastName,  name));
         }
 
+
+        public void ActivateUser(long chatId)
+        {
+            if (IsActivated)
+                throw new Exception("User already activated");
+
+            ChatId = chatId;
+            IsActivated = true;
+
+            AddDomainEvent(new UserActivatedDomainEvent(UserId, PhoneNumber.Number, chatId, FirstName, LastName, Name));
+        }
+
+
         public void DeactivateUser()
         {
             if (!IsActivated) 

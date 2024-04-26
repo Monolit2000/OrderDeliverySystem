@@ -11,9 +11,11 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
     {
         public string Name { get; set; }
 
+        public DateTime TimeToExist { get; set; }
+
         public Guid EstablishmentId { get; set; }
 
-        public Guid CatalogTypeId { get; set; }
+        //public Guid CatalogTypeId { get; set; }
 
         public string Description { get; set; }
 

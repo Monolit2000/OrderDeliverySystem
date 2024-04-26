@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Catalog.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class CatalogContextModelSnapshot : ModelSnapshot
+    [Migration("20240426173512_NewBasketMigrationNewProperty")]
+    partial class NewBasketMigrationNewProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +35,9 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EstablishmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -59,6 +65,8 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CatalogItemId");
+
+                    b.HasIndex("EstablishmentId");
 
                     b.ToTable("Catalog", "catalog");
                 });
@@ -91,6 +99,17 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                     b.HasKey("EstablishmentId");
 
                     b.ToTable("Establishments", "catalog");
+                });
+
+            modelBuilder.Entity("OrderDeliverySystem.Catalog.Domain.Catalog.CatalogItem", b =>
+                {
+                    b.HasOne("OrderDeliverySystem.Catalog.Domain.Catalog.Establishment", "Establishment")
+                        .WithMany()
+                        .HasForeignKey("EstablishmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Establishment");
                 });
 #pragma warning restore 612, 618
         }

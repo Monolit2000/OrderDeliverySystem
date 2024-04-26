@@ -48,7 +48,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
         {
 
             var catalogItem = await _catalogContext.CatalogItems
-                .Include(ci => ci.CatalogType) 
+                //.Include(ci => ci.CatalogType) 
                 .FirstOrDefaultAsync(ci => ci.CatalogItemId == ItemId);
 
             return catalogItem;
@@ -123,5 +123,11 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
         {
             return await _catalogContext.CatalogTypes.ToListAsync();
         }
+
+        public async Task<List<CatalogItem>> GetOllCatalogItems()
+        {
+            return await _catalogContext.CatalogItems.ToListAsync();
+        }
+
     }
 }

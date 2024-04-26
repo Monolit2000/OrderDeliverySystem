@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItem
 
             var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
 
-            var oldType = catalogItem.CatalogType;
+            //var oldType = catalogItem.CatalogType;
 
             //var oldType = await _catalogRepository.GetCatalogTypeByIdAsync(catalogItem.CatalogTypeId);
 
@@ -36,19 +36,20 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItem
             if (catalogType == null)
                 return Result.Fail("Catalog type not found");
 
-            catalogItem.ChangeCatalogType(catalogType);
+            //catalogItem.ChangeCatalogType(catalogType);
 
             await _catalogRepository.SaveChangesAsync();
 
+            return new ChangeCatalogItemDto();
 
-            return new ChangeCatalogItemDto()
-            {
-                OldTypeId = oldType.CatalogTypeId,
-                OldType = oldType.Type,
+            //return new ChangeCatalogItemDto()
+            //{
+            //    OldTypeId = oldType.CatalogTypeId,
+            //    OldType = oldType.Type,
 
-                NewTypeId = catalogItem.CatalogTypeId,
-                NewType = catalogType.Type
-            };
+            //    NewTypeId = catalogItem.CatalogTypeId,
+            //    NewType = catalogType.Type
+            //};
         }
     }
 }

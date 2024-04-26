@@ -14,88 +14,67 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
     public class CatalogItem : Entity, IAggregateRoot
     {
-      
-        public Guid CatalogItemId { get; set; }
+
+        public Guid CatalogItemId { get; private set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public Guid ProductId { get; set; }
+        public DateTime TimeToItemExist {get; private set;}
 
-        public string Description { get; set; }
+        public Guid ProductId { get; private set; }
 
-        public decimal Price { get; set; }
+        public string Description { get; private set; }
 
-        public string PictureFileName { get; set; } = string.Empty;
+        public decimal Price { get; private set; }
 
-        public string PictureUri { get; set; } = string.Empty;
+        public string PictureFileName { get; private set; } = string.Empty;
 
-        public Establishment Establishment { get; private set; }
+        public string PictureUri { get; private set; } = string.Empty;
 
-        public CatalogType CatalogType { get; set; }
+        //public Guid EstablishmentId { get; private set; }
 
-        public Guid EstablishmentId { get; set; }
+        //public Establishment Establishment { get; private set; }
 
-        public Guid CatalogTypeId { get; set; }
+        //public Guid CatalogTypeId { get; set; }
+
+        //public CatalogType CatalogType { get; set; }
+
 
         private CatalogItem() 
         {
 
-        }    
+        }
 
 
-        public CatalogItem( 
+        //public CatalogItem(
+        //   string name,
+        //   Establishment establishment,
+        //   string description,
+        //   decimal price)
+        //{
+        //    CatalogItemId = Guid.NewGuid();
+        //    SetName(name);
+        //    Establishment = establishment;
+        //    Description = description;
+        //    Price = price;
+        //}
+
+        public CatalogItem(
             string name,
-            Establishment establishment,
-            CatalogType catalogType,
-            string description, 
+            DateTime timeToItemExist,
+      //      Establishment establishment,
+            string description,
             decimal price)
         {
             CatalogItemId = Guid.NewGuid();
+            TimeToItemExist = timeToItemExist;  
             SetName(name);
-            Establishment = establishment;
+    //        Establishment = establishment;
             Description = description;
             Price = price;
-            CatalogType = catalogType;
-
-            //ProductId = productId;
-            //PictureFileName = pictureFileName;
-            //PictureUri = pictureUri;
-            //CatalogType = catalogType;
         }
 
-
-
-        public CatalogItem(
-           string name,
-           Guid establishmentId,
-           Guid catalogTypeId,
-           string description,
-           decimal price)
-        {
-            CatalogItemId = Guid.NewGuid();
-            SetName(name);
-            EstablishmentId = establishmentId;
-            Description = description;
-            Price = price;
-            CatalogTypeId = catalogTypeId;
-
-            //ProductId = productId;
-            //PictureFileName = pictureFileName;
-            //PictureUri = pictureUri;
-            //CatalogType = catalogType;
-        }
-
-
-        public void ChangeCatalogType(Guid catalogTypeId)
-        {
-            CatalogTypeId = catalogTypeId;
-        }
-
-        public void ChangeCatalogType(CatalogType catalogType)
-        {
-            CatalogType = catalogType;
-        }
 
 
         private void SetName(string name)
@@ -116,15 +95,67 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             Price = newPrice;
         }
 
+
+        public void ChangeTimeToItemExist(DateTime newDateTime)
+        {
+            TimeToItemExist = newDateTime;  
+        }
+
         public void ChangePictureUri(string uri)
         {
             PictureUri = uri;
         }
 
-        public void ChangeEstablishment(Guid establishmentId)
-        {
-            EstablishmentId = establishmentId;
-        }
+        //public void ChangeEstablishment(Guid establishmentId)
+        //{
+        //    EstablishmentId = establishmentId;
+        //}
+
+
+
+        //public CatalogItem( 
+        //    string name,
+        //    Establishment establishment,
+        //    CatalogType catalogType,
+        //    string description, 
+        //    decimal price)
+        //{
+        //    CatalogItemId = Guid.NewGuid();
+        //    SetName(name);
+        //    Establishment = establishment;
+        //    Description = description;
+        //    Price = price;
+        //    CatalogType = catalogType;
+        //}
+
+
+
+        //public CatalogItem(
+        //   string name,
+        //   Guid establishmentId,
+        //   Guid catalogTypeId,
+        //   string description,
+        //   decimal price)
+        //{
+        //    CatalogItemId = Guid.NewGuid();
+        //    SetName(name);
+        //    EstablishmentId = establishmentId;
+        //    Description = description;
+        //    Price = price;
+        //    CatalogTypeId = catalogTypeId;
+        //}
+
+
+        //public void ChangeCatalogType(Guid catalogTypeId)
+        //{
+        //    CatalogTypeId = catalogTypeId;
+        //}
+
+        //public void ChangeCatalogType(CatalogType catalogType)
+        //{
+        //    CatalogType = catalogType;
+        //}
+
 
     }
 }
