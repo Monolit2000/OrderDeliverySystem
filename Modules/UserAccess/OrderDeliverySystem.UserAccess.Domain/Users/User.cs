@@ -15,19 +15,19 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
     {
         public Guid UserId { get; private set; }
 
-        public string FirstName;
+        public string FirstName { get; private set; }
 
-        public string LastName;
+        public string LastName { get; private set; }
 
-        public string Name;
+        public string Name { get; private set; }
 
-        public PhoneNumber PhoneNumber;
+        public PhoneNumber PhoneNumber { get; private set; }
 
-        public UserRole Role;
+        public UserRole Role { get; private set; }
 
         public bool IsActivated = false;
 
-        public long ChatId;
+        public long ChatId { get; private set; }
 
         private User()
         {
