@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 
 namespace OrderDeliverySystem.UserAccess.Application.Authentication
 {
-    internal class ActivateUserCommandHendler : IRequestHandler<ActivateUserCommand, ActivateResult>
+    internal class ActivateUserCommandHendler : IRequestHandler<ActivateUserCommand, Result<ActivateResult>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -12,7 +13,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
             _userRepository = userRepository;
         }
 
-        public async Task<ActivateResult> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ActivateResult>> Handle(ActivateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetUserByPhoneNumberAsync(request.PhoneNumber.Number);
 

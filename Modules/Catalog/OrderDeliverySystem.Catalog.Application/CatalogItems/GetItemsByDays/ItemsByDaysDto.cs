@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
+namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays
 {
-    public class ItemsByDaysDto
+    public class ItemsByDaysDto 
     {
         public DateTime Day { get; set; }
 

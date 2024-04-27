@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using OrderDeliverySystem.Basket.Infrastructure.Startup;
 
 using OrderDeliverySystem.Catalog.Infrastructure.Startup;
+using OrderDeliverySystem.Ordering.Infrastructure.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,8 @@ builder.Logging.AddSerilog();
 
 builder.Services.AddUserAccessModule(builder.Configuration)
     .AddBasketModule(builder.Configuration)
-    .AddCatalogModule(builder.Configuration); 
+    .AddCatalogModule(builder.Configuration)
+    .AddOrderModule(builder.Configuration);
 
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Azure.Core;
+using FluentResults;
+using MediatR;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
 {
-    public class CreateConsumerCommand : IRequest<CreateConsumerResult>
+    public class CreateConsumerCommand : IRequest<Result<CreateConsumerResult>>
     {
 
         public PhoneNumber PhoneNumber { get; }

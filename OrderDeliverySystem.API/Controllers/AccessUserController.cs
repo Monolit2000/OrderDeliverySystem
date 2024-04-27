@@ -1,3 +1,4 @@
+using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
@@ -46,14 +47,20 @@ namespace OrderDeliverySystem.API.Controllers
             //    createRequest.LastName,
             //    createRequest.Name));
 
-            var user = await _userAccessModule.ExecuteCommandAsync(
+            var result = await _userAccessModule.ExecuteCommandAsync(
                 new CreateConsumerCommand(PhoneNumber.Create(createRequest.PhoneNumber).Value,
                 createRequest.FirstName,
                 createRequest.LastName,
                 createRequest.Name,
                 createRequest.ChatId));
 
-            return Ok(user);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        
         }
 
         [HttpPost("AddType")]

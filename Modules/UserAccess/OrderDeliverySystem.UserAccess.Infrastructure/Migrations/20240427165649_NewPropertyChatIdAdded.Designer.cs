@@ -13,14 +13,15 @@ using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
 {
     [DbContext(typeof(UserAccessContext))]
-    [Migration("20240420160335_AddUserAccsessRoleMigartion")]
-    partial class AddUserAccsessRoleMigartion
+    [Migration("20240427165649_NewPropertyChatIdAdded")]
+    partial class NewPropertyChatIdAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("userAccess")
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -31,6 +32,10 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("ChatId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("ChatId");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

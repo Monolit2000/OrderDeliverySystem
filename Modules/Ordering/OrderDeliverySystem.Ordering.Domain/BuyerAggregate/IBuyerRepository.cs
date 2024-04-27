@@ -10,7 +10,7 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
     {
         Buyer Add(Buyer buyer);
         Buyer Update(Buyer buyer);
-        Task<Buyer> FindAsync(string BuyerIdentityGuid);
+        Task<Buyer> FindAsync(long chatId);
         Task<Buyer> FindByIdAsync(int id);
     }
 }

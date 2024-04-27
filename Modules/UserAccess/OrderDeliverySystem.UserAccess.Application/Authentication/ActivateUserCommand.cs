@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 
 
 namespace OrderDeliverySystem.UserAccess.Application.Authentication
 {
-    public class ActivateUserCommand : IRequest<ActivateResult>
+    public class ActivateUserCommand : IRequest<Result<ActivateResult>>
     {
         public PhoneNumber PhoneNumber { get; }
 

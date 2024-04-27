@@ -4,6 +4,7 @@ using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItemType;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 
@@ -61,8 +62,8 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
             return Ok(result.Value);
         }
 
-        [HttpPost("GetOllItemsByDays")]
-        public async Task<IActionResult> DeleteCatalogItem(/*[FromBody]*/ GetOllItemsByDaysQuery getOllItemsByDaysQuery)
+        [HttpPost("GetItemsByDays")]
+        public async Task<IActionResult> DeleteCatalogItem(/*[FromBody]*/ GetItemsByDaysQuery getOllItemsByDaysQuery)
         {
             var result = await _mediator.Send(getOllItemsByDaysQuery);
 
@@ -73,6 +74,23 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 
             return Ok(result.Value);
         }
+
+
+
+        [HttpPost("GetOllItemsByDays")]
+        public async Task<IActionResult> GetOllItemsByDays()
+        {
+            var result = await _mediator.Send( new GetOllItemsByDaysQuery());
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+
 
     }
 }

@@ -19,6 +19,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
             builder.HasKey(x => x.UserId);
 
             builder.Property(p => p.IsActivated).HasColumnName("IsActivated");
+            builder.Property(p => p.ChatId).HasColumnName("ChatId");
             builder.Property(p => p.FirstName).HasColumnName("FirstName");
             builder.Property(p => p.LastName).HasColumnName("LastName");
             builder.Property(p => p.Name).HasColumnName("Name");

@@ -1,11 +1,10 @@
 ﻿using FluentResults;
 using MediatR;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,88 +21,24 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
 
         public async Task<Result<List<ItemsByDaysDto>>> Handle(GetOllItemsByDaysQuery request, CancellationToken cancellationToken)
         {
-
             var root = await _catalogRepository.GetOllCatalogItems();
 
-            //var outList = root
-            // .Where(p => request.ListOfDays.Contains(p.TimeToItemExist))
-
-            // .ToList();
-            var filteredDays = request.ListOfDays.Select(day => day.Date).ToList();
-
-
-
-            //var itemsByDays = root
-            //   .Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
-            //.GroupBy(item => item.TimeToItemExist.Date)
-            //.Select(group => new ItemsByDaysDto
-            //{
-            //    Day = group.Key,
-            //    Items = group.Select(item => new CatalogItemDto
-            //    {
-            //        Name = item.Name,
-            //        Price = item.Price,
-            //        Description = item.Description
-            //    }).ToList()
-            //})
-            //.ToList();
-
-
-
-
-
-
             var itemsByDays = root
-                .Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
-                .GroupBy(item => item.TimeToItemExist.Date)
-                .OrderBy(g => g.Key)
-                .Select(group => new ItemsByDaysDto
+            .GroupBy(item => item.TimeToItemExist.Date)
+            .OrderBy(g => g.Key)
+            .Select(group => new ItemsByDaysDto
+            {
+                Day = group.Key,
+                Items = group.Select(item => new CatalogItemDto
                 {
-                    Day = group.Key,
-                    Items = group.Select(item => new CatalogItemDto
-                    {
-                        Name = item.Name,
-                        Price = item.Price,
-                        Description = item.Description
-                    }).ToList()
-                })
-                .ToList();
+                    Name = item.Name,
+                    Price = item.Price,
+                    Description = item.Description
+                }).ToList()
+            })
+            .ToList();
 
-
-
-
-            //.Where(item => filteredDays.Contains(item.TimeToItemExist.Date))
-            //.GroupBy(item => item.TimeToItemExist.Date)
-            //.Select(group => new ItemsByDaysDto
-            //{
-            //    Day = group.Key,
-            //    Items = group.Select(item => new CatalogItemDto
-            //    {
-            //        Name = item.Name,
-            //        Price = item.Price,
-            //        Description = item.Description
-            //    }).ToList()
-            //})
-            //.ToList();
-
-
-
-
-            //var itemsByDays = root
-            //.GroupBy(item => item.TimeToItemExist.Date)
-            //.Select(group => new ItemsByDaysDto
-            //{
-            //    Day = group.Key,
-            //    Items = group.Select(item => new CatalogItemDto
-            //    {
-            //        Name = item.Name,
-            //        Price = item.Price,
-            //        Description = item.Description
-            //    }).ToList()
-            //})
-            //.ToList();
-
-            return itemsByDays;    
+            return itemsByDays;
         }
     }
 }

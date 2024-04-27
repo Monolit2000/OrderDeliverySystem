@@ -30,9 +30,12 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
             throw new NotImplementedException();
         }
 
-        public Task GetUserByChatId(long chatId)
+        public async Task <User> GetUserByChatId(long chatId)
         {
-            throw new NotImplementedException();
+            var user = await _userAccessContext.Users
+               .FirstOrDefaultAsync(u => u.ChatId == chatId);
+
+            return user;
         }
 
         public async Task<User> GetUserByPhoneNumberAsync(string phoneNumber)

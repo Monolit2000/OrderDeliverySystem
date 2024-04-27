@@ -33,6 +33,7 @@
     <ProjectReference Include="..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Basket\OrderDeliverySystem.Basket.Infrastructure\OrderDeliverySystem.Basket.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Catalog\OrderDeliverySystem.Catalog.Infrastructure\OrderDeliverySystem.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Ordering\OrderDeliverySystem.Ordering.Infrastructure\OrderDeliverySystem.Ordering.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj" />
   </ItemGroup>
 
