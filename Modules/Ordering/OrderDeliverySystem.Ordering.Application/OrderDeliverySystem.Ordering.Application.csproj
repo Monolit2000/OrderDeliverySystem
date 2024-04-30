@@ -12,8 +12,4 @@
     <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Buyers\" />
-  </ItemGroup>
-
 </Project>

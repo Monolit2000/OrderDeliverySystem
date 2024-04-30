@@ -8,22 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.IntegrationEventsHandlers
+namespace OrderDeliverySystem.Ordering.Application.Buyers.IntegrationEventsHandlers
 {
     public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<ConsumerActivatedIntegretionEvent>
     {
-        public readonly IOrderRepository _orderRepository;
+        public readonly IBuyerRepository _buyerRepository;
 
-        public ConsumerActivatedIntegretionEventHandler(IOrderRepository orderRepository)
+        public ConsumerActivatedIntegretionEventHandler(IBuyerRepository buyerRepository)
         {
-            _orderRepository = orderRepository;
+            _buyerRepository = buyerRepository;
         }
 
         public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            var buyer = new Buyer(notification.UserId, notification.ChatId, notification.Name,notification.PhoneNumber);
+            var buyer = new Buyer(notification.UserId, notification.ChatId, notification.Name, notification.PhoneNumber);
 
-            
+            await Console.Out.WriteLineAsync(buyer.Name);
         }
     }
 }
