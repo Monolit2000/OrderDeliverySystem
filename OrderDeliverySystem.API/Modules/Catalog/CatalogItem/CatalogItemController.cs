@@ -77,7 +77,7 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 
 
 
-        [HttpPost("GetOllItemsByDays")]
+        [HttpGet("GetOllItemsByDays")]
         public async Task<IActionResult> GetOllItemsByDays()
         {
             var result = await _mediator.Send( new GetOllItemsByDaysQuery());
@@ -93,4 +93,7 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 
 
     }
+
+    
+
 }

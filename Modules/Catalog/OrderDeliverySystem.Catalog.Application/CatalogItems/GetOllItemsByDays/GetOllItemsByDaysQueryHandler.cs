@@ -31,6 +31,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
                 Day = group.Key,
                 Items = group.Select(item => new CatalogItemDto
                 {
+                    Id = item.CatalogItemId,
                     Name = item.Name,
                     Price = item.Price,
                     Description = item.Description

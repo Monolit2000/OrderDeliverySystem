@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrderDeliverySystem.CommonModule.Infrastructure.Domain;
 using OrderDeliverySystem.Ordering.Application.Contract;
 using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
-using OrderDeliverySystem.Ordering.Domain.Order;
+using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.Ordering.Infrastructure.Domain;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 using OrderDeliverySystem.Ordering.Infrastructure.Startup.EventBus;

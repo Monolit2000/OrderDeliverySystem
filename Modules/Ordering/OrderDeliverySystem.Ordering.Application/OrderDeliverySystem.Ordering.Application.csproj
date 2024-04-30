@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Buyers\" />
+  </ItemGroup>
+
 </Project>

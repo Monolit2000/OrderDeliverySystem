@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Domain.Order
+namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 {
     public class OrderItem : Entity
     {
+        public Guid OrderItemId { get; private set; }
+
         public string ProductName { get; private set; }
 
         public string PictureUrl { get; private set; }
@@ -19,13 +21,15 @@ namespace OrderDeliverySystem.Ordering.Domain.Order
 
         public int Units { get; private set; }
 
-        public int ProductId { get; private set; }
+         public Guid ProductId { get; private set; }
 
         protected OrderItem() { }
 
-        public OrderItem(int productId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
+        public OrderItem(Guid orderItemId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
         {
-            ProductId = productId;
+            OrderItemId = Guid.NewGuid();
+
+            ProductId = orderItemId;
 
             ProductName = productName;
             UnitPrice = unitPrice;
