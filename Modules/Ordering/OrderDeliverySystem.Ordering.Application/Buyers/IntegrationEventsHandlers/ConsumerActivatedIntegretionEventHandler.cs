@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer;
 using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.UserAccess.IntegrationEvents;
@@ -12,18 +13,22 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.IntegrationEventsHandl
 {
     public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<ConsumerActivatedIntegretionEvent>
     {
-        public readonly IBuyerRepository _buyerRepository;
+        private readonly IMediator _mediator;
 
-        public ConsumerActivatedIntegretionEventHandler(IBuyerRepository buyerRepository)
+        public ConsumerActivatedIntegretionEventHandler(IMediator mediator)
         {
-            _buyerRepository = buyerRepository;
+            _mediator = mediator;
         }
 
         public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            var buyer = new Buyer(notification.UserId, notification.ChatId, notification.Name, notification.PhoneNumber);
-
-            await Console.Out.WriteLineAsync(buyer.Name);
+            await _mediator.Send(new AddBuyerCommand(
+                notification.UserId, 
+                notification.PhoneNumber,
+                notification.ChatId, 
+                notification.FirstName,
+                notification.LastName, 
+                notification.Name));
         }
     }
 }

@@ -13,7 +13,11 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
 
         public long BuyerChatId { get; private set; }
 
-        public string PhoneNumber { get; private set; } 
+        public string PhoneNumber { get; private set; }
+
+        public string FirstName { get; private set; }
+
+        public string LastName { get; private set; }
 
         public string Name { get; private set; }
 
@@ -29,10 +33,12 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
             PhoneNumber = phoneNumber;
         }
 
-        public Buyer(Guid byerId, long buyerChatId, string name, string phoneNumber) 
+        public Buyer(Guid byerId, long buyerChatId, string firstName, string lastName, string name, string phoneNumber) 
         {
             BuyerId = byerId;
             BuyerChatId = buyerChatId;
+            FirstName = firstName;
+            LastName = lastName;
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
             PhoneNumber = phoneNumber;
         }

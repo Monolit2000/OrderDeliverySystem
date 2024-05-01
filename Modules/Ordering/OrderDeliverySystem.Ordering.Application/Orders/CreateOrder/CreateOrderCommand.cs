@@ -14,6 +14,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public List<OrderItemDto> OrderItems { get; set; }
 
+        public long ChatId { get; set; }    
+
         public string Description { get; set; }
 
         public string PhoneNumber { get; set;}

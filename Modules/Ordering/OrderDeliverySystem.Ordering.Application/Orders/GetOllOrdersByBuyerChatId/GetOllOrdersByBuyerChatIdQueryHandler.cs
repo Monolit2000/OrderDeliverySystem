@@ -29,6 +29,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
             var order = root
             .Select(order => new OrderDto
             {
+                OrderId = order.OrderId,
                 OrderItems = order.OrderItems.Select(item => new OrderItemDto
                 {
                     ItemId = item.OrderItemId,
