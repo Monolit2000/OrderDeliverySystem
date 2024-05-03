@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication
                 ChatId = user.ChatId,
                 IsActivated = user.IsActivated,
                 Name = user.Name,
-                Role = user.Role
+                Role = user.Role.Value
             };
 
             await _userRepository.SaveChangesAsync();

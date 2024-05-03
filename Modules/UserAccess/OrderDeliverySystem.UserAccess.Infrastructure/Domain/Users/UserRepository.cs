@@ -25,6 +25,13 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
             await _userAccessContext.SaveChangesAsync();
         }
 
+        public async Task<List<User>> GetGetOllActiveUser()
+        {
+            var users = await _userAccessContext.Users.Where(u => u.IsActivated).ToListAsync();
+
+            return users;   
+        }
+
         public Task GetUserAsync(User user)
         {
             throw new NotImplementedException();

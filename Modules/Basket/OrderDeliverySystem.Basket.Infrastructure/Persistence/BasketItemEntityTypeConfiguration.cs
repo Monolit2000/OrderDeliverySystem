@@ -14,7 +14,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
         public void Configure(EntityTypeBuilder<BasketItem> builder)
         {
             // Установка ключа
-            builder.HasKey(bi => bi.ProductId); // Поскольку продукт может быть идентифицирован по ProductId
+          //  builder.HasKey(bi => bi.ProductId); // Поскольку продукт может быть идентифицирован по ProductId
 
             // Конфигурация необходимых полей
             builder.Property(bi => bi.ProductName);
@@ -22,7 +22,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
             builder.Property(bi => bi.UnitPrice);// Настройка точности для decimal
 
             // Если необходимы индексы или уникальность
-            builder.HasIndex(bi => bi.ProductId); // Индекс для ускорения поиска
+            //builder.HasIndex(bi => bi.ProductId); // Индекс для ускорения поиска
         }
     }
 }

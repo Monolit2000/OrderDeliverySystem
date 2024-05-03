@@ -7,18 +7,42 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
-    public class BasketItem 
+    public class BasketItem : Entity
     {
-        public int ProductId { get; set; }
         public Guid BasketItemId { get; set; }  
+        public Guid ProductId { get; set; }
         public Guid BasketId { get; set; }
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
-        public decimal OldUnitPrice { get; set; }
-        public int Quantity { get; set; }
-        public string PictureUrl { get; set; }
+        public int Quantity { get; set; } = 1;
 
 
-        public DeliveryOptions delivery { get; set; } = default;
+        public BasketItem()
+        {
+                
+        }
+
+        public BasketItem(
+            Guid productId,
+            Guid basketId,
+            string productName,
+            decimal unitPrice,
+            int quantity = 1)
+        {
+            if (unitPrice < 0)
+                throw new ArgumentException("Unit price cannot be negative.", nameof(unitPrice));
+
+            if (quantity < 0)
+                throw new ArgumentException("Quantity cannot be negative.", nameof(quantity));
+
+            BasketItemId = Guid.NewGuid();
+            ProductId = productId;
+            BasketId = basketId;
+            ProductName = productName;
+            UnitPrice = unitPrice;
+            Quantity = quantity;
+        }
+
+        // public DeliveryOptions delivery { get; set; } = default;
     }
 }

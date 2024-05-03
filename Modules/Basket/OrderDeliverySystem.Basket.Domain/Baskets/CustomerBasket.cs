@@ -29,6 +29,11 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         //public CustomerBasket() { }
 
+        public void AddItem(BasketItem item)
+        {
+            Items.Add(item);
+        }
+
         public CustomerBasket(Guid buyerId/*, long buyerChatId*/)
         {
             BasketId = Guid.NewGuid();

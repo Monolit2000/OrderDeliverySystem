@@ -15,8 +15,9 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         Task GetUserAsync(User user);
 
         Task <User> GetUserByPhoneNumberAsync(string PhoneNumber);
-
         Task <User> GetUserByChatId(long chatId);
+
+        Task<List<User>> GetGetOllActiveUser();
 
         Task SaveChangesAsync();
     }

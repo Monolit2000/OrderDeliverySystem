@@ -27,16 +27,16 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
             var userByChatIdAlreadyExist = await _userRepository.GetUserByChatId(request.ChatId);
 
             if (user != null)
-                return new CreateConsumerResult($"A user with this '{request.PhoneNumber.Number}' already exists");
+                return Result.Fail($"A user with this '{request.PhoneNumber.Number}' already exists");
 
             if(userByChatIdAlreadyExist != null)
                 return Result.Fail($"You are already registered under a different phone number, you can change your current phone number in your profile.  ");
 
             var newUser = User.CreateCustomer(
                 request.PhoneNumber,
-                request.Name,
                 request.FirstName,
-                request.LastName);
+                request.LastName,
+                request.Name);
 
             newUser.ActivateUser(request.ChatId, newUser.PhoneNumber.Number, newUser.FirstName, newUser.LastName, newUser.Name);
 
@@ -49,7 +49,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
                 ChatId = newUser.ChatId,
                 IsActivated = newUser.IsActivated,
                 Name = newUser.Name,
-                Role = newUser.Role
+                Role = newUser.Role.Value
             };
 
             return new CreateConsumerResult(userDto);

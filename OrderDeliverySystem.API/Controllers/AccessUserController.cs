@@ -3,9 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer;
+using OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveConsumers;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 
 namespace OrderDeliverySystem.API.Controllers
@@ -59,29 +61,46 @@ namespace OrderDeliverySystem.API.Controllers
                 return BadRequest(result.Reasons);
             }
 
+            return Ok(result);
+        
+        }
+
+        [HttpGet("GetOllActiveUsers")]
+        public async Task<IActionResult> GetOllActiveUsers()
+        {
+            var result = await _mediator.Send(new GetOllActiveUserQuerie());
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
             return Ok(result.Value);
-        
-        }
-
-        [HttpPost("AddType")]
-        public async Task<IActionResult> CreateCatalogType(ActivateUserRequest activateRequest)
-        {
-            await _mediator.Send(new AddCatalogItemCommand());
-
-            return Ok();
         }
 
 
-        [HttpPost("AddBasket")]
-        public async Task<IActionResult> CreateBusket(ActivateUserRequest activateRequest)
-        {
-            await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), activateRequest.ChatId));
-
-            return Ok();
-        }
 
 
-        
+
+        //[HttpPost("AddType")]
+        //public async Task<IActionResult> CreateCatalogType(ActivateUserRequest activateRequest)
+        //{
+        //    await _mediator.Send(new AddCatalogItemCommand());
+
+        //    return Ok();
+        //}
+
+
+        //[HttpPost("AddBasket")]
+        //public async Task<IActionResult> CreateBusket(ActivateUserRequest activateRequest)
+        //{
+        //    await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), activateRequest.ChatId));
+
+        //    return Ok();
+        //}
+
+
+
 
     }
 
