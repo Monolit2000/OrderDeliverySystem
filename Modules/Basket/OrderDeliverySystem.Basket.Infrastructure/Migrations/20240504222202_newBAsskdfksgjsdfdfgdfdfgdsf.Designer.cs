@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketContext))]
-    partial class BasketContextModelSnapshot : ModelSnapshot
+    [Migration("20240504222202_newBAsskdfksgjsdfdfgdfdfgdsf")]
+    partial class newBAsskdfksgjsdfdfgdfdfgdsf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,13 +74,11 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 
             modelBuilder.Entity("OrderDeliverySystem.Basket.Domain.Baskets.BasketItem", b =>
                 {
-                    b.HasOne("OrderDeliverySystem.Basket.Domain.Baskets.CustomerBasket", "CustomerBasket")
+                    b.HasOne("OrderDeliverySystem.Basket.Domain.Baskets.CustomerBasket", null)
                         .WithMany("Items")
                         .HasForeignKey("CustomerBasketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CustomerBasket");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Basket.Domain.Baskets.CustomerBasket", b =>

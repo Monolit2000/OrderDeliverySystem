@@ -19,11 +19,10 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
             _mediator = mediator;
         }
 
-
-        [HttpGet("GetBasket")]
-        public async Task<IActionResult> GetBasket(GetBasketRequest getBasketRequest)
+        [HttpPost("GetBasket")]
+        public async Task<IActionResult> GetBasket(GetBasketQuery getBasketQuery)
         {
-            var result = await _mediator.Send(new GetBasketQuery());
+            var result = await _mediator.Send(getBasketQuery);
 
             if (!result.IsSuccess)
             {

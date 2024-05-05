@@ -26,18 +26,36 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
             await _basketContext.SaveChangesAsync();
         }
 
-        public Task<bool> DeleteBasketAsync(string id)
+        public async Task<bool> DeleteBasketAsync(CustomerBasket basket)
         {
-            throw new NotImplementedException();
+            _basketContext.Remove(basket);
+
+            return true;
         }
 
         public async Task<CustomerBasket> GetBasketAsync(long customerChatId)
         {
-            var customerBasket = await _basketContext.Baskets
-                .Include(b => b.Items)
-                .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
+
+
+            var customerBasket = await _basketContext.Baskets.FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId); ;
+
+            if (customerBasket != null)
+            {
+                await _basketContext.Entry(customerBasket)
+                    .Collection(i => i.Items).LoadAsync();
+            }
 
             return customerBasket;
+
+
+
+
+
+            //var customerBasket = await _basketContext.Baskets
+            //    .Include(b => b.Items)
+            //    .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
+
+            //return customerBasket;
         }
 
         public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)

@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Modules\Baskets\Basket\Новая папка\" />
     <Folder Include="Modules\UserAccess\" />
     <Folder Include="Modules\Payments\" />
     <Folder Include="Modules\Administration\" />

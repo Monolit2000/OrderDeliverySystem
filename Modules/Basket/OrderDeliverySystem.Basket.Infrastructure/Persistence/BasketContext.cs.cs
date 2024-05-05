@@ -15,13 +15,15 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
         }
         public DbSet<CustomerBasket> Baskets { get; set; }
 
+        public DbSet<BasketItem> BasketItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("basket");
 
-            base.OnModelCreating(modelBuilder);
+           // base.OnModelCreating(modelBuilder);
 
-            //  modelBuilder.ApplyConfiguration(new BasketEntityTypeConfiguration());
+           // modelBuilder.ApplyConfiguration(new BasketEntityTypeConfiguration());
 
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(BasketEntityTypeConfiguration).Assembly);
 

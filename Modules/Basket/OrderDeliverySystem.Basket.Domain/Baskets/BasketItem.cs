@@ -11,7 +11,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
     {
         public Guid BasketItemId { get; set; }  
         public Guid ProductId { get; set; }
-        public Guid BasketId { get; set; }
+        public Guid CustomerBasketId { get; set; }
+        public CustomerBasket CustomerBasket { get; set; }
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
@@ -24,7 +25,6 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         public BasketItem(
             Guid productId,
-            Guid basketId,
             string productName,
             decimal unitPrice,
             int quantity = 1)
@@ -35,9 +35,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             if (quantity < 0)
                 throw new ArgumentException("Quantity cannot be negative.", nameof(quantity));
 
-            BasketItemId = Guid.NewGuid();
+         //   BasketItemId = Guid.NewGuid();
             ProductId = productId;
-            BasketId = basketId;
             ProductName = productName;
             UnitPrice = unitPrice;
             Quantity = quantity;

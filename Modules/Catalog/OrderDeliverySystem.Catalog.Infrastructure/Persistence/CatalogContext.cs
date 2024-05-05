@@ -31,6 +31,8 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
 
             modelBuilder.Entity<Establishment>().HasKey(e => e.EstablishmentId);
 
+            CatalogItemSeeder.Seed(modelBuilder);
+
             //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CatalogItemConfiguration());
         }

@@ -4,6 +4,7 @@ using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItemType;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
@@ -90,7 +91,18 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
             return Ok(result.Value);
         }
 
+        [HttpPost("GetItemById")]
+        public async Task<IActionResult> GetItemById(GetItemByIdQuerie getItemByIdQuerie)
+        {
+            var result = await _mediator.Send(getItemByIdQuerie);
 
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
 
     }
 

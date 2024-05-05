@@ -28,11 +28,19 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
 
             var basketDto = new BasketDto()
             {
-                BasketId = basket.BasketId,
+                BasketId = basket.CustomerBasketId,
 
                 BuyerId = basket.BuyerId,
 
                 BasketItems = basket.Items
+                    .Select(i => new BasketItemDto
+                    {
+                        ProductId = i.ProductId,
+                        BasketItemId = i.BasketItemId,
+                        ProductName = i.ProductName, 
+                        UnitPrice = i.UnitPrice,
+                        Quantity = i.Quantity
+                    }).ToList(),
             };
 
             return basketDto;

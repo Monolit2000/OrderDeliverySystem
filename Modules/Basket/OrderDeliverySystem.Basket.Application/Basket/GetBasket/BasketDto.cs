@@ -13,6 +13,6 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
 
         public Guid BuyerId { get; set; }
 
-        public List<BasketItem> BasketItems { get; set; } = [];
+        public List<BasketItemDto> BasketItems { get; set; } = [];
     }
 }

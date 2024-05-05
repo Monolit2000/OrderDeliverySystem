@@ -47,6 +47,19 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         }
 
 
+        public CatalogItem(Guid id, string name, DateTime timeToItemExist, Guid productId, string description, decimal price, string pictureFileName, string pictureUri)
+        {
+            CatalogItemId = id;
+            Name = name;
+            TimeToItemExist = timeToItemExist;
+            ProductId = productId;
+            Description = description;
+            Price = price;
+            PictureFileName = pictureFileName;
+            PictureUri = pictureUri;
+        }
+
+
         //public CatalogItem(
         //   string name,
         //   Establishment establishment,

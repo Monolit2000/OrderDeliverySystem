@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public async Task<Result<CreateOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var address = new Address(request.Adderss);
+            //var address = new Address(request.Adderss);
 
             var order = new Order(request.BuyerId,request.FirstName, new Address(request.Adderss), request.Description);
 

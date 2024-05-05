@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using FluentResults;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
 using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
 using OrderDeliverySystem.Basket.Domain.Baskets;
@@ -25,17 +26,19 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
         {
             var basket = await _basketRepository.GetBasketAsync(request.BuyerChatId);
 
+            if (basket == null)
+                return Result.Fail("Basket dose not exist");
+
             var basketItem = new BasketItem(
                     request.ProductId,
-                    basket.BasketId,
                     request.ProductName,
                     request.UnitPrice,
-                    request.Quantity = 1);
+                    request.Quantity);
 
             basket.AddItem(basketItem);
 
             await _basketRepository.SaveChangesAsync();
-
+        
             return new AddItemInBasketDto { Success = true };
         }
     }

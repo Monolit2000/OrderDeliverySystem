@@ -17,9 +17,29 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
             builder.ToTable("Basket", "Basket");
 
             // Установка ключа
-            builder.HasKey(cb => cb.BasketId); // Assuming `Id` is inherited from `Entity`
+            builder.HasKey(cb => cb.CustomerBasketId); // Assuming `Id` is inherited from `Entity`
 
-            builder.Property(p => p.BuyerId).HasColumnName("BuyerId").IsRequired(); 
+
+
+
+            builder.HasKey(cb => cb.CustomerBasketId);
+
+            builder.Property(cb => cb.CustomerBasketId)
+                   .IsRequired()
+                   .ValueGeneratedNever();
+
+            builder.Property(cb => cb.BuyerId)
+                   .IsRequired();
+
+            //builder.HasMany(cb => cb.Items)
+            //       .WithOne()
+            //       .HasForeignKey(bi => bi.CustomerBasketId);
+
+
+
+
+
+            //builder.Property(p => p.BuyerId).HasColumnName("BuyerId").IsRequired(); 
            // builder.Property(p => p.BuyerChatId).HasColumnName("BuyerChatId");
   
             
@@ -39,7 +59,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
             // Конфигурация связи один-ко-многим
             //builder.HasMany(cb => cb.Items)
             //       .WithOne()
-            //       .HasForeignKey("BasketId") // Создание внешнего ключа в BasketItem
+            //       .HasForeignKey("CustomerBasketId") // Создание внешнего ключа в BasketItem
             //       .OnDelete(DeleteBehavior.Cascade); // Опция каскадного удаления
         }
     }
