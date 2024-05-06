@@ -30,7 +30,8 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
                 ItemId = catalogItem.CatalogItemId,
                 Name = catalogItem.Name,
                 Description = catalogItem.Description,
-                Price = catalogItem.Price
+                Price = catalogItem.Price,
+                Day = catalogItem.TimeToItemExist
             };
 
             return catalogItemDto;

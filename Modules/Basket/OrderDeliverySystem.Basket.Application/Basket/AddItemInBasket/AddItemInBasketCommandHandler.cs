@@ -33,9 +33,11 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
                     request.ProductId,
                     request.ProductName,
                     request.UnitPrice,
+                    request.Day,
                     request.Quantity);
 
-            basket.AddItem(basketItem);
+            if (!basket.AddItem(basketItem))
+                return Result.Fail($"Товар '{request.ProductName}' вже наявний у кошику");
 
             await _basketRepository.SaveChangesAsync();
         

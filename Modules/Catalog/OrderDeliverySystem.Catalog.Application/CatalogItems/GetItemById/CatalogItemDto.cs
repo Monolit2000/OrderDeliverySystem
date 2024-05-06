@@ -17,5 +17,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
         public string ImageUri { get; set; }
 
         public decimal Price { get; set; }
+
+        public DateTime Day { get; set; }
     }
 }

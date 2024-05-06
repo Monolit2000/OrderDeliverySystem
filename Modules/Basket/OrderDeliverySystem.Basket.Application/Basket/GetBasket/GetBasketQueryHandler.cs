@@ -39,7 +39,9 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
                         BasketItemId = i.BasketItemId,
                         ProductName = i.ProductName, 
                         UnitPrice = i.UnitPrice,
-                        Quantity = i.Quantity
+                        Quantity = i.Quantity,
+                        Day = i.Day,    
+
                     }).ToList(),
             };
 

@@ -17,6 +17,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
 
+        public DateTime Day { get; set; }
+
 
         public BasketItem()
         {
@@ -27,6 +29,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             Guid productId,
             string productName,
             decimal unitPrice,
+            DateTime day,
             int quantity = 1)
         {
             if (unitPrice < 0)
@@ -40,6 +43,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             ProductName = productName;
             UnitPrice = unitPrice;
             Quantity = quantity;
+            Day = day;
         }
 
         // public DeliveryOptions delivery { get; set; } = default;

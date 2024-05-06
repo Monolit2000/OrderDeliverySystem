@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
     public class CustomerBasket : Entity, IAggregateRoot
@@ -31,14 +32,26 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         //public CustomerBasket() { }
 
-        public void AddItem(BasketItem item)
+        public bool AddItem(BasketItem item)
         {
             var existingOrderForProduct = Items.FirstOrDefault(o => o.ProductId == item.ProductId);
 
             if (existingOrderForProduct != null)
-                throw new Exception("Product has already been added");
+                return false;
 
             Items.Add(item);
+            return true;
+        }
+
+        public bool RemuveItem(Guid BasketItemId)
+        {
+            var item = Items.FirstOrDefault(o => o.BasketItemId == BasketItemId);
+
+            if (item == null)
+                return false;
+
+            Items.Remove(item);
+            return true;
         }
 
         public CustomerBasket(Guid buyerId, long buyerChatId)
