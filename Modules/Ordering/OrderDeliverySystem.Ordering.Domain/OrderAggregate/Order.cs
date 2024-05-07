@@ -44,17 +44,29 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Submitted;
             OrderDate = DateTime.UtcNow;
             Address = address;
-            Description = description;
+            Description = "The order was submitted";
 
             //// Add the OrderStarterDomainEvent to the domain events collection 
         }
+        public bool SetAwaitingValidationStatus()
+        {
+            if (OrderStatus == OrderStatus.Paid)
+            {
+                return false;
+            }
 
+            OrderStatus = OrderStatus.AwaitingValidation;
+            Description = "Order awaiting validation";
 
+            return true;
+        }
 
         public void SetPaidStatus()
         {
             OrderStatus = OrderStatus.Paid;
+            Description = "The order was paid";
         }
+
 
         public void SetShippedStatus()
         {
@@ -64,7 +76,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             }
 
             OrderStatus = OrderStatus.Shipped;
-            Description = "The order was shipped.";
+            Description = "The order was shipped";
             //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.SerSubmittedOrderStatus
 {
-    internal class SerSubmittedOrderStatusCommand
+    public class SetSubmittedOrderStatusCommand
     {
     }
 }

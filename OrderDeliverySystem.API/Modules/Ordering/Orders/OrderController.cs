@@ -5,6 +5,10 @@ using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Ordering.Application.Orders.CancelOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.CreateOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
+using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrderStatus;
+using OrderDeliverySystem.Ordering.Application.Orders.SerSubmittedOrderStatus;
+using OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus;
+using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {
@@ -58,5 +62,46 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 
             return Ok(result.Value);
         }
+
+
+        [HttpPost("SetPaidOrderStatus")]
+        public async Task<IActionResult> SetPaidOrderStatus(SetPaidOrderStatusCommand setPaidOrderStatusCommand)
+        {
+            var result = await _mediator.Send(setPaidOrderStatusCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpPost("SetShippedOrderStatus")]
+        public async Task<IActionResult> SetPaidOrderStatus(SetShippedOrderStatusCommand setShippedOrderStatusCommand)
+        {
+            var result = await _mediator.Send(setShippedOrderStatusCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpPost("SatAwaitingValidationOrderStatus")]
+        public async Task<IActionResult> SatAwaitingValidationOrderStatus(SatAwaitingValidationOrderStatusCommand satAwaitingValidationOrderStatusCommand)
+        {
+            var result = await _mediator.Send(satAwaitingValidationOrderStatusCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+        
     }
 }

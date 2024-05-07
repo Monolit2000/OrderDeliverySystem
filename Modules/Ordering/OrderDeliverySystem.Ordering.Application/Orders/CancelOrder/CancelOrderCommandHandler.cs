@@ -24,10 +24,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CancelOrder
             var orderToUpdate = await _orderRepository.GetAsync(request.OrderId);
 
             if (orderToUpdate == null)
-            {
                 return Result.Fail("Order not found"); 
-            }
-
+            
             orderToUpdate.SetCancelledStatus();
 
             await _orderRepository.SaveChangesAsync();

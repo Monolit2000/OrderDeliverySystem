@@ -20,15 +20,17 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer
 
         public async Task<Result<BuyerDto>> Handle(AddBuyerCommand request, CancellationToken cancellationToken)
         {
-            var buerExist = _buyerRepository.FindAsync(request.ChatId);
+            var buerExist = await _buyerRepository.FindAsync(request.ChatId);
             
             if (buerExist != null)
             {
-                return new BuyerDto() 
-                {
-                    BuyerId = request.UserId,
-                    BuyerChatId = request.ChatId 
-                };
+                await _buyerRepository.Delete(buerExist);
+
+                //return new BuyerDto() 
+                //{
+                //    BuyerId = request.UserId,
+                //    BuyerChatId = request.ChatId 
+                //};
             }
 
             var buyer = new Buyer(request.UserId, request.ChatId, request.FirstName, request.LastName, request.Name, request.PhoneNumber);

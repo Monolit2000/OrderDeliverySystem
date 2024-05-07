@@ -11,12 +11,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CancelOrder
     {
         public Guid OrderId { get; private set; }
 
-        public string Status { get; private set; }
+        public string OrderStatus { get; private set; }
 
         public CancelOrderDto(Guid orderId, OrderStatus status)
         {
             OrderId = orderId;
-            Status = status.Value;
+            OrderStatus = status.Value;
         }
     }
 }

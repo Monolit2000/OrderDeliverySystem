@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus
 {
-    internal class SetShippedOrderStatusDto
+    public class SetShippedOrderStatusDto
     {
+        public Guid OrderId { get; set; }
+
+        public string OrderStatus { get; set; }
     }
 }

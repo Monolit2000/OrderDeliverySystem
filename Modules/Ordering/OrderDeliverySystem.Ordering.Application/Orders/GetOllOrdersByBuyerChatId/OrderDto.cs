@@ -12,6 +12,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
 
         public string Status { get; set; } 
 
+        public DateTime Created { get; set; }
+
+        public string Description { get; set; }
+
         public List<OrderItemDto> OrderItems { get; set; } = [];
 
     }

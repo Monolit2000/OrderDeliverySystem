@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
         public async Task<bool> DeleteBasketAsync(CustomerBasket basket)
         {
             _basketContext.Remove(basket);
-
+            await SaveChangesAsync();
             return true;
         }
 

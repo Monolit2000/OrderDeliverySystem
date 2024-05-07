@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrderStatus
 {
-    internal class SatAwaitingValidationOrderStatusDto
+    public class SatAwaitingValidationOrderStatusDto
     {
+        public Guid OrderId { get; set; }
+
+        public string OrderStatus { get; set; }
     }
 }

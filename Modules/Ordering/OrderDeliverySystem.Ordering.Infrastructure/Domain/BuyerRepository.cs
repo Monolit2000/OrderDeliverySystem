@@ -43,5 +43,12 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain
         {
             await _orderContext.SaveChangesAsync();
         }
+
+        public async Task Delete(Buyer buyer)
+        {
+            _orderContext.Buyers.Remove(buyer);
+
+            await _orderContext.SaveChangesAsync();
+        }
     }
 }

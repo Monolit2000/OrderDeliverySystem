@@ -20,9 +20,9 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public async Task<Result<CreateOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            //var address = new Address(request.Adderss);
+            var address = new Address(request.Adderss);
 
-            var order = new Order(request.UserId, request.FirstName, new Address(request.Adderss));
+            var order = new Order(request.UserId, request.FirstName, address);
 
             foreach (var item in request.OrderItems)
             {

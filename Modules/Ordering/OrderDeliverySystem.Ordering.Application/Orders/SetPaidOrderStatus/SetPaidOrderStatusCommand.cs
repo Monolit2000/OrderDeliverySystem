@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentResults;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus
 {
-    internal class SetPaidOrderStatusCommand
+    public class SetPaidOrderStatusCommand : IRequest<Result<SetPaidOrderStatusDto>>
     {
+        public Guid OrderId { get; set; }
     }
 }
