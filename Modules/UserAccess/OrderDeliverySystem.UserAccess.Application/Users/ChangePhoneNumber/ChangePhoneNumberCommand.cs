@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId
+namespace OrderDeliverySystem.UserAccess.Application.Users.ChangePhoneNumber
 {
-    public class GetOllOrdersByBuyerChatIdQuery : IRequest<Result<List<OrderDto>>>
+    public class ChangePhoneNumberCommand : IRequest<Result<ChangePhoneNumberDto>>
     {
         public long ChatId { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

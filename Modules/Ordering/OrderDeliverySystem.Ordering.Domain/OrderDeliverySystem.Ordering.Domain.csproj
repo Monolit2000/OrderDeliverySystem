@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SetSubmittedOrderStatus\" />
+  </ItemGroup>
+
 </Project>

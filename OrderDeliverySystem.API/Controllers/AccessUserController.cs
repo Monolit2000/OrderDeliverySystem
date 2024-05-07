@@ -7,6 +7,8 @@ using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.ChangeFirstName;
+using OrderDeliverySystem.UserAccess.Application.Users.ChangeLastName;
+using OrderDeliverySystem.UserAccess.Application.Users.ChangePhoneNumber;
 using OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer;
 using OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveConsumers;
 using OrderDeliverySystem.UserAccess.Application.Users.GetUserByChatId;
@@ -99,5 +101,30 @@ namespace OrderDeliverySystem.API.Controllers
             return Ok(result.Value);
         }
 
+        [HttpPut("ChangeLastName")]
+        public async Task<IActionResult> ChangeLastName(ChangeLastNameCommand changeLastNameCommand)
+        {
+            var result = await _mediator.Send(changeLastNameCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpPut("ChangePhoneNumber")]
+        public async Task<IActionResult> ChangePhoneNumber(ChangePhoneNumberCommand changePhoneNumberCommand)
+        {
+            var result = await _mediator.Send(changePhoneNumberCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
     }
 }

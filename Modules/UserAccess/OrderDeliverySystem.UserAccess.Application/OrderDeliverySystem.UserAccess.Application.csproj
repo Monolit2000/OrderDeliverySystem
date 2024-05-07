@@ -16,7 +16,6 @@
     <Folder Include="Authentication\IntegrationEvents\" />
     <Folder Include="Users\IntegrationEvents\" />
     <Folder Include="Users\ChangeName\" />
-    <Folder Include="Users\ChangePhoneNumber\" />
   </ItemGroup>
 
 </Project>

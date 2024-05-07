@@ -25,6 +25,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             if(string.IsNullOrWhiteSpace(inputNumber))
                 return Result.Fail(new Error("ValueIsInvalid"));
 
+
             if(Regex.IsMatch(inputNumber, phoneRegex) == false)
                 return Result.Fail(new Error("ValueIsInvalid"));
                 

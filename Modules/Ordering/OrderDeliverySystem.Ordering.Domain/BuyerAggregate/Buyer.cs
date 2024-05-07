@@ -19,7 +19,7 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
 
         public string LastName { get; private set; }
 
-        public string Name { get; private set; }
+        public string Name { get; private set; } 
 
         public Buyer()
         {

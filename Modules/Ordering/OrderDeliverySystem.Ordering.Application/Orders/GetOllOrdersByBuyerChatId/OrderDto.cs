@@ -10,6 +10,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
     {
         public Guid OrderId { get; set; }
 
+        public string Status { get; set; } 
 
         public List<OrderItemDto> OrderItems { get; set; } = [];
 

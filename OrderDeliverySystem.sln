@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.API", "OrderDeliverySystem.API\OrderDeliverySystem.API.csproj", "{82B5BB1E-170B-4EE0-98FA-91F3CE87B221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.API", "OrderDeliverySystem.API\OrderDeliverySystem.API.csproj", "{82B5BB1E-170B-4EE0-98FA-91F3CE87B221}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{9734BA6E-E91B-4F5C-B1C3-9A5A54B1E561}"
 EndProject
@@ -11,71 +11,73 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C472
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{10D3F2FB-5D28-48AD-A469-31F1445C62C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Catalog.Application", "Modules\Catalog\OrderDeliverySystem.Catalog.Application\OrderDeliverySystem.Catalog.Application.csproj", "{E794B801-BEE6-41DB-8521-E51777CEEAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Catalog.Application", "Modules\Catalog\OrderDeliverySystem.Catalog.Application\OrderDeliverySystem.Catalog.Application.csproj", "{E794B801-BEE6-41DB-8521-E51777CEEAFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Catalog.Domain", "Modules\Catalog\OrderDeliverySystem.Catalog.Domain\OrderDeliverySystem.Catalog.Domain.csproj", "{A48E8CCE-98C7-414D-B006-4FEBD0C9BFF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Catalog.Domain", "Modules\Catalog\OrderDeliverySystem.Catalog.Domain\OrderDeliverySystem.Catalog.Domain.csproj", "{A48E8CCE-98C7-414D-B006-4FEBD0C9BFF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Catalog.Infrastructure", "Modules\Catalog\OrderDeliverySystem.Catalog.Infrastructure\OrderDeliverySystem.Catalog.Infrastructure.csproj", "{6ECCAC62-D2EA-42ED-BB90-43A6F115BD15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Catalog.Infrastructure", "Modules\Catalog\OrderDeliverySystem.Catalog.Infrastructure\OrderDeliverySystem.Catalog.Infrastructure.csproj", "{6ECCAC62-D2EA-42ED-BB90-43A6F115BD15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Catalog.IntegrationEvents", "Modules\Catalog\OrderDeliverySystem.Catalog.IntegrationEvents\OrderDeliverySystem.Catalog.IntegrationEvents.csproj", "{C641F1FB-7A9B-4936-A8FF-AAC1D012F5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Catalog.IntegrationEvents", "Modules\Catalog\OrderDeliverySystem.Catalog.IntegrationEvents\OrderDeliverySystem.Catalog.IntegrationEvents.csproj", "{C641F1FB-7A9B-4936-A8FF-AAC1D012F5AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{EA0B669A-F6D4-47E6-901C-2DEE55F4E57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.Application", "Modules\Ordering\OrderDeliverySystem.Ordering.Application\OrderDeliverySystem.Ordering.Application.csproj", "{962563CF-DACF-4CE4-90A0-A567F909FEF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Ordering.Application", "Modules\Ordering\OrderDeliverySystem.Ordering.Application\OrderDeliverySystem.Ordering.Application.csproj", "{962563CF-DACF-4CE4-90A0-A567F909FEF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.Domain", "Modules\Ordering\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj", "{8D1BFCD0-F2CC-4DAB-AC46-8C3206C52AF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Ordering.Domain", "Modules\Ordering\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj", "{8D1BFCD0-F2CC-4DAB-AC46-8C3206C52AF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.Infrastructure", "Modules\Ordering\OrderDeliverySystem.Ordering.Infrastructure\OrderDeliverySystem.Ordering.Infrastructure.csproj", "{217EE369-CD89-4BA4-8618-C18EA9750940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Ordering.Infrastructure", "Modules\Ordering\OrderDeliverySystem.Ordering.Infrastructure\OrderDeliverySystem.Ordering.Infrastructure.csproj", "{217EE369-CD89-4BA4-8618-C18EA9750940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.IntegrationEvents", "Modules\Ordering\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj", "{D84E561A-CEE5-48D2-AAAC-2CD592C8AB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Ordering.IntegrationEvents", "Modules\Ordering\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj", "{D84E561A-CEE5-48D2-AAAC-2CD592C8AB5D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{EE1465B9-DEF8-45F9-AFB8-E2E59FD768D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Basket.Application", "Modules\Basket\OrderDeliverySystem.Basket.Application\OrderDeliverySystem.Basket.Application.csproj", "{032F9FE3-75BF-4536-B037-B4FDD76CB7F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Basket.Application", "Modules\Basket\OrderDeliverySystem.Basket.Application\OrderDeliverySystem.Basket.Application.csproj", "{032F9FE3-75BF-4536-B037-B4FDD76CB7F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Basket.Domain", "Modules\Basket\OrderDeliverySystem.Basket.Domain\OrderDeliverySystem.Basket.Domain.csproj", "{8AAA6E56-7EE6-466E-AEC3-B3C3E71C2E09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Basket.Domain", "Modules\Basket\OrderDeliverySystem.Basket.Domain\OrderDeliverySystem.Basket.Domain.csproj", "{8AAA6E56-7EE6-466E-AEC3-B3C3E71C2E09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Basket.Infrastructure", "Modules\Basket\OrderDeliverySystem.Basket.Infrastructure\OrderDeliverySystem.Basket.Infrastructure.csproj", "{DDDD836A-9CD2-4790-A118-4F09C0931CFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Basket.Infrastructure", "Modules\Basket\OrderDeliverySystem.Basket.Infrastructure\OrderDeliverySystem.Basket.Infrastructure.csproj", "{DDDD836A-9CD2-4790-A118-4F09C0931CFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Basket.IntegrationEvents", "Modules\Basket\OrderDeliverySystem.Basket.IntegrationEvents\OrderDeliverySystem.Basket.IntegrationEvents.csproj", "{FA32490D-C1E7-4AC8-B09C-53300ECA757B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Basket.IntegrationEvents", "Modules\Basket\OrderDeliverySystem.Basket.IntegrationEvents\OrderDeliverySystem.Basket.IntegrationEvents.csproj", "{FA32490D-C1E7-4AC8-B09C-53300ECA757B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccess", "UserAccess", "{39E17215-2EB1-42F4-9832-E8698BFAD7EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.UserAccess.Application", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Application\OrderDeliverySystem.UserAccess.Application.csproj", "{76441D94-3298-4786-B51E-4D0191F5B13E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.Application", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Application\OrderDeliverySystem.UserAccess.Application.csproj", "{76441D94-3298-4786-B51E-4D0191F5B13E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.UserAccess.Domain", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj", "{E69974F2-F808-4308-BBF2-4429EACC3E75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.Domain", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj", "{E69974F2-F808-4308-BBF2-4429EACC3E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.UserAccess.Infrastructure", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj", "{639735A8-1279-4F41-A13B-5DEBC6A7101C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.Infrastructure", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj", "{639735A8-1279-4F41-A13B-5DEBC6A7101C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.UserAccess.IntegrationEvents", "Modules\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj", "{CE19FA8C-4111-4B7F-97FB-09F478C8BE57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.IntegrationEvents", "Modules\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj", "{CE19FA8C-4111-4B7F-97FB-09F478C8BE57}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{015F2585-593B-4F30-BC0E-52FF7109FD62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Administration.IntegrationEvents", "Modules\Administration\OrderDeliverySystem.Administration.IntegrationEvents\OrderDeliverySystem.Administration.IntegrationEvents.csproj", "{028DDD90-B85F-4201-9B90-7C63053507C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Administration.IntegrationEvents", "Modules\Administration\OrderDeliverySystem.Administration.IntegrationEvents\OrderDeliverySystem.Administration.IntegrationEvents.csproj", "{028DDD90-B85F-4201-9B90-7C63053507C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Administration.Application", "Modules\Administration\OrderDeliverySystem.Administration.Application\OrderDeliverySystem.Administration.Application.csproj", "{A329A547-24F2-40A5-98BB-305F08D0589E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Administration.Application", "Modules\Administration\OrderDeliverySystem.Administration.Application\OrderDeliverySystem.Administration.Application.csproj", "{A329A547-24F2-40A5-98BB-305F08D0589E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Administration.Domain", "Modules\Administration\OrderDeliverySystem.Administration.Domain\OrderDeliverySystem.Administration.Domain.csproj", "{DAF82496-210E-4810-81C4-4D8B239588FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Administration.Domain", "Modules\Administration\OrderDeliverySystem.Administration.Domain\OrderDeliverySystem.Administration.Domain.csproj", "{DAF82496-210E-4810-81C4-4D8B239588FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Administration.Infrastructure", "Modules\Administration\OrderDeliverySystem.Administration.Infrastructure\OrderDeliverySystem.Administration.Infrastructure.csproj", "{264CBA2B-435E-44DE-B601-192B101281ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Administration.Infrastructure", "Modules\Administration\OrderDeliverySystem.Administration.Infrastructure\OrderDeliverySystem.Administration.Infrastructure.csproj", "{264CBA2B-435E-44DE-B601-192B101281ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{4A9369DF-FF9C-4279-8C6B-52C18343CCCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Payments.Application", "Modules\Payments\OrderDeliverySystem.Payments.Application\OrderDeliverySystem.Payments.Application.csproj", "{EC23247D-4A37-4AC7-917C-8B08EF204E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.Application", "Modules\Payments\OrderDeliverySystem.Payments.Application\OrderDeliverySystem.Payments.Application.csproj", "{EC23247D-4A37-4AC7-917C-8B08EF204E4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Payments.Domain", "Modules\Payments\OrderDeliverySystem.Payments.Domain\OrderDeliverySystem.Payments.Domain.csproj", "{E7CAF3FC-051B-42E9-AC4E-93AA3CB388EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.Domain", "Modules\Payments\OrderDeliverySystem.Payments.Domain\OrderDeliverySystem.Payments.Domain.csproj", "{E7CAF3FC-051B-42E9-AC4E-93AA3CB388EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Payments.Infrastructure", "Modules\Payments\OrderDeliverySystem.Payments.Infrastructure\OrderDeliverySystem.Payments.Infrastructure.csproj", "{680C7DBD-E0CF-4144-9BC5-F952E5CD623A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.Infrastructure", "Modules\Payments\OrderDeliverySystem.Payments.Infrastructure\OrderDeliverySystem.Payments.Infrastructure.csproj", "{680C7DBD-E0CF-4144-9BC5-F952E5CD623A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Payments.IntegrationEvents", "Modules\Payments\OrderDeliverySystem.Payments.IntegrationEvents\OrderDeliverySystem.Payments.IntegrationEvents.csproj", "{D593B8D0-145A-4AD6-9511-6FFF635D63D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.IntegrationEvents", "Modules\Payments\OrderDeliverySystem.Payments.IntegrationEvents\OrderDeliverySystem.Payments.IntegrationEvents.csproj", "{D593B8D0-145A-4AD6-9511-6FFF635D63D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2EA607B2-8047-4FDC-8F79-A0A4A6EC3935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.CommonModule.Application", "Common\OrderDeliverySystem.CommonModule.Application\OrderDeliverySystem.CommonModule.Application.csproj", "{EC306833-8780-4AEB-BE68-20F1C0BE570B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.CommonModule.Application", "Common\OrderDeliverySystem.CommonModule.Application\OrderDeliverySystem.CommonModule.Application.csproj", "{EC306833-8780-4AEB-BE68-20F1C0BE570B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.CommonModule.Domain", "OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj", "{063B2BEA-5130-4457-8C3A-62ED2F579D65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.CommonModule.Domain", "OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj", "{063B2BEA-5130-4457-8C3A-62ED2F579D65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.CommonModule.Infrastructure", "Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj", "{82BD19EB-BC2E-4823-8409-A68B89676F5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.CommonModule.Infrastructure", "Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj", "{82BD19EB-BC2E-4823-8409-A68B89676F5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{B567988A-E596-45A9-ABD3-64D68F7F87D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,6 +236,7 @@ Global
 		{EC306833-8780-4AEB-BE68-20F1C0BE570B} = {2EA607B2-8047-4FDC-8F79-A0A4A6EC3935}
 		{063B2BEA-5130-4457-8C3A-62ED2F579D65} = {2EA607B2-8047-4FDC-8F79-A0A4A6EC3935}
 		{82BD19EB-BC2E-4823-8409-A68B89676F5A} = {2EA607B2-8047-4FDC-8F79-A0A4A6EC3935}
+		{B567988A-E596-45A9-ABD3-64D68F7F87D1} = {C4728797-BD33-4928-829A-D82AD3492617}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1254FF5-BE1D-4C73-8A0D-46128C684FD0}

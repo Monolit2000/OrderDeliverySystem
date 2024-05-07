@@ -37,7 +37,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
-        public Order(Guid buyerId, string userName, Address address, string description)
+        public Order(Guid buyerId, Address address, string description)
         {
             OrderId = Guid.NewGuid();
             BuyerId = buyerId;
@@ -50,6 +50,36 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
+
+        public void SetPaidStatus()
+        {
+            OrderStatus = OrderStatus.Paid;
+        }
+
+        public void SetShippedStatus()
+        {
+            if (OrderStatus != OrderStatus.Paid)
+            {
+                return;
+            }
+
+            OrderStatus = OrderStatus.Shipped;
+            Description = "The order was shipped.";
+            //AddDomainEvent(new OrderShippedDomainEvent(this));
+        }
+
+        private void AddOrderStartedDomainEvent(string userId, string userName, int cardTypeId, string cardNumber,
+            string cardSecurityNumber, string cardHolderName, DateTime cardExpiration)
+        {
+            //var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName, cardTypeId,
+            //                                                            cardNumber, cardSecurityNumber,
+            //                                                            cardHolderName, cardExpiration);
+
+            //this.AddDomainEvent(orderStartedDomainEvent);
+        }
+
+
+
         public Order(Guid buyerId, string userName, Address address) 
         {
             OrderId = Guid.NewGuid();
@@ -57,6 +87,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Submitted;
             OrderDate = DateTime.UtcNow;
             Address = address;
+            Description = "not set";
 
             //// Add the OrderStarterDomainEvent to the domain events collection 
         }

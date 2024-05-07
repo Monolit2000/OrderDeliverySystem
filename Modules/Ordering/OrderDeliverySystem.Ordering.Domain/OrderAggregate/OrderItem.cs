@@ -27,7 +27,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public OrderItem(Guid orderItemId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
         {
-            OrderItemId = Guid.NewGuid();
+            //OrderItemId = Guid.NewGuid();
 
             ProductId = orderItemId;
 

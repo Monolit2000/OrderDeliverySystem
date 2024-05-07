@@ -22,7 +22,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
         {
             //var address = new Address(request.Adderss);
 
-            var order = new Order(request.BuyerId,request.FirstName, new Address(request.Adderss), request.Description);
+            var order = new Order(request.UserId, request.FirstName, new Address(request.Adderss));
 
             foreach (var item in request.OrderItems)
             {

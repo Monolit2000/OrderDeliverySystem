@@ -10,13 +10,9 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 {
     public class CreateOrderCommand : IRequest<Result<CreateOrderDto>>
     {
-        public Guid BuyerId { get; set;}
+        public Guid UserId { get; set;}
 
-        public long ChatId { get; set; }    
-
-        public string Description { get; set; }
-
-        public string PhoneNumber { get; set;}
+        public long ChatId { get; set; }
 
         public string FirstName { get; set; }
 
