@@ -16,10 +16,14 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
     public class AddItemInBasketCommandHandler : IRequestHandler<AddItemInBasketCommand, Result<AddItemInBasketDto>>
     {
         private readonly IBasketRepository _basketRepository;
+        private readonly IMediator _mediator;
 
-        public AddItemInBasketCommandHandler(IBasketRepository userRepository)
+        public AddItemInBasketCommandHandler(
+            IBasketRepository userRepository,
+            IMediator mediator)
         {
             _basketRepository = userRepository;
+            _mediator = mediator;
         }
 
         public async Task<Result<AddItemInBasketDto>> Handle(AddItemInBasketCommand request, CancellationToken cancellationToken)

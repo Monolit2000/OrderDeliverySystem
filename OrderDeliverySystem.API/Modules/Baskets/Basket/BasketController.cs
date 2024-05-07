@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket;
+using OrderDeliverySystem.Basket.Application.Basket.CleanBasket;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
 using OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem;
 using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
@@ -78,6 +79,19 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
         public async Task<IActionResult> DeleteBasketItem(DeleteBasketItemCommand deleteBasketItemCommand)
         {
             var result = await _mediator.Send(deleteBasketItemCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+        [HttpPost("CleanBasket")]
+        public async Task<IActionResult> CleanBasket(CleanBasketCommand cleanBasketCommand)
+        {
+            var result = await _mediator.Send(cleanBasketCommand);
 
             if (!result.IsSuccess)
             {

@@ -34,7 +34,7 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         }
 
         [HttpPost("CancelOrder")]
-        public async Task<IActionResult> CreateOrder(CancelOrderCommand cancelOrderCommand)
+        public async Task<IActionResult> CancelOrder(CancelOrderCommand cancelOrderCommand)
         {
             var result = await _mediator.Send(cancelOrderCommand);
 
@@ -47,7 +47,7 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         }
 
         [HttpPost("GetOllOrdersByBuyerChatId")]
-        public async Task<IActionResult> CreateOrder(GetOllOrdersByBuyerChatIdQuery getOllOrdersByBuyerChatIdQuery)
+        public async Task<IActionResult> GetOllOrdersByBuyerChatId(GetOllOrdersByBuyerChatIdQuery getOllOrdersByBuyerChatIdQuery)
         {
             var result = await _mediator.Send(getOllOrdersByBuyerChatIdQuery);
 

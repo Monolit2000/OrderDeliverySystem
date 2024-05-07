@@ -58,9 +58,11 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
             await _userAccessContext.SaveChangesAsync();   
         }
 
-        public Task UpdateAsync(User user)
+        public async Task UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            _userAccessContext.Users.Update(user);
+
+            await _userAccessContext.SaveChangesAsync();
         }
     }
 }

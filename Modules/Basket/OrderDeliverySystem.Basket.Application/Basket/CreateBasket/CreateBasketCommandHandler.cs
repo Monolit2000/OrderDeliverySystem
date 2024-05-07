@@ -24,6 +24,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 
             await _basketRepository.AddBasketAsync(basket);
 
+         
            // await Console.Out.WriteLineAsync("Basket created");
 
             return new BasketDto { BasketId = basket.CustomerBasketId };

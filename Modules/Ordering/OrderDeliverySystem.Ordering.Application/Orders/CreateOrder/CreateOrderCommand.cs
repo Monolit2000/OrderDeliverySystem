@@ -12,8 +12,6 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
     {
         public Guid BuyerId { get; set;}
 
-        public List<OrderItemDto> OrderItems { get; set; }
-
         public long ChatId { get; set; }    
 
         public string Description { get; set; }
@@ -26,5 +24,6 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public string Adderss { get; set; }
 
+        public List<OrderItemDto> OrderItems { get; set; }
     }
 }

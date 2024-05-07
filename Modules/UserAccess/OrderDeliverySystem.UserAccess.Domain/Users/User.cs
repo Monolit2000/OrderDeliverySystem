@@ -25,6 +25,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public UserRole Role { get; private set; }
 
+        public string Address { get; set; } = "Not specified";
+
         public bool IsActivated = false;
 
         public long ChatId { get; private set; }
@@ -33,6 +35,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         {
             
         }
+
+
 
         private User(
            Guid id,  PhoneNumber phoneNumber, string firstName, string lastName,  string name, UserRole role)
@@ -45,6 +49,36 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             Role = role;
 
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
+        }
+
+
+        public void ChangeFirstName(string firstName)
+        {
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("First name cannot be empty or whitespace.");
+
+            FirstName = firstName;
+        }
+
+        public void ChangeLastName(string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName))
+                throw new ArgumentException("Last name cannot be empty or whitespace.");
+
+            LastName = lastName;
+        }
+
+        public void ChangePhoneNumber(PhoneNumber phoneNumber)
+        {
+            PhoneNumber = phoneNumber;
+        }
+
+        public void ChangeAddress(string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+                throw new ArgumentException("Address cannot be empty or whitespace.");
+
+            Address = address;
         }
 
         public void ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)

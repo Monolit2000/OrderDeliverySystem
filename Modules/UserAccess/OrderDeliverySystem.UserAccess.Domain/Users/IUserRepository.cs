@@ -8,17 +8,18 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 {
     public interface IUserRepository
     {
-        Task AddAsync(User user);
+        public Task AddAsync(User user);
 
-        Task UpdateAsync(User user);
+        public Task UpdateUserAsync(User user);
 
-        Task GetUserAsync(User user);
+        public Task GetUserAsync(User user);
 
-        Task <User> GetUserByPhoneNumberAsync(string PhoneNumber);
-        Task <User> GetUserByChatId(long chatId);
+        public Task<User> GetUserByPhoneNumberAsync(string PhoneNumber);
 
-        Task<List<User>> GetGetOllActiveUser();
+        public Task<User> GetUserByChatId(long chatId);
 
-        Task SaveChangesAsync();
+        public Task<List<User>> GetGetOllActiveUser();
+
+        public Task SaveChangesAsync();
     }
 }

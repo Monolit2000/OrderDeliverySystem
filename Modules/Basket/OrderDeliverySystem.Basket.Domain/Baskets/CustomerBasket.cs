@@ -54,6 +54,12 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             return true;
         }
 
+        public bool CleanBasket()
+        {
+            Items.Clear();
+            return true;
+        }
+
         public CustomerBasket(Guid buyerId, long buyerChatId)
         {
             CustomerBasketId = Guid.NewGuid();
