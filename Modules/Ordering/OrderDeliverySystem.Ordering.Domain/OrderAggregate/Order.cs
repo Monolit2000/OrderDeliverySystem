@@ -80,8 +80,19 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
 
-        private void AddOrderStartedDomainEvent(string userId, string userName, int cardTypeId, string cardNumber,
-            string cardSecurityNumber, string cardHolderName, DateTime cardExpiration)
+        public Order(Guid buyerId, string userName, Address address) 
+        {
+            OrderId = Guid.NewGuid();
+            BuyerId = buyerId;
+            OrderStatus = OrderStatus.Submitted;
+            OrderDate = DateTime.UtcNow;
+            Address = address;
+            Description = "The order was submitted";
+
+            AddOrderStartedDomainEvent(buyerId, userName);
+        }
+
+        private void AddOrderStartedDomainEvent(Guid userId, string userName)
         {
             //var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName, cardTypeId,
             //                                                            cardNumber, cardSecurityNumber,
@@ -91,18 +102,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
-
-        public Order(Guid buyerId, string userName, Address address) 
-        {
-            OrderId = Guid.NewGuid();
-            BuyerId = buyerId;
-            OrderStatus = OrderStatus.Submitted;
-            OrderDate = DateTime.UtcNow;
-            Address = address;
-            Description = "not set";
-
-            //// Add the OrderStarterDomainEvent to the domain events collection 
-        }
 
 
 
