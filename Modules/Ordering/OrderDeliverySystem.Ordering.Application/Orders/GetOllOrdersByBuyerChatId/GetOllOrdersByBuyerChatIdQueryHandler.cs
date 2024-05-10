@@ -30,6 +30,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
             .Select(order => new OrderDto
             {
                 OrderId = order.OrderId,
+                BuyerId = order.BuyerId,    
                 Created = order.OrderDate,
                 Status = order.OrderStatus.Value,
                 Description = order.Description,

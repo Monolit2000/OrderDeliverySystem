@@ -13,7 +13,6 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
     [ApiController]
     public class BasketController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public BasketController(IMediator mediator)

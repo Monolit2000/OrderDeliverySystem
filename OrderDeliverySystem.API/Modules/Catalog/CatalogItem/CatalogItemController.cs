@@ -1,13 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OrderDeliverySystem.API.Controllers;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.ChangeCatalogItemType;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
-using OrderDeliverySystem.UserAccess.Application.Contracts;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {

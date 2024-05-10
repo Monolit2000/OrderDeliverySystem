@@ -1,9 +1,5 @@
-using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
-using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
-using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.ChangeFirstName;
@@ -14,16 +10,18 @@ using OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveConsumers;
 using OrderDeliverySystem.UserAccess.Application.Users.GetUserByChatId;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 
-namespace OrderDeliverySystem.API.Controllers
+namespace OrderDeliverySystem.API.Modules.UserAccess
 {
     [Route("api/userAccess")]
     [ApiController]
-    public class AccessUserController : ControllerBase
+    public class UserAccessController : ControllerBase
     {
         private readonly IUserAccessModule _userAccessModule;
         private readonly IMediator _mediator;
 
-        public AccessUserController(IUserAccessModule userAccessModule, IMediator mediator)
+        public UserAccessController(
+            IUserAccessModule userAccessModule, 
+            IMediator mediator)
         {
             _userAccessModule = userAccessModule;
             _mediator = mediator;

@@ -10,5 +10,6 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveUsers
     {
         public Guid Id { get; set; }
         public long ChatId { get; set; }
+        public string UserName { get; set; }
     }
 }

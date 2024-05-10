@@ -27,6 +27,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveUsers
             {
                 Id = user.UserId,
                 ChatId = user.ChatId,
+                UserName = user.FirstName
 
             }).ToList();
 

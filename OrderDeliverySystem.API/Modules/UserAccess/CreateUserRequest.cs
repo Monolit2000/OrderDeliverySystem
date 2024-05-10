@@ -1,4 +1,4 @@
-﻿namespace OrderDeliverySystem.API.Controllers
+﻿namespace OrderDeliverySystem.API.Modules.UserAccess
 {
     public class CreateUserRequest
     {
