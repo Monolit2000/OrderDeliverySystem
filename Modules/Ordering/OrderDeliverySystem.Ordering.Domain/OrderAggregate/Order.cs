@@ -63,6 +63,9 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public void SetPaidStatus()
         {
+            if (OrderStatus == OrderStatus.Shipped)
+                return;
+
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
         }
