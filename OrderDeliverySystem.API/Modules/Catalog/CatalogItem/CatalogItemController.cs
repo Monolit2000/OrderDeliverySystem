@@ -89,6 +89,21 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
             return Ok(result.Value);
         }
 
+
+        [HttpGet("GetTestItem")]
+        public async Task<IActionResult> GetTestItem()
+        {
+            var result = "TestUpdateItemUpdatePersistence";
+
+            //if (!result.IsSuccess)
+            //{
+            //    return BadRequest(result.Reasons);
+            //}
+
+            return Ok(result);
+        }
+
+
         [HttpPost("GetItemById")]
         public async Task<IActionResult> GetItemById(GetItemByIdQuerie getItemByIdQuerie)
         {

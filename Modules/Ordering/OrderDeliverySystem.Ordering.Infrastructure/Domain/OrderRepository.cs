@@ -53,6 +53,15 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain
 
         }
 
+        public async Task<List<Order>> GetOllOrders()
+        {
+            var result = await _orderContext.Orders
+                .Include(o => o.OrderItems)
+                .ToListAsync();
+
+            return result;  
+        }
+
         public async Task SaveChangesAsync()
         {
             await _orderContext.SaveChangesAsync();

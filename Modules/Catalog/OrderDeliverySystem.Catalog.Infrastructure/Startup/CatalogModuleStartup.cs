@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Startup
          this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DefaultConnectionNew");
 
             services.AddMediatR(cfg =>
             {

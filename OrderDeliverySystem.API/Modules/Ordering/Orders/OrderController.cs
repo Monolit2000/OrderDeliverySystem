@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Ordering.Application.Orders.CancelOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.CreateOrder;
+using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
 using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SerSubmittedOrderStatus;
@@ -62,6 +63,22 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 
             return Ok(result.Value);
         }
+
+
+        [HttpGet("GetOllOrders")]
+        public async Task<IActionResult> GetOllOrdersByBuyerChatId()
+        {
+            var result = await _mediator.Send(new GetOllOrdersQuerie());
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+
 
 
         [HttpPost("SetPaidOrderStatus")]

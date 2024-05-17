@@ -8,6 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="Modules\Administration\**" />
+    <Compile Remove="Modules\Payments\**" />
+    <Compile Remove="Новая папка\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="Modules\Administration\**" />
+    <Content Remove="Modules\Payments\**" />
+    <Content Remove="Новая папка\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Modules\Administration\**" />
+    <EmbeddedResource Remove="Modules\Payments\**" />
+    <EmbeddedResource Remove="Новая папка\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="Modules\Administration\**" />
+    <None Remove="Modules\Payments\**" />
+    <None Remove="Новая папка\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
@@ -22,11 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Modules\Baskets\Basket\Новая папка\" />
-    <Folder Include="Modules\Payments\" />
-    <Folder Include="Modules\Administration\" />
-    <Folder Include="Новая папка\" />
   </ItemGroup>
 
   <ItemGroup>

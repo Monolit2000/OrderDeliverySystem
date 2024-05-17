@@ -20,10 +20,12 @@ builder.Services.AddSwaggerGen();
 
 // Configure Serilog
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-    .ReadFrom.Configuration(hostingContext.Configuration));
+    .ReadFrom.Configuration(hostingContext.Configuration)
+    .WriteTo.Console());
 
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
+    .WriteTo.Console()
     .CreateLogger();
 
 

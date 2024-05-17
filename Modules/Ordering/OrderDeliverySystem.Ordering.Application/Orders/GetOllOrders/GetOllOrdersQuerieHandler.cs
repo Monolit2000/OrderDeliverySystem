@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
+using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using System;
 using System.Collections.Generic;
@@ -7,30 +8,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId
+namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
 {
-    public class GetOllOrdersByBuyerChatIdQueryHandler : IRequestHandler<GetOllOrdersByBuyerChatIdQuery, Result<List<OrderDto>>>
+    public class GetOllOrdersQuerieHandler : IRequestHandler<GetOllOrdersQuerie, Result<List<OrderDto>>>
     {
         public readonly IOrderRepository _orderRepository;
 
-        public GetOllOrdersByBuyerChatIdQueryHandler(IOrderRepository orderRepository)
+        public GetOllOrdersQuerieHandler(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersByBuyerChatIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersQuerie request, CancellationToken cancellationToken)
         {
-
-            var root = await _orderRepository.GetOllOrderAsyncByChatId(request.ChatId);
+            var root = await _orderRepository.GetOllOrders();
 
             if (root == null)
-                return Result.Fail("order not faond by id ");
+                return Result.Fail("ordersDto not faond by id ");
 
-            var order = root
+            var ordersDto = root
             .Select(order => new OrderDto
             {
                 OrderId = order.OrderId,
-                BuyerId = order.BuyerId,    
+                BuyerId = order.BuyerId,
                 Created = order.OrderDate,
                 Status = order.OrderStatus.Value,
                 Description = order.Description,
@@ -45,10 +45,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
             })
             .ToList();
 
-            if (order == null)
-                return Result.Fail("order not faond by id ");
-
-            return order;
+            return ordersDto;
         }
     }
 }

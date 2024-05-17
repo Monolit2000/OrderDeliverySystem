@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 {
     public interface IOrderRepository
@@ -15,6 +16,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         public Task<Order> GetAsync(Guid orderId);
 
         public Task<List<Order>> GetOllOrderAsyncByChatId(long chatId);
+
+        public Task<List<Order>> GetOllOrders();
 
         public Task SaveChangesAsync();
     }
