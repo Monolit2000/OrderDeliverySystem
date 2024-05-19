@@ -7,13 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
-    <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
+    <Compile Remove="IntegrationEvents\**" />
+    <EmbeddedResource Remove="IntegrationEvents\**" />
+    <None Remove="IntegrationEvents\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IntegrationEvents\" />
+    <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
   </ItemGroup>
 
 </Project>

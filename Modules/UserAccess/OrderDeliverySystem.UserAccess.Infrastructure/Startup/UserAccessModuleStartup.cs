@@ -29,10 +29,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Startup
             {
                 cfg.RegisterServicesFromAssembly(typeof(IUserAccessModule).Assembly /*Assembly.GetExecutingAssembly()*/);
             });
-
-            //services.AddDbContext<UserAccessContext>(options =>
-            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
+    
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
             services.AddDbContext<UserAccessContext>((sp, options) =>

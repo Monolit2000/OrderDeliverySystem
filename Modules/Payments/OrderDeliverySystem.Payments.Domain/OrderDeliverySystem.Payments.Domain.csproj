@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Payments\" />
+    <Compile Remove="Payments\**" />
+    <EmbeddedResource Remove="Payments\**" />
+    <None Remove="Payments\**" />
   </ItemGroup>
 
 </Project>
