@@ -2,7 +2,7 @@
 services:
   orderdeliverysystem.api:
     environment:
-      - ConnectionStrings__DefaultConnection=Host=orderdeliverysystem.database;Port=5432;Database=OrderDeliverySystemContext;Username=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__DefaultConnection=Data Source=tcp:orderdeliverysystem-apidbserver.database.windows.net,1433;Initial Catalog=OrderDeliverySystem.API_db;User Id=AdminDb@orderdeliverysystem-apidbserver;Password=master6@1
       - ASPNETCORE_ENVIRONMENT=Development
     container_name: orderdeliverysystem.api
     image: ${DOCKER_REGISTRY-}orderdeliverysystemapi
