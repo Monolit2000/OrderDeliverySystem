@@ -21,13 +21,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public string Value { get; }
 
+
         private OrderStatus(string value)
         {
             Value = value;
         }
-
-        private OrderStatus() { }
-
 
 
     }

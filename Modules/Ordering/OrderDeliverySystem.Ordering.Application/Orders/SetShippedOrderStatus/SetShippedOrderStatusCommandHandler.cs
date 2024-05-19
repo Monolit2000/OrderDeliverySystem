@@ -27,7 +27,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus
             if (order == null)
                 return Result.Fail("Order not found");
 
-            order.SetShippedStatus();
+            var result = order.SetShippedStatus();
+
+            if (result.IsFailed)
+                return Result.Fail($"Cannot set status to Shipped because the order is not paid.");
 
             await _orderRepository.SaveChangesAsync();
 

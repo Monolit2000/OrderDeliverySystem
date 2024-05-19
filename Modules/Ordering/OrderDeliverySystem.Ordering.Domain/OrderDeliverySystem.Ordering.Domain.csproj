@@ -14,4 +14,8 @@
     <Folder Include="SetSubmittedOrderStatus\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentResults" Version="3.15.2" />
+  </ItemGroup>
+
 </Project>

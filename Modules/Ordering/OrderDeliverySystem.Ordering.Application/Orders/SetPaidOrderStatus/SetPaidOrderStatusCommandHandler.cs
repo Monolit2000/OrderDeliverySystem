@@ -26,7 +26,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus
             if (order == null)
                 return Result.Fail("Order not found");
 
-            order.SetPaidStatus();
+            if (order.SetPaidStatus().IsFailed)
+                return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
 
             await _orderRepository.SaveChangesAsync();
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
+using FluentResults;
 
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 {
@@ -48,40 +49,74 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
             //// Add the OrderStarterDomainEvent to the domain events collection 
         }
-        public bool SetAwaitingValidationStatus()
+
+        public Result SetSubmittedStatus()
+        {
+            OrderStatus = OrderStatus.Submitted;
+            Description = "Order awaiting validation";
+
+            return Result.Ok();
+            //AddDomainEvent(new OrderSubmittedDomainEvent(this));
+        }
+
+
+        public Result SetAwaitingValidationStatus()
         {
             if (OrderStatus == OrderStatus.Paid)
             {
-                return false;
+                return Result.Fail("Cannot set status to AwaitingValidation because the order is already paid.");
             }
 
             OrderStatus = OrderStatus.AwaitingValidation;
             Description = "Order awaiting validation";
 
-            return true;
+            return Result.Ok();
+            //AddDomainEvent(new OrderAwaitingValidationDomainEvent(this));
         }
 
-        public void SetPaidStatus()
+        public Result SetPaidStatus()
         {
             if (OrderStatus == OrderStatus.Shipped)
-                return;
+                return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
 
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
+
+            return Result.Ok();
+            //AddDomainEvent(new OrderPaidDomainEvent(this));
         }
 
 
-        public void SetShippedStatus()
+        public Result SetShippedStatus()
         {
             if (OrderStatus != OrderStatus.Paid)
             {
-                return;
+                return Result.Fail("Cannot set status to Shipped because the order is not paid.");
             }
 
             OrderStatus = OrderStatus.Shipped;
             Description = "The order was shipped";
+
+            return Result.Ok();
             //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
+
+
+        public Result SetCancelledStatus()
+        {
+            if (OrderStatus == OrderStatus.Paid ||
+                OrderStatus == OrderStatus.Shipped)
+            {
+                return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
+            }
+
+            OrderStatus = OrderStatus.Cancelled;
+            Description = $"The order was cancelled.";
+
+            return Result.Ok();
+            //AddDomainEvent(new OrderCancelledDomainEvent(this));
+        }
+
 
         public Order(Guid buyerId, string userName, Address address) 
         {
@@ -122,18 +157,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
-        public void SetCancelledStatus()
-        {
-            if (OrderStatus == OrderStatus.Paid ||
-                OrderStatus == OrderStatus.Shipped)
-            {
-                throw new Exception($"Is not possible to change the order status from {OrderStatus} to {OrderStatus.Cancelled}.");
-            }
-
-            OrderStatus = OrderStatus.Cancelled;
-            Description = $"The order was cancelled.";
-            //AddDomainEvent(new OrderCancelledDomainEvent(this));
-        }
 
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Ordering.Application.Orders.CancelOrder;
+using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus;
 using OrderDeliverySystem.Ordering.Application.Orders.CreateOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
@@ -88,7 +89,7 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 
             if (!result.IsSuccess)
             {
-                return BadRequest(result.Reasons);
+                return BadRequest(result.Reasons.Select(r => r.Message));
             }
 
             return Ok(result.Value);
@@ -119,6 +120,19 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 
             return Ok(result.Value);
         }
-        
+
+        [HttpPost("ChangeOrderStatus")]
+        public async Task<IActionResult> SatAwaitingValidationOrderStatus(ChangeOrderStatusCommand changeOrderStatusCommand)
+        {
+            var result = await _mediator.Send(changeOrderStatusCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons.Select(r => r.Message));
+            }
+
+            return Ok(result.Value);
+        }
+
     }
 }

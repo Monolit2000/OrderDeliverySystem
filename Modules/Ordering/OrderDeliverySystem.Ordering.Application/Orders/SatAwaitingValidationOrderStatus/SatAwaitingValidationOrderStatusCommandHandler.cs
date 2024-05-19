@@ -29,8 +29,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationO
 
             var setStatusResult = order.SetAwaitingValidationStatus();
 
-            if (!setStatusResult)
-                return Result.Fail(order.Description);
+            if (setStatusResult.IsFailed)
+                return setStatusResult;
 
             await _orderRepository.SaveChangesAsync();
 

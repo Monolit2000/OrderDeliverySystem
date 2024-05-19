@@ -26,7 +26,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CancelOrder
             if (orderToUpdate == null)
                 return Result.Fail("Order not found"); 
             
-            orderToUpdate.SetCancelledStatus();
+            var result = orderToUpdate.SetCancelledStatus();
+
+            if(result.IsFailed)
+            {
+                return result;
+            }
 
             await _orderRepository.SaveChangesAsync();
 
