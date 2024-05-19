@@ -1,0 +1,51 @@
+
+services:
+  orderdeliverysystem.api:
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=orderdeliverysystem.database;Port=5432;Database=OrderDeliverySystemContext;Username=postgres;Password=postgres;Include Error Detail=true
+      - ASPNETCORE_ENVIRONMENT=Development
+    container_name: orderdeliverysystem.api
+    image: ${DOCKER_REGISTRY-}orderdeliverysystemapi
+    build:
+      context: .
+      dockerfile: OrderDeliverySystem.API/Dockerfile
+    ports:
+      - "5003:8080"
+  #   depends_on:
+  #     orderdeliverysystem.database:
+  #       condition: service_healthy
+
+
+  # orderdeliverysystem.database:
+  #   image: postgres:latest
+  #   container_name: orderdeliverysystem.database
+  #   environment:
+  #     - POSTGRES_DB=OrderDeliverySystemContext
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - ./.containers/OrderDeliverySystemContext-db:/var/lib/postgresql/data
+  #   ports:
+  #     - 5432:5432
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+
+  proxy:
+    image: nginx:latest
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - orderdeliverysystem.api
+  
+
+
+
+
+    
