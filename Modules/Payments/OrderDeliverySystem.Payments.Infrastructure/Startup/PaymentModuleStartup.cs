@@ -7,11 +7,6 @@ using OrderDeliverySystem.Payments.Infrastructure.Contract;
 using OrderDeliverySystem.Payments.Infrastructure.EventBus;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OrderDeliverySystem.Payments.Domain.Payment;
 using OrderDeliverySystem.Payments.Infrastructure.Domain;
 

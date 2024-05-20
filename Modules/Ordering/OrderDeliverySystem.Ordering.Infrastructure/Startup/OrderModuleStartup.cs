@@ -7,13 +7,15 @@ using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.Ordering.Infrastructure.Domain;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
-using OrderDeliverySystem.Ordering.Infrastructure.Startup.EventBus;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderDeliverySystem.Ordering.Infrastructure.EventBus;
+using MediatR;
+using OrderDeliverySystem.Ordering.Application.Behaviors;
 
 namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
 {
@@ -27,8 +29,12 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(IOrderingModule).Assembly);
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
             });
 
+            //services.AddScoped(
+            //    typeof(IPipelineBehavior<,>),
+            //    typeof(LoggingPipelineBehavior<,>));
 
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 

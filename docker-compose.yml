@@ -1,8 +1,9 @@
+version: '3.4'
 
 services:
   orderdeliverysystem.api:
     environment:
-      - ConnectionStrings__DefaultConnection=Data Source=tcp:orderdeliverysystem-apidbserver.database.windows.net,1433;Initial Catalog=OrderDeliverySystem.API_db;User Id=AdminDb@orderdeliverysystem-apidbserver;Password=master6@1
+      - ConnectionStrings__DefaultConnectionNew=Server=localhost;Database=YourDatabaseName;User Id=sa;Password=YourPassword;MultipleActiveResultSets=true;TrustServerCertificate=true;
       - ASPNETCORE_ENVIRONMENT=Development
     container_name: orderdeliverysystem.api
     image: ${DOCKER_REGISTRY-}orderdeliverysystemapi
@@ -10,10 +11,45 @@ services:
       context: .
       dockerfile: OrderDeliverySystem.API/Dockerfile
     ports:
-      - "5003:8080"
-  #   depends_on:
-  #     orderdeliverysystem.database:
-  #       condition: service_healthy
+      - "5200:8080"
+    # depends_on:
+    #   orderdeliverysystem.database:
+    #     condition: service_healthy
+
+
+    # Server=orderdeliverysystem.database;Database=OrderDeliverySystemContext;User Id=sa;Password=YourStrong@Passw0rd;MultipleActiveResultSets=true;TrustServerCertificate=true;
+
+  orderdeliverysystem.database:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: orderdeliverysystem.database
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Express
+    volumes:
+      - ./mssql-data:/var/opt/mssql
+    ports:
+      - 1433:1433
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Passw0rd -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  proxy:
+    image: nginx:latest
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - orderdeliverysystem.api
 
 
   # orderdeliverysystem.database:
@@ -32,18 +68,6 @@ services:
   #     interval: 10s
   #     timeout: 5s
   #     retries: 5
-
-
-  proxy:
-    image: nginx:latest
-    container_name: nginx_proxy
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - "80:80"
-    depends_on:
-      - orderdeliverysystem.api
-  
 
 
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Infrastructure.Startup.EventBus
+namespace OrderDeliverySystem.Catalog.Infrastructure.EventBus
 {
     public static class EventBusDiConfiguration
     {

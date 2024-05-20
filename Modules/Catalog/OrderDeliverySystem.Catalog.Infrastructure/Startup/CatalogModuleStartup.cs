@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using OrderDeliverySystem.Catalog.Infrastructure.Domain;
-using OrderDeliverySystem.Catalog.Infrastructure.Startup.EventBus;
+using OrderDeliverySystem.Catalog.Infrastructure.EventBus;
 
 namespace OrderDeliverySystem.Catalog.Infrastructure.Startup
 {

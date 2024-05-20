@@ -1,11 +1,10 @@
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using Serilog;
 using OrderDeliverySystem.UserAccess.Infrastructure.Startup;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using OrderDeliverySystem.Basket.Infrastructure.Startup;
-
 using OrderDeliverySystem.Catalog.Infrastructure.Startup;
 using OrderDeliverySystem.Ordering.Infrastructure.Startup;
+using OrderDeliverySystem.Payments.Infrastructure.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,18 +17,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-// Configure Serilog
+//Configure Serilog
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
     .ReadFrom.Configuration(hostingContext.Configuration)
-    .WriteTo.Console());
+   /* .WriteTo.Console()*/);
 
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
-    .WriteTo.Console()
+    //.WriteTo.Console()
     .CreateLogger();
 
 
-// Add Serilog logger
+//Add Serilog logger
 builder.Logging.AddSerilog();
 
 
@@ -37,7 +36,8 @@ builder.Logging.AddSerilog();
 builder.Services.AddUserAccessModule(builder.Configuration)
     .AddBasketModule(builder.Configuration)
     .AddCatalogModule(builder.Configuration)
-    .AddOrderModule(builder.Configuration);
+    .AddOrderModule(builder.Configuration)
+    .AddPaymentModule(builder.Configuration);
 
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
@@ -55,6 +55,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseSerilogRequestLogging();
 
 app.UseAuthorization();
 
