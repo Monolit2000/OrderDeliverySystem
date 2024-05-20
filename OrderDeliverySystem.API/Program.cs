@@ -32,8 +32,8 @@ var logger = new LoggerConfiguration()
 builder.Logging.AddSerilog();
 
 
-
-builder.Services.AddUserAccessModule(builder.Configuration)
+builder.Services
+    .AddUserAccessModule(builder.Configuration)
     .AddBasketModule(builder.Configuration)
     .AddCatalogModule(builder.Configuration)
     .AddOrderModule(builder.Configuration)

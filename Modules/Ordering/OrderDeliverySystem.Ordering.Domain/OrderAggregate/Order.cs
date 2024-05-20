@@ -76,8 +76,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetPaidStatus()
         {
-            if (OrderStatus == OrderStatus.Shipped)
-                return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
+            //if (OrderStatus == OrderStatus.Shipped)
+            //    return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
 
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
@@ -89,10 +89,10 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetShippedStatus()
         {
-            if (OrderStatus != OrderStatus.Paid)
-            {
-                return Result.Fail("Cannot set status to Shipped because the order is not paid.");
-            }
+            //if (OrderStatus != OrderStatus.Paid)
+            //{
+            //    return Result.Fail("Cannot set status to Shipped because the order is not paid.");
+            //}
 
             OrderStatus = OrderStatus.Shipped;
             Description = "The order was shipped";
@@ -104,11 +104,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetCancelledStatus()
         {
-            if (OrderStatus == OrderStatus.Paid ||
-                OrderStatus == OrderStatus.Shipped)
-            {
-                return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
-            }
+            //if (OrderStatus == OrderStatus.Paid ||
+            //    OrderStatus == OrderStatus.Shipped)
+            //{
+            //    return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
+            //}
 
             OrderStatus = OrderStatus.Cancelled;
             Description = $"The order was cancelled.";

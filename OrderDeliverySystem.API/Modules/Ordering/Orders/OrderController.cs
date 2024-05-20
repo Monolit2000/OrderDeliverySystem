@@ -11,6 +11,7 @@ using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrder
 using OrderDeliverySystem.Ordering.Application.Orders.SerSubmittedOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
+using OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using Azure.Core;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 
 namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
@@ -16,11 +18,16 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
     {
         private readonly IServiceProvider _serviceProvider;
         private InMemoryMessageQueue _inMemoryMessageQueue;
+        private readonly ILogger<IntegrationEventProcessorJob> _logger;
 
-        public IntegrationEventProcessorJob(IServiceProvider serviceProvider, InMemoryMessageQueue inMemoryMessageQueue)
+        public IntegrationEventProcessorJob(
+            IServiceProvider serviceProvider,
+            InMemoryMessageQueue inMemoryMessageQueue,
+            ILogger<IntegrationEventProcessorJob> logger)
         {
             _serviceProvider = serviceProvider; 
             _inMemoryMessageQueue = inMemoryMessageQueue;
+            _logger = logger;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,6 +40,9 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
 
             await foreach (IIntegrationEvent @event in _inMemoryMessageQueue.Reder.ReadAllAsync(stoppingToken))
             {
+                _logger.LogInformation(
+                    "Starting IntegrationEvent {@event}, {@DateTimeUtc}",@event, DateTime.UtcNow);
+
                 await mediatr.Publish(@event, stoppingToken);
             }           
         }

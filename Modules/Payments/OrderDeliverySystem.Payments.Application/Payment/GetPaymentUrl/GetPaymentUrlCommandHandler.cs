@@ -1,4 +1,7 @@
 ﻿using FluentResults;
+using LiqPay.SDK;
+using LiqPay.SDK.Dto;
+using LiqPay.SDK.Dto.Enums;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,9 +21,39 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
             _logger = logger;
         }
 
-        public Task<Result<PaymentUrlDto>> Handle(GetPaymentUrlCommand request, CancellationToken cancellationToken)
+        public async Task<Result<PaymentUrlDto>> Handle(GetPaymentUrlCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var paymentRequest = new LiqPayRequest
+            {
+                Amount = 1,
+                Currency = "UAN",
+                OrderId = "order_id",
+                Action = LiqPayRequestAction.Pay,
+                Language = LiqPayRequestLanguage.EN,
+                ServerUrl = "https://localhost:7085/payment/LiqPayCallback",
+                Description = "TestPay",
+                Goods = new List<LiqPayRequestGoods>
+                {
+                    new LiqPayRequestGoods
+                    {
+                        Amount = 1,
+                        Count = 2,
+                        Unit = "pcs.",
+                        Name = "Order1"
+                    }
+                }
+            };
+
+            var liqPayClient = new LiqPayClient("test", "test");
+
+            liqPayClient.IsCnbSandbox = true;
+
+            //signature and payment data 
+            var paymentDetails = liqPayClient.GenerateDataAndSignature(paymentRequest);
+
+            string сheckoutUri = $"https://www.liqpay.ua/api/3/checkout?data={Uri.EscapeDataString(paymentDetails.Key)}&signature={Uri.EscapeDataString(paymentDetails.Value)}";
+
+            return new PaymentUrlDto(сheckoutUri);
         }
     }
 }

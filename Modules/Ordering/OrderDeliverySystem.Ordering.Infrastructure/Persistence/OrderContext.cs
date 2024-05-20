@@ -18,13 +18,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-
         public DbSet<Buyer> Buyers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("ordering");
+
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
         }
     }
 }

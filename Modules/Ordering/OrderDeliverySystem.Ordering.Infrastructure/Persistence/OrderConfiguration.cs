@@ -14,7 +14,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
         public void Configure(EntityTypeBuilder<Order> builder)
         {
 
-            builder.ToTable("Orders", "orders");
 
             builder.HasKey(x => x.OrderId);
 
@@ -32,4 +31,20 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
         }
     }
+
+    public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
+    {
+        public void Configure(EntityTypeBuilder<OrderItem> builder)
+        {
+
+            builder.HasKey(x => x.OrderItemId);
+
+            builder.Property(e => e.Discount)
+                .HasColumnType("decimal(18,2)");
+
+            builder.Property(e => e.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+        }
+    }
+
 }

@@ -32,10 +32,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
             });
 
-            //services.AddScoped(
-            //    typeof(IPipelineBehavior<,>),
-            //    typeof(LoggingPipelineBehavior<,>));
-
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
             services.AddDbContext<OrderContext>((sp, options) =>

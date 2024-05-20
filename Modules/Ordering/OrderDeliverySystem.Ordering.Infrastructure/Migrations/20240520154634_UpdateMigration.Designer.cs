@@ -13,8 +13,8 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20240430144431_newOrderMigaratonfixProperty")]
-    partial class newOrderMigaratonfixProperty
+    [Migration("20240520154634_UpdateMigration")]
+    partial class UpdateMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,9 +29,20 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("BuyerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("BuyerChatId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,7 +52,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("BuyerId");
 
                     b.ToTable("Buyers", "ordering");
                 });
@@ -52,7 +63,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -64,9 +75,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("buyer")
-                        .HasColumnType("uniqueidentifier");
 
                     b.ComplexProperty<Dictionary<string, object>>("Address", "OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order.Address#Address", b1 =>
                         {
@@ -90,7 +98,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders", "orders");
+                    b.ToTable("Orders", "ordering");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>
@@ -109,8 +117,8 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
                         .IsRequired()

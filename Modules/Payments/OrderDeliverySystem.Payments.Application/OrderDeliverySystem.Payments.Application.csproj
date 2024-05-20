@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiqPay" Version="2024.4.908.5254" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
   </ItemGroup>
 

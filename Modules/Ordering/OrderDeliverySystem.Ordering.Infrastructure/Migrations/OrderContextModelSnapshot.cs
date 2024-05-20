@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("BuyerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -49,7 +49,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("BuyerId");
 
                     b.ToTable("Buyers", "ordering");
                 });
@@ -60,7 +60,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -95,7 +95,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders", "orders");
+                    b.ToTable("Orders", "ordering");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class newOrderMigaratonfixProperty : Migration
+    public partial class UpdateMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,16 +14,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
             migrationBuilder.EnsureSchema(
                 name: "ordering");
 
-            migrationBuilder.EnsureSchema(
-                name: "orders");
-
             migrationBuilder.CreateTable(
                 name: "Buyers",
                 schema: "ordering",
                 columns: table => new
                 {
                     BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BuyerChatId = table.Column<long>(type: "bigint", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -33,13 +33,12 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Orders",
-                schema: "orders",
+                schema: "ordering",
                 columns: table => new
                 {
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    buyer = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -61,7 +60,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Units = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -70,7 +69,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
-                        principalSchema: "orders",
+                        principalSchema: "ordering",
                         principalTable: "Orders",
                         principalColumn: "OrderId");
                 });
@@ -95,7 +94,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders",
-                schema: "orders");
+                schema: "ordering");
         }
     }
 }
