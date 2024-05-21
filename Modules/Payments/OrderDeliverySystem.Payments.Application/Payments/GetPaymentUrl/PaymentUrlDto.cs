@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
+namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
 {
     public class PaymentUrlDto
     {

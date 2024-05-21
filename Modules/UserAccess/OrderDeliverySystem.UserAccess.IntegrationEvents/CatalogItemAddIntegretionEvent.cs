@@ -9,7 +9,7 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 {
     public class CatalogItemAddIntegretionEvent : IntegrationEvent
     {
-        public CatalogItemAddIntegretionEvent(Guid id, DateTime occurredOn) : base(id, occurredOn)
+        public CatalogItemAddIntegretionEvent() 
         {
         }
     }

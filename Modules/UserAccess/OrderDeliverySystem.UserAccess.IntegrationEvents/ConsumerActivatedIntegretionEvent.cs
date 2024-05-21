@@ -23,9 +23,13 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 
         public string Name { get; }
 
-        public ConsumerActivatedIntegretionEvent(Guid userId, string phoneNumber, long chatId, string firstName, string lastName, string name, 
-            Guid id, DateTime occurredOn) 
-            : base(id, occurredOn)
+        public ConsumerActivatedIntegretionEvent(
+            Guid userId, 
+            string phoneNumber, 
+            long chatId,
+            string firstName, 
+            string lastName, 
+            string name) 
         {
             UserId = userId;
             PhoneNumber = phoneNumber;

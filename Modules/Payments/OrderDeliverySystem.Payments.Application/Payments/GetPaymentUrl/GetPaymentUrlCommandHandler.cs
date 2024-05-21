@@ -3,22 +3,29 @@ using LiqPay.SDK;
 using LiqPay.SDK.Dto;
 using LiqPay.SDK.Dto.Enums;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
+namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
 {
     public class GetPaymentUrlCommandHandler : IRequestHandler<GetPaymentUrlCommand, Result<PaymentUrlDto>>
     {
-        private ILogger<GetPaymentUrlCommandHandler> _logger;
+        private readonly ILogger<GetPaymentUrlCommandHandler> _logger;
 
-        public GetPaymentUrlCommandHandler(ILogger<GetPaymentUrlCommandHandler> logger)
+        private readonly IConfiguration _config;
+
+        public GetPaymentUrlCommandHandler(
+            ILogger<GetPaymentUrlCommandHandler> logger,
+            IConfiguration config)
         {
             _logger = logger;
+            _config = config;
         }
 
         public async Task<Result<PaymentUrlDto>> Handle(GetPaymentUrlCommand request, CancellationToken cancellationToken)
@@ -30,7 +37,7 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
                 OrderId = "order_id",
                 Action = LiqPayRequestAction.Pay,
                 Language = LiqPayRequestLanguage.EN,
-                ServerUrl = "https://localhost:7085/payment/LiqPayCallback",
+                ServerUrl = _config["ProcessorCallbackUrl"],
                 Description = "Test pay",
                 Goods = new List<LiqPayRequestGoods>
                 {
@@ -48,10 +55,15 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
 
             liqPayClient.IsCnbSandbox = true;
 
-            //signature and payment data 
             var paymentDetails = liqPayClient.GenerateDataAndSignature(paymentRequest);
 
             string сheckoutUri = $"https://www.liqpay.ua/api/3/checkout?data={Uri.EscapeDataString(paymentDetails.Key)}&signature={Uri.EscapeDataString(paymentDetails.Value)}";
+
+
+            var payment = new Payment(
+                request.UserId, 
+                request.OrderId,
+                request.Amount);
 
             return new PaymentUrlDto(сheckoutUri);
         }

@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
             if (request == null || string.IsNullOrEmpty(request.Data) || string.IsNullOrEmpty(request.Signature))
             {
                 //Invalid request
-                return new CallbacProcessingResult();
+                return Result.Fail("Invalid request");
             }
 
             // Decode the data from Base64
@@ -35,18 +35,28 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
 
             var liqPayClient = new LiqPayClient(_config["LiqPayPublicTestKey"], _config["LiqPayPrivateTestKey"]);
 
-            // Generate the signature on the server side
-            //var generatedSignature = CreateSignature(request.Data);
+           // Generate the signature on the server side
+            var generatedSignature = liqPayClient.CreateSignature(request.Data);
 
-            // Compare signatures
-            //if (generatedSignature != model.signature)
-            //{
-            //    return BadRequest("Invalid signature");
-            //}
-
-
+            //Compare signatures
+            if (generatedSignature != request.Signature)
+            {
+                return Result.Fail("Invalid signature");
+            }
 
             var transactionData = JsonConvert.DeserializeObject<LiqPayResponse>(dataString);
+
+            if (transactionData.Status == LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Success)
+            {
+                
+            }
+
+            var fd = transactionData.Status switch
+            {
+                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Failure => "sd",
+            };
+
+
 
             return new CallbacProcessingResult();
         }

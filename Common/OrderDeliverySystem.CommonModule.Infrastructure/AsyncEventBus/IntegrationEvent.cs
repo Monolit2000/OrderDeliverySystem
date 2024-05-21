@@ -21,10 +21,10 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus
 
         public DateTime OccurredOn { get; }
 
-        protected IntegrationEvent(Guid id, DateTime occurredOn)
+        protected IntegrationEvent()
         {
-            this.Id = id;
-            this.OccurredOn = occurredOn;
+            this.Id = Guid.NewGuid();
+            this.OccurredOn = DateTime.UtcNow;
         }
     }
 }

@@ -9,7 +9,6 @@ using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using OrderDeliverySystem.Payments.Infrastructure.Domain;
-using OrderDeliverySystem.PaymentAggregate.Domain.Payment;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Startup
 {

@@ -1,17 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 using OrderDeliverySystem.Ordering.Application.Orders.CancelOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus;
 using OrderDeliverySystem.Ordering.Application.Orders.CreateOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
 using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrderStatus;
-using OrderDeliverySystem.Ordering.Application.Orders.SerSubmittedOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
-using OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {

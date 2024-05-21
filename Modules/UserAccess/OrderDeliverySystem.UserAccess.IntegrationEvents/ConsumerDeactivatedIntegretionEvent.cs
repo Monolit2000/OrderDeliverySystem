@@ -9,7 +9,7 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 {
     public class ConsumerDeactivatedIntegretionEvent : IntegrationEvent
     {
-        public ConsumerDeactivatedIntegretionEvent(Guid id, DateTime occurredOn) : base(id, occurredOn)
+        public ConsumerDeactivatedIntegretionEvent(Guid id, DateTime occurredOn)
         {
         }
     }

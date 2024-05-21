@@ -7,13 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authentication\IntegrationEvents\**" />
+    <EmbeddedResource Remove="Authentication\IntegrationEvents\**" />
+    <None Remove="Authentication\IntegrationEvents\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication\IntegrationEvents\" />
     <Folder Include="Users\IntegrationEvents\" />
     <Folder Include="Users\ChangeName\" />
   </ItemGroup>

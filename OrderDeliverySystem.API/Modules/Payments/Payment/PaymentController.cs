@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.API.Modules.Payments.Payment.Model;
-using OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl;
 using OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing;
+using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
 
 namespace OrderDeliverySystem.API.Modules.Payments.Payment
 {
@@ -29,8 +29,8 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
             return Ok(result.Value);
         }
 
-        [HttpGet("LiqPayCallback")]
-        public async Task<IActionResult> LiqPayCallback(LiqPayCallbackModel request)
+        [HttpPost("LiqPayCallback")]
+        public async Task<IActionResult> LiqPayCallback([FromBody]LiqPayCallbackModel request)
         {
             var result = await _mediator.Send(new CallbacProcessingCommand(request.data, request.signature));
 

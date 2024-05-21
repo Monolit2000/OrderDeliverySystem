@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Payments.Domain\OrderDeliverySystem.Payments.Domain.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Payments.IntegrationEvents\OrderDeliverySystem.Payments.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>
