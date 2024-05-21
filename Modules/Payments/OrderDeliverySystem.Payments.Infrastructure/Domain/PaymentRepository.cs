@@ -1,4 +1,5 @@
-﻿using OrderDeliverySystem.Payments.Domain.Payment;
+﻿using OrderDeliverySystem.PaymentAggregate.Domain.Payment;
+using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
