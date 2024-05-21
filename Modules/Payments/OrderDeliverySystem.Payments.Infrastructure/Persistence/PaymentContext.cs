@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using OrderDeliverySystem.Payments.Infrastructure.Startup;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
@@ -13,6 +14,8 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
         public PaymentContext(DbContextOptions<PaymentContext> options) : base(options)
         { }
 
+        public DbSet<Payment> Orders { get; set; }
+  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

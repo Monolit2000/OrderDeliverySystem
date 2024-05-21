@@ -26,12 +26,12 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
             var paymentRequest = new LiqPayRequest
             {
                 Amount = 1,
-                Currency = "UAN",
+                Currency = "UAH",
                 OrderId = "order_id",
                 Action = LiqPayRequestAction.Pay,
                 Language = LiqPayRequestLanguage.EN,
                 ServerUrl = "https://localhost:7085/payment/LiqPayCallback",
-                Description = "TestPay",
+                Description = "Test pay",
                 Goods = new List<LiqPayRequestGoods>
                 {
                     new LiqPayRequestGoods
@@ -44,7 +44,7 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
                 }
             };
 
-            var liqPayClient = new LiqPayClient("test", "test");
+            var liqPayClient = new LiqPayClient("sandbox_i53975565933", "sandbox_kgz4d1g7hvZJl9nKCmMWbOd6vGRCUUdmzmDs97xu");
 
             liqPayClient.IsCnbSandbox = true;
 
