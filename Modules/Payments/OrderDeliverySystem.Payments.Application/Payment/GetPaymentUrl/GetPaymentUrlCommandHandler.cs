@@ -44,7 +44,7 @@ namespace OrderDeliverySystem.Payments.Application.Payment.GetPaymentUrl
                 }
             };
 
-            var liqPayClient = new LiqPayClient("sandbox_i53975565933", "sandbox_kgz4d1g7hvZJl9nKCmMWbOd6vGRCUUdmzmDs97xu");
+            var liqPayClient = new LiqPayClient(_config["LiqPayPublicTestKey"], _config["LiqPayPrivateTestKey"]);
 
             liqPayClient.IsCnbSandbox = true;
 
