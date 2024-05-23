@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.UserAccess.Infrastructure.Startup.EventBus
+namespace OrderDeliverySystem.UserAccess.Infrastructure.EventBus
 {
     public static class EventBusDiConfiguration
     {

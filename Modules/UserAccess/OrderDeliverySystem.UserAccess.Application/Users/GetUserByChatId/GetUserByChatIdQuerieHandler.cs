@@ -32,7 +32,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.GetUserByChatId
                 user.Name,
                 user.PhoneNumber.Number,
                 user.Role.Value, 
-                user.Address, 
+                user.WorkAddress, 
                 user.IsActivated, 
                 user.ChatId);
 

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.API.Modules.Payments.Payment.Model;
+using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
 
@@ -17,9 +18,9 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
         }
 
         [HttpGet("GetPaymentUrl")]
-        public async Task<IActionResult> GetPaymentUrl()
+        public async Task<IActionResult> GetPaymentUrl([FromQuery] GetPaymentUrlCommand getPaymentUrlCommand)
         {
-            var result = await _mediator.Send(new GetPaymentUrlCommand());
+            var result = await _mediator.Send(getPaymentUrlCommand);
 
             if (!result.IsSuccess)
             {
@@ -38,8 +39,10 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
             {
                 return BadRequest(result.Reasons.Select(r => r.Message));
             }
-
             return Ok(result.Value);
         }
+
+        public record PaymentRequest(decimal Amount, Guid OrderId);
+
     }
 }

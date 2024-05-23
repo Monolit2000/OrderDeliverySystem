@@ -21,6 +21,8 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
         
         public string Name { get; private set; } 
         
+        public string WorkAddress { get; private set; }
+
         public Buyer()
         {
 
@@ -42,5 +44,17 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
             PhoneNumber = phoneNumber;
         }
+
+        public Buyer(Guid byerId, long buyerChatId, string firstName, string lastName, string name, string phoneNumber, string workAddress)
+        {
+            BuyerId = byerId;
+            BuyerChatId = buyerChatId;
+            FirstName = firstName;
+            LastName = lastName;
+            Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
+            PhoneNumber = phoneNumber;
+            WorkAddress = workAddress;
+        }
+
     }
 }

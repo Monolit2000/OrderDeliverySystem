@@ -30,10 +30,10 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("WorkAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Address");
+                        .HasColumnName("WorkAddress");
 
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint")

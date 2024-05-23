@@ -36,7 +36,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-
             builder.HasKey(x => x.OrderItemId);
 
             builder.Property(e => e.Discount)
@@ -44,7 +43,17 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
             builder.Property(e => e.UnitPrice)
                 .HasColumnType("decimal(18,2)");
+
+            builder.ComplexProperty(o => o.OrderStatus, b =>
+            {
+                b.IsRequired();
+                b.Property(a => a.Value).HasColumnName("OrderStatus");
+            });
+
         }
+
+
+
     }
 
 }

@@ -30,7 +30,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.UpdateUser
             user.ChangeFirstName(request.FirstName);
             user.ChangeLastName(request.LastName);
             user.ChangePhoneNumber(PhoneNumber.Create(request.PhoneNumber).Value);
-            user.ChangeAddress(request.Address);
+            user.ChangeWorkAddress(request.Address);
 
             return new UpdateUserDto {Success = true};
         }

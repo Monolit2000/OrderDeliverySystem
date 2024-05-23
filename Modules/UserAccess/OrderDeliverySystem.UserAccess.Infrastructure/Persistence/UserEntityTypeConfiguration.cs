@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
             builder.Property(p => p.FirstName).HasColumnName("FirstName");
             builder.Property(p => p.LastName).HasColumnName("LastName");
             builder.Property(p => p.Name).HasColumnName("Name");
-            builder.Property(p => p.Address).HasColumnName("Address");
+            builder.Property(p => p.WorkAddress).HasColumnName("WorkAddress");
 
 
 

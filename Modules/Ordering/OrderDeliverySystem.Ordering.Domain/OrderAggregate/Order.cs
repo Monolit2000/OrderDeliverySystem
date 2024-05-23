@@ -26,6 +26,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public string Description { get; private set; }
 
+
         private readonly List<OrderItem> _orderItems = [];
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
@@ -34,9 +35,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         private Order()
         {
-            //_orderItems = new List<OrderItem>();
         }
-
 
         public Order(Guid buyerId, Address address, string description)
         {
@@ -62,58 +61,44 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetAwaitingValidationStatus()
         {
-            if (OrderStatus == OrderStatus.Paid)
-            {
-                return Result.Fail("Cannot set status to AwaitingValidation because the order is already paid.");
-            }
 
             OrderStatus = OrderStatus.AwaitingValidation;
             Description = "Order awaiting validation";
 
             return Result.Ok();
+            // return Result.Fail("Cannot set status to AwaitingValidation because the order is already paid.");
             //AddDomainEvent(new OrderAwaitingValidationDomainEvent(this));
         }
 
         public Result SetPaidStatus()
         {
-            //if (OrderStatus == OrderStatus.Shipped)
-            //    return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
-
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
 
             return Result.Ok();
+            //return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
             //AddDomainEvent(new OrderPaidDomainEvent(this));
         }
 
 
         public Result SetShippedStatus()
         {
-            //if (OrderStatus != OrderStatus.Paid)
-            //{
-            //    return Result.Fail("Cannot set status to Shipped because the order is not paid.");
-            //}
-
             OrderStatus = OrderStatus.Shipped;
             Description = "The order was shipped";
 
             return Result.Ok();
+            // return Result.Fail("Cannot set status to Shipped because the order is not paid.");
             //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
 
 
         public Result SetCancelledStatus()
         {
-            //if (OrderStatus == OrderStatus.Paid ||
-            //    OrderStatus == OrderStatus.Shipped)
-            //{
-            //    return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
-            //}
-
             OrderStatus = OrderStatus.Cancelled;
             Description = $"The order was cancelled.";
 
             return Result.Ok();
+            // return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
             //AddDomainEvent(new OrderCancelledDomainEvent(this));
         }
 

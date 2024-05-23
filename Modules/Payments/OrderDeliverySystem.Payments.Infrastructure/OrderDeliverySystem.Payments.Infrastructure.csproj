@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Payments.Api\OrderDeliverySystem.Payments.Api.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.Payments.Application\OrderDeliverySystem.Payments.Application.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.Payments.Domain\OrderDeliverySystem.Payments.Domain.csproj" />
   </ItemGroup>

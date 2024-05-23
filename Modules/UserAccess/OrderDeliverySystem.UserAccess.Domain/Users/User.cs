@@ -25,7 +25,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public UserRole Role { get; private set; }
 
-        public string Address { get; set; } = "Not specified";
+        public string WorkAddress { get; set; } = "Not specified";
+
 
         public bool IsActivated = false;
 
@@ -37,9 +38,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         }
 
 
-
         private User(
-           Guid id,  PhoneNumber phoneNumber, string firstName, string lastName,  string name, UserRole role)
+           Guid id,  PhoneNumber phoneNumber, string firstName, string lastName, string name, UserRole role)
         {
             UserId = id;    
             PhoneNumber = phoneNumber;
@@ -48,6 +48,20 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             Name = name;
             Role = role;
 
+            this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
+        }
+
+
+        private User(
+         Guid id, PhoneNumber phoneNumber, string firstName, string lastName, string name, UserRole role, string workAddress)
+        {
+            UserId = id;
+            PhoneNumber = phoneNumber;
+            FirstName = firstName;
+            LastName = lastName;
+            Name = name;
+            Role = role;
+            WorkAddress = workAddress;  
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }
 
@@ -73,12 +87,12 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             PhoneNumber = phoneNumber;
         }
 
-        public void ChangeAddress(string address)
+        public void ChangeWorkAddress(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
-                throw new ArgumentException("Address cannot be empty or whitespace.");
+                throw new ArgumentException("WorkAddress cannot be empty or whitespace.");
 
-            Address = address;
+            WorkAddress = address;
         }
 
         public void ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)
@@ -125,8 +139,6 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
                 LastName,
                 name,
                 UserRole.Customer);
-
-            
         }
 
         public static User CreateDeliverer(
