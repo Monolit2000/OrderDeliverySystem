@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents
 {
-    public class PaymentCompletedDomainEvent : DomainEventBase
+    public class PaymentSuccessDomainEvent : DomainEventBase
     {
         public Guid PaymentId { get; }
         public Guid OrderId { get; }
 
-        public PaymentCompletedDomainEvent(Guid paymentId, Guid orderId)
+        public PaymentSuccessDomainEvent(Guid paymentId, Guid orderId)
         {
             PaymentId = paymentId;
             OrderId = orderId;

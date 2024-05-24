@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 
@@ -12,9 +13,11 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [Migration("20240523190230_WorkAddresPropertysAdded")]
+    partial class WorkAddresPropertysAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,10 +67,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -81,6 +80,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
+                    b.ComplexProperty<Dictionary<string, object>>("Address", "OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order.Address#Address", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Place")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Address");
+                        });
+
                     b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order.OrderStatus#OrderStatus", b1 =>
                         {
                             b1.IsRequired();
@@ -92,8 +101,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         });
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("BuyerId");
 
                     b.ToTable("Orders", "ordering");
                 });
@@ -159,17 +166,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems", "ordering");
-                });
-
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", b =>
-                {
-                    b.HasOne("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>

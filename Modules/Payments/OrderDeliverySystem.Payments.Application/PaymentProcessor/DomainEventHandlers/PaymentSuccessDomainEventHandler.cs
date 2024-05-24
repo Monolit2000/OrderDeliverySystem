@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents;
-using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +9,22 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventHandlers
 {
-    public class PaymentFailedDomainEventHandler : INotificationHandler<PaymentFailedDomainEvent>
+    public class PaymentSuccessDomainEventHandler : INotificationHandler<PaymentSuccessDomainEvent>
     {
         private readonly IAsyncEventBus _eventBus;
 
-        public PaymentFailedDomainEventHandler(IAsyncEventBus eventBus)
+        public PaymentSuccessDomainEventHandler(IAsyncEventBus eventBus)
         {
             _eventBus = eventBus;
         }
 
-        public async Task Handle(PaymentFailedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(PaymentSuccessDomainEvent notification, CancellationToken cancellationToken)
         {
-            await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
-                notification.OrderId,
-                notification.PaymentId));
+
+            //await _eventBus.PublishAsync(new PaymentFailedIntegretionEvent(
+
+            //     notification.OccurredOn));
+
         }
     }
 }

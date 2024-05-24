@@ -3,7 +3,7 @@ version: '3.4'
 services:
   orderdeliverysystem.api:
     environment:
-      - ConnectionStrings__DefaultConnectionNew=Server=localhost;Database=YourDatabaseName;User Id=sa;Password=YourPassword;MultipleActiveResultSets=true;TrustServerCertificate=true;
+      - ConnectionStrings__DefaultConnectionNew=Server=orderdeliverysystem.database;Database=OrderDeliverySystemContext;User Id=sa;Password=YourStrong@Passw0rd;MultipleActiveResultSets=true;TrustServerCertificate=false;
       - ASPNETCORE_ENVIRONMENT=Development
     container_name: orderdeliverysystem.api
     image: ${DOCKER_REGISTRY-}orderdeliverysystemapi
@@ -16,6 +16,7 @@ services:
     #   orderdeliverysystem.database:
     #     condition: service_healthy
 
+     # Server=localhost;Database=YourDatabaseName;User Id=sa;Password=YourPassword;MultipleActiveResultSets=true;TrustServerCertificate=true;
 
     # Server=orderdeliverysystem.database;Database=OrderDeliverySystemContext;User Id=sa;Password=YourStrong@Passw0rd;MultipleActiveResultSets=true;TrustServerCertificate=true;
 
@@ -26,10 +27,11 @@ services:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
       - MSSQL_PID=Express
+       - MSSQL_AGENT_LOGGING_LEVEL=2
     volumes:
       - ./mssql-data:/var/opt/mssql
     ports:
-      - 1433:1433
+      - 1434:1434
     deploy:
       resources:
         limits:

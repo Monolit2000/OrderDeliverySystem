@@ -17,11 +17,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
             builder.HasKey(x => x.OrderId);
 
-            builder.ComplexProperty(o => o.Address, b =>
-            {
-                b.IsRequired();
-                b.Property(a => a.Place).HasColumnName("Address");
-            });
 
             builder.ComplexProperty(o => o.OrderStatus, b =>
             {
@@ -44,10 +39,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
             builder.Property(e => e.UnitPrice)
                 .HasColumnType("decimal(18,2)");
 
-            builder.ComplexProperty(o => o.OrderStatus, b =>
+
+            builder.ComplexProperty(o => o.DeliveryOptions, b =>
             {
-                b.IsRequired();
-                b.Property(a => a.Value).HasColumnName("OrderStatus");
+                b.Property(a => a.IsSelfPickup).HasColumnName("IsSelfPickup");
+                b.Property(a => a.DeliveryMethod).HasColumnName("DeliveryMethod");
+                b.Property(a => a.DeliveryCost).HasColumnName("DeliveryCost");
+                b.Property(a => a.DeliveryDateTime).HasColumnName("DeliveryDateTime");
+                b.Property(a => a.Address).HasColumnName("Address");
             });
 
         }

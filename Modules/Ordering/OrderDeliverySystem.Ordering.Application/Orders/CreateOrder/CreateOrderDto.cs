@@ -10,9 +10,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
     {
         public Guid OrderId { get; set; }
 
-        public CreateOrderDto(Guid orderId)
+        public string CheckoutUrl { get; set; }  
+
+        public CreateOrderDto(Guid orderId, string getCheckoutUrl)
         {
             OrderId = orderId;
+            CheckoutUrl = getCheckoutUrl;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Domain
             _context = context;
         }
 
-        public async Task<Payment> GetByIdAsync(Guid id)
+        public async Task<Payment?> GetByOrderIdAsync(Guid orderId)
         {
-            return await _context.Payments.FindAsync(id);
+            return await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == orderId);
         }
 
         public async Task AddAsync(Payment payment)

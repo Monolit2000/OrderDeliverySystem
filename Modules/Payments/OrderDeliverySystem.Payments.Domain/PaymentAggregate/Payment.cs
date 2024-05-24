@@ -13,38 +13,38 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
     public class Payment : Entity, IAggregateRoot
     {
         public Guid PaymentId { get; private set; }
-        public Guid UserId { get; private set; }
+        public Guid PayerId { get; private set; }
         public Guid OrderId { get; private set; }
         public decimal Amount { get; private set; }
-        public PaymentStatus Status { get; private set; }
+        public PaymentStatus PaymentStatus { get; private set; }
         public DateTime PaymentDate { get; private set; }
 
         private Payment() { }
 
-        public Payment(Guid orderId, Guid userId, decimal amount)
+        public Payment(Guid orderId, Guid payerId, decimal amount)
         {
             PaymentId = Guid.NewGuid();
             OrderId = orderId;
-            UserId = userId;
+            PayerId = payerId;
             Amount = amount;
             PaymentDate = DateTime.UtcNow;
         }
 
-        public Result CompletePayment()
+        public Result SuccessPayment()
         {
-            if (Status != PaymentStatus.Pending)
+            if (PaymentStatus != PaymentStatus.Pending)
             {
                 Result.Fail("Payment can only be completed if it is pending.");
             }
 
-            ChangeStatus(PaymentStatus.Completed);
-            AddDomainEvent(new PaymentCompletedDomainEvent(PaymentId, OrderId));
+            ChangeStatus(PaymentStatus.Success);
+            AddDomainEvent(new PaymentSuccessDomainEvent(PaymentId, OrderId));
             return Result.Ok();
         }
 
-        public Result FailPayment()
+        public Result FailPayment(string resonses)
         {
-            if (Status != PaymentStatus.Pending)
+            if (PaymentStatus != PaymentStatus.Pending)
             {
                 Result.Fail("Payment can only be failed if it is pending.");
             }
@@ -56,8 +56,8 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
 
         public Result ChangeStatus(PaymentStatus newStatus)
         {
-            var oldStatus = Status.Value;
-            Status = newStatus;
+            var oldStatus = PaymentStatus.Value;
+            PaymentStatus = newStatus;
             AddDomainEvent(new PaymentStatusChangedDomainEvent(PaymentId, oldStatus, newStatus.Value));
             return Result.Ok();
         }

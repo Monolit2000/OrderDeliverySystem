@@ -30,11 +30,6 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("WorkAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("WorkAddress");
-
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint")
                         .HasColumnName("ChatId");
@@ -57,6 +52,11 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
+
+                    b.Property<string>("WorkAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WorkAddress");
 
                     b.ComplexProperty<Dictionary<string, object>>("PhoneNumber", "OrderDeliverySystem.UserAccess.Domain.Users.User.PhoneNumber#PhoneNumber", b1 =>
                         {

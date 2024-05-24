@@ -3,7 +3,10 @@ using LiqPay.SDK;
 using LiqPay.SDK.Dto;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
+using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +17,22 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
 {
     public class CallbacProcessingCommandHandler : IRequestHandler<CallbacProcessingCommand, Result<CallbacProcessingResult>>
     {
+        private readonly ILogger<GetPaymentUrlCommandHandler> _logger;
+        private readonly IPaymentRepository _paymentRepository;
         private readonly IConfiguration _config;
-        public CallbacProcessingCommandHandler(IConfiguration config)
+
+        public CallbacProcessingCommandHandler(
+            IPaymentRepository paymentRepository,
+            ILogger<GetPaymentUrlCommandHandler> logger,
+            IConfiguration config)
         {
+            _logger = logger;
             _config = config;
+            _paymentRepository = paymentRepository;
         }
 
         public async Task<Result<CallbacProcessingResult>> Handle(CallbacProcessingCommand request, CancellationToken cancellationToken)
         {
-
-
 
             if (request == null || string.IsNullOrEmpty(request.Data) || string.IsNullOrEmpty(request.Signature))
             {
@@ -39,24 +48,28 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
 
             //Compare signatures
             if (generatedSignature != request.Signature)
-            {
                 return Result.Fail("Invalid signature");
-            }
+            
 
             // Decode the data from Base64
             var dataBytes = Convert.FromBase64String(request.Data);
             var dataString = Encoding.UTF8.GetString(dataBytes);
 
-            var transactionData = JsonConvert.DeserializeObject<LiqPayResponse>(dataString);
+            var liqPayResponse = JsonConvert.DeserializeObject<LiqPayResponse>(dataString);
 
-            if (transactionData.Status == LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Success)
-            {
-                
-            }
+            Guid result = Guid.Parse(liqPayResponse.OrderId);
 
-            var fd = transactionData.Status switch
+            var payment = await _paymentRepository.GetByOrderIdAsync(result);
+
+            if (payment is null)
+                return Result.Fail("Payment not found");
+
+         
+
+            var fd = liqPayResponse.Status switch
             {
-                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Failure => "sd",
+                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Success => payment.SuccessPayment(),
+                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Failure => payment.FailPayment(liqPayResponse.ErrorDescription), 
             };
 
 

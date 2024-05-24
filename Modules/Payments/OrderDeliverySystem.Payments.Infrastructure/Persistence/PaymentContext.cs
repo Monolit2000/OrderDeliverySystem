@@ -19,7 +19,10 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-        
+            modelBuilder.HasDefaultSchema("payments");
+
+            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+
         }
     }
 }

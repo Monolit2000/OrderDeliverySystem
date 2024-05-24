@@ -11,7 +11,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
     {
         public static PaymentStatus Pending => new PaymentStatus(nameof(Pending));
 
-        public static PaymentStatus Completed => new PaymentStatus(nameof(Completed));
+        public static PaymentStatus Success => new PaymentStatus(nameof(Success));
 
         public static PaymentStatus Failed => new PaymentStatus(nameof(Failed));
 
@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Status cannot be empty or null.", nameof(Value));
+                throw new ArgumentException("PaymentStatus cannot be empty or null.", nameof(Value));
             }
 
             Value = value;
@@ -32,7 +32,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
             return status switch
             {
                 "Pending" => Pending,
-                "Completed" => Completed,
+                "Success" => Success,
                 "Failed" => Failed,
                 _ => throw new ArgumentException($"Invalid payment status: {status}")
             };

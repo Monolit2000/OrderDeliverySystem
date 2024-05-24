@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
 using FluentResults;
+using OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents;
 
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 {
@@ -17,15 +18,20 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public DateTime OrderDate { get; private set; }
 
-        [Required]
-        public Address Address { get; private set; }
+        public string Address { get; private set; }
 
         public Guid BuyerId { get; private set; }
+
+        public Buyer Buyer { get; private set; }    
 
         public OrderStatus OrderStatus { get; private set; }
 
         public string Description { get; private set; }
-
+        public decimal Amount 
+        {
+            get => OrderItems
+                .Sum(item => (item.UnitPrice - item.Discount) * item.Units); 
+        }
 
         private readonly List<OrderItem> _orderItems = [];
 
@@ -37,7 +43,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         {
         }
 
-        public Order(Guid buyerId, Address address, string description)
+        public decimal GetAmount() 
+            => OrderItems.Sum(item => (item.UnitPrice - item.Discount) * item.Units);
+        
+
+        public Order(Guid buyerId, string address)
         {
             OrderId = Guid.NewGuid();
             BuyerId = buyerId;
@@ -58,7 +68,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             //AddDomainEvent(new OrderSubmittedDomainEvent(this));
         }
 
-
         public Result SetAwaitingValidationStatus()
         {
 
@@ -75,9 +84,10 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
 
+
+            AddDomainEvent(new OrderPaidDomainEvent(OrderId, BuyerId));
             return Result.Ok();
             //return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
-            //AddDomainEvent(new OrderPaidDomainEvent(this));
         }
 
 
@@ -103,7 +113,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
-        public Order(Guid buyerId, string userName, Address address) 
+        public Order(Guid buyerId, string userName, string address) 
         {
             OrderId = Guid.NewGuid();
             BuyerId = buyerId;

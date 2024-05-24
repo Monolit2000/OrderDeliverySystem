@@ -9,6 +9,8 @@ using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using OrderDeliverySystem.Payments.Infrastructure.Domain;
+using OrderDeliverySystem.Payments.Api;
+using OrderDeliverySystem.Payments.Infrastructure.Application.Payment;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Startup
 {
@@ -38,6 +40,9 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Startup
            
 
             services.AddScoped<IPaymentModule, PaymentModule>();
+
+            services.AddScoped<IPaymentsApi, PaymentsApi>();
+
             services.AddEventBusModule();
             return services;
 

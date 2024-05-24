@@ -43,6 +43,7 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
             LastName = lastName;
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
             PhoneNumber = phoneNumber;
+            WorkAddress = "Default";
         }
 
         public Buyer(Guid byerId, long buyerChatId, string firstName, string lastName, string name, string phoneNumber, string workAddress)

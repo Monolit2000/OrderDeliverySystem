@@ -40,7 +40,7 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer
             var buyerDto = new BuyerDto
             { 
                 BuyerId = buyer.BuyerId, 
-                BuyerChatId = buyer .BuyerChatId
+                BuyerChatId = buyer.BuyerChatId
             };
 
             return buyerDto;

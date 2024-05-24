@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Authentication\IntegrationEvents\**" />
+    <Compile Remove="Users\ChangeName\**" />
     <EmbeddedResource Remove="Authentication\IntegrationEvents\**" />
+    <EmbeddedResource Remove="Users\ChangeName\**" />
     <None Remove="Authentication\IntegrationEvents\**" />
+    <None Remove="Users\ChangeName\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Users\IntegrationEvents\" />
-    <Folder Include="Users\ChangeName\" />
   </ItemGroup>
 
 </Project>

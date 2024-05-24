@@ -13,8 +13,8 @@ using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
 {
     [DbContext(typeof(UserAccessContext))]
-    [Migration("20240515195612_UserAddresMigration")]
-    partial class UserAddresMigration
+    [Migration("20240523191443_WorkAddresPropertysAddedll")]
+    partial class WorkAddresPropertysAddedll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +32,6 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("WorkAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("WorkAddress");
 
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint")
@@ -60,6 +55,11 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
+
+                    b.Property<string>("WorkAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("WorkAddress");
 
                     b.ComplexProperty<Dictionary<string, object>>("PhoneNumber", "OrderDeliverySystem.UserAccess.Domain.Users.User.PhoneNumber#PhoneNumber", b1 =>
                         {

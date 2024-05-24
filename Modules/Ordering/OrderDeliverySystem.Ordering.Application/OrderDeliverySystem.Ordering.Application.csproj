@@ -14,9 +14,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Payments\OrderDeliverySystem.Payments.Api\OrderDeliverySystem.Payments.Api.csproj" />
+    <ProjectReference Include="..\..\Payments\OrderDeliverySystem.Payments.IntegrationEvents\OrderDeliverySystem.Payments.IntegrationEvents.csproj" />
     <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.Api\OrderDeliverySystem.UserAccess.Api.csproj" />
     <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
+    <ProjectReference Include="..\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

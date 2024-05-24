@@ -1,4 +1,5 @@
-﻿using OrderDeliverySystem.CommonModule.Domain;
+﻿using FluentResults;
+using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,25 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public string Value { get; }
 
-
         private OrderStatus(string value)
         {
             Value = value;
         }
+
+        public static Result<OrderStatus> FromString(string status)
+        {
+            return status switch
+            {
+                "Submitted" => Submitted,
+                "AwaitingValidation" => AwaitingValidation,
+                "Paid" => Paid,
+                "Shipped" => Shipped,
+                "Cancelled" => Cancelled,
+                
+                _ => Result.Fail($"Invalid payment status: {status}")
+            };
+        }
+
 
 
     }

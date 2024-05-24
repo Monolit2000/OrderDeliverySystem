@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class UserAddresMigration : Migration
+    public partial class WorkAddresPropertysAddedll : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChatId = table.Column<long>(type: "bigint", nullable: false),
                     IsActivated = table.Column<bool>(type: "bit", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -6,26 +6,23 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
 {
     public class GetPaymentUrlCommandHandler : IRequestHandler<GetPaymentUrlCommand, Result<PaymentUrlDto>>
     {
         private readonly ILogger<GetPaymentUrlCommandHandler> _logger;
-
+        private readonly IPaymentRepository _paymentRepository; 
         private readonly IConfiguration _config;
 
         public GetPaymentUrlCommandHandler(
+            IPaymentRepository paymentRepository,
             ILogger<GetPaymentUrlCommandHandler> logger,
             IConfiguration config)
         {
             _logger = logger;
             _config = config;
+            _paymentRepository = paymentRepository;
         }
 
         public async Task<Result<PaymentUrlDto>> Handle(GetPaymentUrlCommand request, CancellationToken cancellationToken)
@@ -38,17 +35,7 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
                 Action = LiqPayRequestAction.Pay,
                 Language = LiqPayRequestLanguage.EN,
                 ServerUrl = _config["ProcessorCallbackUrl"],
-                Description = "Test pay",
-                Goods = new List<LiqPayRequestGoods>
-                {
-                    new LiqPayRequestGoods
-                    {
-                        Amount = 1,
-                        Count = 2,
-                        Unit = "pcs.",
-                        Name = "Order1"
-                    }
-                }
+                Description = "Оплата послуг",
             };
 
             var liqPayClient = new LiqPayClient(_config["LiqPayPublicTestKey"], _config["LiqPayPrivateTestKey"]);
@@ -63,6 +50,8 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
                 request.UserId, 
                 request.OrderId,
                 request.Amount);
+
+            await _paymentRepository.AddAsync(payment);
 
             return new PaymentUrlDto(сheckoutUri);
         }

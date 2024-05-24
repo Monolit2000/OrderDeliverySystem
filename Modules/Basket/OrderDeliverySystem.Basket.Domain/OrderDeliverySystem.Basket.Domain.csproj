@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
+    <ProjectReference Include="..\..\Ordering\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

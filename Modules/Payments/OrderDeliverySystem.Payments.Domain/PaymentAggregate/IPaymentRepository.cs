@@ -8,8 +8,8 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
 {
     public interface IPaymentRepository
     {
-        public Task AddAsync(Payment payment);
-        public Task<Payment> GetByIdAsync(Guid id);
+        public Task<Payment> GetByOrderIdAsync(Guid orderId);
 
+        public Task AddAsync(Payment payment);
     }
 }

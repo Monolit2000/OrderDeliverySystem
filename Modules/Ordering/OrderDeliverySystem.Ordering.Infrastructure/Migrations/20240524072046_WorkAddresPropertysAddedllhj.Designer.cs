@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 
@@ -12,9 +13,11 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [Migration("20240524072046_WorkAddresPropertysAddedllhj")]
+    partial class WorkAddresPropertysAddedllhj
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,8 +96,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("BuyerId");
-
                     b.ToTable("Orders", "ordering");
                 });
 
@@ -159,17 +160,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems", "ordering");
-                });
-
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", b =>
-                {
-                    b.HasOne("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>

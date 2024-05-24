@@ -14,7 +14,6 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
         public Guid OrderId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-
         public GetPaymentUrlCommand() { }
 
         public GetPaymentUrlCommand(
