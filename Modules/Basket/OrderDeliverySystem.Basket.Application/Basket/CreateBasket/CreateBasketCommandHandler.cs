@@ -19,7 +19,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
         public async Task<Result<BasketDto>> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
 
-            var basketToDelete = await _basketRepository.GetBasketAsync(request.BuyerChatId);
+            var basketToDelete = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
 
             if (basketToDelete != null)
                 await _basketRepository.DeleteBasketAsync(basketToDelete);

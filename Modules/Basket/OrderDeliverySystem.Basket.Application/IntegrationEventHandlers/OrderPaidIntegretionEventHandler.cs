@@ -20,7 +20,10 @@ namespace OrderDeliverySystem.Basket.Application.IntegrationEventHandlers
 
         public async Task Handle(OrderPaidIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new CleanBasketCommand());
+            await _mediator.Send(new CleanBasketCommand 
+            {
+                BuyerId = notification.BuyerId 
+            });
         }
     }
 }

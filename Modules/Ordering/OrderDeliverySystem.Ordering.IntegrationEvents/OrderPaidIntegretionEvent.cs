@@ -9,5 +9,11 @@ namespace OrderDeliverySystem.Ordering.IntegrationEvents
 {
     public class OrderPaidIntegretionEvent : IntegrationEvent
     {
+        public Guid BuyerId { get; }
+
+        public OrderPaidIntegretionEvent(Guid buyerId)
+        {
+            BuyerId = buyerId;
+        }
     }
 }

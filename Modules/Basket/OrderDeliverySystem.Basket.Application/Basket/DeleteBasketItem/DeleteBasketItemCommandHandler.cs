@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem
 
         public async Task<Result<DeleteBasketItemDto>> Handle(DeleteBasketItemCommand request, CancellationToken cancellationToken)
         {
-            var basket = await _basketRepository.GetBasketAsync(request.BuyerChatId);
+            var basket = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
 
             if (basket == null)
                 return Result.Fail("Basket dose not exist");

@@ -10,6 +10,6 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CleanBasket
 {
     public class CleanBasketCommand : IRequest<Result<CleanBasketDto>>
     {
-        public long BuyerChatId { get; set; }
+        public Guid BuyerId { get; set; }
     }
 }

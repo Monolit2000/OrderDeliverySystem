@@ -15,9 +15,13 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
         {
             builder.HasKey(p => p.PaymentId );
 
-            builder.ComplexProperty(o => o.PaymentStatus, b =>
+            builder.Property(p => p.Amount)
+                   .HasColumnType("decimal(18,2)")
+                   .IsRequired();
+
+            builder.OwnsOne(o => o.PaymentStatus, b =>
             {
-                b.Property(a => a.Value).HasColumnName("PaymentStatus");
+                b.Property(a => a.Value).HasColumnName("PaymentStatus").IsRequired();
             });
         }
     }

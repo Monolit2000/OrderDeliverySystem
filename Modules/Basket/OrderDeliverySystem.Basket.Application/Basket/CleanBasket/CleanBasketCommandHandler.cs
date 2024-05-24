@@ -25,7 +25,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CleanBasket
 
         public async Task<Result<CleanBasketDto>> Handle(CleanBasketCommand request, CancellationToken cancellationToken)
         {
-            var basket = await _basketRepository.GetBasketAsync(request.BuyerChatId);
+            var basket = await _basketRepository.GetBasketByBuyerIdAsync(request.BuyerId);
 
             if (basket == null)
                 return Result.Fail("Basket dose not exist");

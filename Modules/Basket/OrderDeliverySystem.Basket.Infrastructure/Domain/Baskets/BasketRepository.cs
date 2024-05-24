@@ -33,7 +33,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
             return true;
         }
 
-        public async Task<CustomerBasket> GetBasketAsync(long customerChatId)
+        public async Task<CustomerBasket> GetBasketByChatIdAsync(long customerChatId)
         {
 
 
@@ -48,15 +48,28 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
             return customerBasket;
 
 
-
-
-
             //var customerBasket = await _basketContext.Baskets
             //    .Include(b => b.Items)
             //    .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
 
             //return customerBasket;
         }
+
+
+        public async Task<CustomerBasket> GetBasketByBuyerIdAsync(Guid buyerId)
+        {
+            var customerBasket = await _basketContext.Baskets.FirstOrDefaultAsync(b => b.BuyerId == buyerId); ;
+
+            if (customerBasket != null)
+            {
+                await _basketContext.Entry(customerBasket)
+                    .Collection(i => i.Items).LoadAsync();
+            }
+
+            return customerBasket;
+        }
+
+
 
         public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
