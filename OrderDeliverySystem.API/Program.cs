@@ -19,17 +19,30 @@ builder.Services.AddSwaggerGen();
 
 //Configure Serilog
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-    .ReadFrom.Configuration(hostingContext.Configuration)
-   /* .WriteTo.Console()*/);
+    .ReadFrom.Configuration(hostingContext.Configuration));
 
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
-    //.WriteTo.Console()
     .CreateLogger();
 
 
 //Add Serilog logger
 builder.Logging.AddSerilog();
+
+
+
+// Configure CORS to allow all origins, methods, and headers
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 
 
 builder.Services
@@ -43,7 +56,6 @@ builder.Services
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,10 +65,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseSerilogRequestLogging();
+
+// Use CORS policy to allow all
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

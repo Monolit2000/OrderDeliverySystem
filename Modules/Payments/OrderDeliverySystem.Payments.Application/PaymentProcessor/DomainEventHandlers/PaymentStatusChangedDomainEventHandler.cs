@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventHandlers
 {
-    public class PaymentFailedDomainEventHandler : INotificationHandler<PaymentFailedDomainEvent>
+    public class PaymentFailedDomainEventHandler : INotificationHandler<PaymentStatusChangedDomainEvent>
     {
         private readonly IAsyncEventBus _eventBus;
 
@@ -19,11 +19,11 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventH
             _eventBus = eventBus;
         }
 
-        public async Task Handle(PaymentFailedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(PaymentStatusChangedDomainEvent notification, CancellationToken cancellationToken)
         {
-            await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
-                notification.OrderId,
-                notification.PaymentId));
+            //await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
+            //    notification.OrderId,
+            //    notification.PaymentId));
         }
     }
 }

@@ -11,5 +11,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         public Task<Payment> GetByOrderIdAsync(Guid orderId);
 
         public Task AddAsync(Payment payment);
+
+        public Task SaveChangesAsync();
     }
 }

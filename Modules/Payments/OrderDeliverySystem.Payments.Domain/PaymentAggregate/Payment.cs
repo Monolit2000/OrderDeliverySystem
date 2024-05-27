@@ -28,15 +28,12 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
             PayerId = payerId;
             Amount = amount;
             PaymentDate = DateTime.UtcNow;
+            PaymentStatus = PaymentStatus.Pending;  
         }
 
         public Result SuccessPayment()
         {
-            if (PaymentStatus != PaymentStatus.Pending)
-            {
-                Result.Fail("Payment can only be completed if it is pending.");
-            }
-
+            PaymentStatus = PaymentStatus.Success;
             ChangeStatus(PaymentStatus.Success);
             AddDomainEvent(new PaymentSuccessDomainEvent(PaymentId, OrderId));
             return Result.Ok();
@@ -44,11 +41,6 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
 
         public Result FailPayment(string resonses)
         {
-            if (PaymentStatus != PaymentStatus.Pending)
-            {
-                Result.Fail("Payment can only be failed if it is pending.");
-            }
-
             ChangeStatus(PaymentStatus.Failed);
             AddDomainEvent(new PaymentFailedDomainEvent(PaymentId, OrderId));
             return Result.Ok();

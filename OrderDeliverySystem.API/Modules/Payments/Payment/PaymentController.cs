@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.API.Modules.Payments.Payment.Model;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing;
+using OrderDeliverySystem.Payments.Application.Payments.GetPaymentStatus;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
 
 namespace OrderDeliverySystem.API.Modules.Payments.Payment
@@ -31,7 +32,7 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
         }
 
         [HttpPost("LiqPayCallback")]
-        public async Task<IActionResult> LiqPayCallback([FromBody]LiqPayCallbackModel request)
+        public async Task<IActionResult> LiqPayCallback([FromForm] LiqPayCallbackModel request)
         {
             var result = await _mediator.Send(new CallbacProcessingCommand(request.data, request.signature));
 
@@ -42,7 +43,16 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
             return Ok(result.Value);
         }
 
-        public record PaymentRequest(decimal Amount, Guid OrderId);
+        [HttpPost("GetPaymentStatus")]
+        public async Task<IActionResult> GetPaymentStatus(GetPaymentStatusQuery getPaymentStatusQuery)
+        {
+            var result = await _mediator.Send(getPaymentStatusQuery);
 
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons.Select(r => r.Message));
+            }
+            return Ok(result.Value);
+        }
     }
 }

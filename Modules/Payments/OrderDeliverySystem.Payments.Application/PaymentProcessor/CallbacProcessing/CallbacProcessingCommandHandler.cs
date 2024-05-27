@@ -1,7 +1,9 @@
 ﻿using FluentResults;
 using LiqPay.SDK;
 using LiqPay.SDK.Dto;
+using LiqPay.SDK.Dto.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -33,17 +35,17 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
 
         public async Task<Result<CallbacProcessingResult>> Handle(CallbacProcessingCommand request, CancellationToken cancellationToken)
         {
-
             if (request == null || string.IsNullOrEmpty(request.Data) || string.IsNullOrEmpty(request.Signature))
             {
                 //Invalid request
                 return Result.Fail("Invalid request");
             }
 
-
             var liqPayClient = new LiqPayClient(_config["LiqPayPublicTestKey"], _config["LiqPayPrivateTestKey"]);
 
-           // Generate the signature on the server side
+            liqPayClient.IsCnbSandbox = true;
+
+            // Generate the signature on the server side
             var generatedSignature = liqPayClient.CreateSignature(request.Data);
 
             //Compare signatures
@@ -64,15 +66,22 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
             if (payment is null)
                 return Result.Fail("Payment not found");
 
-         
+            payment.SuccessPayment();
 
-            var fd = liqPayResponse.Status switch
+            switch (liqPayResponse.Status)
             {
-                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Success => payment.SuccessPayment(),
-                LiqPay.SDK.Dto.Enums.LiqPayResponseStatus.Failure => payment.FailPayment(liqPayResponse.ErrorDescription), 
-            };
+                case LiqPayResponseStatus.Sandbox:
+                case LiqPayResponseStatus.Success:
+                    payment.SuccessPayment();
+                    break;
+                case LiqPayResponseStatus.Failure:
+                    payment.FailPayment(liqPayResponse.ErrorDescription);
+                    break;
+                default:
+                    return Result.Fail("Unhandled payment status");
+            }
 
-
+            await _paymentRepository.SaveChangesAsync();
 
             return new CallbacProcessingResult();
         }

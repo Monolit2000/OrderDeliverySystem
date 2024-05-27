@@ -35,6 +35,7 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
                 Action = LiqPayRequestAction.Pay,
                 Language = LiqPayRequestLanguage.EN,
                 ServerUrl = _config["ProcessorCallbackUrl"],
+                Version = 3,
                 Description = "Оплата послуг",
             };
 
@@ -47,8 +48,8 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
             string сheckoutUri = $"https://www.liqpay.ua/api/3/checkout?data={Uri.EscapeDataString(paymentDetails.Key)}&signature={Uri.EscapeDataString(paymentDetails.Value)}";
 
             var payment = new Payment(
-                request.UserId, 
                 request.OrderId,
+                request.UserId, 
                 request.Amount);
 
             await _paymentRepository.AddAsync(payment);

@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using Azure.Core;
+using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents;
+using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +15,26 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventH
     public class PaymentSuccessDomainEventHandler : INotificationHandler<PaymentSuccessDomainEvent>
     {
         private readonly IAsyncEventBus _eventBus;
-
-        public PaymentSuccessDomainEventHandler(IAsyncEventBus eventBus)
+        private readonly ILogger<PaymentSuccessDomainEventHandler> _logger;
+        public PaymentSuccessDomainEventHandler(
+            IAsyncEventBus eventBus, 
+            ILogger<PaymentSuccessDomainEventHandler> logger)
         {
             _eventBus = eventBus;
+            _logger = logger;
         }
 
         public async Task Handle(PaymentSuccessDomainEvent notification, CancellationToken cancellationToken)
         {
 
-            //await _eventBus.PublishAsync(new PaymentFailedIntegretionEvent(
+            _logger.LogInformation(
+                 "Starting request {@RequestName}, {@DateTimeUtc}",
+                 typeof(PaymentSuccessDomainEvent).Name,
+                 DateTime.UtcNow);
 
-            //     notification.OccurredOn));
-
+            await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
+                notification.PaymentId,
+                notification.OrderId));
         }
     }
 }
