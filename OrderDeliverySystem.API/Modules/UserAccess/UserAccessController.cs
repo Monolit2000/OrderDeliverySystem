@@ -8,6 +8,7 @@ using OrderDeliverySystem.UserAccess.Application.Users.ChangePhoneNumber;
 using OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer;
 using OrderDeliverySystem.UserAccess.Application.Users.GetOllActiveConsumers;
 using OrderDeliverySystem.UserAccess.Application.Users.GetUserByChatId;
+using OrderDeliverySystem.UserAccess.Application.Users.UpdateUser;
 using OrderDeliverySystem.UserAccess.Domain.Users;
 
 namespace OrderDeliverySystem.API.Modules.UserAccess
@@ -120,6 +121,20 @@ namespace OrderDeliverySystem.API.Modules.UserAccess
             if (!result.IsSuccess)
             {
                 return BadRequest(result.Reasons);
+            }
+
+            return Ok(result.Value);
+        }
+
+
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UpdateUserCommand updateUserCommand)
+        {
+            var result = await _mediator.Send(updateUserCommand);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Reasons.Select(r => r.Message));
             }
 
             return Ok(result.Value);

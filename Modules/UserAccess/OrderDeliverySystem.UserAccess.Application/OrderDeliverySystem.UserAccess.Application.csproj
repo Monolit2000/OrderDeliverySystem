@@ -9,20 +9,19 @@
   <ItemGroup>
     <Compile Remove="Authentication\IntegrationEvents\**" />
     <Compile Remove="Users\ChangeName\**" />
+    <Compile Remove="Users\IntegrationEvents\**" />
     <EmbeddedResource Remove="Authentication\IntegrationEvents\**" />
     <EmbeddedResource Remove="Users\ChangeName\**" />
+    <EmbeddedResource Remove="Users\IntegrationEvents\**" />
     <None Remove="Authentication\IntegrationEvents\**" />
     <None Remove="Users\ChangeName\**" />
+    <None Remove="Users\IntegrationEvents\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\OrderDeliverySystem.CommonModule.Infrastructure\OrderDeliverySystem.CommonModule.Infrastructure.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.Domain\OrderDeliverySystem.UserAccess.Domain.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Users\IntegrationEvents\" />
   </ItemGroup>
 
 </Project>

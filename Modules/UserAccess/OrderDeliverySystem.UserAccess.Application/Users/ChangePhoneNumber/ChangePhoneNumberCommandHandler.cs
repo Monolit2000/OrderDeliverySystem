@@ -28,16 +28,16 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.ChangePhoneNumber
 
             var oldPhoneNumber = user.PhoneNumber.Number;
 
-            var newPhoneNumber = PhoneNumber.Create(request.PhoneNumber);
+            //var newPhoneNumber = PhoneNumber.Create(request.PhoneNumber);
 
-            if (newPhoneNumber.IsFailed)
-            {
-                var errorMessage = newPhoneNumber.Errors.FirstOrDefault()?.Message ?? "Unknown error";
+            //if (newPhoneNumber.IsFailed)
+            //{
+            //    var errorMessage = newPhoneNumber.Errors.FirstOrDefault()?.Message ?? "Unknown error";
 
-                return Result.Fail(errorMessage);
-            }
+            //    return Result.Fail(errorMessage);
+            //}
 
-            user.ChangePhoneNumber(newPhoneNumber.Value);
+            user.ChangePhoneNumber(request.PhoneNumber);
 
             await _userRepository.SaveChangesAsync();
 

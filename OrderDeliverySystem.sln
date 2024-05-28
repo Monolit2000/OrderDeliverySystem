@@ -81,9 +81,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notificati
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.UserAccess.Api", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Api\OrderDeliverySystem.UserAccess.Api.csproj", "{F4166BA7-39AA-41A0-888F-26041D2405E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.Api", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Api\OrderDeliverySystem.UserAccess.Api.csproj", "{F4166BA7-39AA-41A0-888F-26041D2405E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Payments.Api", "Modules\Payments\OrderDeliverySystem.Payments.Api\OrderDeliverySystem.Payments.Api.csproj", "{850A6F84-488D-4BF5-8A99-F66592C77191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.Api", "Modules\Payments\OrderDeliverySystem.Payments.Api\OrderDeliverySystem.Payments.Api.csproj", "{850A6F84-488D-4BF5-8A99-F66592C77191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Application", "Modules\Notifications\OrderDeliverySystem.Notifications.Application\OrderDeliverySystem.Notifications.Application.csproj", "{542E788C-35CA-44E3-91ED-62D24FF93DBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Domain", "Modules\Notifications\OrderDeliverySystem.Notifications.Domain\OrderDeliverySystem.Notifications.Domain.csproj", "{11AE1191-794E-447C-B9FB-30F92184EE37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Infrastructure", "Modules\Notifications\OrderDeliverySystem.Notifications.Infrastructure\OrderDeliverySystem.Notifications.Infrastructure.csproj", "{2AA0B210-2AAB-4C61-B84A-A06719AD1536}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.IntegrationEvents", "Modules\Notifications\OrderDeliverySystem.Notifications.IntegrationEvents\OrderDeliverySystem.Notifications.IntegrationEvents.csproj", "{C6551057-4CA2-4102-9F9B-7673CE145348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.Api", "Modules\Ordering\OrderDeliverySystem.Ordering.Api\OrderDeliverySystem.Ordering.Api.csproj", "{2124A4DB-2DBC-4341-A059-4B22756B1503}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Api", "Modules\Notifications\OrderDeliverySystem.Notifications.Api\OrderDeliverySystem.Notifications.Api.csproj", "{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,6 +227,30 @@ Global
 		{850A6F84-488D-4BF5-8A99-F66592C77191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{850A6F84-488D-4BF5-8A99-F66592C77191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{850A6F84-488D-4BF5-8A99-F66592C77191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{542E788C-35CA-44E3-91ED-62D24FF93DBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542E788C-35CA-44E3-91ED-62D24FF93DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542E788C-35CA-44E3-91ED-62D24FF93DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542E788C-35CA-44E3-91ED-62D24FF93DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11AE1191-794E-447C-B9FB-30F92184EE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11AE1191-794E-447C-B9FB-30F92184EE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11AE1191-794E-447C-B9FB-30F92184EE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11AE1191-794E-447C-B9FB-30F92184EE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AA0B210-2AAB-4C61-B84A-A06719AD1536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA0B210-2AAB-4C61-B84A-A06719AD1536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA0B210-2AAB-4C61-B84A-A06719AD1536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA0B210-2AAB-4C61-B84A-A06719AD1536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6551057-4CA2-4102-9F9B-7673CE145348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6551057-4CA2-4102-9F9B-7673CE145348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6551057-4CA2-4102-9F9B-7673CE145348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6551057-4CA2-4102-9F9B-7673CE145348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2124A4DB-2DBC-4341-A059-4B22756B1503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2124A4DB-2DBC-4341-A059-4B22756B1503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2124A4DB-2DBC-4341-A059-4B22756B1503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2124A4DB-2DBC-4341-A059-4B22756B1503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -257,6 +293,12 @@ Global
 		{B567988A-E596-45A9-ABD3-64D68F7F87D1} = {C4728797-BD33-4928-829A-D82AD3492617}
 		{F4166BA7-39AA-41A0-888F-26041D2405E2} = {39E17215-2EB1-42F4-9832-E8698BFAD7EF}
 		{850A6F84-488D-4BF5-8A99-F66592C77191} = {4A9369DF-FF9C-4279-8C6B-52C18343CCCD}
+		{542E788C-35CA-44E3-91ED-62D24FF93DBC} = {B567988A-E596-45A9-ABD3-64D68F7F87D1}
+		{11AE1191-794E-447C-B9FB-30F92184EE37} = {B567988A-E596-45A9-ABD3-64D68F7F87D1}
+		{2AA0B210-2AAB-4C61-B84A-A06719AD1536} = {B567988A-E596-45A9-ABD3-64D68F7F87D1}
+		{C6551057-4CA2-4102-9F9B-7673CE145348} = {B567988A-E596-45A9-ABD3-64D68F7F87D1}
+		{2124A4DB-2DBC-4341-A059-4B22756B1503} = {EA0B669A-F6D4-47E6-901C-2DEE55F4E57E}
+		{68ADA9B0-E7D4-4657-91F4-6B42F22738E4} = {B567988A-E596-45A9-ABD3-64D68F7F87D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1254FF5-BE1D-4C73-8A0D-46128C684FD0}

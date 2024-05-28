@@ -66,56 +66,67 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         }
 
 
-        public void ChangeFirstName(string firstName)
+        public Result ChangeFirstName(string firstName)
         {
             if (string.IsNullOrWhiteSpace(firstName))
-                throw new ArgumentException("First name cannot be empty or whitespace.");
+                return Result.Fail("First name cannot be empty or whitespace.");
 
             FirstName = firstName;
+            return Result.Ok();
         }
 
-        public void ChangeLastName(string lastName)
+        public Result ChangeLastName(string lastName)
         {
             if (string.IsNullOrWhiteSpace(lastName))
-                throw new ArgumentException("Last name cannot be empty or whitespace.");
+                return Result.Fail("Last name cannot be empty or whitespace.");
 
             LastName = lastName;
+            return Result.Ok();
         }
 
-        public void ChangePhoneNumber(PhoneNumber phoneNumber)
+        public Result ChangePhoneNumber(string phoneNumber)
         {
-            PhoneNumber = phoneNumber;
+            var phoneNumberResult = PhoneNumber.Create(phoneNumber);
+
+            if (phoneNumberResult.IsFailed)
+                return Result.Fail(phoneNumberResult.Errors.First());
+
+            PhoneNumber = phoneNumberResult.Value;
+            return Result.Ok();
         }
 
-        public void ChangeWorkAddress(string address)
+        public Result ChangeWorkAddress(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
-                throw new ArgumentException("WorkAddress cannot be empty or whitespace.");
+                return Result.Fail("WorkAddress cannot be empty or whitespace.");
 
             WorkAddress = address;
+            return Result.Ok();
         }
 
-        public void ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)
+        public Result ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)
         {
             if (IsActivated)
-                throw new Exception("User already activated");
+                return Result.Fail("User already activated");
 
             ChatId = chatId;
             IsActivated = true;
 
             AddDomainEvent(new UserActivatedDomainEvent(UserId, phoneNumber, chatId, firstName,  lastName,  name));
+            return Result.Ok();
         }
 
 
-        public void ActivateUser(long chatId)
+        public Result ActivateUser(long chatId)
         {
             if (IsActivated)
-                throw new Exception("User already activated");
+                return Result.Fail("User already activated");
 
             ChatId = chatId;
             IsActivated = true;
 
             AddDomainEvent(new UserActivatedDomainEvent(UserId, PhoneNumber.Number, chatId, FirstName, LastName, Name));
+            return Result.Ok();
         }
 
 

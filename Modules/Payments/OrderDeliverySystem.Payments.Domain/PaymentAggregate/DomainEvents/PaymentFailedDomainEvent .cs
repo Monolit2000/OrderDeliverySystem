@@ -11,11 +11,13 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents
     {
         public Guid PaymentId { get; }
         public Guid OrderId { get; }
+        string Resonses { get; }
 
-        public PaymentFailedDomainEvent(Guid paymentId, Guid orderId)
+        public PaymentFailedDomainEvent(Guid paymentId, Guid orderId, string resonses)
         {
             PaymentId = paymentId;
             OrderId = orderId;
+            Resonses = resonses;    
         }
     }
 }

@@ -23,11 +23,11 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
         public static Result<PhoneNumber> Create(string inputNumber)
         {
             if(string.IsNullOrWhiteSpace(inputNumber))
-                return Result.Fail(new Error("ValueIsInvalid"));
+                return Result.Fail("ValueIsInvalid");
 
 
             if(Regex.IsMatch(inputNumber, phoneRegex) == false)
-                return Result.Fail(new Error("ValueIsInvalid"));
+                return Result.Fail("invalid number");
                 
             return new PhoneNumber(inputNumber);
         }

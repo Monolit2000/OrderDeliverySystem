@@ -19,7 +19,6 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationO
             _orderRepository = orderRepository;
         }
 
-
         public async Task<Result<SatAwaitingValidationOrderStatusDto>> Handle(SatAwaitingValidationOrderStatusCommand request, CancellationToken cancellationToken)
         {
             var order = await _orderRepository.GetAsync(request.OrderId);

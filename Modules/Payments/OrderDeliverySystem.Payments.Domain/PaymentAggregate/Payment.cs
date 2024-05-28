@@ -34,15 +34,16 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         public Result SuccessPayment()
         {
             PaymentStatus = PaymentStatus.Success;
-            ChangeStatus(PaymentStatus.Success);
+            //ChangeStatus(PaymentStatus.Success);
             AddDomainEvent(new PaymentSuccessDomainEvent(PaymentId, OrderId));
             return Result.Ok();
         }
 
         public Result FailPayment(string resonses)
         {
-            ChangeStatus(PaymentStatus.Failed);
-            AddDomainEvent(new PaymentFailedDomainEvent(PaymentId, OrderId));
+            PaymentStatus = PaymentStatus.Failed;
+            //ChangeStatus(PaymentStatus.Failed);
+            AddDomainEvent(new PaymentFailedDomainEvent(PaymentId, OrderId, resonses));
             return Result.Ok();
         }
 

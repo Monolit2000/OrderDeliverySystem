@@ -74,11 +74,15 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
                 case LiqPayResponseStatus.Success:
                     payment.SuccessPayment();
                     break;
+
                 case LiqPayResponseStatus.Failure:
                     payment.FailPayment(liqPayResponse.ErrorDescription);
                     break;
+
                 default:
-                    return Result.Fail("Unhandled payment status");
+                    payment.FailPayment(liqPayResponse.ErrorDescription);
+                    break;
+
             }
 
             await _paymentRepository.SaveChangesAsync();

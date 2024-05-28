@@ -1,7 +1,9 @@
-﻿using OrderDeliverySystem.CommonModule.Domain;
+﻿using FluentResults;
+using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,14 +29,14 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
             Value = value;
         }
 
-        public static PaymentStatus FromString(string status)
+        public static Result<PaymentStatus> FromString(string status)
         {
             return status switch
             {
                 "Pending" => Pending,
                 "Success" => Success,
                 "Failed" => Failed,
-                _ => throw new ArgumentException($"Invalid payment status: {status}")
+                _ => Result.Fail($"Invalid payment status: {status}")
             };
         }
     }

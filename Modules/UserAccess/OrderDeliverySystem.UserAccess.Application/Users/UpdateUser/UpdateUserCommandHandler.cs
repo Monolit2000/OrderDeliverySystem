@@ -20,19 +20,59 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.UpdateUser
 
         public async Task<Result<UpdateUserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userByPhoneNumberExist = await _userRepository.GetUserByPhoneNumberAsync(request.PhoneNumber);
-
-            if (userByPhoneNumberExist != null)
-                return Result.Fail("This phone number is already in use");
-
             var user = await _userRepository.GetUserByChatId(request.ChatId);
 
-            user.ChangeFirstName(request.FirstName);
-            user.ChangeLastName(request.LastName);
-            user.ChangePhoneNumber(PhoneNumber.Create(request.PhoneNumber).Value);
-            user.ChangeWorkAddress(request.Address);
+            if (user == null)
+                return Result.Fail("User not found");
 
-            return new UpdateUserDto {Success = true};
+            if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+            {
+                var userByPhoneNumberExist = await _userRepository.GetUserByPhoneNumberAsync(request.PhoneNumber);
+
+                if (userByPhoneNumberExist != null)
+                    return Result.Fail("This phone number is already in use");
+            }
+
+            var results = new List<Result>
+            {
+                !string.IsNullOrWhiteSpace(request.FirstName) ? user.ChangeFirstName(request.FirstName) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.LastName) ? user.ChangeLastName(request.LastName) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.PhoneNumber) ? user.ChangePhoneNumber(request.PhoneNumber) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.WorkPlace) ? user.ChangeWorkAddress(request.WorkPlace) : Result.Ok()
+            };
+
+            var combinedResult = CombineResults(results);
+
+            if (combinedResult.IsFailed)
+                return Result.Fail<UpdateUserDto>(combinedResult.Errors.First());
+
+            await _userRepository.SaveChangesAsync();
+
+            var updateUserDto = new UpdateUserDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber.Number,
+                WorkAddress = user.WorkAddress,
+            };
+
+            return updateUserDto;
         }
+
+        private Result CombineResults(IEnumerable<Result> results)
+        {
+            foreach (var result in results)
+            {
+                if (result.IsFailed)
+                    return result;
+            }
+            return Result.Ok();
+        }
+
+        //private Result CombineResults(IEnumerable<Result> results)
+        //{
+        //    var failedResult = results.FirstOrDefault(result => result.IsFailed);
+        //    return failedResult ?? Result.Ok();
+        //}
     }
 }
