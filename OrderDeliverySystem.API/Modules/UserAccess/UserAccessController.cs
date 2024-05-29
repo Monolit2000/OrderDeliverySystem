@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Application.Users.ChangeFirstName;
@@ -15,7 +16,7 @@ namespace OrderDeliverySystem.API.Modules.UserAccess
 {
     [Route("api/userAccess")]
     [ApiController]
-    public class UserAccessController : ControllerBase
+    public class UserAccessController : BaseController
     {
         private readonly IUserAccessModule _userAccessModule;
         private readonly IMediator _mediator;
@@ -40,104 +41,59 @@ namespace OrderDeliverySystem.API.Modules.UserAccess
             return Ok(user);
         }
 
+
         [HttpPost("CreateNewCustomer")]
         public async Task<IActionResult> CreateCustomer(CreateUserRequest createRequest)
         {
 
-            var result = await _userAccessModule.ExecuteCommandAsync(
+            return HandleResult(await _userAccessModule.ExecuteCommandAsync(
                 new CreateConsumerCommand(PhoneNumber.Create(createRequest.PhoneNumber).Value,
                 createRequest.FirstName,
                 createRequest.LastName,
                 createRequest.Name,
-                createRequest.ChatId));
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result);
-
+                createRequest.ChatId)));
         }
+
 
         [HttpGet("GetOllActiveUsers")]
         public async Task<IActionResult> GetOllActiveUsers()
         {
-            var result = await _mediator.Send(new GetOllActiveUserQuerie());
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(new GetOllActiveUserQuerie()));
         }
+
 
         [HttpPut("ChangeFirstName")]
         public async Task<IActionResult> ChangeFirstName(ChangeFirstNameCommand changeFirstNameCommand)
         {
-            var result = await _mediator.Send(changeFirstNameCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(changeFirstNameCommand));
         }
 
 
         [HttpPost("GetUserByChatId")]
         public async Task<IActionResult> GetUserByChatId(GetUserByChatIdQuerie getUserByChatIdQuerie)
         {
-            var result = await _mediator.Send(getUserByChatIdQuerie);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(getUserByChatIdQuerie));
         }
+
 
         [HttpPut("ChangeLastName")]
         public async Task<IActionResult> ChangeLastName(ChangeLastNameCommand changeLastNameCommand)
         {
-            var result = await _mediator.Send(changeLastNameCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(changeLastNameCommand));
         }
+         
 
         [HttpPut("ChangePhoneNumber")]
         public async Task<IActionResult> ChangePhoneNumber(ChangePhoneNumberCommand changePhoneNumberCommand)
         {
-            var result = await _mediator.Send(changePhoneNumberCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(changePhoneNumberCommand));
         }
 
 
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser(UpdateUserCommand updateUserCommand)
         {
-            var result = await _mediator.Send(updateUserCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons.Select(r => r.Message));
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(updateUserCommand));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.Notifications.Infrastructure.Startup
 {
     public static class NotificationsModuleStartup
     {
-        public static IServiceCollection AddPaymentModule(
+        public static IServiceCollection AddNotificationModule(
      this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnectionNew");
@@ -33,7 +33,6 @@ namespace OrderDeliverySystem.Notifications.Infrastructure.Startup
 
             //    options.UseSqlServer(connectionString);
             //});
-
             services.AddScoped<INotificationsModule, NotificationsModule>();
 
             //services.AddScoped<INotificationsApi, NotificationsApi>();

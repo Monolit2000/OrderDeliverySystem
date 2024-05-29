@@ -9,5 +9,8 @@ namespace OrderDeliverySystem.Notifications.Application.TelegramClient.SendNotif
 {
     public class SendNotificationCommand : IRequest
     {
+        public long ChatId { get; set; }
+
+        public string Message { get; set; }
     }
 }

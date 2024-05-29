@@ -45,6 +45,15 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users
             return user;
         }
 
+        public async Task<User> GetUserById(Guid UserId)
+        {
+            var user = await _userAccessContext.Users
+             .FirstOrDefaultAsync(u => u.UserId == UserId);
+
+            return user;
+        }
+
+
         public async Task<User> GetUserByPhoneNumberAsync(string phoneNumber)
         {
             var user = await _userAccessContext.Users

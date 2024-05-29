@@ -18,6 +18,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public Task<User> GetUserByChatId(long chatId);
 
+        public Task<User> GetUserById(Guid UserId);
+
         public Task<List<User>> GetGetOllActiveUser();
 
         public Task SaveChangesAsync();

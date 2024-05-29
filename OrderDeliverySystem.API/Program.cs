@@ -5,6 +5,7 @@ using OrderDeliverySystem.Basket.Infrastructure.Startup;
 using OrderDeliverySystem.Catalog.Infrastructure.Startup;
 using OrderDeliverySystem.Ordering.Infrastructure.Startup;
 using OrderDeliverySystem.Payments.Infrastructure.Startup;
+using OrderDeliverySystem.Notifications.Infrastructure.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +51,9 @@ builder.Services
     .AddBasketModule(builder.Configuration)
     .AddCatalogModule(builder.Configuration)
     .AddOrderModule(builder.Configuration)
-    .AddPaymentModule(builder.Configuration);
+    .AddPaymentModule(builder.Configuration)
+    .AddNotificationModule(builder.Configuration);
+
 
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();

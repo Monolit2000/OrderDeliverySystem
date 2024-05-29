@@ -6,14 +6,14 @@ using OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
+using OrderDeliverySystem.API.Modules.Base;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {
     [Route("api/Catalog/CatalogItem")]
     [ApiController]
-    public class CatalogItemController : ControllerBase
+    public class CatalogItemController : BaseController
     {
-
         private readonly IMediator _mediator;
 
         public CatalogItemController(IMediator mediator)
@@ -21,100 +21,46 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
             _mediator = mediator;
         }
 
+
         [HttpPost("AddCatalogItem")]
         public async Task<IActionResult> AddCatalogItem(AddCatalogItemCommand addCatalogItemRequest)
         {
-           var result = await _mediator.Send(addCatalogItemRequest);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(addCatalogItemRequest));
         }
 
 
         [HttpPut("ChangeCatalogItemType")]
         public async Task<IActionResult> ChangeCatalogItemType(ChangeCatalogItemTypeCommand changeCatalogItemType)
         {
-            var result = await _mediator.Send(changeCatalogItemType);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(changeCatalogItemType));
         }
+
 
         [HttpDelete("DeleteCatalogItem")]
         public async Task<IActionResult> DeleteCatalogItem(DeleteCatalogItemCommand deleteCatalogItemCommand)
         {
-            var result = await _mediator.Send(deleteCatalogItemCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(deleteCatalogItemCommand));
         }
+
 
         [HttpPost("GetItemsByDays")]
-        public async Task<IActionResult> DeleteCatalogItem(/*[FromBody]*/ GetItemsByDaysQuery getOllItemsByDaysQuery)
+        public async Task<IActionResult> DeleteCatalogItem(GetItemsByDaysQuery getOllItemsByDaysQuery)
         {
-            var result = await _mediator.Send(getOllItemsByDaysQuery);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(getOllItemsByDaysQuery));
         }
-
 
 
         [HttpGet("GetOllItemsByDays")]
         public async Task<IActionResult> GetOllItemsByDays()
         {
-            var result = await _mediator.Send( new GetOllItemsByDaysQuery());
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
-        }
-
-
-        [HttpGet("GetTestItem")]
-        public async Task<IActionResult> GetTestItem()
-        {
-            var result = "TestUpdateItemUpdatePersistence";
-
-            //if (!result.IsSuccess)
-            //{
-            //    return BadRequest(result.Reasons);
-            //}
-
-            return Ok(result);
+            return HandleResult(await _mediator.Send( new GetOllItemsByDaysQuery()));
         }
 
 
         [HttpPost("GetItemById")]
         public async Task<IActionResult> GetItemById(GetItemByIdQuerie getItemByIdQuerie)
         {
-            var result = await _mediator.Send(getItemByIdQuerie);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(getItemByIdQuerie));
         }
 
     }

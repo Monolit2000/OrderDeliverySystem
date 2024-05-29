@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderDeliverySystem.CommonModule.Infrastructure.Domain;
+using OrderDeliverySystem.UserAccess.Api;
 using OrderDeliverySystem.UserAccess.Application.Contracts;
 using OrderDeliverySystem.UserAccess.Domain.Users;
+using OrderDeliverySystem.UserAccess.Infrastructure.Application.Users;
 using OrderDeliverySystem.UserAccess.Infrastructure.Domain.Users;
 using OrderDeliverySystem.UserAccess.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
@@ -39,6 +41,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Startup
                 options.UseSqlServer(connectionString);
             });
 
+            services.AddScoped<IUserAccessApi, UserAccessApi>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserAccessModule, UserAccessModule>();
             services.AddEventBusModule();

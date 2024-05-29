@@ -1,4 +1,5 @@
 ﻿using OrderDeliverySystem.UserAccess.Api;
+using OrderDeliverySystem.UserAccess.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,21 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Application.Users
 {
     public class UserAccessApi : IUserAccessApi
     {
-        public Task<UserResponse> GetUserAsync(Guid id)
+
+        private readonly IUserRepository _userRepository;
+
+        public UserAccessApi(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+        }
+
+        public async Task<UserResponse> GetUserAsync(Guid id)
+        {
+            var user = await _userRepository.GetUserById(id);
+
+            var responce = new UserResponse(user.UserId, user.ChatId, user.FirstName);
+
+            return responce;    
         }
     }
 }

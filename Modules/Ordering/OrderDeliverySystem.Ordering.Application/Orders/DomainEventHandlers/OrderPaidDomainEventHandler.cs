@@ -17,7 +17,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.DomainEventHandlers
 
         public async Task Handle(OrderPaidDomainEvent notification, CancellationToken cancellationToken)
         {
-            await _eventBus.PublishAsync(new OrderPaidIntegretionEvent(notification.BuyerId));
+            await _eventBus.PublishAsync(new OrderPaidIntegretionEvent(notification.BuyerId, notification.OrderId));
         }
     }
 }

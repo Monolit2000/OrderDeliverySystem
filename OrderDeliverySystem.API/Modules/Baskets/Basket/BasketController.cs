@@ -5,13 +5,15 @@ using OrderDeliverySystem.Basket.Application.Basket.CleanBasket;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
 using OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem;
 using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
+using OrderDeliverySystem.Basket.Application.Basket.UpdateBaske;
 using OrderDeliverySystem.Catalog.Application.Establishments.GetOllEstablishment;
+using OrderDeliverySystem.API.Modules.Base;
 
 namespace OrderDeliverySystem.API.Modules.Baskets.Basket
 {
     [Route("api/Basket/Basket")]
     [ApiController]
-    public class BasketController : ControllerBase
+    public class BasketController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -20,84 +22,53 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
             _mediator = mediator;
         }
 
+
         [HttpPost("GetBasket")]
         public async Task<IActionResult> GetBasket(GetBasketQuery getBasketQuery)
         {
-            var result = await _mediator.Send(getBasketQuery);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(getBasketQuery));
         }
+
 
         [HttpPost("CreateBasket")]
         public async Task<IActionResult> CreateBasket(AddBasketRequest addBasketRequest)
         {
-            var result = await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), addBasketRequest.BuyerChatId));
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), addBasketRequest.BuyerChatId)));
         }
 
 
         [HttpPut("UpdateBasket")]
         public async Task<IActionResult> UpdateBasket(UpdateBasketRequest getBasketRequest)
         {
-            var result = await _mediator.Send(new GetBasketQuery());
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(new GetBasketQuery()));
         }
 
 
         [HttpPost("AddItemInBasket")]
         public async Task<IActionResult> AddItemInBasket(AddItemInBasketCommand addItemInBasket)
         {
-            var result = await _mediator.Send(addItemInBasket);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult( await _mediator.Send(addItemInBasket));
         }
+
 
         [HttpPost("DeleteBasketItem")]
         public async Task<IActionResult> DeleteBasketItem(DeleteBasketItemCommand deleteBasketItemCommand)
         {
-            var result = await _mediator.Send(deleteBasketItemCommand);
-
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
-
-            return Ok(result.Value);
+            return HandleResult(await _mediator.Send(deleteBasketItemCommand));
         }
+
 
         [HttpPost("CleanBasket")]
         public async Task<IActionResult> CleanBasket(CleanBasketCommand cleanBasketCommand)
         {
-            var result = await _mediator.Send(cleanBasketCommand);
+            return HandleResult(await _mediator.Send(cleanBasketCommand)); 
+        }
 
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.Reasons);
-            }
 
-            return Ok(result.Value);
+        [HttpPost("UpdateBasket")]
+        public async Task<IActionResult> UpdateBasket(UpdateBasketCommand updateBasketCommand)
+        {
+            return HandleResult(await _mediator.Send(updateBasketCommand));
         }
     }
 }

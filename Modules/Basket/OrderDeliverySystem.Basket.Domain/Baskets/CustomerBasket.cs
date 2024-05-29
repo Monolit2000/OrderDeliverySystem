@@ -14,10 +14,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         public Guid CustomerBasketId { get;  set; }
 
-        //[Required]
         public long BuyerChatId { get;  set; }
 
-        [Required]
         public Guid BuyerId { get;  set; }
 
       //  private List<BasketItem> _basketItem = [];
@@ -30,7 +28,13 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             Items = new List<BasketItem>();
         }
 
-        //public CustomerBasket() { }
+
+        public void UpdateBasket(List<BasketItem> basketItems)
+        {
+            Items = basketItems;
+            //AddDomainEvent(new BasketUpdateDomainEvent());
+        }
+
 
         public bool AddItem(BasketItem item)
         {

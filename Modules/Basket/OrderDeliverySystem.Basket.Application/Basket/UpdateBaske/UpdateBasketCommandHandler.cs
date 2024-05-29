@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentResults;
+using MediatR;
 using OrderDeliverySystem.Basket.Domain.Baskets;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
 {
-    public class UpdateBasketCommandHandler : IRequestHandler<UpdateBasketCommand, UpdateBasketResult>
+    public class UpdateBasketCommandHandler : IRequestHandler<UpdateBasketCommand, Result<UpdateBasketResult>>
     {
 
         private readonly IBasketRepository _busketRepository;
@@ -18,11 +19,15 @@ namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
             _busketRepository = userRepository;
         }
 
-
-
-        public Task<UpdateBasketResult> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateBasketResult>> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var basket = await _busketRepository.GetBasketByBuyerIdAsync(request.BuyerId);
+
+            basket.UpdateBasket(request.Items);
+
+            await _busketRepository.SaveChangesAsync(); 
+            
+            return new UpdateBasketResult(basket.CustomerBasketId, basket.BuyerId);  
         }
     }
 }
