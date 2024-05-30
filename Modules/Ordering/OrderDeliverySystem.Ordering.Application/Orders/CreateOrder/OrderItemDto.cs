@@ -18,6 +18,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public int Units { get; set; }
 
+        public bool IsDelivery { get; set; }
+
         public string PictureUrl { get; set; }
     }
 }

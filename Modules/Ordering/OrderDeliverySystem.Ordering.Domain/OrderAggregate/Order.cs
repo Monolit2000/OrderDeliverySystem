@@ -145,8 +145,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             if (existingOrderForProduct != null)
                 throw new Exception("Product has already been added");
 
-            //add validated new order item
             var orderItem = new OrderItem(orderItemId, productName, unitPrice, discount, pictureUrl, units);
+
+            //if (isDelivery)
+            //    orderItem.AddDeliveryProrerty();
+
             _orderItems.Add(orderItem);
             
         }

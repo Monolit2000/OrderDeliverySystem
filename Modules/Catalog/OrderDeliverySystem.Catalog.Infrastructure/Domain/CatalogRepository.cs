@@ -26,6 +26,14 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             await _catalogContext.SaveChangesAsync();
         }
 
+        public async Task<CatalogItem?> GetCatalogItemById(Guid catalogItemId)
+        {
+            var item = await _catalogContext.CatalogItems
+                .FirstOrDefaultAsync(ci => ci.CatalogItemId == catalogItemId);
+
+            return item;
+        }
+
         public async Task AddCatalogTypeAsync(CatalogType catalogType)
         {
             await _catalogContext.AddAsync(catalogType);
@@ -56,7 +64,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain
             //return await _catalogContext.CatalogItems.FirstOrDefaultAsync(ci => ci.CatalogItemId == ItemId);
         }
 
-        public async Task<Establishment> GetEstablishmentById(Guid Id)
+        public async Task<Establishment?> GetEstablishmentById(Guid Id)
         {
             return await _catalogContext.Establishments.FirstOrDefaultAsync(e => e.EstablishmentId == Id);
         }

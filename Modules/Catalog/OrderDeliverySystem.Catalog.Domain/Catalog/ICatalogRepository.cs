@@ -11,6 +11,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         #region CatalogItem
         public IQueryable<CatalogItem> GetOllCatalogItemQueryable();
 
+        public Task<CatalogItem?> GetCatalogItemById(Guid catalogItemId);
+
         public Task<List<CatalogItem>> GetOllCatalogItems();
 
         public Task<bool> RemoveCatalogItemByIdAsync(Guid catalogItemId);
@@ -27,7 +29,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public Task AddEstablishmentAsync(Establishment establishment);
 
-        public Task<Establishment> GetEstablishmentById(Guid Id);
+        public Task<Establishment?> GetEstablishmentById(Guid Id);
         
         public Task<bool> EstablishmentExistByIdAsync(Guid id);
 

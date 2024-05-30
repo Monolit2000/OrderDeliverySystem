@@ -36,7 +36,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
             var catalogItem = new CatalogItem(
                 request.Name,
                 request.TimeToExist,
-           //     establishment,
                 request.Description,
                 request.Price);
 

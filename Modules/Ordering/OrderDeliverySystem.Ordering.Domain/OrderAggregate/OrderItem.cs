@@ -42,7 +42,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Discount = discount;
             Units = units;
             PictureUrl = pictureUrl;
-            DeliveryOptions = DeliveryOptions.CreateSelfPickupDeliveryOptions(DateTime.Now, "Default");
+            DeliveryOptions = DeliveryOptions.SelfPickup(DateTime.Now, "Default");
         }
 
 
@@ -68,13 +68,13 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetDefoultDeliveryOptions(DateTime dateTime, string selfPickupAddress)
         {
-            DeliveryOptions = DeliveryOptions.CreateSelfPickupDeliveryOptions(dateTime, selfPickupAddress);
+            DeliveryOptions = DeliveryOptions.SelfPickup(dateTime, selfPickupAddress);
             return Result.Ok(); 
         }
 
-        public Result AddDeliveryProrerty(DateTime dateTime, string selfPickupAddress)
+        public Result AddDeliveryProrerty(DateTime dateTime, string address)
         {
-            DeliveryOptions = DeliveryOptions.CreateDeliveryOptions(dateTime, selfPickupAddress); 
+            DeliveryOptions = DeliveryOptions.Delivery(dateTime, address, 20); 
             return Result.Ok();
         }
     }

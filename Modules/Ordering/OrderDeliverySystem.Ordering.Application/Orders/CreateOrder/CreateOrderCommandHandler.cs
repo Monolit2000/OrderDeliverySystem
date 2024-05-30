@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
 using OrderDeliverySystem.Payments.Api;
@@ -11,16 +12,18 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Result<CreateOrderDto>>
+    public class CreateOrderCommandHandler(
+        IOrderRepository _orderRepository, 
+        IPaymentsApi _paymentsApi) : IRequestHandler<CreateOrderCommand, Result<CreateOrderDto>>
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly IPaymentsApi _paymentsApi;
+        //private readonly IOrderRepository _orderRepository;
+        //private readonly IPaymentsApi _paymentsApi;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IPaymentsApi paymentsApi)
-        {
-            _orderRepository = orderRepository;
-            _paymentsApi = paymentsApi;
-        }
+        //public CreateOrderCommandHandler(IOrderRepository orderRepository, IPaymentsApi paymentsApi)
+        //{
+        //    _orderRepository = orderRepository;
+        //    _paymentsApi = paymentsApi;
+        //}
 
         public async Task<Result<CreateOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
@@ -30,16 +33,19 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
             foreach (var item in request.OrderItems)
             {
-                order.AddOrderItem(item.ItemId, item.ProductName, item.UnitPrice, item.Discount, item.PictureUrl, item.Units);
+                order.AddOrderItem(
+                    item.ItemId,
+                    item.ProductName,
+                    item.UnitPrice, item.Discount, item.PictureUrl, item.Units);
             }
 
             var addOrderTask = _orderRepository.AddAsync(order);
 
             var getCheckoutUrlResultTask = _paymentsApi.GetCheckoutUrl(
-            new GetCheckoutUrlRequest 
-            {
-                UserId = order.BuyerId, OrderId = order.OrderId, Amount = order.Amount
-            });
+                new GetCheckoutUrlRequest 
+                {
+                    UserId = order.BuyerId, OrderId = order.OrderId, Amount = order.Amount
+                });
 
             await Task.WhenAll(addOrderTask, getCheckoutUrlResultTask);
 

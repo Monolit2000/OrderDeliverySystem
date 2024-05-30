@@ -25,10 +25,10 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             IsSelfPickup = isSelfPickup;
         }
 
-        public static DeliveryOptions CreateSelfPickupDeliveryOptions(DateTime dateTime, string address) => 
+        public static DeliveryOptions SelfPickup(DateTime dateTime, string address) => 
             new DeliveryOptions(true, "The takeaway itself", address, 0, dateTime);
 
-        public static DeliveryOptions CreateDeliveryOptions(DateTime dateTime, string address, decimal deliveryCost = 20) =>
+        public static DeliveryOptions Delivery(DateTime dateTime, string address, decimal deliveryCost = 0) =>
             new DeliveryOptions(false, "Delivery", address, deliveryCost, dateTime);
     }
 }
