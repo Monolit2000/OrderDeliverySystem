@@ -14,6 +14,10 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
 
+        public bool IsDelivery { get; set; }
+
+        public DateTime DeliveryDateTime { get; set; }
+
         public DateTime Day { get; set; }
     }
 }

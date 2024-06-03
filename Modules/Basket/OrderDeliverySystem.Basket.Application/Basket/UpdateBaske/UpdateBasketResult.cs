@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
         public UpdateBasketResult(Guid basketId, Guid buyerId)
         { 
             BasketId = basketId;
-            BasketId = buyerId;
+            BuyerId = buyerId;
         }
     }
 }

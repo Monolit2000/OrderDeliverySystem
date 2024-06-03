@@ -20,7 +20,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
 
         public async Task<Result<EditCatalogItemDto>> Handle(EditCatalogItemCommand request, CancellationToken cancellationToken)
         {
-
             var catalogItem = await _catalogRepository.GetCatalogItemById(request.CatalogItemId);
 
             if (catalogItem == null)
@@ -29,12 +28,13 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
 
             var results = new List<Result>
             {
-                !string.IsNullOrWhiteSpace(request.Name) ? catalogItem.SetName(request.Name) : Result.Ok(),
-                request.TimeToItemExist != default ? catalogItem.ChangeTimeToItemExist(request.TimeToItemExist) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.Name)        ? catalogItem.SetName(request.Name) : Result.Ok(),
+                request.TimeToItemExist != default              ? catalogItem.ChangeTimeToItemExist(request.TimeToItemExist) : Result.Ok(),
                 !string.IsNullOrWhiteSpace(request.Description) ? catalogItem.ChangeDescription(request.Description) : Result.Ok(),
-                request.Price > 0 ? catalogItem.ChangePrice(request.Price) : Result.Ok(),
-                !string.IsNullOrWhiteSpace(request.PictureUri) ? catalogItem.ChangePictureUri(request.PictureUri) : Result.Ok()
+                request.Price > 0                               ? catalogItem.ChangePrice(request.Price) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.PictureUri)  ? catalogItem.ChangePictureUri(request.PictureUri) : Result.Ok()
             };
+
 
             var combinedResult = CombineResults(results);
 

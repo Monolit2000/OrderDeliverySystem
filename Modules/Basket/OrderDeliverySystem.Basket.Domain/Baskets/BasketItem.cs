@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
@@ -16,6 +17,10 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
+
+        public bool IsDelivery { get; set; }    
+
+        public DateTime deliveryDateTime { get; set; }
 
         public DateTime Day { get; set; }
 

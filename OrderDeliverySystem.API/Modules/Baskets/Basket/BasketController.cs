@@ -37,11 +37,11 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
         }
 
 
-        [HttpPut("UpdateBasket")]
-        public async Task<IActionResult> UpdateBasket(UpdateBasketRequest getBasketRequest)
-        {
-            return HandleResult(await _mediator.Send(new GetBasketQuery()));
-        }
+        //[HttpPut("UpdateBasket")]
+        //public async Task<IActionResult> UpdateBasket(UpdateBasketRequest getBasketRequest)
+        //{
+        //    return HandleResult(await _mediator.Send(new GetBasketQuery()));
+        //}
 
 
         [HttpPost("AddItemInBasket")]

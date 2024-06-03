@@ -23,7 +23,19 @@ namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
         {
             var basket = await _busketRepository.GetBasketByBuyerIdAsync(request.BuyerId);
 
-            basket.UpdateBasket(request.Items);
+            if (basket == null)
+                return Result.Fail("Basket not found");
+
+            var requestItme = request.Item;
+
+            var updateBasketItemResult = basket.UpdateBasketItem(
+                                            requestItme.BasketItemId,
+                                            requestItme.Quantity,
+                                            requestItme.isDelivery,
+                                            requestItme.DelvieryTime);
+
+            if(!updateBasketItemResult.IsSuccess)
+                return updateBasketItemResult;
 
             await _busketRepository.SaveChangesAsync(); 
             

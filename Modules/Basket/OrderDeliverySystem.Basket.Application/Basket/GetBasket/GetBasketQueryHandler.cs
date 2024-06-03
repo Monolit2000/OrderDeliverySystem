@@ -40,7 +40,8 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
                         UnitPrice = i.UnitPrice,
                         Quantity = i.Quantity,
                         Day = i.Day,    
-
+                        IsDelivery = i.IsDelivery,
+                        DeliveryDateTime = i.deliveryDateTime
                     }).ToList(),
             };
 

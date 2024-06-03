@@ -1,8 +1,10 @@
-﻿using OrderDeliverySystem.CommonModule.Domain;
+﻿using FluentResults;
+using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,12 +31,29 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         }
 
 
-        public void UpdateBasket(List<BasketItem> basketItems)
+        public Result UpdateBasketItem(
+            Guid ItemId, 
+            int quantity = 1,
+            bool isDelivery = false, 
+            DateTime delvieryTime = default)
         {
-            Items = basketItems;
-            //AddDomainEvent(new BasketUpdateDomainEvent());
-        }
+            var basketItem = Items.FirstOrDefault(o => o.BasketItemId == ItemId);
 
+            if (basketItem == null)
+                return Result.Fail("Item not found");
+
+            if (quantity > 1)
+                basketItem.Quantity = quantity;
+
+            if (isDelivery != basketItem.IsDelivery)
+                basketItem.IsDelivery = isDelivery; 
+
+            if(isDelivery == true && delvieryTime != default)
+                basketItem.deliveryDateTime = delvieryTime;
+
+            return Result.Ok();
+        }
+     
 
         public bool AddItem(BasketItem item)
         {
