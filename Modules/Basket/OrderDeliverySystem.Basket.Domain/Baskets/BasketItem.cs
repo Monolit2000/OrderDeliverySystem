@@ -12,15 +12,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
     {
         public Guid BasketItemId { get; set; }  
         public Guid ProductId { get; set; }
+        public string ProductImageUrl { get; set; }
         public Guid CustomerBasketId { get; set; }
         public CustomerBasket CustomerBasket { get; set; }
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
-
         public bool IsDelivery { get; set; }    
 
-        public DateTime deliveryDateTime { get; set; }
+        public DateTime DeliveryDateTime { get; set; }
 
         public DateTime Day { get; set; }
 
@@ -35,6 +35,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             string productName,
             decimal unitPrice,
             DateTime day,
+            string productImageUrl,
             int quantity = 1)
         {
             if (unitPrice < 0)
@@ -49,6 +50,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             UnitPrice = unitPrice;
             Quantity = quantity;
             Day = day;
+            ProductImageUrl = productImageUrl;
         }
 
         // public DeliveryOptions delivery { get; set; } = default;

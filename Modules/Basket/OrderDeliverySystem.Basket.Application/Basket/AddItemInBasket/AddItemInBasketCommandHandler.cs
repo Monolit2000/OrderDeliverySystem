@@ -1,15 +1,7 @@
-﻿using Azure.Core;
-using FluentResults;
+﻿using FluentResults;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
-using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
 using OrderDeliverySystem.Basket.Domain.Baskets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
 {
@@ -38,6 +30,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
                     request.ProductName,
                     request.UnitPrice,
                     request.Day,
+                    request.ProductImageUrl,
                     request.Quantity);
 
             if (!basket.AddItem(basketItem))

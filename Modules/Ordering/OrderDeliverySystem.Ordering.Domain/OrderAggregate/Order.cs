@@ -75,7 +75,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Description = "Order awaiting validation";
 
             return Result.Ok();
-            // return Result.Fail("Cannot set status to AwaitingValidation because the order is already paid.");
             //AddDomainEvent(new OrderAwaitingValidationDomainEvent(this));
         }
 
@@ -87,7 +86,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
             AddDomainEvent(new OrderPaidDomainEvent(OrderId, BuyerId));
             return Result.Ok();
-            //return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
         }
 
 
@@ -97,7 +95,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Description = "The order was shipped";
 
             return Result.Ok();
-            // return Result.Fail("Cannot set status to Shipped because the order is not paid.");
             //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
 
@@ -108,7 +105,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Description = $"The order was cancelled.";
 
             return Result.Ok();
-            // return Result.Fail($"Is not possible to change the order status from {OrderStatus.Value} to {OrderStatus.Cancelled.Value}.");
             //AddDomainEvent(new OrderCancelledDomainEvent(this));
         }
 

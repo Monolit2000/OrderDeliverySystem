@@ -13,16 +13,13 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
     {
         public void Configure(EntityTypeBuilder<BasketItem> builder)
         {
-            // Установка ключа
-          //  builder.HasKey(bi => bi.ProductId); // Поскольку продукт может быть идентифицирован по ProductId
 
-            // Конфигурация необходимых полей
             builder.Property(bi => bi.ProductName);
 
-            builder.Property(bi => bi.UnitPrice);// Настройка точности для decimal
+            builder.Property(bi => bi.UnitPrice)
+                .HasColumnType("decimal(18,2)");
 
-            // Если необходимы индексы или уникальность
-            //builder.HasIndex(bi => bi.ProductId); // Индекс для ускорения поиска
+
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Basket.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 {
     [DbContext(typeof(BasketContext))]
-    partial class BasketContextModelSnapshot : ModelSnapshot
+    [Migration("20240603132937_AddProductImageUrlMigration")]
+    partial class AddProductImageUrlMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,6 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeliveryDateTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("IsDelivery")
                         .HasColumnType("bit");
 
@@ -57,6 +57,9 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Migrations
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("deliveryDateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("BasketItemId");
 

@@ -13,7 +13,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
         public string ProductName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; } = 1;
-
+        public string ProductImageUrl { get; set; }
         public bool IsDelivery { get; set; }
 
         public DateTime DeliveryDateTime { get; set; }

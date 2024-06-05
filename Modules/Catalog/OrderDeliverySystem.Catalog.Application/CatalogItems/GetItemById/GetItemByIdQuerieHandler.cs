@@ -31,7 +31,8 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
                 Name = catalogItem.Name,
                 Description = catalogItem.Description,
                 Price = catalogItem.Price,
-                Day = catalogItem.TimeToItemExist
+                Day = catalogItem.TimeToItemExist,
+                ImageUri = catalogItem.PictureUri
             };
 
             return catalogItemDto;

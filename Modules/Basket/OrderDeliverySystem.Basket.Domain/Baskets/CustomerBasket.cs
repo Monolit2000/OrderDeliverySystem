@@ -49,7 +49,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
                 basketItem.IsDelivery = isDelivery; 
 
             if(isDelivery == true && delvieryTime != default)
-                basketItem.deliveryDateTime = delvieryTime;
+                basketItem.DeliveryDateTime = delvieryTime;
 
             return Result.Ok();
         }
@@ -79,6 +79,10 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         public bool CleanBasket()
         {
+
+            if (!Items.Any())
+                return true;
+
             Items.Clear();
             return true;
         }

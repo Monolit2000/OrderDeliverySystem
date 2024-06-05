@@ -33,7 +33,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
 
                 BasketItems = basket.Items
                     .Select(i => new BasketItemDto
-                    {
+                    {                  
                         ProductId = i.ProductId,
                         BasketItemId = i.BasketItemId,
                         ProductName = i.ProductName, 
@@ -41,7 +41,8 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
                         Quantity = i.Quantity,
                         Day = i.Day,    
                         IsDelivery = i.IsDelivery,
-                        DeliveryDateTime = i.deliveryDateTime
+                        ProductImageUrl = i.ProductImageUrl,
+                        DeliveryDateTime = i.DeliveryDateTime
                     }).ToList(),
             };
 
