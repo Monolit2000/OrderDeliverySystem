@@ -8,14 +8,11 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
     public class AddItemInBasketCommandHandler : IRequestHandler<AddItemInBasketCommand, Result<AddItemInBasketDto>>
     {
         private readonly IBasketRepository _basketRepository;
-        private readonly IMediator _mediator;
 
         public AddItemInBasketCommandHandler(
-            IBasketRepository userRepository,
-            IMediator mediator)
+            IBasketRepository userRepository)
         {
             _basketRepository = userRepository;
-            _mediator = mediator;
         }
 
         public async Task<Result<AddItemInBasketDto>> Handle(AddItemInBasketCommand request, CancellationToken cancellationToken)
@@ -33,8 +30,10 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
                     request.ProductImageUrl,
                     request.Quantity);
 
-            if (!basket.AddItem(basketItem))
-                return Result.Fail($"Товар '{request.ProductName}' вже наявний у кошику");
+            var addItemrResult = basket.AddItem(basketItem);
+
+            if(addItemrResult.IsFailed)
+                return addItemrResult;
 
             await _basketRepository.SaveChangesAsync();
         

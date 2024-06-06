@@ -16,15 +16,6 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
         IOrderRepository _orderRepository, 
         IPaymentsApi _paymentsApi) : IRequestHandler<CreateOrderCommand, Result<CreateOrderDto>>
     {
-        //private readonly IOrderRepository _orderRepository;
-        //private readonly IPaymentsApi _paymentsApi;
-
-        //public CreateOrderCommandHandler(IOrderRepository orderRepository, IPaymentsApi paymentsApi)
-        //{
-        //    _orderRepository = orderRepository;
-        //    _paymentsApi = paymentsApi;
-        //}
-
         public async Task<Result<CreateOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var order = new Order(
@@ -41,6 +32,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
                     item.PictureUrl, 
                     item.IsDelivery,
                     item.DeliveryDateTime,
+                    request.Adderss,
                     item.Units);
             }
 

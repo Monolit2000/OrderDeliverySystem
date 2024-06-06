@@ -13,8 +13,8 @@ using OrderDeliverySystem.UserAccess.Infrastructure.Persistence;
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Migrations
 {
     [DbContext(typeof(UserAccessContext))]
-    [Migration("20240523191443_WorkAddresPropertysAddedll")]
-    partial class WorkAddresPropertysAddedll
+    [Migration("20240605104104_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

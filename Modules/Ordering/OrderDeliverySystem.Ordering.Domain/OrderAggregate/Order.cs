@@ -157,13 +157,10 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             if (existingOrderForProduct != null)
                 throw new Exception("Product has already been added");
 
-          
-
-
             var orderItem = new OrderItem(orderItemId, productName, unitPrice, discount, pictureUrl, units);
 
-            //if (isDelivery)
-            //    orderItem.AddDeliveryProrerty(deliveryDateTime, address);
+            if (isDelivery)
+                orderItem.AddDeliveryProrerty(deliveryDateTime, address);
 
             _orderItems.Add(orderItem);
             

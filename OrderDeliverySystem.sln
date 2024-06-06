@@ -79,23 +79,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.CommonM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{B567988A-E596-45A9-ABD3-64D68F7F87D1}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.UserAccess.Api", "Modules\UserAccess\OrderDeliverySystem.UserAccess.Api\OrderDeliverySystem.UserAccess.Api.csproj", "{F4166BA7-39AA-41A0-888F-26041D2405E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Payments.Api", "Modules\Payments\OrderDeliverySystem.Payments.Api\OrderDeliverySystem.Payments.Api.csproj", "{850A6F84-488D-4BF5-8A99-F66592C77191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Application", "Modules\Notifications\OrderDeliverySystem.Notifications.Application\OrderDeliverySystem.Notifications.Application.csproj", "{542E788C-35CA-44E3-91ED-62D24FF93DBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Notifications.Application", "Modules\Notifications\OrderDeliverySystem.Notifications.Application\OrderDeliverySystem.Notifications.Application.csproj", "{542E788C-35CA-44E3-91ED-62D24FF93DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Domain", "Modules\Notifications\OrderDeliverySystem.Notifications.Domain\OrderDeliverySystem.Notifications.Domain.csproj", "{11AE1191-794E-447C-B9FB-30F92184EE37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Notifications.Domain", "Modules\Notifications\OrderDeliverySystem.Notifications.Domain\OrderDeliverySystem.Notifications.Domain.csproj", "{11AE1191-794E-447C-B9FB-30F92184EE37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Infrastructure", "Modules\Notifications\OrderDeliverySystem.Notifications.Infrastructure\OrderDeliverySystem.Notifications.Infrastructure.csproj", "{2AA0B210-2AAB-4C61-B84A-A06719AD1536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Notifications.Infrastructure", "Modules\Notifications\OrderDeliverySystem.Notifications.Infrastructure\OrderDeliverySystem.Notifications.Infrastructure.csproj", "{2AA0B210-2AAB-4C61-B84A-A06719AD1536}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.IntegrationEvents", "Modules\Notifications\OrderDeliverySystem.Notifications.IntegrationEvents\OrderDeliverySystem.Notifications.IntegrationEvents.csproj", "{C6551057-4CA2-4102-9F9B-7673CE145348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Notifications.IntegrationEvents", "Modules\Notifications\OrderDeliverySystem.Notifications.IntegrationEvents\OrderDeliverySystem.Notifications.IntegrationEvents.csproj", "{C6551057-4CA2-4102-9F9B-7673CE145348}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Ordering.Api", "Modules\Ordering\OrderDeliverySystem.Ordering.Api\OrderDeliverySystem.Ordering.Api.csproj", "{2124A4DB-2DBC-4341-A059-4B22756B1503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Ordering.Api", "Modules\Ordering\OrderDeliverySystem.Ordering.Api\OrderDeliverySystem.Ordering.Api.csproj", "{2124A4DB-2DBC-4341-A059-4B22756B1503}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderDeliverySystem.Notifications.Api", "Modules\Notifications\OrderDeliverySystem.Notifications.Api\OrderDeliverySystem.Notifications.Api.csproj", "{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderDeliverySystem.Notifications.Api", "Modules\Notifications\OrderDeliverySystem.Notifications.Api\OrderDeliverySystem.Notifications.Api.csproj", "{68ADA9B0-E7D4-4657-91F4-6B42F22738E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -215,10 +213,6 @@ Global
 		{82BD19EB-BC2E-4823-8409-A68B89676F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82BD19EB-BC2E-4823-8409-A68B89676F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82BD19EB-BC2E-4823-8409-A68B89676F5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38A68AD5-E1A7-4C98-8036-A9431CD3AEB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4166BA7-39AA-41A0-888F-26041D2405E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4166BA7-39AA-41A0-888F-26041D2405E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4166BA7-39AA-41A0-888F-26041D2405E2}.Release|Any CPU.ActiveCfg = Release|Any CPU

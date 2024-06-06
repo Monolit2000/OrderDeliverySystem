@@ -55,15 +55,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
         }
      
 
-        public bool AddItem(BasketItem item)
+        public Result AddItem(BasketItem item)
         {
             var existingOrderForProduct = Items.FirstOrDefault(o => o.ProductId == item.ProductId);
 
             if (existingOrderForProduct != null)
-                return false;
+                return Result.Fail("$Товар '{request.ProductName}' вже наявний у кошику");
 
             Items.Add(item);
-            return true;
+            return Result.Ok();
         }
 
         public bool RemuveItem(Guid BasketItemId)
