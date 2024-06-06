@@ -36,7 +36,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
                 order.AddOrderItem(
                     item.ItemId,
                     item.ProductName,
-                    item.UnitPrice, item.Discount, item.PictureUrl, item.Units);
+                    item.UnitPrice, 
+                    item.Discount, 
+                    item.PictureUrl, 
+                    item.IsDelivery,
+                    item.DeliveryDateTime,
+                    item.Units);
             }
 
             var addOrderTask = _orderRepository.AddAsync(order);

@@ -20,6 +20,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
         public bool IsDelivery { get; set; }
 
+        public DateTime DeliveryDateTime { get; set; }
+
         public string PictureUrl { get; set; }
     }
 }

@@ -29,8 +29,13 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         public string Description { get; private set; }
         public decimal Amount 
         {
-            get => OrderItems
-                .Sum(item => (item.UnitPrice - item.Discount) * item.Units); 
+            get 
+            {
+                return OrderItems
+                  .Sum(item =>
+                      (item.UnitPrice - item.Discount) * item.Units +
+                      (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
+            }
         }
 
         private readonly List<OrderItem> _orderItems = [];
@@ -80,9 +85,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetPaidStatus()
         {
+            if (OrderStatus == OrderStatus.Paid)
+                return Result.Ok();
+
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
-
 
             AddDomainEvent(new OrderPaidDomainEvent(OrderId, BuyerId));
             return Result.Ok();
@@ -134,17 +141,29 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
 
 
-        public void AddOrderItem(Guid orderItemId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
+        public void AddOrderItem(
+            Guid orderItemId,
+            string productName,
+            decimal unitPrice,
+            decimal discount,
+            string pictureUrl,
+            bool isDelivery,
+            DateTime deliveryDateTime,
+            string address,
+            int units = 1)
         {
             var existingOrderForProduct = _orderItems.FirstOrDefault(o => o.ProductId == orderItemId);
 
             if (existingOrderForProduct != null)
                 throw new Exception("Product has already been added");
 
+          
+
+
             var orderItem = new OrderItem(orderItemId, productName, unitPrice, discount, pictureUrl, units);
 
             //if (isDelivery)
-            //    orderItem.AddDeliveryProrerty();
+            //    orderItem.AddDeliveryProrerty(deliveryDateTime, address);
 
             _orderItems.Add(orderItem);
             
