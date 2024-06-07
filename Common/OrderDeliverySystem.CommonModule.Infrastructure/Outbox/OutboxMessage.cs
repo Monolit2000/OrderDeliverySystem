@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.CommonModule.Infrastructure.Outbox
 {
-    public class OutboxMessage
+    public sealed class OutboxMessage
     {
         public Guid Id { get; set; }    
 
