@@ -115,6 +115,15 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             //AddDomainEvent(new OrderCancelledDomainEvent(this));
         }
 
+        public Result PaidFaild(string reasons)
+        {
+            OrderStatus = OrderStatus.PaidFaild;    
+            Description = reasons;
+
+            AddDomainEvent(new OrderPaidDomainEvent(OrderId, BuyerId));
+            return Result.Ok();  
+        }
+            
 
         public Order(Guid buyerId, string userName, string address) 
         {

@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using System.Reflection.Metadata.Ecma335;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus
 {
@@ -27,6 +28,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus
                 "Paid" => order.SetPaidStatus(),
                 "Shipped" => order.SetShippedStatus(),
                 "Cancelled" => order.SetCancelledStatus(),
+                "PaidFaild" => 
                 _ => Result.Fail("Unprocessed status")
             };
 
