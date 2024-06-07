@@ -81,7 +81,15 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result ChangeDeliveryTime(DateTime newDeliveryDateTime)
         {
+            if (newDeliveryDateTime.TimeOfDay >= DeliveryOptions.DeliveryDateTime.TimeOfDay)
+            {
+                return Result.Fail("Change Delivery Time failed");
+            }
 
+            DeliveryOptions = DeliveryOptions.Delivery(
+                newDeliveryDateTime, 
+                DeliveryOptions.Address,
+                DeliveryOptions.DeliveryCost);
 
             return Result.Ok();
         }
