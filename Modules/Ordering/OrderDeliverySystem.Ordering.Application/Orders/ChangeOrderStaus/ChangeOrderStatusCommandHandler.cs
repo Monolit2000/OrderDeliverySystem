@@ -28,7 +28,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus
                 "Paid" => order.SetPaidStatus(),
                 "Shipped" => order.SetShippedStatus(),
                 "Cancelled" => order.SetCancelledStatus(),
-                "PaidFaild" => 
+                //"PaidFaild" => 
                 _ => Result.Fail("Unprocessed status")
             };
 
