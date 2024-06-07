@@ -79,7 +79,6 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         public bool CleanBasket()
         {
-
             if (!Items.Any())
                 return true;
 
