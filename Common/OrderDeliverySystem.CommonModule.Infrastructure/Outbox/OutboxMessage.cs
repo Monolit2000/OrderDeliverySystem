@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Api
+namespace OrderDeliverySystem.CommonModule.Infrastructure.Outbox
 {
-    public record PaymentCheckoutResponce(Guid OrderId, string CheckoutUrl);
-
+    public class OutboxMessage
+    {
+    }
 }

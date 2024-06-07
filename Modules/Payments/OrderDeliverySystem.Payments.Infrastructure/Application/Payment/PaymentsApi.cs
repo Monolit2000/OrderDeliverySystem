@@ -2,6 +2,7 @@
 using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Payments.Api;
+using OrderDeliverySystem.Payments.Api.GetCheckoutUrl;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
 using System;
 using System.Collections.Generic;

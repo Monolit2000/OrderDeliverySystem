@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Api
+namespace OrderDeliverySystem.Payments.Api.GetCheckoutUrl
 {
     public class GetCheckoutUrlRequest
     {

@@ -4,7 +4,7 @@ using OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents;
 using OrderDeliverySystem.Ordering.IntegrationEvents;
 
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.DomainEventHandlers
+namespace OrderDeliverySystem.Ordering.Application.Orders.Events
 {
     public class OrderPaidDomainEventHandler : INotificationHandler<OrderPaidDomainEvent>
     {
