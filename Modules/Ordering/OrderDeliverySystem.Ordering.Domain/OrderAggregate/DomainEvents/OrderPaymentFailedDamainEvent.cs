@@ -7,7 +7,19 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents
 {
-    public class OrderPaymentFailedDamainEvent : DomainEventBase
+    public class OrderPaymentFailedDomainEvent : DomainEventBase
     {
+        public Guid BuyerId { get; set; }
+
+        public Guid OrderId { get; set; }
+
+        public string Reason { get; set; }
+
+        public OrderPaymentFailedDomainEvent(Guid buyerId, Guid orderId, string reason)
+        {
+            BuyerId = buyerId;
+            OrderId = orderId;
+            Reason = reason;
+        }
     }
 }

@@ -77,6 +77,15 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             DeliveryOptions = DeliveryOptions.Delivery(dateTime, address, 20); 
             return Result.Ok();
         }
+
+
+        public Result ChangeDeliveryTime(DateTime newDeliveryDateTime)
+        {
+
+
+            return Result.Ok();
+        }
+
     }
     
 }

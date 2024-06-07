@@ -64,6 +64,27 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             //// Add the OrderStarterDomainEvent to the domain events collection 
         }
 
+
+
+        public Result ChangeDeliveryTime(Guid orderItemId, DateTime newDeliveriDetaTime)
+        {
+            var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
+
+            if (orderItem == null)
+                return Result.Fail("Ored item not exist");
+
+            if(newDeliveriDetaTime.TimeOfDay >= orderItem.DeliveryOptions.DeliveryDateTime.TimeOfDay)
+            {
+
+                return Result.Ok();
+            }
+
+            return Result.Ok();
+        }
+
+
+        #region Status
+
         public Result SetSubmittedStatus()
         {
             OrderStatus = OrderStatus.Submitted;
@@ -101,8 +122,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Shipped;
             Description = "The order was shipped";
 
+            AddDomainEvent(new OrderShippedDomainEvent(OrderId, BuyerId));
             return Result.Ok();
-            //AddDomainEvent(new OrderShippedDomainEvent(this));
         }
 
 
@@ -111,19 +132,21 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Cancelled;
             Description = $"The order was cancelled.";
 
+            AddDomainEvent(new OrderCancelledDomainEvent(OrderId, BuyerId));
             return Result.Ok();
-            //AddDomainEvent(new OrderCancelledDomainEvent(this));
         }
 
-        public Result PaidFaild(string reasons)
+        public Result PaidFaild(string reason)
         {
             OrderStatus = OrderStatus.PaidFaild;    
-            Description = reasons;
+            Description = reason;
 
-            AddDomainEvent(new OrderPaidDomainEvent(OrderId, BuyerId));
+            AddDomainEvent(new OrderPaymentFailedDomainEvent(OrderId, BuyerId, reason));
             return Result.Ok();  
         }
-            
+
+        #endregion 
+
 
         public Order(Guid buyerId, string userName, string address) 
         {
