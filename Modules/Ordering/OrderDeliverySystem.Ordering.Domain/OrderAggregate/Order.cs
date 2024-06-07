@@ -73,11 +73,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             if (orderItem == null)
                 return Result.Fail("Ored item not exist");
 
-            if(newDeliveriDetaTime.TimeOfDay >= orderItem.DeliveryOptions.DeliveryDateTime.TimeOfDay)
-            {
-
-                return Result.Ok();
-            }
+            orderItem.ChangeDeliveryTime(newDeliveriDetaTime);
 
             return Result.Ok();
         }
