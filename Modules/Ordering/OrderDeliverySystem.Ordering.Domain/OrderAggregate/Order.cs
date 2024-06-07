@@ -69,7 +69,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
 
             if (orderItem == null)
-                return Result.Fail("Ored item not exist");
+                return Result.Fail("Ored item not found");
 
             var changeDeliveryTimeResult = orderItem.ChangeDeliveryTime(newDeliveriDetaTime);
 
