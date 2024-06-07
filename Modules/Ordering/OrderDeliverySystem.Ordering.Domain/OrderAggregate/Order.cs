@@ -64,8 +64,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             //// Add the OrderStarterDomainEvent to the domain events collection 
         }
 
-
-
         public Result ChangeDeliveryTime(Guid orderItemId, DateTime newDeliveriDetaTime)
         {
             var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
@@ -73,7 +71,10 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             if (orderItem == null)
                 return Result.Fail("Ored item not exist");
 
-            orderItem.ChangeDeliveryTime(newDeliveriDetaTime);
+            var changeDeliveryTimeResult = orderItem.ChangeDeliveryTime(newDeliveriDetaTime);
+
+            if (changeDeliveryTimeResult.IsFailed)
+                return changeDeliveryTimeResult;
 
             return Result.Ok();
         }
