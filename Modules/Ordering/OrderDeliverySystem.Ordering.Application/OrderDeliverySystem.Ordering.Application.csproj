@@ -22,4 +22,8 @@
     <ProjectReference Include="..\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Orders\ChangeOrderDeliveryAddress\" />
+  </ItemGroup>
+
 </Project>

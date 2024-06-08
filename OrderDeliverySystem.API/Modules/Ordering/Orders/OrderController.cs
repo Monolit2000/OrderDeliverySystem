@@ -9,6 +9,8 @@ using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrder
 using OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
 using OrderDeliverySystem.API.Modules.Base;
+using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTime;
+using OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {
@@ -78,5 +80,16 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
             return HandleResultWithReasonsAsStrArray(await _mediator.Send(changeOrderStatusCommand));
         }
 
+        [HttpPost("ChangeOrderDeliveryTime")]
+        public async Task<IActionResult> ChangeOrderDeliveryTime(ChangeOrderDeliveryTimeCommand changeOrderDeliveryTimeCommand)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(changeOrderDeliveryTimeCommand));
+        }
+
+        [HttpPost("ChangeDeliveryOptions")]
+        public async Task<IActionResult> ChangeDeliveryOptions(ChangeDeliveryOptionsCommand changeDeliveryOptionsCommand)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(changeDeliveryOptionsCommand));
+        }
     }
 }

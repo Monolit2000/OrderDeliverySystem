@@ -22,7 +22,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Address = address;
             DeliveryCost = deliveryCost;
             DeliveryDateTime = deliveryDateTime;
-            IsSelfPickup = isSelfPickup;
         }
 
         public static DeliveryOptions SelfPickup(DateTime dateTime, string address) => 
@@ -30,5 +29,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public static DeliveryOptions Delivery(DateTime dateTime, string address, decimal deliveryCost = 0) =>
             new DeliveryOptions(false, "Delivery", address, deliveryCost, dateTime);
+
     }
 }

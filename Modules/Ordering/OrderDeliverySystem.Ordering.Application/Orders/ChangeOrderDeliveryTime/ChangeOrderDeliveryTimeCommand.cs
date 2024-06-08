@@ -10,5 +10,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTim
 {
     public class ChangeOrderDeliveryTimeCommand : IRequest<Result<ChangeOrderDeliveryTimeResult>>
     {
+        public Guid OrderId { get; set; }
+
+        public Guid OrderItmeId { get; set; }
+
+        public DateTime NewDeliveriDetaTime { get; set; }   
     }
 }

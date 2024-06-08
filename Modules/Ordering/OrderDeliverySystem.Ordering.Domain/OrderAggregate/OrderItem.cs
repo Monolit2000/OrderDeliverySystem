@@ -78,16 +78,20 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
-
         public Result ChangeDeliveryTime(DateTime newDeliveryDateTime)
         {
-            if (newDeliveryDateTime.TimeOfDay >= DeliveryOptions.DeliveryDateTime.TimeOfDay)
+            if (DeliveryOptions.DeliveryDateTime < DateTime.Now.AddHours(1))
             {
-                return Result.Fail("Change Delivery Time failed");
+                return Result.Fail("The new delivery time must be at least two hours from now.");
+            }
+
+            if (newDeliveryDateTime.Date != DeliveryOptions.DeliveryDateTime.Date)
+            {
+                return Result.Fail("The new delivery date must match the originally planned delivery date.");
             }
 
             DeliveryOptions = DeliveryOptions.Delivery(
-                newDeliveryDateTime, 
+                newDeliveryDateTime,
                 DeliveryOptions.Address,
                 DeliveryOptions.DeliveryCost);
 
@@ -95,5 +99,4 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
     }
-    
 }
