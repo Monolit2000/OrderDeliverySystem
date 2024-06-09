@@ -98,5 +98,24 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
+        public Result ChangeDeliveryAddress(string newAddress)
+        {
+            if (DeliveryOptions.DeliveryDateTime < DateTime.Now.AddHours(1))
+            {
+                return Result.Fail("Cannot change delivery address within 1 hour of delivery.");
+            }
+
+            if (string.IsNullOrEmpty(newAddress))
+            {
+                return Result.Fail("New address cannot be empty.");
+            }
+
+            DeliveryOptions = DeliveryOptions.Delivery(
+                DeliveryOptions.DeliveryDateTime,
+                newAddress,
+                DeliveryOptions.DeliveryCost);
+
+            return Result.Ok();
+        }
     }
 }

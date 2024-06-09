@@ -28,11 +28,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions
             if (order == null)
                 return Result.Fail("Order not found");
 
-
             var results = new List<Result>
             {
                 request.NewDeliveriDetaTime != default ? order.ChangeDeliveryTime(request.OrderItmeId, request.NewDeliveriDetaTime) : Result.Ok(),
-                !string.IsNullOrWhiteSpace(request.NewAddress) ? order.ChangeDeliveryTime(request.OrderItmeId, request.NewDeliveriDetaTime) : Result.Ok(),
+                !string.IsNullOrWhiteSpace(request.NewAddress) ? order.ChangeDeliveryAddress(request.OrderItmeId, request.NewAddress) : Result.Ok(),
             };
 
             var combinedResult = CombineResults(results);

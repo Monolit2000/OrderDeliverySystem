@@ -80,6 +80,23 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         }
 
 
+        public Result ChangeDeliveryAddress(Guid orderItemId, string newAddress)
+        {
+            var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
+
+            if (orderItem == null)
+                return Result.Fail("Ored item not found");
+
+            var changeDeliveryAddressResult = orderItem.ChangeDeliveryAddress(newAddress);
+
+            if (changeDeliveryAddressResult.IsFailed)
+                return changeDeliveryAddressResult;
+
+            return Result.Ok();
+        }
+
+
+
         #region Status
 
         public Result SetSubmittedStatus()
