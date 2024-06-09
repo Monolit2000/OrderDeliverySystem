@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using Autofac.Core.Activators.Reflection;
+using FluentResults;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions
 
         public Guid OrderItmeId { get; set; }
 
-        public DateTime NewDeliveriDetaTime { get; set; }
+        public DateTime? NewDeliveriDetaTime { get; set; } = default;
 
-        public string NewAddress { get; set; }
+        public string? NewAddress { get; set; }
     }
 }
