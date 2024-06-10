@@ -15,10 +15,11 @@ namespace OrderDeliverySystem.CommonModule.Domain
         /// </summary>
         public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
 
-        public void ClearDomainEvents()
-        {
-            _domainEvents?.Clear();
-        }
+        public void ClearDomainEvents() 
+            => _domainEvents?.Clear();
+      
+
+        public IReadOnlyCollection<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
 
         /// <summary>
         /// Add domain event.

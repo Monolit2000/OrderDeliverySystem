@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json;
+using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,36 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.Outbox
             CancellationToken cancellationToken = default)
         {
             DbContext? dbContext = eventData.Context;
+
+            if(dbContext is null)
+            {
+                return base.SavingChangesAsync(eventData, result, cancellationToken);
+            }
+
+            var outboxMessage = dbContext.ChangeTracker
+                .Entries<Entity>()
+                .Select(x => x.Entity)
+                .SelectMany(x =>
+                {
+                    var domainEvents = x.GetDomainEvents();
+                    x.ClearDomainEvents();
+                    return domainEvents;
+                })
+                .Select(domainEvent => new OutboxMessage
+                {
+                    Id = Guid.NewGuid(),
+                    OccurredOnUtc = DateTime.UtcNow,
+                    Type = domainEvent.GetType().Name,
+                    Content = JsonConvert.SerializeObject(
+                        domainEvent,
+                        new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.All
+                        })  
+                })
+                .ToList();
+
+            dbContext.Set<OutboxMessage>().AddRange(outboxMessage);
 
             return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
