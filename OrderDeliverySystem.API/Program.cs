@@ -6,6 +6,9 @@ using OrderDeliverySystem.Catalog.Infrastructure.Startup;
 using OrderDeliverySystem.Ordering.Infrastructure.Startup;
 using OrderDeliverySystem.Payments.Infrastructure.Startup;
 using OrderDeliverySystem.Notifications.Infrastructure.Startup;
+using Autofac.Core;
+using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +57,7 @@ builder.Services
     .AddPaymentModule(builder.Configuration)
     .AddNotificationModule(builder.Configuration);
 
-
+builder.Services.AddSingleton<ISaveChangesInterceptor, ConvertDomainEventsToOutboxMessageIterseptor>();
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 

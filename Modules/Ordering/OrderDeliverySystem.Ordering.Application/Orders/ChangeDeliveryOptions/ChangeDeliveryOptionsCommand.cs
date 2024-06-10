@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions
 
         public Guid OrderItmeId { get; set; }
 
-        public DateTime? NewDeliveriDetaTime { get; set; } = default;
+        public DateTime NewDeliveriDetaTime { get; set; } = default;
 
         public string? NewAddress { get; set; }
     }

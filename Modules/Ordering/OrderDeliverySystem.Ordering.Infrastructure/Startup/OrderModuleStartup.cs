@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using OrderDeliverySystem.Ordering.Infrastructure.EventBus;
 using MediatR;
 using OrderDeliverySystem.Ordering.Application.Behaviors;
+using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
 
 namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
 {
