@@ -12,7 +12,6 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.Outbox
 {
     public sealed class ConvertDomainEventsToOutboxMessageIterseptor : SaveChangesInterceptor
     {
-
         public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData, 
             InterceptionResult<int> result, 

@@ -9,6 +9,7 @@ using OrderDeliverySystem.Notifications.Infrastructure.Startup;
 using Autofac.Core;
 using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,21 @@ builder.Services.AddSingleton<ISaveChangesInterceptor, ConvertDomainEventsToOutb
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
+//builder.Services.AddQuartz(configure =>
+//{
+//    var jobKey = new JobKey(nameof(ProcessOutboxMessagesJob));
+
+//    configure.AddJob<ProcessOutboxMessagesJob>(jobKey)
+//    .AddTrigger(trigger =>
+//    trigger.ForJob(jobKey)
+//    .WithSimpleSchedule(schedule => 
+//    schedule.WithIntervalInSeconds(10)
+//    .RepeatForever()));
+
+//    configure.UseMicrosoftDependencyInjectionJobFactory();
+//});
+
+//builder.Services.AddQuartzHostedService();
 
 var app = builder.Build();
 
