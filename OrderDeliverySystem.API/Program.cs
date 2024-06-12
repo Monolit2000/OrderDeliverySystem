@@ -10,6 +10,7 @@ using Autofac.Core;
 using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Quartz;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,9 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
+
+
+builder.Services.AddHangfire(options => options.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionNew")));
 
 
 

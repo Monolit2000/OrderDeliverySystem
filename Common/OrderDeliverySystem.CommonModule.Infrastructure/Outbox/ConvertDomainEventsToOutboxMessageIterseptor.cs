@@ -30,7 +30,9 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.Outbox
                 .SelectMany(x =>
                 {
                     var domainEvents = x.GetDomainEvents();
+
                     x.ClearDomainEvents();
+
                     return domainEvents;
                 })
                 .Select(domainEvent => new OutboxMessage
