@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="IntegrationEvents\**" />
+    <Compile Remove="Orders\ChangeOrderDeliveryAddress\**" />
     <EmbeddedResource Remove="IntegrationEvents\**" />
+    <EmbeddedResource Remove="Orders\ChangeOrderDeliveryAddress\**" />
     <None Remove="IntegrationEvents\**" />
+    <None Remove="Orders\ChangeOrderDeliveryAddress\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +23,6 @@
     <ProjectReference Include="..\..\UserAccess\OrderDeliverySystem.UserAccess.IntegrationEvents\OrderDeliverySystem.UserAccess.IntegrationEvents.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.Ordering.Domain\OrderDeliverySystem.Ordering.Domain.csproj" />
     <ProjectReference Include="..\OrderDeliverySystem.Ordering.IntegrationEvents\OrderDeliverySystem.Ordering.IntegrationEvents.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Orders\ChangeOrderDeliveryAddress\" />
   </ItemGroup>
 
 </Project>
