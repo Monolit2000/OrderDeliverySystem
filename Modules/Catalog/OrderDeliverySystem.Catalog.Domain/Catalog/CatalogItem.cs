@@ -38,7 +38,15 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         }
 
-        public CatalogItem(Guid id, string name, DateTime timeToItemExist, Guid productId, string description, decimal price, string pictureFileName, string pictureUri)
+        public CatalogItem(
+            Guid id, 
+            string name,
+            DateTime timeToItemExist, 
+            Guid productId,
+            string description, 
+            decimal price,
+            string pictureFileName, 
+            string pictureUri)
         {
             CatalogItemId = id;
             Name = name;
@@ -64,6 +72,25 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             Price = price;
         }
 
+        public static Result<CatalogItem> CreateNew(string name, DateTime timeToItemExist, Guid productId, string description, decimal price, string pictureFileName = "", string pictureUri = "")
+        {
+            if (price <= 0)
+                return Result.Fail<CatalogItem>("Price must be greater than zero.");
+            
+            var catalogItem = new CatalogItem
+            {
+                CatalogItemId = Guid.NewGuid(),
+                Name = name,
+                TimeToItemExist = timeToItemExist,
+                ProductId = productId,
+                Description = description,
+                Price = price,
+                PictureFileName = pictureFileName,
+                PictureUri = pictureUri
+            };
+
+            return Result.Ok(catalogItem);
+        }
 
 
         public Result SetName(string name)
