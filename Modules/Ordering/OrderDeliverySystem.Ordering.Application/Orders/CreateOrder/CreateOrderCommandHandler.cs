@@ -19,7 +19,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
     {
         public async Task<Result<CreateOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = new Order(
+            var order = Order.CreateNew(
                 request.UserId,
                 request.Adderss);
 
@@ -39,11 +39,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
             var addOrderTask = _orderRepository.AddAsync(order);
 
-            var getCheckoutUrlResultTask = _paymentsApi.GetCheckoutUrl(
-                new GetCheckoutUrlRequest 
-                {
-                    UserId = order.BuyerId, OrderId = order.OrderId, Amount = order.Amount
-                });
+            var getCheckoutUrlResultTask = _paymentsApi.GetCheckoutUrl(new GetCheckoutUrlRequest
+            {
+                UserId = order.BuyerId,
+                OrderId = order.OrderId,
+                Amount = order.Amount
+            });
 
             await Task.WhenAll(addOrderTask, getCheckoutUrlResultTask);
 

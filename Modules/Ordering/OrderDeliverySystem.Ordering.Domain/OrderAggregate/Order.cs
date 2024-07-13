@@ -44,15 +44,9 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public int? PaymentId { get; private set; }
 
-        private Order()
-        {
-        }
+        private Order() { } // For EF core 
 
-        public decimal GetAmount() 
-            => OrderItems.Sum(item => (item.UnitPrice - item.Discount) * item.Units);
-        
-
-        public Order(Guid buyerId, string address)
+        private Order(Guid buyerId, string address)
         {
             OrderId = Guid.NewGuid();
             BuyerId = buyerId;
@@ -61,7 +55,26 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Address = address;
             Description = "The order was submitted";
 
-            //// Add the OrderStarterDomainEvent to the domain events collection 
+            AddDomainEvent(new OrderStarterDomainEvent());
+        }
+
+        public static Order CreateNew(
+            Guid buyerId, 
+            string address)
+        {
+            return new Order(
+                buyerId, 
+                address);
+        }
+
+        public decimal GetAmount()
+        {
+            return OrderItems.Sum(item =>
+                      (item.UnitPrice - item.Discount) * item.Units +
+                      (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
+
+            //return OrderItems.Sum(item => 
+            //(item.UnitPrice - item.Discount) * item.Units);
         }
 
         public Result ChangeDeliveryTime(Guid orderItemId, DateTime newDeliveriDetaTime)
@@ -95,8 +108,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
-
-
         #region Status
 
         public Result SetSubmittedStatus()
@@ -104,8 +115,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.Submitted;
             Description = "Order awaiting validation";
 
+            AddDomainEvent(new OrderSubmittedDomainEvent());
             return Result.Ok();
-            //AddDomainEvent(new OrderSubmittedDomainEvent(this));
         }
 
         public Result SetAwaitingValidationStatus()
@@ -114,8 +125,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             OrderStatus = OrderStatus.AwaitingValidation;
             Description = "Order awaiting validation";
 
+            AddDomainEvent(new OrderAwaitingValidationDomainEvent());
             return Result.Ok();
-            //AddDomainEvent(new OrderAwaitingValidationDomainEvent(this));
         }
 
         public Result SetPaidStatus()
@@ -209,10 +220,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
                 orderItem.AddDeliveryProrerty(deliveryDateTime, address);
 
             _orderItems.Add(orderItem);
-            
         }
-
-
-
     }
 }

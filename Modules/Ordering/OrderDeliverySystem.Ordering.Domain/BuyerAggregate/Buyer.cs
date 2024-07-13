@@ -23,19 +23,15 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
         
         public string WorkAddress { get; private set; }
 
-        public Buyer()
-        {
+        private Buyer() { } // For Ef Core
 
-        }
-
-        public Buyer(Guid byerId, string name, string phoneNumber) 
-        {
-            BuyerId = byerId;
-            Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
-            PhoneNumber = phoneNumber;
-        }
-
-        public Buyer(Guid byerId, long buyerChatId, string firstName, string lastName, string name, string phoneNumber) 
+        private Buyer(
+            Guid byerId, 
+            long buyerChatId,
+            string firstName,
+            string lastName,
+            string name,
+            string phoneNumber) 
         {
             BuyerId = byerId;
             BuyerChatId = buyerChatId;
@@ -46,16 +42,21 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
             WorkAddress = "Default";
         }
 
-        public Buyer(Guid byerId, long buyerChatId, string firstName, string lastName, string name, string phoneNumber, string workAddress)
+        public static Buyer CreateNew(
+            Guid byerId,
+            long buyerChatId, 
+            string firstName,
+            string lastName,
+            string name,
+            string phoneNumber)
         {
-            BuyerId = byerId;
-            BuyerChatId = buyerChatId;
-            FirstName = firstName;
-            LastName = lastName;
-            Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
-            PhoneNumber = phoneNumber;
-            WorkAddress = workAddress;
+            return new Buyer(
+                byerId, 
+                buyerChatId, 
+                firstName, 
+                lastName, 
+                name,
+                phoneNumber);
         }
-
     }
 }

@@ -33,7 +33,7 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer
                 //};
             }
 
-            var buyer = new Buyer(request.UserId, request.ChatId, request.FirstName, request.LastName, request.Name, request.PhoneNumber);
+            var buyer =  Buyer.CreateNew(request.UserId, request.ChatId, request.FirstName, request.LastName, request.Name, request.PhoneNumber);
 
             await _buyerRepository.AddAsync(buyer);
 
