@@ -8,8 +8,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
     {
         public Guid BasketItemId { get; private set; }  
         public Guid ProductId { get; private set; }
-        public string ProductImageUrl { get; private set; }
         public Guid CustomerBasketId { get; private set; }
+        public string ProductImageUrl { get; private set; }
         public CustomerBasket CustomerBasket { get; private set; }
         public string ProductName { get; private set; }
         public decimal UnitPrice { get; private set; }

@@ -35,6 +35,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         {
             PaymentStatus = PaymentStatus.Success;
             //ChangeStatus(PaymentStatus.Success);
+
             AddDomainEvent(new PaymentSuccessDomainEvent(PaymentId, OrderId));
             return Result.Ok();
         }
@@ -43,6 +44,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         {
             PaymentStatus = PaymentStatus.Failed;
             //ChangeStatus(PaymentStatus.Failed);
+
             AddDomainEvent(new PaymentFailedDomainEvent(PaymentId, OrderId, resonses));
             return Result.Ok();
         }
@@ -51,6 +53,7 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
         {
             var oldStatus = PaymentStatus.Value;
             PaymentStatus = newStatus;
+
             AddDomainEvent(new PaymentStatusChangedDomainEvent(PaymentId, oldStatus, newStatus.Value));
             return Result.Ok();
         }

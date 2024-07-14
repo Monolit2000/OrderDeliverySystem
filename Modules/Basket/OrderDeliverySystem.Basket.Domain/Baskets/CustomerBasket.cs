@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,20 +16,30 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
     public class CustomerBasket : Entity, IAggregateRoot
     {
 
-        public Guid CustomerBasketId { get;  set; }
+        public Guid CustomerBasketId { get; private set; }
 
-        public long BuyerChatId { get;  set; }
+        public long BuyerChatId { get; private set; }
 
-        public Guid BuyerId { get;  set; }
+        public Guid BuyerId { get; private set; }
 
-      //  private List<BasketItem> _basketItem = [];
+        //  private List<BasketItem> _basketItem = [];
 
-        public List<BasketItem> Items { get; set; }
+        public List<BasketItem> Items { get; private set; } = [];
 
+        private CustomerBasket() { } // For Ef Core
 
-        public CustomerBasket()
+        public CustomerBasket(Guid buyerId, long buyerChatId)
         {
-            Items = new List<BasketItem>();
+            CustomerBasketId = Guid.NewGuid();
+            BuyerId = buyerId;
+            BuyerChatId = buyerChatId;
+        }
+
+        public static CustomerBasket CreateNew(Guid buyerId, long buyerChatId)
+        {
+            return new CustomerBasket(
+                buyerId,
+                buyerChatId);
         }
 
 
@@ -44,14 +55,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
                 return Result.Fail("Item not found");
 
             if (quantity > 1)
-                basketItem.Quantity = quantity;
+                basketItem.UpdateQuantity(quantity);
 
             if (isDelivery != basketItem.IsDelivery)
-                basketItem.IsDelivery = isDelivery; 
+                basketItem.SetDelivery(isDelivery, delvieryTime);
+               // basketItem.IsDelivery = isDelivery; 
 
             if(isDelivery == true && delvieryTime != default)
-                basketItem.DeliveryDateTime = delvieryTime;
-
+                basketItem.SetDelivery(isDelivery, delvieryTime);
+            //basketItem.DeliveryDateTime = delvieryTime;
             return Result.Ok();
         }
      
@@ -87,21 +99,6 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             Items.Clear();
             AddDomainEvent(new BasketClearedDomainEvent());
             return Result.Ok();
-        }
-
-        public CustomerBasket(Guid buyerId, long buyerChatId)
-        {
-            CustomerBasketId = Guid.NewGuid();
-            BuyerId = buyerId;  
-            BuyerChatId = buyerChatId;
-        }
-
-        public CustomerBasket(Guid buyerId, Guid basketId/*, long buyerChatId*/)
-        {
-            CustomerBasketId = basketId;
-            BuyerId = buyerId;
-            //BuyerChatId = buyerChatId;
-            // Items = new List<BasketItem>(); 
         }
     }
 }

@@ -10,7 +10,12 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         public bool IsSelfPickup { get; private set; }
         public string Address { get; private set; }
 
-        private DeliveryOptions(bool isSelfPickup, string deliveryMethod, string address, decimal deliveryCost, DateTime deliveryDateTime)
+        private DeliveryOptions(
+            bool isSelfPickup,
+            string deliveryMethod, 
+            string address,
+            decimal deliveryCost,
+            DateTime deliveryDateTime)
         {
             IsSelfPickup = isSelfPickup;
             DeliveryMethod = deliveryMethod;
