@@ -10,17 +10,11 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 {
     public class ConsumerActivatedIntegretionEvent : IntegrationEvent
     {
-
         public Guid UserId { get; }
-
         public string PhoneNumber { get; }
-
         public long ChatId { get; } 
-
         public string FirstName { get; }
-
         public string LastName { get; }
-
         public string Name { get; }
 
         public ConsumerActivatedIntegretionEvent(

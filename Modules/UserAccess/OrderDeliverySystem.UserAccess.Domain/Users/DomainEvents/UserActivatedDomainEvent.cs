@@ -23,8 +23,13 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users.DomainEvents
         public string Name { get; }
 
 
-        public UserActivatedDomainEvent( Guid userId,
-            string phoneNumber, long chatId, string firstName, string lastName, string name)
+        public UserActivatedDomainEvent( 
+            Guid userId,
+            string phoneNumber, 
+            long chatId,
+            string firstName,
+            string lastName,
+            string name)
         {
             UserId = userId;
             PhoneNumber = phoneNumber;

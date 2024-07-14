@@ -13,14 +13,11 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CleanBasket
     public class CleanBasketCommandHandler : IRequestHandler<CleanBasketCommand, Result<CleanBasketDto>>
     {
         private readonly IBasketRepository _basketRepository;
-        private readonly IMediator _mediator;
 
         public CleanBasketCommandHandler(
-            IBasketRepository userRepository,
-            IMediator mediator)
+            IBasketRepository userRepository)
         {
             _basketRepository = userRepository;
-            _mediator = mediator;
         }
 
         public async Task<Result<CleanBasketDto>> Handle(CleanBasketCommand request, CancellationToken cancellationToken)

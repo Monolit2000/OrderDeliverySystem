@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer
 
         public async Task<Result<BuyerDto>> Handle(AddBuyerCommand request, CancellationToken cancellationToken)
         {
-            var buerExist = await _buyerRepository.FindAsync(request.ChatId);
+            var buerExist = await _buyerRepository.GetByChatIdAsync(request.ChatId);
             
             if (buerExist != null)
             {

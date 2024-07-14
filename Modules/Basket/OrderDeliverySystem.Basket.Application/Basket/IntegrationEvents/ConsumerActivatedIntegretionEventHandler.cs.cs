@@ -1,14 +1,6 @@
 ﻿using MediatR;
 using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
-using OrderDeliverySystem.CommonModule.Infrastructure.EventBus;
 using OrderDeliverySystem.UserAccess.IntegrationEvents;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
 {
@@ -22,7 +14,9 @@ namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
         }
         public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new CreateBasketCommand(notification.UserId, notification.ChatId));
+            await _mediator.Send(new CreateBasketCommand(
+                notification.UserId,
+                notification.ChatId));
         }
     }
 }

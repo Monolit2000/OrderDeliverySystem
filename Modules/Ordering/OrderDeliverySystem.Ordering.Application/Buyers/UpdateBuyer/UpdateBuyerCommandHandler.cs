@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.UpdateBuyer
         public async Task<Result<UpdateBuyerDto>> Handle(UpdateBuyerCommand request, CancellationToken cancellationToken)
         {
 
-           var buyerToUpdate = await _buyerRepository.FindAsync(request.ChatId);
+           var buyerToUpdate = await _buyerRepository.GetByChatIdAsync(request.ChatId);
 
             throw new NotImplementedException();
 

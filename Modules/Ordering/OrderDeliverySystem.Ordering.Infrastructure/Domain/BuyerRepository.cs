@@ -24,12 +24,15 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain
             await _orderContext.SaveChangesAsync(); 
         }
 
-        public async Task<Buyer> FindAsync(long chatId)
+        public async Task<Buyer> GetByChatIdAsync(long chatId)
         {
-          return  await _orderContext.Buyers.FirstOrDefaultAsync(o=> o.BuyerChatId == chatId);
+            var buyer = await _orderContext.Buyers
+                .FirstOrDefaultAsync(o => o.BuyerChatId == chatId);
+
+            return buyer;
         }
 
-        public Task<Buyer> FindByIdAsync(int id)
+        public Task<Buyer> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

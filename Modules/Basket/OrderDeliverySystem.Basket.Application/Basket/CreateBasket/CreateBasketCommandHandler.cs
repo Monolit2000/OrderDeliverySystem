@@ -1,8 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
-using OrderDeliverySystem.Basket.Application.Basket.UpdateBaske;
 using OrderDeliverySystem.Basket.Domain.Baskets;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
@@ -18,7 +16,6 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
 
         public async Task<Result<BasketDto>> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
-
             var basketToDelete = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
 
             if (basketToDelete != null)
@@ -29,8 +26,6 @@ namespace OrderDeliverySystem.Basket.Application.Basket.CreateBasket
                 request.BuyerChatId);
 
             await _basketRepository.AddBasketAsync(basket);
-
-           // await Console.Out.WriteLineAsync("Basket created");
 
             return new BasketDto { BasketId = basket.CustomerBasketId };
 

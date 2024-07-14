@@ -13,7 +13,7 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
 
         Task Delete(Buyer buyer);
 
-        Task<Buyer> FindAsync(long chatId);
-        Task<Buyer> FindByIdAsync(int id);
+        Task<Buyer> GetByChatIdAsync(long chatId);
+        Task<Buyer> GetByIdAsync(int id);
     }
 }

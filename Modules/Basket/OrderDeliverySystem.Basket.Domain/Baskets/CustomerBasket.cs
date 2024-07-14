@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using OrderDeliverySystem.Basket.Domain.Baskets.Event;
 using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
@@ -77,13 +78,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             return true;
         }
 
-        public bool CleanBasket()
+
+        public Result CleanBasket()
         {
             if (!Items.Any())
-                return true;
+                return Result.Ok();
 
             Items.Clear();
-            return true;
+            AddDomainEvent(new BasketClearedDomainEvent());
+            return Result.Ok();
         }
 
         public CustomerBasket(Guid buyerId, long buyerChatId)
