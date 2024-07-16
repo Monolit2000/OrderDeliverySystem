@@ -30,7 +30,9 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Application.Payment
                 request.Amount,
                 request.PaymentDate));
 
-            return new PaymentCheckoutResponce(request.OrderId, responce.Value.CheckoutUri);
+            var checkoutUri = responce.Value.CheckoutUri;
+
+            return new PaymentCheckoutResponce(request.OrderId, checkoutUri);
         }
     }
 }

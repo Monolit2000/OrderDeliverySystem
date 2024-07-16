@@ -16,7 +16,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Authentication.DomainEventH
 
         public async Task Handle(UserActivatedDomainEvent notification, CancellationToken cancellationToken)
         {
-           await _eventBus.PublishAsync(new ConsumerActivatedIntegretionEvent(
+           await _eventBus.PublishAsync(new UserRegisteredIntegretionEvent(
                 notification.UserId,
                 notification.PhoneNumber,
                 notification.ChatId,

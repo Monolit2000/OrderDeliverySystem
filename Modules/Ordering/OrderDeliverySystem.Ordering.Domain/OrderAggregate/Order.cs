@@ -219,6 +219,8 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             if (isDelivery)
                 orderItem.AddDeliveryProrerty(deliveryDateTime, address);
 
+            AddDomainEvent();
+
             _orderItems.Add(orderItem);
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.UserAccess.IntegrationEvents
 {
-    public class ConsumerActivatedIntegretionEvent : IntegrationEvent
+    public class UserRegisteredIntegretionEvent : IntegrationEvent
     {
         public Guid UserId { get; }
         public string PhoneNumber { get; }
@@ -17,7 +17,7 @@ namespace OrderDeliverySystem.UserAccess.IntegrationEvents
         public string LastName { get; }
         public string Name { get; }
 
-        public ConsumerActivatedIntegretionEvent(
+        public UserRegisteredIntegretionEvent(
             Guid userId, 
             string phoneNumber, 
             long chatId,

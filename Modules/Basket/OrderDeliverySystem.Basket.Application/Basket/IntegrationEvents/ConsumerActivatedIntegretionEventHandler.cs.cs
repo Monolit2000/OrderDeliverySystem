@@ -4,7 +4,7 @@ using OrderDeliverySystem.UserAccess.IntegrationEvents;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
 {
-    public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<ConsumerActivatedIntegretionEvent>
+    public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<UserRegisteredIntegretionEvent>
     {
         private readonly IMediator _mediator;
 
@@ -12,7 +12,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.IntegrationEvents
         {
             _mediator = mediator;
         }
-        public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(UserRegisteredIntegretionEvent notification, CancellationToken cancellationToken)
         {
             await _mediator.Send(new CreateBasketCommand(
                 notification.UserId,

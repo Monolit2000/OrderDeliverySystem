@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Buyers.IntegrationEventsHandlers
 {
-    public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<ConsumerActivatedIntegretionEvent>
+    public class ConsumerActivatedIntegretionEventHandler : INotificationHandler<UserRegisteredIntegretionEvent>
     {
         private readonly IMediator _mediator;
 
@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Ordering.Application.Buyers.IntegrationEventsHandl
             _mediator = mediator;
         }
 
-        public async Task Handle(ConsumerActivatedIntegretionEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(UserRegisteredIntegretionEvent notification, CancellationToken cancellationToken)
         {
             await _mediator.Send(new AddBuyerCommand(
                 notification.UserId, 

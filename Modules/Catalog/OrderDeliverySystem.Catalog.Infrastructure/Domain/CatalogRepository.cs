@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
+using OrderDeliverySystem.Catalog.Domain.Establishments;
 using OrderDeliverySystem.Catalog.Infrastructure.Persistence;
 
 namespace OrderDeliverySystem.Catalog.Infrastructure.Domain

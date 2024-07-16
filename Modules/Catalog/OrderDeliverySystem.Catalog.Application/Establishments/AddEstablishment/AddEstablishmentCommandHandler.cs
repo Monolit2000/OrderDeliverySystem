@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
+using OrderDeliverySystem.Catalog.Domain.Establishments;
 using System;
 using System.Collections.Generic;
 using System.Linq;

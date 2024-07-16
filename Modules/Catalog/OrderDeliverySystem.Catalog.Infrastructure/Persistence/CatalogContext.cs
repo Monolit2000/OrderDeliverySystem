@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
+using OrderDeliverySystem.Catalog.Domain.Establishments;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;

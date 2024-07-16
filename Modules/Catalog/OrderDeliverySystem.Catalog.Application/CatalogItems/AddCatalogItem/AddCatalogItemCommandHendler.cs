@@ -27,11 +27,12 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
             //    return Result.Fail("Establishment not found");
 
 
-            var catalogItem = new CatalogItem(
+            var catalogItem = CatalogItem.CreateNew(
                 request.Name,
                 request.TimeToExist,
                 request.Description,
-                request.Price);
+                request.Price)
+                .Value;
 
             await _catalogRepository.AddCatalogItemAsync(catalogItem);
 

@@ -21,6 +21,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public string Name { get; private set; }
 
+        public UserName UserName { get; private set; }
+
         public PhoneNumber PhoneNumber { get; private set; }
 
         public UserRole Role { get; private set; }
@@ -32,14 +34,12 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public long ChatId { get; private set; }
 
-        private User()
-        {
-            
-        }
+        private User() { } // For Ef Core
+    
 
 
         private User(
-           Guid id,  PhoneNumber phoneNumber, string firstName, string lastName, string name, UserRole role)
+           Guid id,  PhoneNumber phoneNumber, string firstName, string lastName, string name, UserRole role, string workAddress = "")
         {
             UserId = id;    
             PhoneNumber = phoneNumber;
@@ -47,23 +47,12 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             LastName = lastName;
             Name = name;
             Role = role;
+            WorkAddress = workAddress;
 
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }
 
-
-        private User(
-         Guid id, PhoneNumber phoneNumber, string firstName, string lastName, string name, UserRole role, string workAddress)
-        {
-            UserId = id;
-            PhoneNumber = phoneNumber;
-            FirstName = firstName;
-            LastName = lastName;
-            Name = name;
-            Role = role;
-            WorkAddress = workAddress;  
-            this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
-        }
+     
 
 
         public Result ChangeFirstName(string firstName)

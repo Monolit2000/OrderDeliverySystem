@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace OrderDeliverySystem.Catalog.Domain.Catalog
+namespace OrderDeliverySystem.Catalog.Domain.Establishments
 {
-    public class Establishment : Entity
+    public class Establishment : Entity, IAggregateRoot
     {
-        
-       
-        public Guid EstablishmentId { get; set; } 
-
-       // public Guid CatalogItemId { get; set; } 
+        public Guid EstablishmentId { get; set; }
 
         public string Name { get; set; }
 
@@ -27,12 +23,12 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             EstablishmentId = Guid.NewGuid();
 
-            Name = name;    
+            Name = name;
         }
 
-        public static Establishment Create(string name) 
+        public static Establishment Create(string name)
         {
-            return new Establishment(name); 
+            return new Establishment(name);
         }
     }
 }

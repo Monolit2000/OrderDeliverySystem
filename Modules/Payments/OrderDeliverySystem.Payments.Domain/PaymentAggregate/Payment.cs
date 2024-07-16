@@ -1,12 +1,6 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
 using OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
 {
@@ -28,7 +22,20 @@ namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
             PayerId = payerId;
             Amount = amount;
             PaymentDate = DateTime.UtcNow;
-            PaymentStatus = PaymentStatus.Pending;  
+            PaymentStatus = PaymentStatus.Pending;
+
+            AddDomainEvent(new PaymentCreatedDomainEvent());
+        }
+
+        public static Payment CreateNew(
+            Guid orderId,
+            Guid payerId,
+            decimal amount)
+        {
+            return new Payment(
+                orderId, 
+                payerId, 
+                amount);
         }
 
         public Result SuccessPayment()

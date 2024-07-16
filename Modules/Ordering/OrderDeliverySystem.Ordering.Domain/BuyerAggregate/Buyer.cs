@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Events;
 
 namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
 {
@@ -40,6 +41,8 @@ namespace OrderDeliverySystem.Ordering.Domain.BuyerAggregate
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
             PhoneNumber = phoneNumber;
             WorkAddress = "Default";
+
+            AddDomainEvent(new BuyerCreatedDomainEvent());
         }
 
         public static Buyer CreateNew(

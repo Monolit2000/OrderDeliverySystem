@@ -1,42 +1,21 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Numerics;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using OrderDeliverySystem.Catalog.Domain.Catalog.Events;
 
 namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
     public class CatalogItem : Entity, IAggregateRoot
     {
-
         public Guid CatalogItemId { get; private set; }
-
         public string Name { get; private set; }
-
         public DateTime TimeToItemExist { get; private set; }
-
         public Guid ProductId { get; private set; }
-
         public string Description { get; private set; }
-
         public decimal Price { get; private set; }
-
         public string PictureFileName { get; private set; } = string.Empty;
-
         public string PictureUri { get; private set; } = string.Empty;
 
-
-        private CatalogItem()
-        {
-
-        }
+        private CatalogItem() { } // For EF core
 
         public CatalogItem(
             Guid id, 
@@ -56,23 +35,18 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             Price = price;
             PictureFileName = pictureFileName;
             PictureUri = pictureUri;
+
+            AddDomainEvent(new CatalogItemCreatedDomainEvent());
         }
 
 
-        public CatalogItem(
+        public static Result<CatalogItem> CreateNew(
             string name,
-            DateTime timeToItemExist,
-            string description,
-            decimal price)
-        {
-            CatalogItemId = Guid.NewGuid();
-            TimeToItemExist = timeToItemExist;
-            SetName(name);
-            Description = description;
-            Price = price;
-        }
-
-        public static Result<CatalogItem> CreateNew(string name, DateTime timeToItemExist, Guid productId, string description, decimal price, string pictureFileName = "", string pictureUri = "")
+            DateTime timeToItemExist, 
+            string description, 
+            decimal price,
+            string pictureFileName = "",
+            string pictureUri = "")
         {
             if (price <= 0)
                 return Result.Fail<CatalogItem>("Price must be greater than zero.");
@@ -82,7 +56,6 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
                 CatalogItemId = Guid.NewGuid(),
                 Name = name,
                 TimeToItemExist = timeToItemExist,
-                ProductId = productId,
                 Description = description,
                 Price = price,
                 PictureFileName = pictureFileName,
@@ -112,6 +85,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             }
             Price = newPrice;
 
+            AddDomainEvent(new CatalogItemPriceChangedDomainEvent());
             return Result.Ok();
         }
 
@@ -127,6 +101,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             TimeToItemExist = newDateTime;
 
+            AddDomainEvent(new TimeToItemExistChangedDomainEvent());
             return Result.Ok();
         }
 
@@ -134,6 +109,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             PictureUri = uri;
 
+            AddDomainEvent(new CatalogItemPictureChangedDomainEvent());
             return Result.Ok();
         }
 
