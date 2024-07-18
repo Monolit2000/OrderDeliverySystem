@@ -5,7 +5,8 @@ using LiqPay.SDK.Dto.Enums;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
+using OrderDeliverySystem.Payments.Domain.Payers;
 
 namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
 {
@@ -47,9 +48,9 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl
 
             string сheckoutUri = $"https://www.liqpay.ua/api/3/checkout?data={Uri.EscapeDataString(paymentDetails.Key)}&signature={Uri.EscapeDataString(paymentDetails.Value)}";
 
-            var payment = new Payment(
-                request.OrderId,
-                request.UserId, 
+            var payment = Payment.CreateNew(
+                new OrderId(request.OrderId),
+                new PayerId(request.UserId),
                 request.Amount);
 
             await _paymentRepository.AddAsync(payment);

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
 using System;
 using System.Collections.Generic;
 using System.Linq;

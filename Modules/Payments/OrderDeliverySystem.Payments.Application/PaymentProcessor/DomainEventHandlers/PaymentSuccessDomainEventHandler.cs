@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents;
+using OrderDeliverySystem.Payments.Domain.Payments.DomainEvents;
 using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;
@@ -33,8 +33,8 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventH
                  DateTime.UtcNow);
 
             await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
-                notification.PaymentId,
-                notification.OrderId));
+                notification.PaymentId.Value,
+                notification.OrderId.Value));
         }
     }
 }

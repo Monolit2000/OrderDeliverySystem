@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
 
 namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentStatus
 {

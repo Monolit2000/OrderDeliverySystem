@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents;
+using OrderDeliverySystem.Payments.Domain.Payments.DomainEvents;
 using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventH
         {
             //await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
             //    notification.OrderId,
-            //    notification.PaymentId));
+            //    notification.Id));
         }
     }
 }

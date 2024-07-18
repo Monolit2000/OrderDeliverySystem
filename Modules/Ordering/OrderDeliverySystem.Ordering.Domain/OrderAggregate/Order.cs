@@ -1,13 +1,9 @@
 ﻿using OrderDeliverySystem.CommonModule.Domain;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
 using FluentResults;
+using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
 using OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents;
 
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
@@ -15,30 +11,20 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
     public class Order : Entity, IAggregateRoot
     {
         public Guid OrderId { get; private set; }
+        public Guid BuyerId { get; private set; }
 
         public DateTime OrderDate { get; private set; }
 
         public string Address { get; private set; }
 
-        public Guid BuyerId { get; private set; }
 
-        public Buyer Buyer { get; private set; }    
+        public Buyer Buyer { get; private set; }
 
         public OrderStatus OrderStatus { get; private set; }
 
         public string Description { get; private set; }
-        public decimal Amount 
-        {
-            get 
-            {
-                return OrderItems
-                  .Sum(item =>
-                      (item.UnitPrice - item.Discount) * item.Units +
-                      (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
-            }
-        }
 
-        private readonly List<OrderItem> _orderItems = [];
+        private readonly List<OrderItem> _orderItems = new();
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
@@ -55,36 +41,65 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Address = address;
             Description = "The order was submitted";
 
-            AddDomainEvent(new OrderStarterDomainEvent());
+            AddDomainEvent(new OrderCreatedDomainEvent());
         }
 
-        public static Order CreateNew(
-            Guid buyerId, 
-            string address)
+        public static Order CreateNew(Guid buyerId, string address)
         {
-            return new Order(
-                buyerId, 
-                address);
+            return new Order(buyerId, address);
+        }
+
+        public Result AddOrderItem(
+            Guid orderItemId, 
+            string productName,
+            decimal unitPrice, 
+            decimal discount,
+            string pictureUrl, 
+            bool isDelivery, 
+            DateTime deliveryDateTime, 
+            string address, 
+            int units = 1)
+        {
+            var existingOrderForProduct = _orderItems
+                .FirstOrDefault(o => o.ProductId == orderItemId);
+
+            if (existingOrderForProduct != null)
+                return Result.Fail(OrderErrors.ProductAlreadyAdded);
+
+            var orderItem = OrderItem.CreateNew(
+                orderItemId, 
+                productName, 
+                unitPrice,
+                discount,
+                pictureUrl, 
+                units);
+
+            if (isDelivery)
+                orderItem.AddDeliveryProrerty(deliveryDateTime, address);
+
+            _orderItems.Add(orderItem);
+
+            return Result.Ok();
         }
 
         public decimal GetAmount()
         {
             return OrderItems.Sum(item =>
-                      (item.UnitPrice - item.Discount) * item.Units +
-                      (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
-
-            //return OrderItems.Sum(item => 
-            //(item.UnitPrice - item.Discount) * item.Units);
+                (item.UnitPrice - item.Discount) * item.Units +
+                (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
         }
 
-        public Result ChangeDeliveryTime(Guid orderItemId, DateTime newDeliveriDetaTime)
+        public Result ChangeDeliveryTime(
+            Guid orderItemId, 
+            DateTime newDeliveryDateTime)
         {
-            var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
+            var orderItem = OrderItems
+                .FirstOrDefault(oi => oi.OrderItemId == orderItemId);
 
             if (orderItem == null)
-                return Result.Fail("Ored item not found");
+                return Result.Fail(OrderErrors.OrderItemNotFound);
 
-            var changeDeliveryTimeResult = orderItem.ChangeDeliveryTime(newDeliveriDetaTime);
+            var changeDeliveryTimeResult = orderItem.ChangeDeliveryTime(newDeliveryDateTime);
 
             if (changeDeliveryTimeResult.IsFailed)
                 return changeDeliveryTimeResult;
@@ -92,13 +107,12 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
-
         public Result ChangeDeliveryAddress(Guid orderItemId, string newAddress)
         {
             var orderItem = OrderItems.FirstOrDefault(oi => oi.OrderItemId == orderItemId);
 
             if (orderItem == null)
-                return Result.Fail("Ored item not found");
+                return Result.Fail(OrderErrors.OrderItemNotFound);
 
             var changeDeliveryAddressResult = orderItem.ChangeDeliveryAddress(newAddress);
 
@@ -121,7 +135,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public Result SetAwaitingValidationStatus()
         {
-
             OrderStatus = OrderStatus.AwaitingValidation;
             Description = "Order awaiting validation";
 
@@ -141,7 +154,6 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
-
         public Result SetShippedStatus()
         {
             OrderStatus = OrderStatus.Shipped;
@@ -151,29 +163,27 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             return Result.Ok();
         }
 
-
         public Result SetCancelledStatus()
         {
             OrderStatus = OrderStatus.Cancelled;
-            Description = $"The order was cancelled.";
+            Description = "The order was cancelled.";
 
             AddDomainEvent(new OrderCancelledDomainEvent(OrderId, BuyerId));
             return Result.Ok();
         }
 
-        public Result PaidFaild(string reason)
+        public Result PaidFailed(string reason)
         {
-            OrderStatus = OrderStatus.PaidFaild;    
+            OrderStatus = OrderStatus.PaidFailed;
             Description = reason;
 
             AddDomainEvent(new OrderPaymentFailedDomainEvent(OrderId, BuyerId, reason));
-            return Result.Ok();  
+            return Result.Ok();
         }
 
-        #endregion 
+        #endregion
 
-
-        public Order(Guid buyerId, string userName, string address) 
+        public Order(Guid buyerId, string userName, string address)
         {
             OrderId = Guid.NewGuid();
             BuyerId = buyerId;
@@ -182,46 +192,23 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Address = address;
             Description = "The order was submitted";
 
-            AddOrderStartedDomainEvent(buyerId, userName);
+            OrderStartedDomainEvent(buyerId, userName);
         }
 
-        private void AddOrderStartedDomainEvent(Guid userId, string userName)
+        private void OrderStartedDomainEvent(Guid userId, string userName)
         {
-            //var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName, cardTypeId,
-            //                                                            cardNumber, cardSecurityNumber,
-            //                                                            cardHolderName, cardExpiration);
-
+            //var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName);
             //this.AddDomainEvent(orderStartedDomainEvent);
-        }
-
-
-
-
-
-        public void AddOrderItem(
-            Guid orderItemId,
-            string productName,
-            decimal unitPrice,
-            decimal discount,
-            string pictureUrl,
-            bool isDelivery,
-            DateTime deliveryDateTime,
-            string address,
-            int units = 1)
-        {
-            var existingOrderForProduct = _orderItems.FirstOrDefault(o => o.ProductId == orderItemId);
-
-            if (existingOrderForProduct != null)
-                throw new Exception("Product has already been added");
-
-            var orderItem = new OrderItem(orderItemId, productName, unitPrice, discount, pictureUrl, units);
-
-            if (isDelivery)
-                orderItem.AddDeliveryProrerty(deliveryDateTime, address);
-
-            AddDomainEvent();
-
-            _orderItems.Add(orderItem);
         }
     }
 }
+//public decimal Amount 
+//{
+//    get 
+//    {
+//        return OrderItems
+//          .Sum(item =>
+//              (item.UnitPrice - item.Discount) * item.Units +
+//              (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
+//    }
+//}

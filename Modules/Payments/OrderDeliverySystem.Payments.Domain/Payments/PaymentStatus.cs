@@ -7,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate
+namespace OrderDeliverySystem.Payments.Domain.Payments
 {
     public class PaymentStatus : ValueObject
     {

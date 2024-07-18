@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents
+namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents
 {
-    public class PaymentCreatedDomainEvent : DomainEventBase
+    public class OrderCreatedDomainEvent : DomainEventBase
     {
     }
 }

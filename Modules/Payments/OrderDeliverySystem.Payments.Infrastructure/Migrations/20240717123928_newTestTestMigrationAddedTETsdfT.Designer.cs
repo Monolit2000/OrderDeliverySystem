@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
 {
     [DbContext(typeof(PaymentContext))]
-    partial class PaymentContextModelSnapshot : ModelSnapshot
+    [Migration("20240717123928_newTestTestMigrationAddedTETsdfT")]
+    partial class newTestTestMigrationAddedTETsdfT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

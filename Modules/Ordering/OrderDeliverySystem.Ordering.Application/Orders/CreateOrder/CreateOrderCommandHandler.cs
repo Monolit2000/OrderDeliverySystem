@@ -25,16 +25,19 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
             foreach (var item in request.OrderItems)
             {
-                order.AddOrderItem(
+               var result = order.AddOrderItem(
                     item.ItemId,
                     item.ProductName,
-                    item.UnitPrice, 
-                    item.Discount, 
-                    item.PictureUrl, 
+                    item.UnitPrice,
+                    item.Discount,
+                    item.PictureUrl,
                     item.IsDelivery,
                     item.DeliveryDateTime,
                     request.Adderss,
                     item.Units);
+
+                if (result.IsFailed)
+                    return result;
             }
 
             var addOrderTask = _orderRepository.AddAsync(order);
@@ -43,18 +46,18 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
             {
                 UserId = order.BuyerId,
                 OrderId = order.OrderId,
-                Amount = order.Amount
+                Amount = order.GetAmount(),
             });
 
             await Task.WhenAll(addOrderTask, getCheckoutUrlResultTask);
 
             if (getCheckoutUrlResultTask.Result.IsFailed)
-            {
                 return Result.Fail<CreateOrderDto>(getCheckoutUrlResultTask.Result.Errors);
-            }
 
             var getCheckoutUrlResponce = getCheckoutUrlResultTask.Result.Value;
-            var createOrderDto = new CreateOrderDto(order.OrderId, getCheckoutUrlResponce.CheckoutUrl);
+
+            var createOrderDto = new CreateOrderDto(
+                order.OrderId, getCheckoutUrlResponce.CheckoutUrl);
 
             return Result.Ok(createOrderDto);
         }

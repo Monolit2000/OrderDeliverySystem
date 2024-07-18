@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Payments.Domain.PaymentAggregate.DomainEvents
+namespace OrderDeliverySystem.Payments.Domain.Payments.DomainEvents
 {
     public class PaymentStatusChangedDomainEvent : DomainEventBase
     {
-        public Guid PaymentId { get; }
+        public PaymentId PaymentId { get; }
         public string OldStatus { get; }
         public string NewStatus { get; }
 
-        public PaymentStatusChangedDomainEvent(Guid paymentId, string oldStatus, string newStatus)
+        public PaymentStatusChangedDomainEvent(PaymentId paymentId, string oldStatus, string newStatus)
         {
             PaymentId = paymentId;
             OldStatus = oldStatus;

@@ -1,10 +1,7 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents;
+using OrderDeliverySystem.Ordering.Domain.OrderAggregate.Errors;
 
 namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 {
@@ -29,11 +26,11 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         private OrderItem() { }
 
         public OrderItem(
-            Guid orderItemId, 
-            string productName, 
-            decimal unitPrice, 
-            decimal discount, 
-            string pictureUrl, 
+            Guid orderItemId,
+            string productName,
+            decimal unitPrice,
+            decimal discount,
+            string pictureUrl,
             int units = 1)
         {
             ProductId = orderItemId;
@@ -43,38 +40,36 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
             Units = units;
             PictureUrl = pictureUrl;
             DeliveryOptions = DeliveryOptions.SelfPickup(DateTime.Now, "Default");
+
+            AddDomainEvent(new OrderItemAddedDomainEvent());
         }
 
-
-        public OrderItem(
-            Guid orderItemId, 
+        public static OrderItem CreateNew(
+            Guid orderItemId,
             string productName,
-            decimal unitPrice, 
-            decimal discount, 
+            decimal unitPrice,
+            decimal discount,
             string pictureUrl,
-            DeliveryOptions deliveryOptions, 
             int units = 1)
         {
-            ProductId = orderItemId;
-            ProductName = productName;
-            UnitPrice = unitPrice;
-            Discount = discount;
-            PictureUrl = pictureUrl;
-            DeliveryOptions = deliveryOptions; 
-            Units = units;
+            return new OrderItem(
+                orderItemId,
+                productName,
+                unitPrice,
+                discount,
+                pictureUrl,
+                units);
         }
-
-
 
         public Result SetDefoultDeliveryOptions(DateTime dateTime, string selfPickupAddress)
         {
             DeliveryOptions = DeliveryOptions.SelfPickup(dateTime, selfPickupAddress);
-            return Result.Ok(); 
+            return Result.Ok();
         }
 
         public Result AddDeliveryProrerty(DateTime dateTime, string address)
         {
-            DeliveryOptions = DeliveryOptions.Delivery(dateTime, address, 20); 
+            DeliveryOptions = DeliveryOptions.Delivery(dateTime, address, 20);
             return Result.Ok();
         }
 
@@ -82,12 +77,12 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         {
             if (DeliveryOptions.DeliveryDateTime < DateTime.Now.AddHours(1))
             {
-                return Result.Fail("The new delivery time must be at least two hours from now.");
+                return Result.Fail(OrderItemErrors.DeliveryTimeTooSoon);
             }
 
             if (newDeliveryDateTime.Date != DeliveryOptions.DeliveryDateTime.Date)
             {
-                return Result.Fail("The new delivery date must match the originally planned delivery date.");
+                return Result.Fail(OrderItemErrors.DeliveryDateMismatch);
             }
 
             DeliveryOptions = DeliveryOptions.Delivery(
@@ -102,12 +97,12 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
         {
             if (DeliveryOptions.DeliveryDateTime < DateTime.Now.AddHours(1))
             {
-                return Result.Fail("Cannot change delivery address within 1 hour of delivery.");
+                return Result.Fail(OrderItemErrors.AddressChangeTooSoon);
             }
 
             if (string.IsNullOrEmpty(newAddress))
             {
-                return Result.Fail("New address cannot be empty.");
+                return Result.Fail(OrderItemErrors.EmptyNewAddress);
             }
 
             DeliveryOptions = DeliveryOptions.Delivery(

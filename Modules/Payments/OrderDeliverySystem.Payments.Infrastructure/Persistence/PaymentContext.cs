@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Startup;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Persistence

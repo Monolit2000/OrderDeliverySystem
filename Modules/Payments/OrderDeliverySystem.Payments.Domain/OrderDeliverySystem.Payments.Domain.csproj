@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\..\OrderDeliverySystem.CommonModule.Domain\OrderDeliverySystem.CommonModule.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Payers\Events\" />
+  </ItemGroup>
+
 </Project>

@@ -16,7 +16,7 @@ namespace OrderDeliverySystem.Ordering.Domain.OrderAggregate
 
         public static OrderStatus Paid => new OrderStatus(nameof(Paid));
 
-        public static OrderStatus PaidFaild => new OrderStatus(nameof(PaidFaild));
+        public static OrderStatus PaidFailed => new OrderStatus(nameof(PaidFailed));
 
         public static OrderStatus Shipped => new OrderStatus(nameof(Shipped));
 

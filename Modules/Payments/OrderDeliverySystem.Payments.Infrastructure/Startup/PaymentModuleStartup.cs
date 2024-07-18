@@ -7,7 +7,7 @@ using OrderDeliverySystem.Payments.Infrastructure.Contract;
 using OrderDeliverySystem.Payments.Infrastructure.EventBus;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Domain;
 using OrderDeliverySystem.Payments.Api;
 using OrderDeliverySystem.Payments.Infrastructure.Application.Payment;

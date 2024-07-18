@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrderDeliverySystem.Payments.Domain.PaymentAggregate;
+using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Domain
 
         public async Task<Payment?> GetByOrderIdAsync(Guid orderId)
         {
-            return await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == orderId);
+            return await _context.Payments.FirstOrDefaultAsync(p => p.OrderId.Value == orderId);
         }
 
         public async Task AddAsync(Payment payment)
