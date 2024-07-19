@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +13,13 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-
-
-            builder.HasKey(x => x.OrderId);
-
+            builder.HasKey(x => x.Id);
 
             builder.ComplexProperty(o => o.OrderStatus, b =>
             {
                 b.IsRequired();
                 b.Property(a => a.Value).HasColumnName("OrderStatus");
             });
-
         }
     }
 
@@ -48,11 +44,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
                 b.Property(a => a.DeliveryDateTime).HasColumnName("DeliveryDateTime");
                 b.Property(a => a.Address).HasColumnName("Address");
             });
-
         }
-
-
-
     }
-
 }

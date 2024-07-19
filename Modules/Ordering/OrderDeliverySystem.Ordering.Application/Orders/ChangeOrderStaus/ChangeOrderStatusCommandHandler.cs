@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using System.Reflection.Metadata.Ecma335;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus
@@ -38,7 +38,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus
 
             return new ChangeOrderStatusDto 
             { 
-                OrderId = order.OrderId, 
+                OrderId = order.Id.Value, 
                 OrderStatus = order.OrderStatus.Value 
             };
         }

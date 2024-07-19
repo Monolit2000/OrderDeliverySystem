@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.Payments.Api;
 using OrderDeliverySystem.Payments.Api.GetCheckoutUrl;
 using System;
@@ -45,7 +45,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
             var getCheckoutUrlResultTask = _paymentsApi.GetCheckoutUrl(new GetCheckoutUrlRequest
             {
                 UserId = order.BuyerId,
-                OrderId = order.OrderId,
+                OrderId = order.Id.Value,
                 Amount = order.GetAmount(),
             });
 
@@ -57,7 +57,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
             var getCheckoutUrlResponce = getCheckoutUrlResultTask.Result.Value;
 
             var createOrderDto = new CreateOrderDto(
-                order.OrderId, getCheckoutUrlResponce.CheckoutUrl);
+                order.Id.Value, getCheckoutUrlResponce.CheckoutUrl);
 
             return Result.Ok(createOrderDto);
         }

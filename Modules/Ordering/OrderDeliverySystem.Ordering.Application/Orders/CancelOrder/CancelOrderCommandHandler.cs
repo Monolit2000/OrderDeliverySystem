@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +37,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CancelOrder
 
             await _orderRepository.SaveChangesAsync();
 
-            return new CancelOrderDto(orderToUpdate.OrderId, orderToUpdate.OrderStatus);
+            return new CancelOrderDto(orderToUpdate.Id.Value, orderToUpdate.OrderStatus);
         }
     }
 }

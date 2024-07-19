@@ -11,8 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
-using OrderDeliverySystem.Catalog.Infrastructure.Domain;
 using OrderDeliverySystem.Catalog.Infrastructure.EventBus;
+using OrderDeliverySystem.Catalog.Infrastructure.Domain.Catalogs;
 
 namespace OrderDeliverySystem.Catalog.Infrastructure.Startup
 {

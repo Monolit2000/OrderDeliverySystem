@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
-using OrderDeliverySystem.Payments.Domain.Payments.DomainEvents;
+using OrderDeliverySystem.Payments.Domain.Payments.Events;
 using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;

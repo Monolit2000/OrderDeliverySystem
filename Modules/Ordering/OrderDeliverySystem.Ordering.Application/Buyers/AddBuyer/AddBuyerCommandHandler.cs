@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
+using OrderDeliverySystem.Ordering.Domain.Buyers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

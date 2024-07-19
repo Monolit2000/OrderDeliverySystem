@@ -3,9 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderDeliverySystem.CommonModule.Infrastructure.Domain;
 using OrderDeliverySystem.Ordering.Application.Contract;
-using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
-using OrderDeliverySystem.Ordering.Infrastructure.Domain;
+using OrderDeliverySystem.Ordering.Domain.Buyers;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +16,8 @@ using OrderDeliverySystem.Ordering.Infrastructure.EventBus;
 using MediatR;
 using OrderDeliverySystem.Ordering.Application.Behaviors;
 using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
+using OrderDeliverySystem.Ordering.Infrastructure.Domain.Buyers;
+using OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders;
 
 namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
 {

@@ -3,7 +3,7 @@ using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Payments.Api;
 using OrderDeliverySystem.Payments.Api.GetCheckoutUrl;
-using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
+using OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Application.Payment
         public async Task<Result<PaymentCheckoutResponce>> GetCheckoutUrl(GetCheckoutUrlRequest request)
         {
             var responce = await _mediator.Send(
-                new GetPaymentUrlCommand(
+                new GeneratePaymentUrlCommand(
                 request.UserId,
                 request.OrderId,
                 request.Amount,

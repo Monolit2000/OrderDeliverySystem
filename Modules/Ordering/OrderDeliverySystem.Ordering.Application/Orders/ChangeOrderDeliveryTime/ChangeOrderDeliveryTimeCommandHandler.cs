@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTime

@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
             var ordersDto = root
             .Select(order => new OrderDto
             {
-                OrderId = order.OrderId,
+                OrderId = order.Id,
                 BuyerId = order.BuyerId,
                 Created = order.OrderDate,
                 Status = order.OrderStatus.Value,

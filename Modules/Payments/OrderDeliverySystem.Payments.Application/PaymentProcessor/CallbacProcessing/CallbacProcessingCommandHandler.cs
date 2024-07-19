@@ -1,93 +1,68 @@
-﻿using FluentResults;
-using LiqPay.SDK;
+﻿using MediatR;
+using FluentResults;
 using LiqPay.SDK.Dto;
 using LiqPay.SDK.Dto.Enums;
-using MediatR;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
+using Microsoft.Extensions.Configuration;
 using OrderDeliverySystem.Payments.Domain.Payments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OrderDeliverySystem.Payments.Application.Contract;
+using OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl;
 
 namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing
 {
-    public class CallbacProcessingCommandHandler : IRequestHandler<CallbacProcessingCommand, Result<CallbacProcessingResult>>
+    public class CallbacProcessingCommandHandler : IRequestHandler<CallbackProcessingCommand, Result<CallbackProcessingResult>>
     {
-        private readonly ILogger<GetPaymentUrlCommandHandler> _logger;
+        private readonly ILogger<GeneratePaymentUrlCommandHandler> _logger;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IConfiguration _config;
+        private readonly ICallbackProcessingServise _callbackProcessingService;
 
         public CallbacProcessingCommandHandler(
             IPaymentRepository paymentRepository,
-            ILogger<GetPaymentUrlCommandHandler> logger,
-            IConfiguration config)
+            ILogger<GeneratePaymentUrlCommandHandler> logger,
+            IConfiguration config,
+            ICallbackProcessingServise callbacProcessingServise)
         {
             _logger = logger;
             _config = config;
             _paymentRepository = paymentRepository;
+            _callbackProcessingService = callbacProcessingServise;
         }
 
-        public async Task<Result<CallbacProcessingResult>> Handle(CallbacProcessingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CallbackProcessingResult>> Handle(CallbackProcessingCommand request, CancellationToken cancellationToken)
         {
-            if (request == null || string.IsNullOrEmpty(request.Data) || string.IsNullOrEmpty(request.Signature))
-            {
-                //Invalid request
-                return Result.Fail("Invalid request");
-            }
+            var result = await _callbackProcessingService.ProcessCallback(request.Data, request.Signature);
+            if (result.IsFailed)
+                return Result.Fail(result.Errors);
 
-            var liqPayClient = new LiqPayClient(_config["LiqPayPublicTestKey"], _config["LiqPayPrivateTestKey"]);
+            var liqPayResponse = result.Value;
+            if (!Guid.TryParse(liqPayResponse.OrderId, out var orderId))
+                return Result.Fail("Invalid Order ID");
 
-            liqPayClient.IsCnbSandbox = true;
-
-            // Generate the signature on the server side
-            var generatedSignature = liqPayClient.CreateSignature(request.Data);
-
-            //Compare signatures
-            if (generatedSignature != request.Signature)
-                return Result.Fail("Invalid signature");
-            
-
-            // Decode the data from Base64
-            var dataBytes = Convert.FromBase64String(request.Data);
-            var dataString = Encoding.UTF8.GetString(dataBytes);
-
-            var liqPayResponse = JsonConvert.DeserializeObject<LiqPayResponse>(dataString);
-
-            Guid result = Guid.Parse(liqPayResponse.OrderId);
-
-            var payment = await _paymentRepository.GetByOrderIdAsync(result);
-
+            var payment = await _paymentRepository.GetByOrderIdAsync(orderId);
             if (payment is null)
                 return Result.Fail("Payment not found");
 
-            payment.SuccessPayment();
+            ProcessPayment(payment, liqPayResponse);
 
+            await _paymentRepository.SaveChangesAsync();
+
+            return Result.Ok(new CallbackProcessingResult());
+        }
+
+        private void ProcessPayment(Payment payment, LiqPayResponse liqPayResponse)
+        {
             switch (liqPayResponse.Status)
             {
                 case LiqPayResponseStatus.Sandbox:
                 case LiqPayResponseStatus.Success:
                     payment.SuccessPayment();
                     break;
-
                 case LiqPayResponseStatus.Failure:
-                    payment.FailPayment(liqPayResponse.ErrorDescription);
-                    break;
-
                 default:
                     payment.FailPayment(liqPayResponse.ErrorDescription);
                     break;
-
             }
-
-            await _paymentRepository.SaveChangesAsync();
-
-            return new CallbacProcessingResult();
         }
     }
 }

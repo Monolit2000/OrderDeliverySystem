@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using OrderDeliverySystem.CommonModule.Infrastructure.AsyncEventBus;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate.DomainEvents;
+using OrderDeliverySystem.Ordering.Domain.Orders.Events;
 using OrderDeliverySystem.Ordering.IntegrationEvents;
 
 
@@ -17,7 +17,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.Events
 
         public async Task Handle(OrderPaidDomainEvent notification, CancellationToken cancellationToken)
         {
-            await _eventBus.PublishAsync(new OrderPaidIntegretionEvent(notification.BuyerId, notification.OrderId));
+            await _eventBus.PublishAsync(new OrderPaidIntegretionEvent(notification.BuyerId, notification.OrderId.Value));
         }
     }
 }

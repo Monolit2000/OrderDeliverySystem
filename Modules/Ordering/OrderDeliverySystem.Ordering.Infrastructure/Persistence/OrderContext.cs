@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Buyers;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;

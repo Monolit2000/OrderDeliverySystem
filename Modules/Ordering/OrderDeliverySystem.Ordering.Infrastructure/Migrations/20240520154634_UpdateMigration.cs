@@ -71,14 +71,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         column: x => x.OrderId,
                         principalSchema: "ordering",
                         principalTable: "Orders",
-                        principalColumn: "OrderId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
                 schema: "ordering",
                 table: "OrderItems",
-                column: "OrderId");
+                column: "Id");
         }
 
         /// <inheritdoc />

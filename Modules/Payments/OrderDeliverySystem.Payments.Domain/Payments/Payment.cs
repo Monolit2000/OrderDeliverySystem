@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.Payments.Domain.Payers;
-using OrderDeliverySystem.Payments.Domain.Payments.DomainEvents;
+using OrderDeliverySystem.Payments.Domain.Payments.Events;
 
 namespace OrderDeliverySystem.Payments.Domain.Payments
 {
@@ -40,6 +40,17 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
             return new Payment(
                 orderId, 
                 payerId, 
+                amount);
+        }
+
+        public static Payment StartPayment(
+            OrderId orderId,
+            PayerId payerId,
+            decimal amount)
+        {
+            return new Payment(
+                orderId,
+                payerId,
                 amount);
         }
 

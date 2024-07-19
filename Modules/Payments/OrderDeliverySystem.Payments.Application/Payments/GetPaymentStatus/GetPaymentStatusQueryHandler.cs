@@ -5,20 +5,20 @@ using LiqPay.SDK;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
+using OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl;
 using OrderDeliverySystem.Payments.Domain.Payments;
 
 namespace OrderDeliverySystem.Payments.Application.Payments.GetPaymentStatus
 {
     public class GetPaymentStatusQueryHandler : IRequestHandler<GetPaymentStatusQuery, Result<PaymentStatusDto>>
     {
-        private readonly ILogger<GetPaymentUrlCommandHandler> _logger;
+        private readonly ILogger<GeneratePaymentUrlCommandHandler> _logger;
         private readonly IPaymentRepository _paymentRepository;
         private readonly IConfiguration _config;
 
         public GetPaymentStatusQueryHandler(
             IPaymentRepository paymentRepository,
-            ILogger<GetPaymentUrlCommandHandler> logger,
+            ILogger<GeneratePaymentUrlCommandHandler> logger,
             IConfiguration config)
         {
             _logger = logger;

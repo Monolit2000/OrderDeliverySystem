@@ -4,7 +4,7 @@ using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.API.Modules.Payments.Payment.Model;
 using OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentStatus;
-using OrderDeliverySystem.Payments.Application.Payments.GetPaymentUrl;
+using OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl;
 
 namespace OrderDeliverySystem.API.Modules.Payments.Payment
 {
@@ -19,8 +19,8 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
         }
 
 
-        [HttpGet("GetPaymentUrl")]
-        public async Task<IActionResult> GetPaymentUrl([FromQuery] GetPaymentUrlCommand getPaymentUrlCommand)
+        [HttpGet("GeneratePaymentUrl")]
+        public async Task<IActionResult> GetPaymentUrl([FromQuery] GeneratePaymentUrlCommand getPaymentUrlCommand)
         {
             return HandleResult(await _mediator.Send(getPaymentUrlCommand));
         }
@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
         [HttpPost("LiqPayCallback")]
         public async Task<IActionResult> LiqPayCallback([FromForm] LiqPayCallbackModel request)
         {
-            return HandleResult(await _mediator.Send(new CallbacProcessingCommand(request.data, request.signature)));
+            return HandleResult(await _mediator.Send(new CallbackProcessingCommand(request.data, request.signature)));
         }
 
 

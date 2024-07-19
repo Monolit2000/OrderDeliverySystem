@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Notifications.Application.TelegramClient.SendNotification
 {
-  
-
     public class SendNotificationCommandHandler : IRequestHandler<SendNotificationCommand>
     {
         private readonly IConfiguration _configuration;

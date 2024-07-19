@@ -2,7 +2,7 @@
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.Payments.IntegrationEvents;
 using System;
 using System.Collections.Generic;

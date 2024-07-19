@@ -1,28 +1,20 @@
-﻿using Azure;
-using Azure.Core;
-using FluentResults;
+﻿using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using OrderDeliverySystem.Ordering.Application.Behaviors;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OrderDeliverySystem.Ordering.Domain.Orders;
+
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus
 {
     public class SetPaidOrderStatusCommandHandler : IRequestHandler<SetPaidOrderStatusCommand, Result<SetPaidOrderStatusDto>>
     {
-        public readonly IOrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly ILogger<SetPaidOrderStatusCommandHandler> _logger;
         public SetPaidOrderStatusCommandHandler(IOrderRepository orderRepository, ILogger<SetPaidOrderStatusCommandHandler> logger)
         {
             _orderRepository = orderRepository;
             _logger = logger;
         }
-
 
         public async Task<Result<SetPaidOrderStatusDto>> Handle(SetPaidOrderStatusCommand request, CancellationToken cancellationToken)
         {
@@ -31,10 +23,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus
             if (order == null)
                 return Result.Fail("Order not found");
 
-            if (order.SetPaidStatus().IsFailed)
-                return Result.Fail("Cannot set the order status to Paid because it is already Shipped.");
+            var result = order.SetPaidStatus();
+            if (!result.IsSuccess)
+                return result;
             
-
             await _orderRepository.SaveChangesAsync();
 
             return new SetPaidOrderStatusDto() 

@@ -68,10 +68,6 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public Result SetName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Name cannot be null or empty.");
-            }
             Name = name;
 
             return Result.Ok();
@@ -80,9 +76,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Result ChangePrice(decimal newPrice)
         {
             if (newPrice <= 0)
-            {
                 return Result.Fail("Price must be greater than zero.");
-            }
+            
             Price = newPrice;
 
             AddDomainEvent(new CatalogItemPriceChangedDomainEvent());
@@ -112,7 +107,5 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             AddDomainEvent(new CatalogItemPictureChangedDomainEvent());
             return Result.Ok();
         }
-
-
     }
 }

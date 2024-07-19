@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Buyers.Buyer", b =>
                 {
                     b.Property<Guid>("BuyerId")
                         .ValueGeneratedOnAdd()
@@ -58,9 +58,9 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.ToTable("Buyers", "ordering");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
                 {
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -81,7 +81,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order.OrderStatus#OrderStatus", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "OrderDeliverySystem.Ordering.Domain.Orders.Order.OrderStatus#OrderStatus", b1 =>
                         {
                             b1.IsRequired();
 
@@ -91,14 +91,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                                 .HasColumnName("OrderStatus");
                         });
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BuyerId");
 
                     b.ToTable("Orders", "ordering");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.OrderItem", b =>
                 {
                     b.Property<Guid>("OrderItemId")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("OrderId")
+                    b.Property<Guid?>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PictureUrl")
@@ -127,7 +127,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<int>("Units")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("DeliveryOptions", "OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem.DeliveryOptions#DeliveryOptions", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("DeliveryOptions", "OrderDeliverySystem.Ordering.Domain.Orders.OrderItem.DeliveryOptions#DeliveryOptions", b1 =>
                         {
                             b1.IsRequired();
 
@@ -156,14 +156,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.HasKey("OrderItemId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("Id");
 
                     b.ToTable("OrderItems", "ordering");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
                 {
-                    b.HasOne("OrderDeliverySystem.Ordering.Domain.BuyerAggregate.Buyer", "Buyer")
+                    b.HasOne("OrderDeliverySystem.Ordering.Domain.Buyers.Buyer", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -172,14 +172,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Navigation("Buyer");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.OrderItem", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.OrderItem", b =>
                 {
-                    b.HasOne("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", null)
+                    b.HasOne("OrderDeliverySystem.Ordering.Domain.Orders.Order", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("Id");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.OrderAggregate.Order", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

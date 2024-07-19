@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using OrderDeliverySystem.Ordering.Application.Buyers.AddBuyer;
-using OrderDeliverySystem.Ordering.Domain.BuyerAggregate;
-using OrderDeliverySystem.Ordering.Domain.OrderAggregate;
+using OrderDeliverySystem.Ordering.Domain.Buyers;
+using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.UserAccess.IntegrationEvents;
 using System;
 using System.Collections.Generic;
