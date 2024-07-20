@@ -65,6 +65,8 @@ builder.Services
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
+builder.Services.AddDistributedMemoryCache();
+
 //builder.Services.AddQuartz(configure =>
 //{
 //    var jobKey = new JobKey(nameof(ProcessOutboxMessagesJob));

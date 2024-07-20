@@ -11,6 +11,7 @@ using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Domain;
 using OrderDeliverySystem.Payments.Api;
 using OrderDeliverySystem.Payments.Infrastructure.Application.Payment;
+using OrderDeliverySystem.Payments.Infrastructure.Servises.Peyments;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Startup
 {
@@ -37,9 +38,10 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Startup
             });
 
             services.AddScoped<IPaymentRepository, PaymentRepository>();
-           
 
             services.AddScoped<IPaymentModule, PaymentModule>();
+
+            services.AddScoped<ICallbackProcessingServise, CallbacProcessingServise>();
 
             services.AddScoped<IPaymentsApi, PaymentsApi>();
 

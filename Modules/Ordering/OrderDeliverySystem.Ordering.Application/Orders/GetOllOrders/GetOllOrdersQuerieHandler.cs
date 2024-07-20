@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
             var ordersDto = root
             .Select(order => new OrderDto
             {
-                OrderId = order.Id,
+                OrderId = order.Id.Value,
                 BuyerId = order.BuyerId,
                 Created = order.OrderDate,
                 Status = order.OrderStatus.Value,

@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.Catalog.Domain.Catalog.Events;
+using System.Text.Json.Serialization;
 
 namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
@@ -18,16 +19,16 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         private CatalogItem() { } // For EF core
 
         public CatalogItem(
-            Guid id, 
+            Guid catalogItemId,
             string name,
-            DateTime timeToItemExist, 
+            DateTime timeToItemExist,
             Guid productId,
-            string description, 
+            string description,
             decimal price,
-            string pictureFileName, 
+            string pictureFileName,
             string pictureUri)
         {
-            CatalogItemId = id;
+            CatalogItemId = catalogItemId;
             Name = name;
             TimeToItemExist = timeToItemExist;
             ProductId = productId;

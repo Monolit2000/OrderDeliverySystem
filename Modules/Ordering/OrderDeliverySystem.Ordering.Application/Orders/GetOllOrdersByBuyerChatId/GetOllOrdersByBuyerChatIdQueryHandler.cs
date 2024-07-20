@@ -27,14 +27,15 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
                 return Result.Fail("order not faond by id ");
 
             var order = root
-            .Select(order => new OrderDto
+            .Select(o => new OrderDto
             {
-                OrderId = order.Id,
-                BuyerId = order.BuyerId,    
-                Created = order.OrderDate,
-                Status = order.OrderStatus.Value,
-                Description = order.Description,
-                OrderItems = order.OrderItems.Select(item => new OrderItemDto
+                OrderId = o.Id.Value,
+                BuyerId = o.BuyerId,    
+                Created = o.OrderDate,
+                Status = o.OrderStatus.Value,
+                Description = o.Description,
+                OrderItems = o.OrderItems
+                .Select(item => new OrderItemDto
                 {
                     ItemId = item.OrderItemId,
                     ProductName = item.ProductName,

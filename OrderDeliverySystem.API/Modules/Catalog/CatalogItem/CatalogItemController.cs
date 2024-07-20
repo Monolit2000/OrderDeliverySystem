@@ -70,9 +70,5 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         {
             return HandleResult(await _mediator.Send(editCatalogItemCommand));
         }
-
     }
-
-    
-
 }
