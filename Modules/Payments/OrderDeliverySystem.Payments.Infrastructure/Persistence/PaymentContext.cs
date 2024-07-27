@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Payments.Domain.Payments;
-using OrderDeliverySystem.Payments.Infrastructure.Startup;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
 {
@@ -15,7 +14,6 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
         { }
 
         public DbSet<Payment> Payments { get; set; }
-  
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

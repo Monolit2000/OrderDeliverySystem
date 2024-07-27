@@ -42,19 +42,19 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
             var addOrderTask = _orderRepository.AddAsync(order);
 
-            var getCheckoutUrlResultTask = _paymentsApi.GetCheckoutUrl(new GetCheckoutUrlRequest
+            var checkoutUrlResultTask = _paymentsApi.GetCheckoutUrl(new GetCheckoutUrlRequest
             {
                 UserId = order.BuyerId,
                 OrderId = order.Id.Value,
                 Amount = order.GetAmount(),
             });
 
-            await Task.WhenAll(addOrderTask, getCheckoutUrlResultTask);
+            await Task.WhenAll(addOrderTask, checkoutUrlResultTask);
 
-            if (getCheckoutUrlResultTask.Result.IsFailed)
-                return Result.Fail<CreateOrderDto>(getCheckoutUrlResultTask.Result.Errors);
+            if (checkoutUrlResultTask.Result.IsFailed)
+                return Result.Fail<CreateOrderDto>(checkoutUrlResultTask.Result.Errors);
 
-            var getCheckoutUrlResponce = getCheckoutUrlResultTask.Result.Value;
+            var getCheckoutUrlResponce = checkoutUrlResultTask.Result.Value;
 
             var createOrderDto = new CreateOrderDto(
                 order.Id.Value, getCheckoutUrlResponce.CheckoutUrl);

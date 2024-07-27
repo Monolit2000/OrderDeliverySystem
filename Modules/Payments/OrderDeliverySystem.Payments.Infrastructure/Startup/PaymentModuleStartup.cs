@@ -43,6 +43,8 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Startup
 
             services.AddScoped<ICallbackProcessingServise, CallbacProcessingServise>();
 
+            services.AddScoped<ILiqPayService, LiqPayService>();
+
             services.AddScoped<IPaymentsApi, PaymentsApi>();
 
             services.AddEventBusModule();

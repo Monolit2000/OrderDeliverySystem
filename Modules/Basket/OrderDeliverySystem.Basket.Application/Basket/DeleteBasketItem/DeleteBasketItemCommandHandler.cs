@@ -1,12 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Basket.Domain.Baskets;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem
 {
@@ -26,7 +20,9 @@ namespace OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem
             if (basket == null)
                 return Result.Fail("Basket dose not exist");
 
-            if(!basket.RemuveItem(request.BasketItemId))
+            var result = basket.RemoveItem(request.BasketItemId);
+
+            if (result.IsFailed)
                 return Result.Fail("Item not exist");
 
             await _basketRepository.SaveChangesAsync();   

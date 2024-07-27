@@ -27,29 +27,27 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
         }
         public async Task<Result<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
         {
+            //string key = $"baskets-{request.BuyerChatId}";
 
-            string key = $"baskets-{request.BuyerChatId}";
+            //var caheValue = await _cache.GetStringAsync(key, cancellationToken);
 
-            var caheValue = await _cache.GetStringAsync(key, cancellationToken);
+            //CustomerBasket? customerBasket;
+            //if (!string.IsNullOrWhiteSpace(caheValue))
+            //{
+            //    customerBasket = JsonSerializer.Deserialize<CustomerBasket>(caheValue);
 
-            CustomerBasket? customerBasket;
-            if (!string.IsNullOrWhiteSpace(caheValue))
-            {
-                customerBasket = JsonSerializer.Deserialize<CustomerBasket>(caheValue);
-
-                if(customerBasket is not null)
-                {
-                    Result.Ok(customerBasket);
-                }
-
-            }
+            //    if(customerBasket is not null)
+            //    {
+            //        Result.Ok(customerBasket);
+            //    }
+            //}
 
             var basket = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
 
             if (basket == null)
                 return Result.Fail("Basket does not exist");
 
-            await _cache.SetStringAsync(key, JsonSerializer.Serialize(basket));   
+           // await _cache.SetStringAsync(key, JsonSerializer.Serialize(basket));   
 
 
 

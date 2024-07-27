@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.DomainEventH
         {
             //await _eventBus.PublishAsync(new PaymentSuccessIntegrationEvent(
             //    notification.OrderId,
-            //    notification.Id));
+            //    notification.PaymentId));
         }
     }
 }

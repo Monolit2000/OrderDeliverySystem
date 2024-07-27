@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public string Name { get; private set; }
 
-        public UserName UserName { get; private set; }
+       // public UserName UserName { get; private set; }
 
         public PhoneNumber PhoneNumber { get; private set; }
 
@@ -92,7 +92,7 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             WorkAddress = address;
             return Result.Ok();
         }
-
+        
         public Result ActivateUser(long chatId, string phoneNumber, string firstName, string lastName, string name)
         {
             if (IsActivated)

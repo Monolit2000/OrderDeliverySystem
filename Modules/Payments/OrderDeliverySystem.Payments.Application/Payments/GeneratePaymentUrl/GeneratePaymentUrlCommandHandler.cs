@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Domain.Payers;
+using OrderDeliverySystem.Payments.Application.Contract;
 
 namespace OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl
 {
@@ -15,41 +16,25 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl
         private readonly ILogger<GeneratePaymentUrlCommandHandler> _logger;
         private readonly IPaymentRepository _paymentRepository; 
         private readonly IConfiguration _config;
+        private readonly ILiqPayService _liqPayService;
 
         public GeneratePaymentUrlCommandHandler(
             IPaymentRepository paymentRepository,
             ILogger<GeneratePaymentUrlCommandHandler> logger,
-            IConfiguration config)
+            IConfiguration config,
+            ILiqPayService liqPayService)
         {
             _logger = logger;
             _config = config;
             _paymentRepository = paymentRepository;
+            _liqPayService = liqPayService;
         }
 
         public async Task<Result<PaymentUrlDto>> Handle(GeneratePaymentUrlCommand request, CancellationToken cancellationToken)
         {
-            var paymentRequest = new LiqPayRequest
-            {
-                Amount = (double)request.Amount,
-                Currency = "UAH",
-                OrderId = request.OrderId.ToString(),
-                Action = LiqPayRequestAction.Pay,
-                Language = LiqPayRequestLanguage.EN,
-                ServerUrl = _config["ProcessorCallbackUrl"],
-                Version = 3,
-                Description = "Оплата послуг",
-            };
-
-            var liqPayClient = new LiqPayClient(
-                _config["LiqPayPublicTestKey"], 
-                _config["LiqPayPrivateTestKey"]);
-
-            liqPayClient.IsCnbSandbox = true;
-
-            var paymentDetails = liqPayClient.GenerateDataAndSignature(paymentRequest);
-
-            string сheckoutUri = $"https://www.liqpay.ua/api/3/checkout?data={Uri.EscapeDataString(paymentDetails.Key)}" +
-                $"&signature={Uri.EscapeDataString(paymentDetails.Value)}";
+            var сheckoutUri = _liqPayService.GeneratePaymentUrl(
+                (double)request.Amount, 
+                request.OrderId);
 
             var payment = Payment.StartPayment(
                 new OrderId(request.OrderId),
@@ -58,7 +43,9 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl
 
             await _paymentRepository.AddAsync(payment);
 
-            return new PaymentUrlDto(сheckoutUri);
+            var paymentUrlDto = new PaymentUrlDto(сheckoutUri);
+
+            return paymentUrlDto;
         }
     }
 }

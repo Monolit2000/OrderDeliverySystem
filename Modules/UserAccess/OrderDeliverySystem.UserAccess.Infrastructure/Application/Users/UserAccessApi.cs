@@ -1,10 +1,5 @@
 ﻿using OrderDeliverySystem.UserAccess.Api;
 using OrderDeliverySystem.UserAccess.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.UserAccess.Infrastructure.Application.Users
 {
@@ -21,6 +16,9 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Application.Users
         public async Task<UserResponse> GetUserAsync(Guid id)
         {
             var user = await _userRepository.GetUserById(id);
+            
+            if(user == null)
+                return new UserResponse(Guid.Parse("4c024333-a4d1-42c3-a537-0df0dd9946ac"), 1111111, "test");
 
             var responce = new UserResponse(user.UserId, user.ChatId, user.FirstName);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderDeliverySystem.Payments.Domain.Payers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
         public Task AddAsync(Payment payment);
 
         public Task SaveChangesAsync();
+
+        public Task<List<Payment>> GetPaymentsByUserId(PayerId payerId);
     }
 }

@@ -6,7 +6,6 @@ using OrderDeliverySystem.Basket.Application.Basket.CreateBasket;
 using OrderDeliverySystem.Basket.Application.Basket.DeleteBasketItem;
 using OrderDeliverySystem.Basket.Application.Basket.GetBasket;
 using OrderDeliverySystem.Basket.Application.Basket.UpdateBaske;
-using OrderDeliverySystem.Catalog.Application.Establishments.GetOllEstablishment;
 using OrderDeliverySystem.API.Modules.Base;
 
 namespace OrderDeliverySystem.API.Modules.Baskets.Basket
@@ -35,14 +34,6 @@ namespace OrderDeliverySystem.API.Modules.Baskets.Basket
         {
             return HandleResult(await _mediator.Send(new CreateBasketCommand(Guid.NewGuid(), addBasketRequest.BuyerChatId)));
         }
-
-
-        //[HttpPut("UpdateBasket")]
-        //public async Task<IActionResult> UpdateBasket(UpdateBasketRequest getBasketRequest)
-        //{
-        //    return HandleResult(await _mediator.Send(new GetBasketQuery()));
-        //}
-
 
         [HttpPost("AddItemInBasket")]
         public async Task<IActionResult> AddItemInBasket(AddItemInBasketCommand addItemInBasket)

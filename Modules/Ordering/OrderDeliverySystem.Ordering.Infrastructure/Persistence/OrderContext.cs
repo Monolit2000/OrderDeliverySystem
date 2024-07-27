@@ -26,6 +26,8 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+
+            OrderSeeder.Seed(modelBuilder);
         }
     }
 }

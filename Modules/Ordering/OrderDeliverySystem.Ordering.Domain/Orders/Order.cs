@@ -32,7 +32,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         private Order() { } // For EF core 
 
-        private Order(Guid buyerId, string address)
+        private Order(Guid buyerId, string address) 
         {
             Id = new OrderId(Guid.NewGuid());
             BuyerId = buyerId;

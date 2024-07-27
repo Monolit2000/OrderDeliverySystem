@@ -34,23 +34,18 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BuyerId");
@@ -61,18 +56,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
@@ -86,7 +79,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                             b1.IsRequired();
 
                             b1.Property<string>("Value")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("OrderStatus");
                         });
@@ -96,6 +88,40 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasIndex("BuyerId");
 
                     b.ToTable("Orders", "ordering");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("57ce6d9f-5bd0-4894-a4e2-e8748adf7cb3"),
+                            Address = "123 Main St, Cityville",
+                            BuyerId = new Guid("df3e4b3a-6704-4691-9b24-469588833b16"),
+                            Description = "The order was submitted",
+                            OrderDate = new DateTime(2024, 7, 27, 0, 57, 0, 602, DateTimeKind.Utc).AddTicks(5088)
+                        },
+                        new
+                        {
+                            Id = new Guid("e88c7c1a-fe51-4bd2-9dd9-17f1b8fb7a8a"),
+                            Address = "456 Elm St, Townsville",
+                            BuyerId = new Guid("df3e4b3a-6704-4691-9b24-469588833b16"),
+                            Description = "The order was submitted",
+                            OrderDate = new DateTime(2024, 7, 27, 0, 57, 0, 602, DateTimeKind.Utc).AddTicks(5102)
+                        },
+                        new
+                        {
+                            Id = new Guid("e95ad8d7-11f6-4940-a841-a8b6f9ca26e1"),
+                            Address = "789 Oak St, Villagetown",
+                            BuyerId = new Guid("df3e4b3a-6704-4691-9b24-469588833b16"),
+                            Description = "The order was submitted",
+                            OrderDate = new DateTime(2024, 7, 27, 0, 57, 0, 602, DateTimeKind.Utc).AddTicks(5105)
+                        },
+                        new
+                        {
+                            Id = new Guid("380123b4-fa5f-49e6-a57d-dade94949d40"),
+                            Address = "321 Maple St, Hamletville",
+                            BuyerId = new Guid("df3e4b3a-6704-4691-9b24-469588833b16"),
+                            Description = "The order was submitted",
+                            OrderDate = new DateTime(2024, 7, 27, 0, 57, 0, 602, DateTimeKind.Utc).AddTicks(5108)
+                        });
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.OrderItem", b =>
@@ -107,18 +133,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PictureUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("UnitPrice")
@@ -132,7 +156,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                             b1.IsRequired();
 
                             b1.Property<string>("Address")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("Address");
 
@@ -145,7 +168,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                                 .HasColumnName("DeliveryDateTime");
 
                             b1.Property<string>("DeliveryMethod")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("DeliveryMethod");
 
@@ -156,7 +178,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                     b.HasKey("OrderItemId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems", "ordering");
                 });
@@ -166,7 +188,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasOne("OrderDeliverySystem.Ordering.Domain.Buyers.Buyer", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Buyer");
@@ -176,7 +198,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                 {
                     b.HasOne("OrderDeliverySystem.Ordering.Domain.Orders.Order", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>

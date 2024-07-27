@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
 
         public async Task<Order> GetAsync(Guid orderId)
         {
-            var order = await _orderContext.Orders.FindAsync(orderId);
+            var order = await _orderContext.Orders.FirstOrDefaultAsync(o => o.Id == new OrderId(orderId));
 
             if (order != null)
             {

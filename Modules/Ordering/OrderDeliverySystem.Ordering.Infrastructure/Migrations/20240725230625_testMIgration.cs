@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateMigration : Migration
+    public partial class testMIgration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,10 +21,11 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                 {
                     BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BuyerChatId = table.Column<long>(type: "bigint", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,17 +37,24 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                 schema: "ordering",
                 columns: table => new
                 {
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaymentId = table.Column<int>(type: "int", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Buyers_BuyerId",
+                        column: x => x.BuyerId,
+                        principalSchema: "ordering",
+                        principalTable: "Buyers",
+                        principalColumn: "BuyerId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,13 +63,18 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                 columns: table => new
                 {
                     OrderItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Units = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeliveryCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DeliveryDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveryMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsSelfPickup = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,22 +91,28 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                 name: "IX_OrderItems_OrderId",
                 schema: "ordering",
                 table: "OrderItems",
-                column: "Id");
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_BuyerId",
+                schema: "ordering",
+                table: "Orders",
+                column: "BuyerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Buyers",
-                schema: "ordering");
-
-            migrationBuilder.DropTable(
                 name: "OrderItems",
                 schema: "ordering");
 
             migrationBuilder.DropTable(
                 name: "Orders",
+                schema: "ordering");
+
+            migrationBuilder.DropTable(
+                name: "Buyers",
                 schema: "ordering");
         }
     }

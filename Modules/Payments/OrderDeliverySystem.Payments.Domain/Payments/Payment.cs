@@ -13,7 +13,7 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
         public PaymentId Id { get; private set; }
         public decimal Amount { get; private set; }
         public PaymentStatus PaymentStatus { get; private set; }
-        public DateTime PaymentDate { get; private set; }
+        public DateTime Date { get; private set; }
 
         private Payment() { }
 
@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
             OrderId = orderId;
             PayerId = payerId;
             Amount = amount;
-            PaymentDate = DateTime.UtcNow;
+            Date = DateTime.UtcNow;
             PaymentStatus = PaymentStatus.Pending;
 
             AddDomainEvent(new PaymentCreatedDomainEvent());

@@ -13,8 +13,8 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20240520154634_UpdateMigration")]
-    partial class UpdateMigration
+    [Migration("20240725230625_testMIgration")]
+    partial class testMIgration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,19 +37,18 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BuyerId");
@@ -60,14 +59,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
@@ -76,27 +77,18 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Address", "OrderDeliverySystem.Ordering.Domain.Orders.Order.Address#Address", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("Place")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Address");
-                        });
-
                     b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "OrderDeliverySystem.Ordering.Domain.Orders.Order.OrderStatus#OrderStatus", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<string>("Value")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("OrderStatus");
                         });
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BuyerId");
 
                     b.ToTable("Orders", "ordering");
                 });
@@ -110,18 +102,16 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PictureUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("UnitPrice")
@@ -130,18 +120,54 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<int>("Units")
                         .HasColumnType("int");
 
+                    b.ComplexProperty<Dictionary<string, object>>("DeliveryOptions", "OrderDeliverySystem.Ordering.Domain.Orders.OrderItem.DeliveryOptions#DeliveryOptions", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Address")
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Address");
+
+                            b1.Property<decimal>("DeliveryCost")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("DeliveryCost");
+
+                            b1.Property<DateTime>("DeliveryDateTime")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("DeliveryDateTime");
+
+                            b1.Property<string>("DeliveryMethod")
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("DeliveryMethod");
+
+                            b1.Property<bool>("IsSelfPickup")
+                                .HasColumnType("bit")
+                                .HasColumnName("IsSelfPickup");
+                        });
+
                     b.HasKey("OrderItemId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems", "ordering");
+                });
+
+            modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>
+                {
+                    b.HasOne("OrderDeliverySystem.Ordering.Domain.Buyers.Buyer", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.OrderItem", b =>
                 {
                     b.HasOne("OrderDeliverySystem.Ordering.Domain.Orders.Order", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("Id");
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.Order", b =>

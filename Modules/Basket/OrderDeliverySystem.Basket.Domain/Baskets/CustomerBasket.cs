@@ -76,18 +76,22 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
                 return Result.Fail("$Товар '{request.ProductName}' вже наявний у кошику");
 
             Items.Add(item);
+
+            AddDomainEvent(new BasketItemAddedDomainEvent());
             return Result.Ok();
         }
 
-        public bool RemuveItem(Guid BasketItemId)
+        public Result RemoveItem(Guid BasketItemId)
         {
             var item = Items.FirstOrDefault(o => o.BasketItemId == BasketItemId);
 
             if (item == null)
-                return false;
+                return Result.Fail("$Товар '{request.ProductName}' не наявний у кошику");
 
             Items.Remove(item);
-            return true;
+
+            AddDomainEvent(new BasketItemRemovedDomainEvent());
+            return Result.Ok();
         }
 
 

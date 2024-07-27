@@ -18,7 +18,6 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
             _mediator = mediator;
         }
 
-
         [HttpGet("GeneratePaymentUrl")]
         public async Task<IActionResult> GetPaymentUrl([FromQuery] GeneratePaymentUrlCommand getPaymentUrlCommand)
         {

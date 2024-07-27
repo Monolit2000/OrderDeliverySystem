@@ -6,11 +6,11 @@ using OrderDeliverySystem.Ordering.IntegrationEvents;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.Events
 {
-    public class OrderPaidDomainEventHandler : INotificationHandler<OrderPaidDomainEvent>
+    public class PublishIntegretiOnEventonOrderPaidDomainEventHandler : INotificationHandler<OrderPaidDomainEvent>
     {
         private readonly IAsyncEventBus _eventBus;
 
-        public OrderPaidDomainEventHandler(IAsyncEventBus eventBus)
+        public PublishIntegretiOnEventonOrderPaidDomainEventHandler(IAsyncEventBus eventBus)
         {
             _eventBus = eventBus;
         }

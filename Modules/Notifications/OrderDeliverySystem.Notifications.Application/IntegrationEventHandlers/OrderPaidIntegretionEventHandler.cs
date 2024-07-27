@@ -13,7 +13,6 @@ namespace OrderDeliverySystem.Notifications.Application.IntegrationEventHandlers
     public class OrderPaidIntegretionEventHandler : INotificationHandler<OrderPaidIntegretionEvent>
     {
         private readonly IMediator _mediator;
-
         private readonly IUserAccessApi _userAccessApi; 
 
        public OrderPaidIntegretionEventHandler(IMediator mediator, IUserAccessApi userAccessApi)

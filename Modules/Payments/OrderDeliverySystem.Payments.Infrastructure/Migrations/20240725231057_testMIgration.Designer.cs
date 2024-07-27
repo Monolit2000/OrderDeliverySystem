@@ -12,8 +12,8 @@ using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
 {
     [DbContext(typeof(PaymentContext))]
-    [Migration("20240717123928_newTestTestMigrationAddedTETsdfT")]
-    partial class newTestTestMigrationAddedTETsdfT
+    [Migration("20240725231057_testMIgration")]
+    partial class testMIgration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("PaymentDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

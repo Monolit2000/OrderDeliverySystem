@@ -2,11 +2,7 @@
 using MediatR;
 using OrderDeliverySystem.UserAccess.Application.Authentication;
 using OrderDeliverySystem.UserAccess.Domain.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OrderDeliverySystem.UserAccess.Domain.Users.DomainErrors;
 
 namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
 {
@@ -18,7 +14,7 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
         {
             _userRepository = userRepository;
         }
-
+        
         public async Task<Result<CreateConsumerResult>> Handle(CreateConsumerCommand request, CancellationToken cancellationToken)
         {
 
@@ -27,10 +23,10 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
             var userByChatIdAlreadyExist = await _userRepository.GetUserByChatId(request.ChatId);
 
             if (user != null)
-                return Result.Fail($"A user with this '{request.PhoneNumber.Number}' already exists");
+                return Result.Fail(UserErrors.UserWithPhoneNumberAlreadyExists(request.PhoneNumber.Number));
 
             if(userByChatIdAlreadyExist != null)
-                return Result.Fail($"You are already registered under a different phone number, you can change your current phone number in your profile.  ");
+                return Result.Fail(UserErrors.UserWithChatIdAlreadyExists);
 
             var newUser = User.CreateCustomer(
                 request.PhoneNumber,
@@ -38,7 +34,12 @@ namespace OrderDeliverySystem.UserAccess.Application.Users.CreateConsumer
                 request.LastName,
                 request.Name);
 
-            newUser.ActivateUser(request.ChatId, newUser.PhoneNumber.Number, newUser.FirstName, newUser.LastName, newUser.Name);
+            newUser.ActivateUser(
+                request.ChatId,
+                newUser.PhoneNumber.Number, 
+                newUser.FirstName, 
+                newUser.LastName,
+                newUser.Name);
 
             await _userRepository.AddAsync(newUser);
 

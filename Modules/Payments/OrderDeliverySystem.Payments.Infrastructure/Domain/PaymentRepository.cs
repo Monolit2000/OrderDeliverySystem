@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Payments.Domain.Payers;
 using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 using System;
@@ -32,6 +33,11 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Domain
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Payment>> GetPaymentsByUserId(PayerId payerId)
+        {
+            return await _context.Payments.Where(p => p.PayerId == payerId).ToListAsync();
         }
     }
 }

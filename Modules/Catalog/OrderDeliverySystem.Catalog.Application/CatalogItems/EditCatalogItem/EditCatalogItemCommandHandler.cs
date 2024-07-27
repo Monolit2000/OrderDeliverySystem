@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
+using OrderDeliverySystem.Catalog.Application.Extensions;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
                 !string.IsNullOrWhiteSpace(request.PictureUri)  ? catalogItem.ChangePictureUri(request.PictureUri) : Result.Ok()
             };
 
-
-            var combinedResult = CombineResults(results);
+            var combinedResult = ResultExtension.CombineResults(results);
 
             if (combinedResult.IsFailed)
                 return Result.Fail<EditCatalogItemDto>(combinedResult.Errors.First());
@@ -44,16 +44,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
             await _catalogRepository.SaveChangesAsync();
 
             return new EditCatalogItemDto();
-        }
-
-        private Result CombineResults(IEnumerable<Result> results)
-        {
-            foreach (var result in results)
-            {
-                if (result.IsFailed)
-                    return result;
-            }
-            return Result.Ok();
         }
     }
 }

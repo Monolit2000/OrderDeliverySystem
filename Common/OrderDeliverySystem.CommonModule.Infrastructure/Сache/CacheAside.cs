@@ -42,9 +42,7 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.Сache
             value = await factory(cancellationToken);
 
             if (value is null)
-            {
                 return default;
-            }
 
             await cache.SetStringAsync(key, JsonSerializer.Serialize(value), options ?? Default, cancellationToken);
 

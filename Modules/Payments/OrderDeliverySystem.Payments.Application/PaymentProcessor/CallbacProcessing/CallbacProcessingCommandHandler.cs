@@ -58,6 +58,7 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
                 case LiqPayResponseStatus.Success:
                     payment.SuccessPayment();
                     break;
+
                 case LiqPayResponseStatus.Failure:
                 default:
                     payment.FailPayment(liqPayResponse.ErrorDescription);

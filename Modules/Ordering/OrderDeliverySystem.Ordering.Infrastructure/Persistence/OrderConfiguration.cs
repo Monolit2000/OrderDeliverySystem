@@ -13,13 +13,27 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(p => p.Id);
+
+            builder.Property(p => p.Id)
+                   .HasConversion(
+                       id => id.Value, // Convert OrderId to Guid for storage
+                       value => new OrderId(value)) // Convert Guid from storage back to OrderId
+                   .HasColumnName("Id")
+                   .IsRequired();
 
             builder.ComplexProperty(o => o.OrderStatus, b =>
             {
                 b.IsRequired();
                 b.Property(a => a.Value).HasColumnName("OrderStatus");
             });
+
+            // Configuring the relationship between Order and Buyer
+            builder.HasOne(o => o.Buyer)
+                   .WithMany()
+                   .HasForeignKey(o => o.BuyerId)
+                   .OnDelete(DeleteBehavior.Restrict); // Adjust this based on your needs
+
         }
     }
 
@@ -38,6 +52,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
             builder.ComplexProperty(o => o.DeliveryOptions, b =>
             {
+                b.IsRequired();
                 b.Property(a => a.IsSelfPickup).HasColumnName("IsSelfPickup");
                 b.Property(a => a.DeliveryMethod).HasColumnName("DeliveryMethod");
                 b.Property(a => a.DeliveryCost).HasColumnName("DeliveryCost");
