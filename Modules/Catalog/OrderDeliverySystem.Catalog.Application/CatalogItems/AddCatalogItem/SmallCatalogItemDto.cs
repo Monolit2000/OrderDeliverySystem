@@ -22,7 +22,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 
         //public decimal Price { get; set; }
 
-        //public string PictureUri { get; set; }
+        //public string PictureUrl { get; set; }
 
         //public Guid ProductId { get; set; }
 

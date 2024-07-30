@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Ordering.Domain.Buyers;
 using OrderDeliverySystem.Ordering.Domain.Orders;
+using OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("ordering");
+            modelBuilder.HasDefaultSchema("ordering"); 
 
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());

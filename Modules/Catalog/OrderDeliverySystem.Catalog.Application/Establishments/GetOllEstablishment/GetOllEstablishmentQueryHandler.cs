@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Catalog.Application.Establishments.GetOllEstablish
 
         public async Task<Result<List<SmallEstablishmentDto>>> Handle(GetOllEstablishmentQuery request, CancellationToken cancellationToken)
         {
-            var ollEstablishments = await _catalogRepository.GetOllEstablishment();
+            var ollEstablishments = await _catalogRepository.GetAllEstablishment();
 
             if (ollEstablishments == null || !ollEstablishments.Any())
                 return Result.Fail("The list of establishments is empty");

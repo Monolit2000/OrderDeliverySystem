@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             string deliveryMethod, 
             string address,
             decimal deliveryCost,
-            DateTime deliveryDateTime)
+            DateTime deliveryDateTime = default)
         {
             IsSelfPickup = isSelfPickup;
             DeliveryMethod = deliveryMethod;

@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
 
         public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersQuerie request, CancellationToken cancellationToken)
         {
-            var root = await _orderRepository.GetOllOrders();
+            var root = await _orderRepository.GetAllOrders();
 
             if (root == null)
                 return Result.Fail("ordersDto not faond by id ");

@@ -16,7 +16,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 schema: "catalog",
                 table: "Catalog",
-                columns: new[] { "CatalogItemId", "Description", "Name", "PictureFileName", "PictureUri", "Price", "ProductId", "TimeToItemExist" },
+                columns: new[] { "CatalogItemId", "Description", "Name", "PictureFileName", "PictureUrl", "Price", "ProductId", "TimeToItemExist" },
                 values: new object[,]
                 {
                     { new Guid("05eed828-315b-4208-8c64-630206254c9f"), "Coffee with steamed milk.", "Cappuccino", "cappuccino.jpg", "/images/cappuccino.jpg", 4.99m, new Guid("f1955656-ed0e-4656-a6b4-3d46973ece92"), new DateTime(2024, 5, 5, 3, 6, 26, 751, DateTimeKind.Local).AddTicks(6649) },

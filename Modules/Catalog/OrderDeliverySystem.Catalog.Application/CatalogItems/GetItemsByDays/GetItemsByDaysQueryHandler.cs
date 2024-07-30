@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays
         public async Task<Result<List<ItemsByDaysDto>>> Handle(GetItemsByDaysQuery request, CancellationToken cancellationToken)
         {
 
-            var root = await _catalogRepository.GetOllCatalogItems();
+            var root = await _catalogRepository.GetAllCatalogItems();
 
             var filteredDays = request.ListOfDays.Select(day => day.Date).ToList();
 

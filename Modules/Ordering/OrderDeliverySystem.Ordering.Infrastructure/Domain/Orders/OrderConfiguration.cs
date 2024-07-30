@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage;
 using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
+namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
 {
     public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
@@ -22,6 +23,11 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
                    .HasColumnName("Id")
                    .IsRequired();
 
+
+            builder.Property(o => o.OrderNumber)
+                  .ValueGeneratedOnAdd();
+
+
             builder.ComplexProperty(o => o.OrderStatus, b =>
             {
                 b.IsRequired();
@@ -33,6 +39,26 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
                    .WithMany()
                    .HasForeignKey(o => o.BuyerId)
                    .OnDelete(DeleteBehavior.Restrict); // Adjust this based on your needs
+
+            //builder.OwnsMany(o => o.OrderItems, oi =>
+            //{
+            //    oi.HasKey(i => i.OrderItemId);
+
+            //    oi.Property(e => e.Discount)
+            //        .HasColumnType("decimal(18,2)");
+
+            //    oi.Property(e => e.UnitPrice)
+            //        .HasColumnType("decimal(18,2)");
+
+            //    oi.OwnsOne(o => o.DeliveryOptions, b =>
+            //    {
+            //        b.Property(a => a.IsSelfPickup).HasColumnName("IsSelfPickup").IsRequired();
+            //        b.Property(a => a.DeliveryMethod).HasColumnName("DeliveryMethod").IsRequired();
+            //        b.Property(a => a.DeliveryCost).HasColumnName("DeliveryCost").HasColumnType("decimal(18,2)").IsRequired();
+            //        b.Property(a => a.Deadline).HasColumnName("Deadline").IsRequired();
+            //        b.Property(a => a.Address).HasColumnName("Address").IsRequired();
+            //    });
+            //});
 
         }
     }

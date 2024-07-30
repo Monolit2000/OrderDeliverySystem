@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogTypes.GetAllCatalogType
 
         public async Task<Result<List<CatalogTypeDto>>> Handle(GetOllCatalogTypeQuery request, CancellationToken cancellationToken)
         {
-            var ollCatalogTypes = await _catalogRepository.GetOllCatalogTypeAsync();
+            var ollCatalogTypes = await _catalogRepository.GetAllCatalogTypeAsync();
 
             if (ollCatalogTypes == null || !ollCatalogTypes.Any())
                 return Result.Fail("The list of establishments is empty");

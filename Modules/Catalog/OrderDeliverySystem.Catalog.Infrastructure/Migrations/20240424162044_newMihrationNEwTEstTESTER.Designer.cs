@@ -51,10 +51,10 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PictureFileName");
 
-                    b.Property<string>("PictureUri")
+                    b.Property<string>("PictureUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("PictureUri");
+                        .HasColumnName("PictureUrl");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")

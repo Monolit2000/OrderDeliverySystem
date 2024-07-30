@@ -70,7 +70,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain.Catalogs
             return await _catalogContext.Establishments.FirstOrDefaultAsync(e => e.EstablishmentId == Id);
         }
 
-        public IQueryable<CatalogItem> GetOllCatalogItemQueryable()
+        public IQueryable<CatalogItem> GetAllCatalogItemQueryable()
         {
             var ItemsQueryable = (IQueryable<CatalogItem>)_catalogContext.CatalogItems;
 
@@ -113,7 +113,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain.Catalogs
             return await _catalogContext.CatalogTypes.FirstOrDefaultAsync(ct => ct.Type == type);
         }
 
-        public async Task<List<Establishment>> GetOllEstablishment()
+        public async Task<List<Establishment>> GetAllEstablishment()
         {
             return await _catalogContext.Establishments.ToListAsync();
         }
@@ -128,12 +128,12 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Domain.Catalogs
             await _catalogContext.SaveChangesAsync();
         }
 
-        public async Task<List<CatalogType>> GetOllCatalogTypeAsync()
+        public async Task<List<CatalogType>> GetAllCatalogTypeAsync()
         {
             return await _catalogContext.CatalogTypes.ToListAsync();
         }
 
-        public async Task<List<CatalogItem>> GetOllCatalogItems()
+        public async Task<List<CatalogItem>> GetAllCatalogItems()
         {
             return await _catalogContext.CatalogItems.ToListAsync();
         }

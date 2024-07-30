@@ -10,6 +10,7 @@ using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Quartz;
 using Hangfire;
+using OrderDeliverySystem.API.ExeptionHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +67,8 @@ builder.Services
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
 builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 //builder.Services.AddQuartz(configure =>
 //{

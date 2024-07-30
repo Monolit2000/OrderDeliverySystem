@@ -38,7 +38,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByEstabli
             //    Description = ci.Description,
             //    ImageUri = ci.PictureFileName, 
             //    Price = ci.Price,
-            //    PictureUri = ci.PictureUri
+            //    PictureUrl = ci.PictureUrl
             //}).ToList();
 
             //return Result.Ok(catalogItemDtos);

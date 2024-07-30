@@ -17,7 +17,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
 
         public async Task<Result<AddItemInBasketDto>> Handle(AddItemInBasketCommand request, CancellationToken cancellationToken)
         {
-            var basket = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
+            var basket = await _basketRepository.GetByChatIdAsync(request.BuyerChatId);
 
             if (basket == null)
                 return Result.Fail("Basket dose not exist");

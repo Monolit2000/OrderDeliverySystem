@@ -132,9 +132,9 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                                 .HasColumnType("decimal(18,2)")
                                 .HasColumnName("DeliveryCost");
 
-                            b1.Property<DateTime>("DeliveryDateTime")
+                            b1.Property<DateTime>("Deadline")
                                 .HasColumnType("datetime2")
-                                .HasColumnName("DeliveryDateTime");
+                                .HasColumnName("Deadline");
 
                             b1.Property<string>("DeliveryMethod")
                                 .HasColumnType("nvarchar(max)")

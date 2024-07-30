@@ -8,6 +8,7 @@ using OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemsByDays;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {
@@ -37,7 +38,7 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         }
 
 
-        [HttpDelete("DeleteCatalogItem")]
+        [HttpPost("DeleteCatalogItem")]
         public async Task<IActionResult> DeleteCatalogItem(DeleteCatalogItemCommand deleteCatalogItemCommand)
         {
             return HandleResult(await _mediator.Send(deleteCatalogItemCommand));
@@ -56,7 +57,13 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         {
             return HandleResult(await _mediator.Send( new GetOllItemsByDaysQuery()));
         }
+      
 
+        [HttpGet("GetAllCatalogItem")]
+        public async Task<IActionResult> GetAllCatalogItem()
+        {
+            return HandleResult(await _mediator.Send(new GetAllCatalogItemQuery()));
+        }
 
         [HttpPost("GetItemById")]
         public async Task<IActionResult> GetItemById(GetItemByIdQuerie getItemByIdQuerie)

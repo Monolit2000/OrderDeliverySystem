@@ -2,7 +2,7 @@
 //using Microsoft.AspNetCore.Mvc;
 //using OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem;
 //using OrderDeliverySystem.Catalog.Application.Establishments.AddEstablishment;
-//using OrderDeliverySystem.Catalog.Application.Establishments.GetOllEstablishment;
+//using OrderDeliverySystem.Catalog.Application.Establishments.GetAllEstablishment;
 
 //namespace OrderDeliverySystem.API.Modules.Catalog.Establishment
 //{
@@ -33,8 +33,8 @@
 //        }
 
 
-//        [HttpPost("GetOllEstablishment")]
-//        public async Task<IActionResult> GetOllEstablishment(/*GetOllEstablishmentRequest getOllEstablishmentRequest*/)
+//        [HttpPost("GetAllEstablishment")]
+//        public async Task<IActionResult> GetAllEstablishment(/*GetOllEstablishmentRequest getOllEstablishmentRequest*/)
 //        {
 //            var result = await _mediator.Send(new GetOllEstablishmentQuery());
 

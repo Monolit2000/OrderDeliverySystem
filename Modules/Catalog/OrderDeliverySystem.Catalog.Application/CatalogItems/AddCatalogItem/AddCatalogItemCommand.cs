@@ -13,15 +13,13 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 
         public DateTime TimeToExist { get; set; }
 
-        public Guid EstablishmentId { get; set; }
-
-        //public Guid CatalogTypeId { get; set; }
-
         public string Description { get; set; }
 
         public decimal Price { get; set; }
 
-        public string PictureUri { get; set; }
+        public string PictureUrl { get; set; }
+
+        //public bool Drink { get; set; }
 
     }
 }

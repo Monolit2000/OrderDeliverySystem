@@ -2,6 +2,7 @@
 using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.Catalog.Domain.Catalog.Events;
 using System.Text.Json.Serialization;
+using Azure.Core;
 
 namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
@@ -51,7 +52,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             if (price <= 0)
                 return Result.Fail<CatalogItem>("Price must be greater than zero.");
-            
+
             var catalogItem = new CatalogItem
             {
                 CatalogItemId = Guid.NewGuid(),
@@ -62,10 +63,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
                 PictureFileName = pictureFileName,
                 PictureUri = pictureUri
             };
-
             return Result.Ok(catalogItem);
         }
-
 
         public Result SetName(string name)
         {
@@ -91,7 +90,6 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
             return Result.Ok();
         }
-
 
         public Result ChangeTimeToItemExist(DateTime newDateTime)
         {

@@ -42,7 +42,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
             //    }
             //}
 
-            var basket = await _basketRepository.GetBasketByChatIdAsync(request.BuyerChatId);
+            var basket = await _basketRepository.GetByChatIdAsync(request.BuyerChatId);
 
             if (basket == null)
                 return Result.Fail("Basket does not exist");

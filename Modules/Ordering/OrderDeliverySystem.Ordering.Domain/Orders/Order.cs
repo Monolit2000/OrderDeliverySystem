@@ -10,13 +10,15 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 {
     public class Order : Entity, IAggregateRoot
     {
-        public OrderId Id { get; private set; }
         public Guid BuyerId { get; private set; }
+
+        public OrderId Id { get; private set; }
+
+        public long OrderNumber { get; private set; }
 
         public DateTime OrderDate { get; private set; }
 
         public string Address { get; private set; }
-
 
         public Buyer Buyer { get; private set; }
 

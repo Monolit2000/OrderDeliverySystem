@@ -8,9 +8,9 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
     public interface IBasketRepository
     {
-        Task<CustomerBasket> GetBasketByChatIdAsync(long customerChatId);
+        Task<CustomerBasket?> GetByChatIdAsync(long customerChatId);
 
-        Task<CustomerBasket> GetBasketByBuyerIdAsync(Guid buyerId);
+        Task<CustomerBasket?> GetByBuyerIdAsync(Guid buyerId);
 
         Task AddBasketAsync(CustomerBasket basket);
 

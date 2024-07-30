@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 
@@ -12,9 +13,11 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [Migration("20240728223137_OrderWTFMigration")]
+    partial class OrderWTFMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,35 +101,35 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8a311fc5-8e39-4a8b-bde4-aa37585281ae"),
+                            Id = new Guid("1109ed6e-374b-4036-80d9-8a484406942e"),
                             Address = "123 Main St, Cityville",
                             BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
                             Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4358)
+                            OrderDate = new DateTime(2024, 7, 28, 22, 31, 37, 293, DateTimeKind.Utc).AddTicks(4199)
                         },
                         new
                         {
-                            Id = new Guid("3e4d205a-bbbf-4a47-9a65-628d2db57c39"),
+                            Id = new Guid("1cbe91d9-e72c-4ca2-b734-b0a5ea5e681b"),
                             Address = "456 Elm St, Townsville",
                             BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
                             Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4375)
+                            OrderDate = new DateTime(2024, 7, 28, 22, 31, 37, 293, DateTimeKind.Utc).AddTicks(4213)
                         },
                         new
                         {
-                            Id = new Guid("13f46e83-b887-4ed8-814c-822c17dd9d12"),
+                            Id = new Guid("f25a8a09-11e2-4e2f-bc73-6b2a562a032a"),
                             Address = "789 Oak St, Villagetown",
                             BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
                             Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4380)
+                            OrderDate = new DateTime(2024, 7, 28, 22, 31, 37, 293, DateTimeKind.Utc).AddTicks(4219)
                         },
                         new
                         {
-                            Id = new Guid("e76ab7c3-abf0-4fbc-af7d-3b70e81ec247"),
+                            Id = new Guid("212d2eff-4b13-4bb9-9d9a-7ddb43709496"),
                             Address = "321 Maple St, Hamletville",
                             BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
                             Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4385)
+                            OrderDate = new DateTime(2024, 7, 28, 22, 31, 37, 293, DateTimeKind.Utc).AddTicks(4224)
                         });
                 });
 
@@ -171,7 +174,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 
                             b1.Property<DateTime>("DeliveryDateTime")
                                 .HasColumnType("datetime2")
-                                .HasColumnName("DeliveryDateTime");
+                                .HasColumnName("Deadline");
 
                             b1.Property<string>("DeliveryMethod")
                                 .HasColumnType("nvarchar(max)")

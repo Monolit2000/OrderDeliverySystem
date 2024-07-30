@@ -21,7 +21,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
 
         public async Task<Result<UpdateBasketResult>> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
         {
-            var basket = await _busketRepository.GetBasketByBuyerIdAsync(request.BuyerId);
+            var basket = await _busketRepository.GetByBuyerIdAsync(request.BuyerId);
 
             if (basket == null)
                 return Result.Fail("Basket not found");

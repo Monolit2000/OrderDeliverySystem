@@ -29,7 +29,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
 
             //if (!_cache.TryGetValue(key, out List<CatalogItem>? catalogItems))
             //{ 
-            //    catalogItems = await _catalogRepository.GetOllCatalogItems();
+            //    catalogItems = await _catalogRepository.GetAllCatalogItems();
             //    if (catalogItems != null)
             //    {
             //        _cache.Set(key, catalogItems, TimeSpan.FromHours(1)); // Set the cache expiration as needed
@@ -37,7 +37,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
             //}
 
             List<CatalogItem>? catalogItems = await _cache.GetOrCreateAsync(key, async token =>
-                 await _catalogRepository.GetOllCatalogItems());
+                 await _catalogRepository.GetAllCatalogItems());
 
             if (catalogItems is null)
                 return Result.Fail("NULL");

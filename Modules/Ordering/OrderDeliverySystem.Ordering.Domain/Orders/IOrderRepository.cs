@@ -17,7 +17,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Task<List<Order>> GetOllOrderAsyncByChatId(long chatId);
 
-        public Task<List<Order>> GetOllOrders();
+        public Task<List<Order>> GetAllOrders();
 
         public Task SaveChangesAsync();
     }

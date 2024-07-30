@@ -11,6 +11,7 @@ using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
 using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTime;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions;
+using OrderDeliverySystem.Ordering.Application.Orders.GetOrderItemByDay;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {
@@ -46,11 +47,18 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         }
 
 
-        [HttpGet("GetOllOrders")]
+        [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetOllOrdersByBuyerChatId()
         {
             return HandleResult(await _mediator.Send(new GetOllOrdersQuerie()));
         }
+
+        [HttpPost("GetAllOrderItemByDay")]
+        public async Task<IActionResult> GetAllOrderItemByDay(GetAllOrderItemByDayQuery getAllOrderItemByDayQuery)
+        {
+            return HandleResult(await _mediator.Send( getAllOrderItemByDayQuery));
+        }
+        
 
 
         [HttpPost("SetPaidOrderStatus")]

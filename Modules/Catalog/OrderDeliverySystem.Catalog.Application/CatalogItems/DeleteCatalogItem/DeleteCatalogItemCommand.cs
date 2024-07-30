@@ -12,9 +12,5 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.DeleteCatalogItem
     {
         public Guid CatalogItemId { get; set; }
 
-        public DeleteCatalogItemCommand(Guid catalogItemId)
-        {
-            CatalogItemId = catalogItemId;
-        }
     }
 }

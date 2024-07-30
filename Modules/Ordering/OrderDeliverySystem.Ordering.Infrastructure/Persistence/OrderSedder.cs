@@ -14,7 +14,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
             // Используем счетчик для увеличения даты на один день для каждого заказа
             var dateIncrement = 0;
 
-            var buyerIdString = Guid.Parse("                return new UserResponse(Guid.Parse(\"4c024333-a4d1-42c3-a537-0df0dd9946ac\"), 1111111, \"test\");\n");
+            var buyerIdString = Guid.Parse("4c024333-a4d1-42c3-a537-0df0dd9946ac");
 
             // Создание заказов с использованием метода CreateNew
             var orders = new[]

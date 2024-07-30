@@ -33,43 +33,23 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
             return true;
         }
 
-        public async Task<CustomerBasket> GetBasketByChatIdAsync(long customerChatId)
+        public async Task<CustomerBasket?> GetByChatIdAsync(long customerChatId)
         {
-
-
-            var customerBasket = await _basketContext.Baskets.FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId); ;
-
-            if (customerBasket != null)
-            {
-                await _basketContext.Entry(customerBasket)
-                    .Collection(i => i.Items).LoadAsync();
-            }
-
-            return customerBasket;
-
-
-            //var customerBasket = await _basketContext.Baskets
-            //    .Include(b => b.Items)
-            //    .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
-
-            //return customerBasket;
-        }
-
-
-        public async Task<CustomerBasket> GetBasketByBuyerIdAsync(Guid buyerId)
-        {
-            var customerBasket = await _basketContext.Baskets.FirstOrDefaultAsync(b => b.BuyerId == buyerId); ;
-
-            if (customerBasket != null)
-            {
-                await _basketContext.Entry(customerBasket)
-                    .Collection(i => i.Items).LoadAsync();
-            }
+            var customerBasket = await _basketContext.Baskets
+                .Include(i => i.Items)
+                .FirstOrDefaultAsync(b => b.BuyerChatId == customerChatId);
 
             return customerBasket;
         }
 
+        public async Task<CustomerBasket?> GetByBuyerIdAsync(Guid buyerId)
+        {
+            var customerBasket = await _basketContext.Baskets
+                .Include(i => i.Items)
+                .FirstOrDefaultAsync(b => b.BuyerId == buyerId);
 
+            return customerBasket;
+        }
 
         public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
@@ -82,3 +62,8 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
         }
     }
 }
+//if (customerBasket != null)
+//{
+//    await _basketContext.Entry(customerBasket)
+//        .Collection(i => i.Items).LoadAsync();
+//}

@@ -10,11 +10,11 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
     public interface ICatalogRepository
     {
         #region CatalogItem
-        public IQueryable<CatalogItem> GetOllCatalogItemQueryable();
+        public IQueryable<CatalogItem> GetAllCatalogItemQueryable();
 
         public Task<CatalogItem?> GetCatalogItemById(Guid catalogItemId);
 
-        public Task<List<CatalogItem>> GetOllCatalogItems();
+        public Task<List<CatalogItem>> GetAllCatalogItems();
 
         public Task<bool> RemoveCatalogItemByIdAsync(Guid catalogItemId);
         public Task<bool> CatalogTypeExistByIdAsync(Guid id);
@@ -36,7 +36,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         public Task<Establishment> GetEstablishmentByName(string name);
 
-        public Task<List<Establishment>> GetOllEstablishment();
+        public Task<List<Establishment>> GetAllEstablishment();
 
         #endregion 
 
@@ -50,7 +50,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
 
         Task<CatalogType> GetCatalogTypeByIdAsync(Guid id);
 
-        public Task<List<CatalogType>> GetOllCatalogTypeAsync();
+        public Task<List<CatalogType>> GetAllCatalogTypeAsync();
 
 
         #endregion

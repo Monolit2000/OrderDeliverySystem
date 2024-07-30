@@ -11,7 +11,6 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
 {
     public class CatalogItemConfiguration : IEntityTypeConfiguration<CatalogItem>
     {
-
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
             builder.ToTable("Catalog", "catalog");
@@ -22,13 +21,6 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
             builder.Property(p => p.Price).HasColumnName("Price");
             builder.Property(p => p.PictureFileName).HasColumnName("PictureFileName");
             builder.Property(p => p.PictureUri).HasColumnName("PictureUri");
-            //builder.Property(p => p.Establishment).HasColumnName("Establishment");
-     
-
-            //builder.HasOne(c => c.Establishment)
-            //    .WithMany()
-            //    .HasForeignKey(c => c.)
-
         }
     }
 }
