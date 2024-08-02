@@ -16,5 +16,8 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
         public Task SaveChangesAsync();
 
         public Task<List<Payment>> GetPaymentsByUserId(PayerId payerId);
+
+        public Task<List<Payment>> GetAllPayments();
+
     }
 }

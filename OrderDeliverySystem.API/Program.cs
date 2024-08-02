@@ -6,9 +6,6 @@ using OrderDeliverySystem.Catalog.Infrastructure.Startup;
 using OrderDeliverySystem.Ordering.Infrastructure.Startup;
 using OrderDeliverySystem.Payments.Infrastructure.Startup;
 using OrderDeliverySystem.Notifications.Infrastructure.Startup;
-using OrderDeliverySystem.CommonModule.Infrastructure.Outbox;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Quartz;
 using Hangfire;
 using OrderDeliverySystem.API.ExeptionHandler;
 
@@ -64,9 +61,13 @@ builder.Services
 
 //builder.Services.AddSingleton<ISaveChangesInterceptor, ConvertDomainEventsToOutboxMessageIterseptor>();
 
+// Register IMemoryCache
+builder.Services.AddMemoryCache();
+
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
 builder.Services.AddDistributedMemoryCache();
+
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 

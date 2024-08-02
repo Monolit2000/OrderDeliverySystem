@@ -34,7 +34,8 @@ namespace OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl
         {
             var сheckoutUri = _liqPayService.GeneratePaymentUrl(
                 (double)request.Amount, 
-                request.OrderId);
+                request.OrderId,
+                request.Description);
 
             var payment = Payment.StartPayment(
                 new OrderId(request.OrderId),

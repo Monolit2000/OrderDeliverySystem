@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using OrderDeliverySystem.Payments.Domain.Payers;
 using OrderDeliverySystem.Payments.Domain.Payments;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
@@ -13,14 +14,16 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
         public PaymentContext(DbContextOptions<PaymentContext> options) : base(options)
         { }
 
+        //public DbSet<Payer> Payers { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("payments");
 
+            //modelBuilder.ApplyConfiguration(new PayerConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
-
+            
         }
     }
 }

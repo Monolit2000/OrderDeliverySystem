@@ -5,42 +5,36 @@ using Microsoft.Extensions.Caching.Memory;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using OrderDeliverySystem.CommonModule.Infrastructure.Сache;
 
-
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays
 {
-    public class GetOllItemsByDaysQueryHandler(
+    public class GetAllItemsByDaysQueryHandler(
         ICatalogRepository _catalogRepository,
-        IDistributedCache _cache) : IRequestHandler<GetOllItemsByDaysQuery, Result<List<ItemsByDaysDto>>>
+        IMemoryCache _cache
+        /*IDistributedCache _cache*/) : IRequestHandler<GetAllItemsByDaysQuery, Result<List<ItemsByDaysDto>>>
     {
-        //private readonly ICatalogRepository _catalogRepository;
-        //private readonly IDistributedCache _cache;
-
-        //public GetOllItemsByDaysQueryHandler(
-        //    ICatalogRepository catalogRepository,
-        //    IDistributedCache cache)
-        //{
-        //    _catalogRepository = catalogRepository;
-        //    _cache = cache;
-        //}
-
-        public async Task<Result<List<ItemsByDaysDto>>> Handle(GetOllItemsByDaysQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<ItemsByDaysDto>>> Handle(GetAllItemsByDaysQuery request, CancellationToken cancellationToken)
         {
-            string key = $"catalog-oll";
+             string key = $"catalog-all";
 
-            //if (!_cache.TryGetValue(key, out List<CatalogItem>? catalogItems))
-            //{ 
-            //    catalogItems = await _catalogRepository.GetAllCatalogItems();
-            //    if (catalogItems != null)
-            //    {
-            //        _cache.Set(key, catalogItems, TimeSpan.FromHours(1)); // Set the cache expiration as needed
-            //    }
-            //}
+            //List<CatalogItem>? catalogItems = await _cache.GetOrCreateAsync(key, async token =>
+            //     await _catalogRepository.GetAllCatalogItems(), 
+            //     new DistributedCacheEntryOptions 
+            //     {
+            //         AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10)
+            //     });
+
+            //if (catalogItems is null)
+            //    return Result.Fail("NULL");
 
             List<CatalogItem>? catalogItems = await _cache.GetOrCreateAsync(key, async token =>
-                 await _catalogRepository.GetAllCatalogItems());
+               await _catalogRepository.GetAllCatalogItems(),
+               new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) },
+               cancellationToken);
 
             if (catalogItems is null)
                 return Result.Fail("NULL");
+
+            //var catalogItems = await _catalogRepository.GetAllCatalogItems();
 
             var itemsByDays = catalogItems
             .GroupBy(item => item.TimeToItemExist.Date)

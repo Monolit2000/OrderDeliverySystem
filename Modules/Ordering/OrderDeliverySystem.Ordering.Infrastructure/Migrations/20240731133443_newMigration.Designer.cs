@@ -13,8 +13,8 @@ using OrderDeliverySystem.Ordering.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20240725230625_testMIgration")]
-    partial class testMIgration
+    [Migration("20240731133443_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,12 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("OrderNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("OrderNumber"));
+
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
 
@@ -132,9 +138,9 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                                 .HasColumnType("decimal(18,2)")
                                 .HasColumnName("DeliveryCost");
 
-                            b1.Property<DateTime>("Deadline")
+                            b1.Property<DateTime>("DeliveryDateTime")
                                 .HasColumnType("datetime2")
-                                .HasColumnName("Deadline");
+                                .HasColumnName("DeliveryDateTime");
 
                             b1.Property<string>("DeliveryMethod")
                                 .HasColumnType("nvarchar(max)")
@@ -157,7 +163,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasOne("OrderDeliverySystem.Ordering.Domain.Buyers.Buyer", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Buyer");

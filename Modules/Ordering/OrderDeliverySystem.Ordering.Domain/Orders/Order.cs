@@ -43,7 +43,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             Address = address;
             Description = "The order was submitted";
 
-            AddDomainEvent(new OrderCreatedDomainEvent());
+            AddDomainEvent(new OrderCreatedDomainEvent(BuyerId, Id));
         }
 
         public static Order CreateNew(Guid buyerId, string address)
@@ -78,6 +78,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
             if (isDelivery)
                 orderItem.AddDeliveryProrerty(deliveryDateTime, address);
+
+            if(!isDelivery)
+                orderItem.SetDefoultDeliveryOptions(deliveryDateTime, address);
 
             _orderItems.Add(orderItem);
 

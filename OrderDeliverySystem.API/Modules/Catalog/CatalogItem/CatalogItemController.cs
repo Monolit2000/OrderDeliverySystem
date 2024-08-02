@@ -9,6 +9,7 @@ using OrderDeliverySystem.Catalog.Application.CatalogItems.GetOllItemsByDays;
 using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItemByWeek;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {
@@ -18,11 +19,9 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
     {
         private readonly IMediator _mediator;
 
-        public CatalogItemController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
+        public CatalogItemController(IMediator mediator) 
+            => _mediator = mediator;
+     
 
         [HttpPost("AddCatalogItem")]
         public async Task<IActionResult> AddCatalogItem(AddCatalogItemCommand addCatalogItemRequest)
@@ -55,9 +54,16 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         [HttpGet("GetOllItemsByDays")]
         public async Task<IActionResult> GetOllItemsByDays()
         {
-            return HandleResult(await _mediator.Send( new GetOllItemsByDaysQuery()));
+            return HandleResult(await _mediator.Send( new GetAllItemsByDaysQuery()));
         }
-      
+
+
+        [HttpGet("GetAllCatalogItemsByWeek")]
+        public async Task<IActionResult> EditCatalogItem(/*GetAllCatalogItemsByWeekQuery getAllCatalogItemsByWeekQuery*/)
+        {
+            return HandleResult(await _mediator.Send(new GetAllCatalogItemsByWeekQuery()));
+        }
+
 
         [HttpGet("GetAllCatalogItem")]
         public async Task<IActionResult> GetAllCatalogItem()
@@ -77,5 +83,6 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
         {
             return HandleResult(await _mediator.Send(editCatalogItemCommand));
         }
+
     }
 }

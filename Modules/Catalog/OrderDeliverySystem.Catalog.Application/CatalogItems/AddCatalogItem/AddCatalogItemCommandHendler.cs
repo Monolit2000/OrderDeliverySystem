@@ -15,18 +15,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
 
         public async Task<Result<SmallCatalogItemDto>> Handle(AddCatalogItemCommand request, CancellationToken cancellationToken)
         {
-
-            //var catalogType = await _catalogRepository.GetCatalogTypeByIdAsync(request.CatalogTypeId);
-
-            //if (catalogType == null)
-            //    return Result.Fail("Catalog type not found");
-
-            //var establishment = await _catalogRepository.GetEstablishmentById(request.EstablishmentId);
-
-            //if(establishment == null)
-            //    return Result.Fail("Establishment not found");
-
-
             var catalogItemResult = CatalogItem.CreateNew(
                 request.Name,
                 request.TimeToExist,
@@ -35,9 +23,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
                 pictureUri: request.PictureUrl);
              
             if(catalogItemResult.IsFailed)
-            {
                 return Result.Fail(catalogItemResult.Errors);
-            }
 
             var catalogItem = catalogItemResult.Value;
 
@@ -48,8 +34,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.AddCatalogItem
                 catalogItem.Name);
 
             return Result.Ok(catalogItemDto);
-
         }
-
     }
 }

@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Servises.Peyments
                 return Result.Fail("Invalid request");
             }
 
-            var liqPayClient = new LiqPayClient(config["LiqPayPublicTestKey"], config["LiqPayPrivateTestKey"]);
+            var liqPayClient = new LiqPayClient(config["LiqPayPublicKey"], config["LiqPayPrivateKey"]);
 
             liqPayClient.IsCnbSandbox = true;
 

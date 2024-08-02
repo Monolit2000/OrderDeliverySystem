@@ -20,33 +20,33 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
 
             modelBuilder.Entity<CatalogItem>().HasData(
                 new CatalogItem(
-                    Guid.NewGuid(), "Margherita Pizza", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic cheese pizza with tomato and basil.", 9.99m, "margherita.jpg", "/images/margherita.jpg"),
+                    Guid.NewGuid(), "Margherita Pizza", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic cheese pizza with tomato and basil.", 9.99m, "wings.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Pepperoni Pizza", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Pizza with pepperoni slices.", 11.99m, "pepperoni.jpg", "/images/pepperoni.jpg"),
+                    Guid.NewGuid(), "Pepperoni Pizza", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Pizza with pepperoni slices.", 11.99m, "wings.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Caesar Salad", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Traditional Caesar salad with croutons and parmesan.", 7.99m, "caesar.jpg", "/images/caesar.jpg"),
+                    Guid.NewGuid(), "Caesar Salad", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Traditional Caesar salad with croutons and parmesan.", 7.99m, "wings.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Spaghetti Bolognese", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Spaghetti with a rich Bolognese sauce.", 12.99m, "spaghetti.jpg", "/images/spaghetti.jpg"),
+                    Guid.NewGuid(), "Spaghetti Bolognese", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Spaghetti with a rich Bolognese sauce.", 12.99m, "wings.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Chicken Wings", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Chicken wings with spicy sauce.", 8.99m, "wings.jpg", "/images/wings.jpg"),
+                    Guid.NewGuid(), "Chicken Wings", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Chicken wings with spicy sauce.", 8.99m, "wings.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Cheeseburger", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic cheeseburger with fries.", 10.99m, "cheeseburger.jpg", "/images/cheeseburger.jpg"),
+                    Guid.NewGuid(), "Cheeseburger", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic cheeseburger with fries.", 10.99m, "cheeseburger.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Fish and Chips", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Fried fish with chips.", 13.99m, "fishchips.jpg", "/images/fishchips.jpg"),
+                    Guid.NewGuid(), "Fish and Chips", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Fried fish with chips.", 13.99m, "fishchips.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Tiramisu", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Traditional Italian dessert with mascarpone.", 6.99m, "tiramisu.jpg", "/images/tiramisu.jpg"),
+                    Guid.NewGuid(), "Tiramisu", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Traditional Italian dessert with mascarpone.", 6.99m, "tiramisu.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Chicken Alfredo", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Chicken with creamy Alfredo sauce.", 14.99m, "alfredo.jpg", "/images/alfredo.jpg"),
+                    Guid.NewGuid(), "Chicken Alfredo", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Chicken with creamy Alfredo sauce.", 14.99m, "alfredo.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Margarita", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic Margarita cocktail.", 5.99m, "margarita.jpg", "/images/margarita.jpg"),
+                    Guid.NewGuid(), "Margarita", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Classic Margarita cocktail.", 5.99m, "margarita.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Mojito", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Refreshing Mojito with mint and lime.", 5.99m, "mojito.jpg", "/images/mojito.jpg"),
+                    Guid.NewGuid(), "Mojito", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Refreshing Mojito with mint and lime.", 5.99m, "mojito.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Pina Colada", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Tropical cocktail with pineapple and coconut.", 6.99m, "pinacolada.jpg", "/images/pinacolada.jpg"),
+                    Guid.NewGuid(), "Pina Colada", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Tropical cocktail with pineapple and coconut.", 6.99m, "pinacolada.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Cappuccino", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Coffee with steamed milk.", 4.99m, "cappuccino.jpg", "/images/cappuccino.jpg"),
+                    Guid.NewGuid(), "Cappuccino", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Coffee with steamed milk.", 4.99m, "cappuccino.jpg", ""),
                 new CatalogItem(
-                    Guid.NewGuid(), "Espresso", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Strong coffee shot.", 2.99m, "espresso.jpg", "/images/espresso.jpg")
+                    Guid.NewGuid(), "Espresso", startDate.AddDays(dateIncrement++), Guid.NewGuid(), "Strong coffee shot.", 2.99m, "espresso.jpg", "")
             );
         }
     }

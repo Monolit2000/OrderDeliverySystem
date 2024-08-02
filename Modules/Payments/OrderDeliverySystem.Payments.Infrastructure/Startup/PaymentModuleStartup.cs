@@ -20,7 +20,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Startup
         public static IServiceCollection AddPaymentModule(
       this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnectionNew");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddMediatR(cfg =>
             {

@@ -12,6 +12,7 @@ using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTime;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOrderItemByDay;
+using OrderDeliverySystem.Ordering.Application.Orders.GetAllOrderItemByDayRange;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {
@@ -53,13 +54,18 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
             return HandleResult(await _mediator.Send(new GetOllOrdersQuerie()));
         }
 
+
         [HttpPost("GetAllOrderItemByDay")]
         public async Task<IActionResult> GetAllOrderItemByDay(GetAllOrderItemByDayQuery getAllOrderItemByDayQuery)
         {
             return HandleResult(await _mediator.Send( getAllOrderItemByDayQuery));
         }
-        
 
+        [HttpPost("GetAllOrderItemsByDayRange")]
+        public async Task<IActionResult> GetAllOrderItemsByDayRange(GetAllOrderItemByDayRangeQuery getAllOrderItemByDayRangeQuery)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(getAllOrderItemByDayRangeQuery));
+        }
 
         [HttpPost("SetPaidOrderStatus")]
         public async Task<IActionResult> SetPaidOrderStatus(SetPaidOrderStatusCommand setPaidOrderStatusCommand)

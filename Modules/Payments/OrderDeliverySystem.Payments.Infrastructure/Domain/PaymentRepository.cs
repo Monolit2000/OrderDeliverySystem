@@ -2,11 +2,7 @@
 using OrderDeliverySystem.Payments.Domain.Payers;
 using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Domain
 {
@@ -38,6 +34,11 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Domain
         public async Task<List<Payment>> GetPaymentsByUserId(PayerId payerId)
         {
             return await _context.Payments.Where(p => p.PayerId == payerId).ToListAsync();
+        }
+
+        public async Task<List<Payment>> GetAllPayments()
+        {
+            return await _context.Payments.ToListAsync();
         }
     }
 }

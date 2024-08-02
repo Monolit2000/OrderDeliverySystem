@@ -3,6 +3,7 @@ using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.Catalog.Domain.Catalog.Events;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using MediatR;
 
 namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
@@ -52,6 +53,9 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             if (price <= 0)
                 return Result.Fail<CatalogItem>("Price must be greater than zero.");
+
+            if (string.IsNullOrEmpty(pictureUri))
+                return Result.Fail("Picture URL is required");
 
             var catalogItem = new CatalogItem
             {

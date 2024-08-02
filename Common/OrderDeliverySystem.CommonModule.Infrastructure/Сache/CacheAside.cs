@@ -15,7 +15,7 @@ namespace OrderDeliverySystem.CommonModule.Infrastructure.Сache
     {
         private static readonly DistributedCacheEntryOptions Default = new()
         {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2)
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
         };
 
         public static async Task<T?> GetOrCreateAsync<T>(

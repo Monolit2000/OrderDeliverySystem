@@ -94,40 +94,6 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.HasIndex("BuyerId");
 
                     b.ToTable("Orders", "ordering");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("8a311fc5-8e39-4a8b-bde4-aa37585281ae"),
-                            Address = "123 Main St, Cityville",
-                            BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
-                            Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4358)
-                        },
-                        new
-                        {
-                            Id = new Guid("3e4d205a-bbbf-4a47-9a65-628d2db57c39"),
-                            Address = "456 Elm St, Townsville",
-                            BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
-                            Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4375)
-                        },
-                        new
-                        {
-                            Id = new Guid("13f46e83-b887-4ed8-814c-822c17dd9d12"),
-                            Address = "789 Oak St, Villagetown",
-                            BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
-                            Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4380)
-                        },
-                        new
-                        {
-                            Id = new Guid("e76ab7c3-abf0-4fbc-af7d-3b70e81ec247"),
-                            Address = "321 Maple St, Hamletville",
-                            BuyerId = new Guid("4c024333-a4d1-42c3-a537-0df0dd9946ac"),
-                            Description = "The order was submitted",
-                            OrderDate = new DateTime(2024, 7, 28, 22, 35, 25, 312, DateTimeKind.Utc).AddTicks(4385)
-                        });
                 });
 
             modelBuilder.Entity("OrderDeliverySystem.Ordering.Domain.Orders.OrderItem", b =>

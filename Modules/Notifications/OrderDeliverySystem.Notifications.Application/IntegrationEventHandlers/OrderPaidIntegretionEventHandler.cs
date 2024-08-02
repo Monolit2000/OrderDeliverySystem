@@ -2,11 +2,7 @@
 using OrderDeliverySystem.Notifications.Application.TelegramClient.SendNotification;
 using OrderDeliverySystem.Ordering.IntegrationEvents;
 using OrderDeliverySystem.UserAccess.Api;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrderDeliverySystem.Notifications.Application.IntegrationEventHandlers
 {

@@ -12,8 +12,8 @@ using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
 {
     [DbContext(typeof(PaymentContext))]
-    [Migration("20240725231057_testMIgration")]
-    partial class testMIgration
+    [Migration("20240802050525_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,10 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("PayerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("PayerId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Payments", "payments");
@@ -45,23 +49,6 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
 
             modelBuilder.Entity("OrderDeliverySystem.Payments.Domain.Payments.Payment", b =>
                 {
-                    b.OwnsOne("OrderDeliverySystem.Payments.Domain.Payers.PayerId", "PayerId", b1 =>
-                        {
-                            b1.Property<Guid>("PaymentId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<Guid>("Value")
-                                .HasColumnType("uniqueidentifier")
-                                .HasColumnName("PayerId");
-
-                            b1.HasKey("PaymentId");
-
-                            b1.ToTable("Payments", "payments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PaymentId");
-                        });
-
                     b.OwnsOne("OrderDeliverySystem.Payments.Domain.Payments.OrderId", "OrderId", b1 =>
                         {
                             b1.Property<Guid>("PaymentId")
@@ -98,8 +85,6 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
                         });
 
                     b.Navigation("OrderId");
-
-                    b.Navigation("PayerId");
 
                     b.Navigation("PaymentStatus");
                 });

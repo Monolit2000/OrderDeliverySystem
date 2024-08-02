@@ -26,7 +26,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Startup
         public static IServiceCollection AddOrderModule(
        this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnectionNew");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddMediatR(cfg =>
             {

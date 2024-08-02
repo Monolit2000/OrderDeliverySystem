@@ -9,7 +9,6 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
     {
         public PayerId PayerId { get; private set; }
         public OrderId OrderId { get; private set; }
-
         public PaymentId Id { get; private set; }
         public decimal Amount { get; private set; }
         public PaymentStatus PaymentStatus { get; private set; }

@@ -5,6 +5,8 @@ using OrderDeliverySystem.API.Modules.Payments.Payment.Model;
 using OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProcessing;
 using OrderDeliverySystem.Payments.Application.Payments.GetPaymentStatus;
 using OrderDeliverySystem.Payments.Application.Payments.GeneratePaymentUrl;
+using OrderDeliverySystem.Payments.Application.Payments.GetPaymentHistoryByDatRange;
+using OrderDeliverySystem.Payments.Application.Payments.GetPaymentHistory;
 
 namespace OrderDeliverySystem.API.Modules.Payments.Payment
 {
@@ -37,5 +39,20 @@ namespace OrderDeliverySystem.API.Modules.Payments.Payment
         {
             return HandleResult(await _mediator.Send(getPaymentStatusQuery));
         }
+
+        [HttpPost("GetPaymentHistoryByDateRange")]
+        public async Task<IActionResult> GetPaymentHistoryByDateRange(GetPaymentHistoryByDateRangeQuery getPaymentHistoryByDateRangeQuery)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(getPaymentHistoryByDateRangeQuery));
+        }
+
+        [HttpPost("GetPaymentHistory")]
+        public async Task<IActionResult> GetPaymentHistory(GetPaymentHistoryQuery getPaymentHistoryQuery)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(getPaymentHistoryQuery));
+        }
+
+        
+
     }
 }

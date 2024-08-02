@@ -20,14 +20,14 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Servises.Peyments
                 Language = LiqPayRequestLanguage.EN,
                 ServerUrl = _config["ProcessorCallbackUrl"],
                 Version = 3,
-                Description = description ?? "Оплата послуг",
+                Description = description ?? $"Оплата замовлення {orderId.ToString()}",
             };
 
             var liqPayClient = new LiqPayClient(
-                _config["LiqPayPublicTestKey"],
-                _config["LiqPayPrivateTestKey"]);
+                _config["LiqPayPublicKey"],
+                _config["LiqPayPrivateKey"]);
 
-            liqPayClient.IsCnbSandbox = true;
+            //liqPayClient.IsCnbSandbox = true;
 
             var paymentDetails = liqPayClient.GenerateDataAndSignature(paymentRequest);
 

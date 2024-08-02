@@ -2,16 +2,17 @@
 
 namespace OrderDeliverySystem.Ordering.IntegrationEvents
 {
-    public class OrderPaidIntegretionEvent : IntegrationEvent
+    public class OrderCreatedIntegrationEvent : IntegrationEvent
     {
+        public Guid OrderId { get; }
         public Guid BuyerId { get; }
 
-        public Guid OrderId { get; }
-
-        public OrderPaidIntegretionEvent(Guid buyerId, Guid orderId)
+        public OrderCreatedIntegrationEvent(
+            Guid orderId, 
+            Guid buyerId)
         {
-            BuyerId = buyerId;
             OrderId = orderId;
+            BuyerId = buyerId;
         }
     }
 }

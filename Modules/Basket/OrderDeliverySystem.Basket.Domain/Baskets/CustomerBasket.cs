@@ -59,9 +59,10 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
             if (isDelivery != basketItem.IsDelivery)
                 basketItem.SetDelivery(isDelivery, delvieryTime);
-               // basketItem.IsDelivery = isDelivery; 
+            // basketItem.IsDelivery = isDelivery; 
 
-            if(isDelivery == true && delvieryTime != default)
+            //chenged isDelivery == true &&
+            if (delvieryTime != default)
                 basketItem.SetDelivery(isDelivery, delvieryTime);
             //basketItem.DeliveryDateTime = delvieryTime;
             return Result.Ok();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.Orders.GetOrderItemByDay
 {
-    public class GetAllOrderItemByDayQuery : IRequest<Result<OrderItemByDayDto>>
+    public class GetAllOrderItemByDayQuery : IRequest<Result<List<OrderItemDto>>>
     {
         public DateTime Deadline { get; set; }
     

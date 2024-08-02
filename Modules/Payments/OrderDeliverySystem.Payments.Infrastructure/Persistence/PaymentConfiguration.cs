@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Payments.Domain.Payments;
+using OrderDeliverySystem.Payments.Domain.Payers;
 
 namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
 {
@@ -21,10 +22,18 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
                    .HasColumnType("decimal(18,2)")
                    .IsRequired();
 
-            builder.OwnsOne(o => o.PayerId, b =>
-            {
-                b.Property(a => a.Value).HasColumnName("PayerId").IsRequired();
-            });
+            //builder.OwnsOne(o => o.PayerId, b =>
+            //{
+            //    b.Property(a => a.Value).HasColumnName("PayerId").IsRequired();
+            //});
+
+              builder.Property(p => p.PayerId)
+                   .HasConversion(
+                       id => id.Value, // Convert PayerId to Guid for storage
+                       value => new PayerId(value)) // Convert Guid from storage back to PayerId
+                   .HasColumnName("PayerId")
+                   .IsRequired();
+
 
             builder.OwnsOne(o => o.OrderId, b =>
             {
@@ -35,6 +44,12 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
             {
                 b.Property(a => a.Value).HasColumnName("PaymentStatus").IsRequired();
             });
+
+            //// Настройка отношения один ко многим с Payer
+            //builder.HasOne<Payer>()
+            //       .WithMany() // Опционально укажите коллекцию навигации в Payer, если она есть
+            //       .HasForeignKey(p => p.PayerId) // Ссылка на PayerId
+            //       .OnDelete(DeleteBehavior.Restrict); // Установите поведение удаления (опционально)
         }
     }
 }

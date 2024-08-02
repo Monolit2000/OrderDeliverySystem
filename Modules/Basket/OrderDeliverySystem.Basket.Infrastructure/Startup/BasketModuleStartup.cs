@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Startup
           this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connectionString = configuration.GetConnectionString("DefaultConnectionNew");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddMediatR(cfg =>
             {
