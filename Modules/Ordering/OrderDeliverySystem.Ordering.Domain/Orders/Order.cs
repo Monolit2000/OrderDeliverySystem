@@ -154,15 +154,21 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
         {
             if (OrderStatus == OrderStatus.Paid)
             {
-                if(paymentId != default)
+                //for manual switching
+                if (paymentId != default)
                     PaymentId = paymentId;
 
                 return Result.Ok();
             }
 
+            foreach (var item in _orderItems)
+                item.MarkAsPaid();
+
             PaymentId = paymentId;
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
+
+
 
             AddDomainEvent(new OrderPaidDomainEvent(Id, BuyerId));
             return Result.Ok();
@@ -195,8 +201,6 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             return Result.Ok();
         }
 
-
-
         public Result ChangeItemStatus(OrderItem item, OrderItemStatus newStatus)
         {
             if (!_orderItems.Contains(item))
@@ -208,21 +212,6 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             return Result.Ok();
         }
 
-
-        private bool ValidateStatusTransition(OrderItemStatus currentStatus, OrderItemStatus newStatus)
-        {
-            var validTransitions = new Dictionary<OrderItemStatus, List<OrderItemStatus>>
-            {
-                { OrderItemStatus.Waiting, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
-                { OrderItemStatus.InWork, new List<OrderItemStatus> { OrderItemStatus.Cooked, OrderItemStatus.Failed } },
-                { OrderItemStatus.Cooked, new List<OrderItemStatus> { OrderItemStatus.PickedUp, OrderItemStatus.Delivered } },
-                { OrderItemStatus.PickedUp, new List<OrderItemStatus> { OrderItemStatus.Delivered } },
-                { OrderItemStatus.Paid, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
-            };
-
-            return validTransitions.TryGetValue(currentStatus, out var possibleStatuses) && possibleStatuses.Contains(newStatus);
-        }
-
         private void NotifyStatusChange(OrderItem item)
         {
     
@@ -231,18 +220,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         private void OrderStartedDomainEvent(Guid userId, string userName)
         {
-            //var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName);
-            //this.AddDomainEvent(orderStartedDomainEvent);
+        
         }
     }
 }
-//public decimal Amount 
-//{
-//    get 
-//    {
-//        return OrderItems
-//          .Sum(item =>
-//              (item.UnitPrice - item.Discount) * item.Units +
-//              (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
-//    }
-//}

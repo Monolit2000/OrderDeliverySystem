@@ -29,20 +29,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChengeOrderItemStatus
 
             var newStatus = statusResult.Value;
 
-            Result result = newStatus.Value switch
-            {
-                nameof(OrderItemStatus.Waiting) => orderItem.MarkAsWaiting(),
-                nameof(OrderItemStatus.Paid) => orderItem.MarkAsPaid(),
-                nameof(OrderItemStatus.Failed) => orderItem.MarkAsFailed(),
-                nameof(OrderItemStatus.PickedUp) => orderItem.MarkAsPickedUp(),
-                nameof(OrderItemStatus.Delivered) => orderItem.MarkAsDelivered(),
-                nameof(OrderItemStatus.Cooked) => orderItem.MarkAsCooked(),
-                nameof(OrderItemStatus.InWork) => orderItem.MarkAsInWork(),
-                _ => Result.Fail($"Unhandled status value: {newStatus.Value}")
-            };
 
-            if (result.IsFailed)
-                return result;
+            var changeStatusResult = orderItem.ChangeStatus(newStatus);
+
+
+            if (changeStatusResult.IsFailed)
+                return changeStatusResult;
 
             await orderRepository.SaveChangesAsync();
 

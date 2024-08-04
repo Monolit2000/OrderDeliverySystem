@@ -89,6 +89,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsWaiting()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Waiting))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.Waiting;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsWaitingDomainEvent());
@@ -97,6 +100,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsPaid()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Paid))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.Paid;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsAsPaidDomainEvent());
@@ -106,6 +112,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsFailed()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Failed))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.Failed;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsFailedDomainEvent());
@@ -115,6 +124,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsPickedUp()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.PickedUp))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.PickedUp;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsPickedUpDomainEvent());
@@ -123,6 +135,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsDelivered()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Delivered))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.Delivered;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsDeliveredDomainEvent());
@@ -131,6 +146,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsCooked()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Cooked))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.Cooked;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsCookedDomainEvent());
@@ -139,6 +157,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public Result MarkAsInWork()
         {
+            if (ValidateStatusTransition(Status, OrderItemStatus.InWork))
+                return Result.Fail("Validate status transition error");
+
             Status = OrderItemStatus.InWork;
             AddStatusChange(this.OrderItemId, Status);
             AddDomainEvent(new OrderItemMarkedAsInWorkDomainEvent());
@@ -209,14 +230,15 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
         {
             var validTransitions = new Dictionary<OrderItemStatus, List<OrderItemStatus>>
             {
-                { OrderItemStatus.Waiting, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
-                { OrderItemStatus.InWork, new List<OrderItemStatus> { OrderItemStatus.Cooked, OrderItemStatus.Failed } },
-                { OrderItemStatus.Cooked, new List<OrderItemStatus> { OrderItemStatus.PickedUp, OrderItemStatus.Delivered } },
-                { OrderItemStatus.PickedUp, new List<OrderItemStatus> { OrderItemStatus.Delivered } },
-                { OrderItemStatus.Paid, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
+                { OrderItemStatus.Waiting, new List<OrderItemStatus>() /*{ OrderItemStatus.InWork, OrderItemStatus.Failed }*/ },
+                { OrderItemStatus.InWork, new List<OrderItemStatus>() /*{ OrderItemStatus.Cooked, OrderItemStatus.Failed }*/ },
+                { OrderItemStatus.Cooked, new List<OrderItemStatus> () /*{ OrderItemStatus.PickedUp, OrderItemStatus.Delivered }*/ },
+                { OrderItemStatus.PickedUp, new List<OrderItemStatus> () /*{ OrderItemStatus.Delivered }*/ },
+                { OrderItemStatus.Paid, new List<OrderItemStatus> () /*{ OrderItemStatus.InWork, OrderItemStatus.Failed }*/ },
             };
 
-            return validTransitions.TryGetValue(currentStatus, out var possibleStatuses) && 
+            return currentStatus == newStatus ||
+                validTransitions.TryGetValue(currentStatus, out var possibleStatuses) && 
                 possibleStatuses.Contains(newStatus);
         }
     }

@@ -49,7 +49,9 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-             builder.HasKey(x => x.OrderItemId);
+
+            builder.HasKey(x => x.OrderItemId);
+
 
             builder.Property(e => e.Discount)
                 .HasColumnType("decimal(18,2)");
@@ -88,7 +90,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
         {
             public void Configure(EntityTypeBuilder<OrderItemStatusChange> builder)
             {
-                builder.HasKey(oisc => oisc.ItemId);
+                builder.HasKey(oisc => oisc.Id);
+
+                builder.Property(p => p.Id)
+                   .HasConversion(
+                       id => id.Value, // Convert OrderId to Guid for storage
+                       value => new OrderItemStatusChangeId(value)) // Convert Guid from storage back to OrderId
+                   .HasColumnName("Id")
+                   .IsRequired();
 
                 builder.Property(oisc => oisc.ItemId)
                     .IsRequired();
