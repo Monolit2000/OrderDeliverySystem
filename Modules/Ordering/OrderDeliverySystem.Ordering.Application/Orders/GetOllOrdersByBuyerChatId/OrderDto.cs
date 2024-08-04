@@ -18,6 +18,10 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerCha
 
         public string Description { get; set; }
 
+        public string BuyerName { get; set; }
+
+        public string BuyerPhoneNumber { get; set; }
+
         public List<OrderItemDto> OrderItems { get; set; } = [];
     }
 }

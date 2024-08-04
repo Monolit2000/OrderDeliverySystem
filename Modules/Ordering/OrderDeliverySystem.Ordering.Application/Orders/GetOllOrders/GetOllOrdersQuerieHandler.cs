@@ -21,13 +21,12 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
 
         public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersQuerie request, CancellationToken cancellationToken)
         {
-            var root = await _orderRepository.GetAllOrders();
+            var orders = await _orderRepository.GetAllOrders();
 
-            if (root == null)
-                return Result.Fail("ordersDto not faond by id ");
+            if (orders == null)
+                return Result.Fail("Orders not faond");
 
-            var ordersDto = root
-            .Select(order => new OrderDto
+            var ordersDto = orders.Select(order => new OrderDto
             {
                 OrderId = order.Id.Value,
                 BuyerId = order.BuyerId,
@@ -40,10 +39,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
                     ProductName = item.ProductName,
                     UnitPrice = item.UnitPrice,
                     Units = item.Units
-                })
-                .ToList()
-            })
-            .ToList();
+                }).ToList()
+            }).ToList();
 
             return ordersDto;
         }

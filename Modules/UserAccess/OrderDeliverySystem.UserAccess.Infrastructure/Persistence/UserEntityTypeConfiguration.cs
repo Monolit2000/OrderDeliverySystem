@@ -24,7 +24,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Persistence
             builder.Property(p => p.LastName).HasColumnName("LastName");
             builder.Property(p => p.Name).HasColumnName("Name");
             builder.Property(p => p.WorkAddress).HasColumnName("WorkAddress");
-
+            builder.Property(p => p.RegistrationDate).HasColumnName("RegistrationDate").IsRequired();
 
 
             builder.ComplexProperty(c => c.PhoneNumber, b =>

@@ -2,6 +2,7 @@
 using OrderDeliverySystem.Ordering.Domain.Buyers;
 using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders;
+using OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders.OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 {
     public class OrderContext : DbContext
     {
-
         public OrderContext(DbContextOptions<OrderContext> options) : base(options)
         { }
 
 
+        public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Buyer> Buyers { get; set; }
+        public DbSet<OrderItemStatusChange> OrderItemStatusChangs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemStatusChangeConfiguration());
 
             //OrderSeeder.Seed(modelBuilder);
         }

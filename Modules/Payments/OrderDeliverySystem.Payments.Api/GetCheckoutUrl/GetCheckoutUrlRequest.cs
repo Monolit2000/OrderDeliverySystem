@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,5 +13,7 @@ namespace OrderDeliverySystem.Payments.Api.GetCheckoutUrl
         public Guid OrderId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
+        public string? Description { get; set; } 
+
     }
 }

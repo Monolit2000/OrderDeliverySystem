@@ -28,7 +28,8 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Application.Payment
                 request.UserId,
                 request.OrderId,
                 request.Amount,
-                request.PaymentDate));
+                request.PaymentDate,
+                request.Description));
 
             var checkoutUri = responce.Value.CheckoutUri;
 

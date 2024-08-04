@@ -30,7 +30,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-        public int? PaymentId { get; private set; }
+        public Guid? PaymentId { get; private set; }
 
         private Order() { } // For EF core 
 
@@ -150,11 +150,17 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             return Result.Ok();
         }
 
-        public Result SetPaidStatus()
+        public Result SetPaidStatus(Guid paymentId = default)
         {
             if (OrderStatus == OrderStatus.Paid)
-                return Result.Ok();
+            {
+                if(paymentId != default)
+                    PaymentId = paymentId;
 
+                return Result.Ok();
+            }
+
+            PaymentId = paymentId;
             OrderStatus = OrderStatus.Paid;
             Description = "The order was paid";
 
@@ -189,6 +195,38 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             return Result.Ok();
         }
 
+
+
+        public Result ChangeItemStatus(OrderItem item, OrderItemStatus newStatus)
+        {
+            if (!_orderItems.Contains(item))
+                return Result.Fail("Item does not belong to this order.");
+
+            item.ChangeStatus(newStatus);
+            NotifyStatusChange(item);
+
+            return Result.Ok();
+        }
+
+
+        private bool ValidateStatusTransition(OrderItemStatus currentStatus, OrderItemStatus newStatus)
+        {
+            var validTransitions = new Dictionary<OrderItemStatus, List<OrderItemStatus>>
+            {
+                { OrderItemStatus.Waiting, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
+                { OrderItemStatus.InWork, new List<OrderItemStatus> { OrderItemStatus.Cooked, OrderItemStatus.Failed } },
+                { OrderItemStatus.Cooked, new List<OrderItemStatus> { OrderItemStatus.PickedUp, OrderItemStatus.Delivered } },
+                { OrderItemStatus.PickedUp, new List<OrderItemStatus> { OrderItemStatus.Delivered } },
+                { OrderItemStatus.Paid, new List<OrderItemStatus> { OrderItemStatus.InWork, OrderItemStatus.Failed } },
+            };
+
+            return validTransitions.TryGetValue(currentStatus, out var possibleStatuses) && possibleStatuses.Contains(newStatus);
+        }
+
+        private void NotifyStatusChange(OrderItem item)
+        {
+    
+        }
         #endregion
 
         private void OrderStartedDomainEvent(Guid userId, string userName)

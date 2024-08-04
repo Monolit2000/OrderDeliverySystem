@@ -13,6 +13,7 @@ using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderDeliveryTime;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeDeliveryOptions;
 using OrderDeliverySystem.Ordering.Application.Orders.GetOrderItemByDay;
 using OrderDeliverySystem.Ordering.Application.Orders.GetAllOrderItemByDayRange;
+using OrderDeliverySystem.Ordering.Application.Orders.ChengeOrderItemStatus;
 
 namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 {
@@ -32,6 +33,8 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         {
             return HandleResult(await _mediator.Send(createOrderCommand));
         }
+
+
 
 
         [HttpPost("CancelOrder")]
@@ -89,10 +92,30 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
 
 
         [HttpPost("ChangeOrderStatus")]
-        public async Task<IActionResult> SatAwaitingValidationOrderStatus(ChangeOrderStatusCommand changeOrderStatusCommand)
+        public async Task<IActionResult> ChangeOrderStatus(ChangeOrderStatusCommand changeOrderStatusCommand)
         {
             return HandleResultWithReasonsAsStrArray(await _mediator.Send(changeOrderStatusCommand));
         }
+
+
+    
+
+
+        [HttpPost("ChengeOrderItemStatus")]
+        public async Task<IActionResult> ChengeOrderItemStatus(ChengeOrderItemStatusCommand chengeOrderItemStatusCommand)
+        {
+            return HandleResultWithReasonsAsStrArray(await _mediator.Send(chengeOrderItemStatusCommand));
+        }
+
+
+        [HttpPost("ChengeOrderItemStatusTest")]
+        public async Task<IActionResult> ChengeOrderItemSdsftatus(ChengeOrderItemStatusCommand chengeOrderItemStatusCommand)
+        {
+            return HandleResult(await _mediator.Send(chengeOrderItemStatusCommand));
+        }
+
+
+
 
         [HttpPost("ChangeOrderDeliveryTime")]
         public async Task<IActionResult> ChangeOrderDeliveryTime(ChangeOrderDeliveryTimeCommand changeOrderDeliveryTimeCommand)

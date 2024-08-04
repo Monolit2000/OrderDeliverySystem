@@ -23,10 +23,8 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
                    .HasColumnName("Id")
                    .IsRequired();
 
-
             builder.Property(o => o.OrderNumber)
                   .ValueGeneratedOnAdd();
-
 
             builder.ComplexProperty(o => o.OrderStatus, b =>
             {
@@ -40,25 +38,9 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
                    .HasForeignKey(o => o.BuyerId)
                    .OnDelete(DeleteBehavior.Restrict); // Adjust this based on your needs
 
-            //builder.OwnsMany(o => o.OrderItems, oi =>
-            //{
-            //    oi.HasKey(i => i.OrderItemId);
-
-            //    oi.Property(e => e.Discount)
-            //        .HasColumnType("decimal(18,2)");
-
-            //    oi.Property(e => e.UnitPrice)
-            //        .HasColumnType("decimal(18,2)");
-
-            //    oi.OwnsOne(o => o.DeliveryOptions, b =>
-            //    {
-            //        b.Property(a => a.IsSelfPickup).HasColumnName("IsSelfPickup").IsRequired();
-            //        b.Property(a => a.DeliveryMethod).HasColumnName("DeliveryMethod").IsRequired();
-            //        b.Property(a => a.DeliveryCost).HasColumnName("DeliveryCost").HasColumnType("decimal(18,2)").IsRequired();
-            //        b.Property(a => a.Deadline).HasColumnName("Deadline").IsRequired();
-            //        b.Property(a => a.Address).HasColumnName("Address").IsRequired();
-            //    });
-            //});
+            builder.HasMany(o => o.OrderItems)
+                   .WithOne()
+                   .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
@@ -67,14 +49,13 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            builder.HasKey(x => x.OrderItemId);
+             builder.HasKey(x => x.OrderItemId);
 
             builder.Property(e => e.Discount)
                 .HasColumnType("decimal(18,2)");
 
             builder.Property(e => e.UnitPrice)
                 .HasColumnType("decimal(18,2)");
-
 
             builder.ComplexProperty(o => o.DeliveryOptions, b =>
             {
@@ -85,6 +66,42 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
                 b.Property(a => a.DeliveryDateTime).HasColumnName("DeliveryDateTime");
                 b.Property(a => a.Address).HasColumnName("Address");
             });
+
+            builder.ComplexProperty(o => o.Status, b =>
+            {
+                b.IsRequired();
+                b.Property(a => a.Value).HasColumnName("Status");
+            });
+
+            builder.HasMany<OrderItemStatusChange>()
+                .WithOne()
+                .HasForeignKey(oisc => oisc.ItemId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+
+
+
+namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
+    {
+        public class OrderItemStatusChangeConfiguration : IEntityTypeConfiguration<OrderItemStatusChange>
+        {
+            public void Configure(EntityTypeBuilder<OrderItemStatusChange> builder)
+            {
+                builder.HasKey(oisc => oisc.ItemId);
+
+                builder.Property(oisc => oisc.ItemId)
+                    .IsRequired();
+
+                builder.ComplexProperty(oisc => oisc.Status, b =>
+                {
+                    b.IsRequired();
+                    b.Property(a => a.Value).HasColumnName("Status");
+                });
+
+                builder.Property(oisc => oisc.ChangedDate)
+                    .IsRequired();
+            }
         }
     }
 }

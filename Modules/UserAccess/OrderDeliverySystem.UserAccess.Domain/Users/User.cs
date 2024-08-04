@@ -34,6 +34,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
 
         public long ChatId { get; private set; }
 
+        public DateTimeOffset RegistrationDate { get; private set; }
+
         private User() { } // For Ef Core
     
 
@@ -48,6 +50,8 @@ namespace OrderDeliverySystem.UserAccess.Domain.Users
             Name = name;
             Role = role;
             WorkAddress = workAddress;
+            RegistrationDate = DateTimeOffset.UtcNow;
+
 
             this.AddDomainEvent(new UserCreatedDomainEvent(UserId));
         }

@@ -1,14 +1,7 @@
-﻿using Azure.Core;
-using FluentResults;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using OrderDeliverySystem.Ordering.Domain.Orders;
 using OrderDeliverySystem.Payments.IntegrationEvents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Ordering.Application.IntegrationEventHandlers
 {
@@ -37,7 +30,7 @@ namespace OrderDeliverySystem.Ordering.Application.IntegrationEventHandlers
                 return;
             }
 
-            order.SetPaidStatus();
+            order.SetPaidStatus(notification.PaymentId);
 
             await _orderRepository.SaveChangesAsync();
         }
