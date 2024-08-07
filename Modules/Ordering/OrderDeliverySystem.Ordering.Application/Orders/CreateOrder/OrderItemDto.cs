@@ -23,5 +23,9 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
         public DateTime DeliveryDateTime { get; set; }
 
         public string PictureUrl { get; set; }
+
+        public string? OptionItemName { get; set; } 
+
+        public decimal OptionItemPrice { get; set; } = default; 
     }
 }

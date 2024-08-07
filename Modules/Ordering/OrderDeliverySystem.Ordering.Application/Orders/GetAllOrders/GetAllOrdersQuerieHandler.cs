@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
+using OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerChatId;
 using OrderDeliverySystem.Ordering.Domain.Orders;
 using System;
 using System.Collections.Generic;
@@ -8,18 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
+namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrders
 {
-    public class GetOllOrdersQuerieHandler : IRequestHandler<GetOllOrdersQuerie, Result<List<OrderDto>>>
+    public class GetAllOrdersQuerieHandler : IRequestHandler<GetAllOrdersQuerie, Result<List<OrderDto>>>
     {
         public readonly IOrderRepository _orderRepository;
 
-        public GetOllOrdersQuerieHandler(IOrderRepository orderRepository)
+        public GetAllOrdersQuerieHandler(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersQuerie request, CancellationToken cancellationToken)
+        public async Task<Result<List<OrderDto>>> Handle(GetAllOrdersQuerie request, CancellationToken cancellationToken)
         {
             var orders = await _orderRepository.GetAllOrders();
 

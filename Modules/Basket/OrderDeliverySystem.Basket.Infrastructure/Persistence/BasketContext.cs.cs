@@ -25,6 +25,8 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new BasketItemEntityTypeConfiguration());
 
+            modelBuilder.ApplyConfiguration(new BasketEntityTypeConfiguration());
+
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(BasketEntityTypeConfiguration).Assembly);
 
 

@@ -28,13 +28,30 @@ namespace OrderDeliverySystem.Basket.Application.Basket.UpdateBaske
 
             var requestItme = request.Item;
 
+
+            OptionalItem newOptionalItem = new();
+
+            if (requestItme.IsAdded == true && 
+                requestItme.OptionalItemName != null &&
+                requestItme.OptionalItemDescription != null &&
+                requestItme.OptionalItemPrice != default)
+            {
+                    newOptionalItem = new OptionalItem(
+                        requestItme.IsAdded,
+                        requestItme.OptionalItemName,
+                        requestItme.OptionalItemDescription,
+                        requestItme.OptionalItemPrice);
+            }
+
             var updateBasketItemResult = basket.UpdateBasketItem(
                                             requestItme.BasketItemId,
                                             requestItme.Quantity,
                                             requestItme.isDelivery,
-                                            requestItme.DelvieryTime);
+                                            requestItme.DelvieryTime,
+                                            newOptionalItem);
 
-            if(!updateBasketItemResult.IsSuccess)
+
+            if (!updateBasketItemResult.IsSuccess)
                 return updateBasketItemResult;
 
             await _busketRepository.SaveChangesAsync(); 

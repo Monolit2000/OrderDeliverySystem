@@ -12,6 +12,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
         public static OrderItemStatus Delivered => new OrderItemStatus(nameof(Delivered));
         public static OrderItemStatus Cooked => new OrderItemStatus(nameof(Cooked));
         public static OrderItemStatus InWork => new OrderItemStatus(nameof(InWork));
+        public static OrderItemStatus Cancelled => new OrderItemStatus(nameof(Cancelled));
 
         private static readonly HashSet<string> ValidStatuses = new HashSet<string>
         {
@@ -21,7 +22,8 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             nameof(PickedUp),
             nameof(Delivered),
             nameof(Cooked),
-            nameof(InWork)
+            nameof(InWork),
+            nameof(Cancelled),
         };
         private OrderItemStatus(string value)
         {

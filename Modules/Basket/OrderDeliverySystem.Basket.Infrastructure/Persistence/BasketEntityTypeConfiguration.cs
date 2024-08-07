@@ -14,10 +14,22 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
         public void Configure(EntityTypeBuilder<CustomerBasket> builder)
         {
 
+            //builder.ToTable("Basket", "Basket");
+
+            //builder.HasKey(cb => cb.CustomerBasketId); 
+
+
+            //builder.HasKey(cb => cb.CustomerBasketId);
+
+            //builder.Property(cb => cb.CustomerBasketId)
+            //       .IsRequired()
+            //       .ValueGeneratedNever();
+
+            //builder.Property(cb => cb.BuyerId)
+            //       .IsRequired();
+
+
             builder.ToTable("Basket", "Basket");
-
-            builder.HasKey(cb => cb.CustomerBasketId); 
-
 
             builder.HasKey(cb => cb.CustomerBasketId);
 
@@ -28,7 +40,15 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
             builder.Property(cb => cb.BuyerId)
                    .IsRequired();
 
+            builder.Property(cb => cb.BuyerChatId)
+                   .IsRequired();
 
+            builder.HasMany(cb => cb.Items)
+                   .WithOne(bi => bi.CustomerBasket)
+                   .HasForeignKey(bi => bi.CustomerBasketId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
+
+   
 }

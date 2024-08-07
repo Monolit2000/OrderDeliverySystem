@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
+using OrderDeliverySystem.Catalog.Application.Contract;
 using OrderDeliverySystem.Catalog.Application.Extensions;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using System;
@@ -12,10 +13,15 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
 {
     public class EditCatalogItemCommandHandler : IRequestHandler<EditCatalogItemCommand, Result<EditCatalogItemDto>>
     {
-        public readonly ICatalogRepository _catalogRepository;
+        private readonly IBlobService _blobService;
 
-        public EditCatalogItemCommandHandler(ICatalogRepository catalogRepository)
+        private readonly ICatalogRepository _catalogRepository;
+
+        public EditCatalogItemCommandHandler(
+            IBlobService blobService,
+            ICatalogRepository catalogRepository)
         {
+            _blobService = blobService;
             _catalogRepository = catalogRepository;
         }
 
@@ -26,6 +32,8 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
             if (catalogItem == null)
                 return Result.Fail("Catalog item not found");
 
+            //if (request.photo != null)
+            //    request.PictureUri = await _blobService.UploadPhotoAsync(request.photo);
 
             var results = new List<Result>
             {
@@ -40,6 +48,22 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem
 
             if (combinedResult.IsFailed)
                 return Result.Fail<EditCatalogItemDto>(combinedResult.Errors.First());
+
+
+            if(request.OptionalItemName != null && 
+                request.OptionalItemDescription != null && 
+                request.OptionalItemPrice != default)
+            {
+                catalogItem.AddOptionItem(new OptionItem(
+                    request.OptionalItemName, 
+                    request.OptionalItemDescription,
+                    request.OptionalItemPrice));
+            }
+            else
+            {
+                catalogItem.AddOptionItem(new OptionItem());
+            }
+
 
             await _catalogRepository.SaveChangesAsync();
 

@@ -25,7 +25,7 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
 
             foreach (var item in request.OrderItems)
             {
-               var result = order.AddOrderItem(
+                var result = order.AddOrderItem(
                     item.ItemId,
                     item.ProductName,
                     item.UnitPrice,
@@ -34,7 +34,9 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.CreateOrder
                     item.IsDelivery,
                     item.DeliveryDateTime,
                     request.Adderss,
-                    item.Units);
+                    item.Units,
+                    item.OptionItemName, 
+                    item.OptionItemPrice); 
 
                 if (result.IsFailed)
                     return result;

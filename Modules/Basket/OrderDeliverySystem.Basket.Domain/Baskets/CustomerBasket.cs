@@ -47,7 +47,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             Guid ItemId, 
             int quantity = 1,
             bool isDelivery = false, 
-            DateTime delvieryTime = default)
+            DateTime delvieryTime = default,
+            OptionalItem optionalItem = null)
         {
             var basketItem = Items.FirstOrDefault(o => o.BasketItemId == ItemId);
 
@@ -64,6 +65,9 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             //chenged isDelivery == true &&
             if (delvieryTime != default)
                 basketItem.SetDelivery(isDelivery, delvieryTime);
+
+            if (optionalItem != null)
+                basketItem.AddOptionalItem(optionalItem);
             //basketItem.DeliveryDateTime = delvieryTime;
             return Result.Ok();
         }

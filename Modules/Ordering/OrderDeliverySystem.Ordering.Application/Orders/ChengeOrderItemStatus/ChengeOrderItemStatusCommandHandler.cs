@@ -22,16 +22,15 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChengeOrderItemStatus
             if (orderItem == null)
                 return Result.Fail("Order item not found");
 
-            var statusResult = OrderItemStatus.Create(request.Status);
+            var statusResult = OrderItemStatus.Create(request.NewStatus);
 
             if (statusResult.IsFailed)
-                return CustomResultHelper.ToResul(statusResult);
+                return CustomResultHelper.ToResult(statusResult);
 
             var newStatus = statusResult.Value;
 
-
+            //change status 
             var changeStatusResult = orderItem.ChangeStatus(newStatus);
-
 
             if (changeStatusResult.IsFailed)
                 return changeStatusResult;

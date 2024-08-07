@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId
+namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerChatId
 {
     public class OrderDto
     {

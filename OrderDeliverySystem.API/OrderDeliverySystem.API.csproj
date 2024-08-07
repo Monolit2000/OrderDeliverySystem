@@ -14,24 +14,21 @@
     <Compile Remove="Controllers\**" />
     <Compile Remove="Modules\Administration\**" />
     <Compile Remove="Modules\Baskets\Basket\Новая папка\**" />
-    <Compile Remove="Новая папка\**" />
     <Content Remove="Controllers\**" />
     <Content Remove="Modules\Administration\**" />
     <Content Remove="Modules\Baskets\Basket\Новая папка\**" />
-    <Content Remove="Новая папка\**" />
     <EmbeddedResource Remove="Controllers\**" />
     <EmbeddedResource Remove="Modules\Administration\**" />
     <EmbeddedResource Remove="Modules\Baskets\Basket\Новая папка\**" />
-    <EmbeddedResource Remove="Новая папка\**" />
     <None Remove="Controllers\**" />
     <None Remove="Modules\Administration\**" />
     <None Remove="Modules\Baskets\Basket\Новая папка\**" />
-    <None Remove="Новая папка\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="FirebaseAdmin" Version="3.0.0" />
     <PackageReference Include="Hangfire" Version="1.8.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <PrivateAssets>all</PrivateAssets>

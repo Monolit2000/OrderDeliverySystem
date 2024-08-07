@@ -10,6 +10,7 @@ using OrderDeliverySystem.API.Modules.Base;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.EditCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem;
 using OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItemByWeek;
+using OrderDeliverySystem.Catalog.Application.CatalogItems.UploadCatalogItemPhoto;
 
 namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 {
@@ -21,7 +22,14 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 
         public CatalogItemController(IMediator mediator) 
             => _mediator = mediator;
-     
+
+        [HttpPost("UploadCatalogItemPhoto")]
+        [Consumes("multipart/form-data")]
+        [RequestSizeLimit(100 * 1024 * 1024)]
+        public async Task<IActionResult> UploadCatalogItemPhoto([FromForm] UploadCatalogItemPhotoCommand uploadCatalogItemPhotoCommand)
+        {
+            return HandleResult(await _mediator.Send(uploadCatalogItemPhotoCommand));
+        }
 
         [HttpPost("AddCatalogItem")]
         public async Task<IActionResult> AddCatalogItem(AddCatalogItemCommand addCatalogItemRequest)
@@ -59,7 +67,7 @@ namespace OrderDeliverySystem.API.Modules.Catalog.CatalogItem
 
 
         [HttpGet("GetAllCatalogItemsByWeek")]
-        public async Task<IActionResult> EditCatalogItem(/*GetAllCatalogItemsByWeekQuery getAllCatalogItemsByWeekQuery*/)
+        public async Task<IActionResult> GetAllCatalogItemsByWeek(/*GetAllCatalogItemsByWeekQuery getAllCatalogItemsByWeekQuery*/)
         {
             return HandleResult(await _mediator.Send(new GetAllCatalogItemsByWeekQuery()));
         }

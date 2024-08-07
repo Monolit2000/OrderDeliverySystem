@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId
+namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerChatId
 {
-    public class GetOllOrdersByBuyerChatIdQueryHandler : IRequestHandler<GetOllOrdersByBuyerChatIdQuery, Result<List<OrderDto>>>
+    public class GetAllOrdersByBuyerChatIdQueryHandler : IRequestHandler<GetAllOrdersByBuyerChatIdQuery, Result<List<OrderDto>>>
     {
         public readonly IOrderRepository _orderRepository;
 
-        public GetOllOrdersByBuyerChatIdQueryHandler(IOrderRepository orderRepository)
+        public GetAllOrdersByBuyerChatIdQueryHandler(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public async Task<Result<List<OrderDto>>> Handle(GetOllOrdersByBuyerChatIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<OrderDto>>> Handle(GetAllOrdersByBuyerChatIdQuery request, CancellationToken cancellationToken)
         {
 
             var root = await _orderRepository.GetOllOrderAsyncByChatId(request.ChatId);

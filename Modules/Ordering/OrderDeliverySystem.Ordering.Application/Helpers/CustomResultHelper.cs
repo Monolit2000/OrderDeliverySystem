@@ -9,7 +9,7 @@ namespace OrderDeliverySystem.Ordering.Application.Helpers
 {
     public static class CustomResultHelper
     {
-        public static Result ToResul<T>(Result<T> originalResult)
+        public static Result ToResult<T>(Result<T> originalResult)
            => Result.Fail(originalResult.Reasons.Select(x => x.Message));
     }
 }

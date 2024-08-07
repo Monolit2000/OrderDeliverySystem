@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using MediatR.NotificationPublishers;
 using OrderDeliverySystem.Basket.Domain.Baskets.Event;
 using OrderDeliverySystem.CommonModule.Domain;
 
@@ -6,16 +7,18 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 {
     public class BasketItem : Entity
     {
-        public Guid BasketItemId { get; private set; }  
-        public Guid ProductId { get; private set; }
         public Guid CustomerBasketId { get; private set; }
-        public string ProductImageUrl { get; private set; }
         public CustomerBasket CustomerBasket { get; private set; }
+
+        public string Description { get; private set; } 
+        public Guid BasketItemId { get; private set; }
+        public Guid ProductId { get; private set; }
+        public string ProductImageUrl { get; private set; }
         public string ProductName { get; private set; }
         public decimal UnitPrice { get; private set; }
         public int Quantity { get; private set; } = 1;
-        public bool IsDelivery { get; private set; }    
-
+        public bool IsDelivery { get; private set; }
+        public OptionalItem OptionalItem { get; set; } 
         public DateTime DeliveryDateTime { get; private set; }
         public DateTime Day { get; private set; }
 
@@ -28,6 +31,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             decimal unitPrice,
             DateTime day,
             string productImageUrl,
+            string description,
             int quantity = 1)
         {
             if (unitPrice < 0)
@@ -35,13 +39,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
             if (quantity < 0)
                 throw new ArgumentException("Quantity cannot be negative.", nameof(quantity));
-
+            BasketItemId = Guid.NewGuid();
             ProductId = productId;
             ProductName = productName;
             UnitPrice = unitPrice;
             Quantity = quantity;
             Day = day;
             ProductImageUrl = productImageUrl;
+            Description = description;
+            OptionalItem = OptionalItem ?? new OptionalItem();
         }
 
         public static BasketItem CreateNew(
@@ -50,6 +56,7 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
             decimal unitPrice,
             DateTime day,
             string productImageUrl,
+            string description,
             int quantity = 1)
         {
             return new BasketItem(
@@ -57,8 +64,15 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
                 productName,
                 unitPrice, 
                 day,
-                productImageUrl, 
+                productImageUrl,
+                description,
                 quantity);    
+        }
+
+
+        public void AddOptionalItem(OptionalItem optionalItem)
+        {
+            OptionalItem = optionalItem;
         }
 
         public Result UpdateQuantity(int newQuantity)

@@ -16,5 +16,7 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem
         public decimal Price { get; set; }
         public string PictureFileName { get; set; } = string.Empty;
         public string PictureUri { get; set; } = string.Empty;
+
+        public OptionalItemDto OptionalItemDto { get; set; }    
     }
 }

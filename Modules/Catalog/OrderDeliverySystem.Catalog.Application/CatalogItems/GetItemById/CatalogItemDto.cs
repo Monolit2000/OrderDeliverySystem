@@ -19,5 +19,9 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
         public decimal Price { get; set; }
 
         public DateTime Day { get; set; }
+
+        public string? OptionalItemName { get; set; }
+        public string? OptionalItemDescription { get; set; }
+        public decimal OptionalItemPrice { get; set; } = default;
     }
 }

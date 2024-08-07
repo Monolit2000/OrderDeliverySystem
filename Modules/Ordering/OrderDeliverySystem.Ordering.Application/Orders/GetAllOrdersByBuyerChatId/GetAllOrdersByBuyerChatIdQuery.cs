@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId
+namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerChatId
 {
-    public class GetOllOrdersByBuyerChatIdQuery : IRequest<Result<List<OrderDto>>>
+    public class GetAllOrdersByBuyerChatIdQuery : IRequest<Result<List<OrderDto>>>
     {
         public long ChatId { get; set; }
     }

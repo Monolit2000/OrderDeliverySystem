@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using OrderDeliverySystem.Ordering.Application.Orders.CancelOrder;
 using OrderDeliverySystem.Ordering.Application.Orders.ChangeOrderStaus;
 using OrderDeliverySystem.Ordering.Application.Orders.CreateOrder;
-using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders;
-using OrderDeliverySystem.Ordering.Application.Orders.GetOllOrdersByBuyerChatId;
+using OrderDeliverySystem.Ordering.Application.Orders.GetAllOrders;
+using OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerChatId;
 using OrderDeliverySystem.Ordering.Application.Orders.SatAwaitingValidationOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetPaidOrderStatus;
 using OrderDeliverySystem.Ordering.Application.Orders.SetShippedOrderStatus;
@@ -44,8 +44,8 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         }
 
 
-        [HttpPost("GetOllOrdersByBuyerChatId")]
-        public async Task<IActionResult> GetOllOrdersByBuyerChatId(GetOllOrdersByBuyerChatIdQuery getOllOrdersByBuyerChatIdQuery)
+        [HttpPost("GetAllOrdersByBuyerChatId")]
+        public async Task<IActionResult> GetOllOrdersByBuyerChatId(GetAllOrdersByBuyerChatIdQuery getOllOrdersByBuyerChatIdQuery)
         {
             return HandleResult(await _mediator.Send(getOllOrdersByBuyerChatIdQuery));
         }
@@ -54,7 +54,7 @@ namespace OrderDeliverySystem.API.Modules.Ordering.Orders
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetOllOrdersByBuyerChatId()
         {
-            return HandleResult(await _mediator.Send(new GetOllOrdersQuerie()));
+            return HandleResult(await _mediator.Send(new GetAllOrdersQuerie()));
         }
 
 

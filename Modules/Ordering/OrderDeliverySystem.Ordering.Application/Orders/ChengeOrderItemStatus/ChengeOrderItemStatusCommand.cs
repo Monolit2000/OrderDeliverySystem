@@ -12,6 +12,6 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.ChengeOrderItemStatus
     {
         public Guid OrderId { get; set; }
         public Guid OrderItemId { get; set; }
-        public string Status { get; set; } 
+        public string NewStatus { get; set; } 
     }
 }

@@ -105,6 +105,14 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("OptionItemName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("OptionItemName");
+
+                    b.Property<decimal>("OptionItemPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("OptionItemPrice");
+
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
 

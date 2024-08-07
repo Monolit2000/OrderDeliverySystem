@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderDeliverySystem.Ordering.Application.Orders.GetOllOrders
+namespace OrderDeliverySystem.Basket.Application.Basket.AddOptionalItem
 {
-    public class GetOllOrdersRequest
+    internal class OptionalItemDto
     {
     }
 }

@@ -14,6 +14,7 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
         public long BuyerChatId { get; set; }
         public Guid ProductId { get; set; }
 
+        public string Description { get; set; }
         public string ProductImageUrl { get; set; } = "string";
 
         public string ProductName { get; set; }
@@ -21,5 +22,10 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
         public int Quantity { get; set; }
 
         public DateTime Day { get; set; }
+
+        public bool IsAdded { get; set; } = false;
+        public string? OptionalItemName { get; set; }
+        public string? OptionalItemDescription { get; set; }
+        public decimal OptionalItemPrice { get; set; } = default;
     }
 }

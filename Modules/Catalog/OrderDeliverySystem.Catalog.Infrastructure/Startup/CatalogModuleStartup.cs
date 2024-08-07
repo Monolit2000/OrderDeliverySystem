@@ -4,15 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using OrderDeliverySystem.Catalog.Application.Contract;
 using OrderDeliverySystem.Catalog.Infrastructure.Persistence;
 using OrderDeliverySystem.CommonModule.Infrastructure.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using OrderDeliverySystem.Catalog.Infrastructure.EventBus;
 using OrderDeliverySystem.Catalog.Infrastructure.Domain.Catalogs;
+using OrderDeliverySystem.Catalog.Infrastructure.Services;
+
 
 namespace OrderDeliverySystem.Catalog.Infrastructure.Startup
 {
@@ -42,6 +39,7 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Startup
 
             services.AddScoped<ICatalogRepository, CatalogRepository>();
             services.AddScoped<ICatalogModule, CatlogModule>();
+            services.AddScoped<IBlobService, BlobService>();
             services.AddEventBusModule();
             return services;
         }

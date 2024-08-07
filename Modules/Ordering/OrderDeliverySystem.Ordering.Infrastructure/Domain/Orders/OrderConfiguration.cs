@@ -59,6 +59,11 @@ namespace OrderDeliverySystem.Ordering.Infrastructure.Domain.Orders
             builder.Property(e => e.UnitPrice)
                 .HasColumnType("decimal(18,2)");
 
+            builder.Property(e => e.OptionItemName).HasColumnName("OptionItemName");
+
+            builder.Property(e => e.OptionItemPrice)
+               .HasColumnType("decimal(18,2)").HasColumnName("OptionItemPrice");
+
             builder.ComplexProperty(o => o.DeliveryOptions, b =>
             {
                 b.IsRequired();

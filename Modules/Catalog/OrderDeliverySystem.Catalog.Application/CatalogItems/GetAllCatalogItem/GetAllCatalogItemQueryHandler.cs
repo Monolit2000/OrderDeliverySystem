@@ -33,8 +33,6 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem
             {
                 return Result.Fail<List<CatalogItemDto>>($"Error retrieving catalog items: {ex.Message}");
             }
-
-
         }
     }
 }

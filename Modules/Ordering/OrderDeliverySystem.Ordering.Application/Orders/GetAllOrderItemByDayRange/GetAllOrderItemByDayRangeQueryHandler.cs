@@ -25,7 +25,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrderItemByDayRa
                     Discount = oi.OrderItem.Discount,
                     Units = oi.OrderItem.Units,
                     Deadline = oi.OrderItem.DeliveryOptions.DeliveryDateTime,
-                    Status = oi.OrderItem.Status.Value
+                    Status = oi.OrderItem.Status.Value,
+                    OptionItemName = oi.OrderItem.OptionItemName   
                     // Address = oi.OrderItem.DeliveryOptions.Address
                 })
                 .ToList();

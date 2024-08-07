@@ -28,7 +28,25 @@ namespace OrderDeliverySystem.Basket.Application.Basket.AddItemInBasket
                     request.UnitPrice,
                     request.Day,
                     request.ProductImageUrl,
+                    request.Description,
                     request.Quantity);
+
+            OptionalItem newOptionalItem = new();
+
+            if (request.IsAdded == true && 
+                request.OptionalItemName != null &&
+                request.OptionalItemDescription != null &&
+                request.OptionalItemPrice != default)
+            {
+                newOptionalItem = new OptionalItem(
+                request.IsAdded == true,
+                request.OptionalItemName,
+                request.OptionalItemDescription,
+                request.OptionalItemPrice);
+            }
+
+            basketItem.AddOptionalItem(newOptionalItem);
+
 
             var addItemrResult = basket.AddItem(basketItem);
 

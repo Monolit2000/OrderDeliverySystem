@@ -1,9 +1,6 @@
 ﻿using FluentResults;
 using OrderDeliverySystem.CommonModule.Domain;
 using OrderDeliverySystem.Catalog.Domain.Catalog.Events;
-using System.Text.Json.Serialization;
-using Azure.Core;
-using MediatR;
 
 namespace OrderDeliverySystem.Catalog.Domain.Catalog
 {
@@ -18,7 +15,11 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public string PictureFileName { get; private set; } = string.Empty;
         public string PictureUri { get; private set; } = string.Empty;
 
-        private CatalogItem() { } // For EF core
+        public OptionItem OptionItem { get; private set; }
+
+        //public OptionItemDr? OptionItemDr { get; private set; }
+
+        private CatalogItem() { } // For EF Core
 
         public CatalogItem(
             Guid catalogItemId,
@@ -38,15 +39,15 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
             Price = price;
             PictureFileName = pictureFileName;
             PictureUri = pictureUri;
+            OptionItem = new OptionItem();
 
             AddDomainEvent(new CatalogItemCreatedDomainEvent());
         }
 
-
         public static Result<CatalogItem> CreateNew(
             string name,
-            DateTime timeToItemExist, 
-            string description, 
+            DateTime timeToItemExist,
+            string description,
             decimal price,
             string pictureFileName = "",
             string pictureUri = "")
@@ -65,7 +66,7 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
                 Description = description,
                 Price = price,
                 PictureFileName = pictureFileName,
-                PictureUri = pictureUri
+                PictureUri = pictureUri,
             };
             return Result.Ok(catalogItem);
         }
@@ -73,7 +74,6 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Result SetName(string name)
         {
             Name = name;
-
             return Result.Ok();
         }
 
@@ -81,9 +81,8 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         {
             if (newPrice <= 0)
                 return Result.Fail("Price must be greater than zero.");
-            
-            Price = newPrice;
 
+            Price = newPrice;
             AddDomainEvent(new CatalogItemPriceChangedDomainEvent());
             return Result.Ok();
         }
@@ -91,14 +90,12 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Result ChangeDescription(string newDescription)
         {
             Description = newDescription;
-
             return Result.Ok();
         }
 
         public Result ChangeTimeToItemExist(DateTime newDateTime)
         {
             TimeToItemExist = newDateTime;
-
             AddDomainEvent(new TimeToItemExistChangedDomainEvent());
             return Result.Ok();
         }
@@ -106,8 +103,15 @@ namespace OrderDeliverySystem.Catalog.Domain.Catalog
         public Result ChangePictureUri(string uri)
         {
             PictureUri = uri;
-
             AddDomainEvent(new CatalogItemPictureChangedDomainEvent());
+            return Result.Ok();
+        }
+
+        public Result AddOptionItem(OptionItem optionItem)
+        {
+            OptionItem = optionItem;
+
+            AddDomainEvent(new OptionItemAddedDomainEvent());
             return Result.Ok();
         }
     }

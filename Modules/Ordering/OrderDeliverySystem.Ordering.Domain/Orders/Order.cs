@@ -60,7 +60,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             bool isDelivery, 
             DateTime deliveryDateTime, 
             string address, 
-            int units = 1)
+            int units = 1,
+            string optionItemName = null, 
+            decimal optionItemNamePrice = default)
         {
             var existingOrderForProduct = _orderItems
                 .FirstOrDefault(o => o.ProductId == orderItemId);
@@ -74,7 +76,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
                 unitPrice,
                 discount,
                 pictureUrl, 
-                units);
+                units,
+                optionItemName,
+                optionItemNamePrice);
 
             if (isDelivery)
                 orderItem.AddDeliveryProrerty(deliveryDateTime, address);
@@ -91,8 +95,16 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
         {
             return OrderItems.Sum(item =>
                 (item.UnitPrice - item.Discount) * item.Units +
-                (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
+                (item.DeliveryOptions.IsSelfPickup ? 0 : 20) +
+                item.OptionItemPrice);
         }
+
+        //public decimal GetAmount()
+        //{
+        //    return OrderItems.Sum(item =>
+        //        (item.UnitPrice - item.Discount) * item.Units +
+        //        (item.DeliveryOptions.IsSelfPickup ? 0 : 20));
+        //}
 
         public Result ChangeDeliveryTime(
             Guid orderItemId, 

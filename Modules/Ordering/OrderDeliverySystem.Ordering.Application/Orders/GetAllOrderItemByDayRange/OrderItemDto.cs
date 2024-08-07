@@ -18,6 +18,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrderItemByDayRa
         public int Units { get; set; }
         public DateTime Deadline { get; set; }
         public string Status { get; set; }  
+        public string? OptionItemName { get; set; }  
+
         // public string Address { get; set; }
     }
 }

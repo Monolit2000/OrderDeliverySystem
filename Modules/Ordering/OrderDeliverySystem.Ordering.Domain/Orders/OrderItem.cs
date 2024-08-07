@@ -29,6 +29,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public DeliveryOptions DeliveryOptions { get; private set; }
 
+        public string OptionItemName { get; private set; }
+        public decimal OptionItemPrice { get; private set; }
+
         private OrderItem() { }
 
         public OrderItem(
@@ -37,7 +40,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             decimal unitPrice,
             decimal discount,
             string pictureUrl,
-            int units = 1)
+            int units = 1,
+            string optionItemName = null,
+            decimal optionItemPrice = 0)
         {
             ProductId = orderItemId;
             ProductName = productName;
@@ -47,6 +52,8 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             PictureUrl = pictureUrl;
             Status = OrderItemStatus.Waiting;
             DeliveryOptions = DeliveryOptions.SelfPickup(DateTime.Now, "Default");
+            OptionItemName = optionItemName;
+            OptionItemPrice = optionItemPrice;
 
             AddDomainEvent(new OrderItemAddedDomainEvent());
         }
@@ -57,7 +64,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             decimal unitPrice,
             decimal discount,
             string pictureUrl,
-            int units = 1)
+            int units = 1,
+            string optionItemName = null,
+            decimal optionItemNamePrice = 0)
         {
             return new OrderItem(
                 orderItemId,
@@ -65,7 +74,9 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
                 unitPrice,
                 discount,
                 pictureUrl,
-                units);
+                units,
+                optionItemName,
+                optionItemNamePrice);
         }
 
         public Result ChangeStatus(OrderItemStatus newStatus)
@@ -79,12 +90,22 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
                 nameof(OrderItemStatus.Delivered) => MarkAsDelivered(),
                 nameof(OrderItemStatus.Cooked) => MarkAsCooked(),
                 nameof(OrderItemStatus.InWork) => MarkAsInWork(),
+                nameof(OrderItemStatus.Cancelled) => MarkAsCancelled(),
                 _ => Result.Fail($"Unhandled status value: {newStatus.Value}")
             };
 
-            //AddStatusChange(this.OrderItemId, newStatus);
-
             return result;
+        }
+
+        public Result MarkAsCancelled()
+        {
+            if (ValidateStatusTransition(Status, OrderItemStatus.Cancelled))
+                return Result.Fail("Validate status transition error");
+
+            Status = OrderItemStatus.Cancelled;
+            AddStatusChange(this.OrderItemId, Status);
+            AddDomainEvent(new OrderItemMarkedAsCancelledDomainEvent());
+            return Result.Ok();
         }
 
         public Result MarkAsWaiting()
@@ -166,7 +187,6 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
             return Result.Ok();
         }
 
-
         private void AddStatusChange(Guid itemId, OrderItemStatus newStatus)
         {
             var statusChange = OrderItemStatusChange.CreateNew(itemId, newStatus, DateTime.UtcNow);
@@ -230,15 +250,16 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
         {
             var validTransitions = new Dictionary<OrderItemStatus, List<OrderItemStatus>>
             {
-                { OrderItemStatus.Waiting, new List<OrderItemStatus>() /*{ OrderItemStatus.InWork, OrderItemStatus.Failed }*/ },
-                { OrderItemStatus.InWork, new List<OrderItemStatus>() /*{ OrderItemStatus.Cooked, OrderItemStatus.Failed }*/ },
-                { OrderItemStatus.Cooked, new List<OrderItemStatus> () /*{ OrderItemStatus.PickedUp, OrderItemStatus.Delivered }*/ },
-                { OrderItemStatus.PickedUp, new List<OrderItemStatus> () /*{ OrderItemStatus.Delivered }*/ },
-                { OrderItemStatus.Paid, new List<OrderItemStatus> () /*{ OrderItemStatus.InWork, OrderItemStatus.Failed }*/ },
+                { OrderItemStatus.Waiting, new List<OrderItemStatus>() },
+                { OrderItemStatus.InWork, new List<OrderItemStatus>() },
+                { OrderItemStatus.Cooked, new List<OrderItemStatus>() },
+                { OrderItemStatus.PickedUp, new List<OrderItemStatus>() },
+                { OrderItemStatus.Paid, new List<OrderItemStatus>() },
+                { OrderItemStatus.Cancelled, new List<OrderItemStatus>() },
             };
 
             return currentStatus == newStatus ||
-                validTransitions.TryGetValue(currentStatus, out var possibleStatuses) && 
+                validTransitions.TryGetValue(currentStatus, out var possibleStatuses) &&
                 possibleStatuses.Contains(newStatus);
         }
     }

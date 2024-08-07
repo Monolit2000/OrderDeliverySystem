@@ -1,11 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
 {
@@ -32,7 +27,10 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetItemById
                 Description = catalogItem.Description,
                 Price = catalogItem.Price,
                 Day = catalogItem.TimeToItemExist,
-                ImageUri = catalogItem.PictureUri
+                ImageUri = catalogItem.PictureUri,
+                OptionalItemName = catalogItem.OptionItem.Name,
+                OptionalItemDescription = catalogItem.OptionItem.Description,
+                OptionalItemPrice = catalogItem.OptionItem.Price
             };
 
             return catalogItemDto;

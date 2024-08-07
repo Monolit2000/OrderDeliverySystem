@@ -27,7 +27,13 @@ namespace OrderDeliverySystem.Catalog.Application.CatalogItems.GetAllCatalogItem
                         Description = item.Description,
                         Price = item.Price,
                         PictureFileName = item.PictureFileName,
-                        PictureUri = item.PictureUri
+                        PictureUri = item.PictureUri,
+                        OptionalItemDto = new OptionalItemDto 
+                        {
+                            OptionalItemName = item.OptionItem.Name,
+                            OptionalItemDescription = item.OptionItem.Description,
+                            OptionalItemPrice = item.OptionItem.Price
+                        }
                     }).ToList()
                 }).ToList();
 

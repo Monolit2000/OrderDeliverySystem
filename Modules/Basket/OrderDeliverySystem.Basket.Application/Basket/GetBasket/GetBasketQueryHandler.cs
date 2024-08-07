@@ -2,13 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using OrderDeliverySystem.Basket.Domain.Baskets;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
 {
@@ -68,7 +62,12 @@ namespace OrderDeliverySystem.Basket.Application.Basket.GetBasket
                         Day = i.Day,    
                         IsDelivery = i.IsDelivery,
                         ProductImageUrl = i.ProductImageUrl,
-                        DeliveryDateTime = i.DeliveryDateTime
+                        DeliveryDateTime = i.DeliveryDateTime,
+                        Description = i.Description,    
+                        IsAdded = i.OptionalItem.IsAdded,
+                        OptionalItemName = i.OptionalItem.Name,
+                        OptionalItemDescription = i.OptionalItem.Description,   
+                        OptionalItemPrice = i.OptionalItem.Price
                     }).ToList(),
             };
 

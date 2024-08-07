@@ -1,13 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OrderDeliverySystem.Catalog.Domain.Catalog;
 using OrderDeliverySystem.Catalog.Domain.Establishments;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
 {
@@ -17,6 +11,8 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
         { }
 
         public DbSet<CatalogItem> CatalogItems { get; set; }
+
+        //public DbSet<OptionItemDr> OptionItems { get; set; }
 
         public DbSet<CatalogType> CatalogTypes { get; set; }
 
@@ -32,10 +28,13 @@ namespace OrderDeliverySystem.Catalog.Infrastructure.Persistence
 
             modelBuilder.Entity<Establishment>().HasKey(e => e.EstablishmentId);
 
-            CatalogItemSeeder.Seed(modelBuilder);
+            //CatalogItemSeeder.Seed(modelBuilder);
 
             //base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CatalogItemConfiguration());
+
+            //modelBuilder.ApplyConfiguration(new OptionItemConfiguration());
+
         }
     }
 }
