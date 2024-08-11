@@ -66,6 +66,9 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddHostedService<IntegrationEventProcessorJob>();
 
+builder.Services.AddHostedService<ScheduledTaskBasketCleanup>();
+
+
 builder.Services.AddDistributedMemoryCache();
 
 

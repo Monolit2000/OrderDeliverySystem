@@ -52,4 +52,14 @@
     <ProjectReference Include="..\Modules\UserAccess\OrderDeliverySystem.UserAccess.Infrastructure\OrderDeliverySystem.UserAccess.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Properties\touchlunch-81db1-firebase-adminsdk-1zzyy-cd4413028dNEW.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Properties\touchlunch-81db1-firebase-adminsdk-1zzyy-cd4413028dNEW.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

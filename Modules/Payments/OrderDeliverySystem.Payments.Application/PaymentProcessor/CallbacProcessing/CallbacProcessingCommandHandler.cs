@@ -39,6 +39,9 @@ namespace OrderDeliverySystem.Payments.Application.PaymentProcessor.CallbacProce
             if (!Guid.TryParse(liqPayResponse.OrderId, out var orderId))
                 return Result.Fail("Invalid Order ID");
 
+            var paymentId = liqPayResponse.PaymentId;
+            var Trunsaction = liqPayResponse.TransactionId;
+
             var payment = await _paymentRepository.GetByOrderIdAsync(orderId);
             if (payment is null)
                 return Result.Fail("Payment not found");

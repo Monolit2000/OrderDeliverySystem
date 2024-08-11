@@ -41,6 +41,10 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Startup
             });
 
 
+            services.AddScoped<BasketCleanupService>();
+
+
+
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketModule, BasketModule>();
             services.AddEventBusModule();

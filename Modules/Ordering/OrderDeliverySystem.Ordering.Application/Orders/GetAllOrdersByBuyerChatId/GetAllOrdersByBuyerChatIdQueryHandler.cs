@@ -40,7 +40,8 @@ namespace OrderDeliverySystem.Ordering.Application.Orders.GetAllOrdersByBuyerCha
                     ItemId = item.OrderItemId,
                     ProductName = item.ProductName,
                     UnitPrice = item.UnitPrice,
-                    Units = item.Units
+                    Units = item.Units,
+                    DeliveryDateTime = item.DeliveryOptions.DeliveryDateTime
                 })
                 .ToList()
             })

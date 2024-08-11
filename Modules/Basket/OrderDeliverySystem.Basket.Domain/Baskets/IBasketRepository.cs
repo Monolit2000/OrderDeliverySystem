@@ -20,6 +20,8 @@ namespace OrderDeliverySystem.Basket.Domain.Baskets
 
         Task<bool> DeleteBasketAsync(CustomerBasket basket);
 
+        Task<List<CustomerBasket>> GetAllBasketsAsync();
+
         Task SaveChangesAsync();
     }
 }

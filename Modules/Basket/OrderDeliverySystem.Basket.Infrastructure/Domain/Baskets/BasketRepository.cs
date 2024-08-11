@@ -60,6 +60,13 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Domain.Baskets
         {
             await _basketContext.SaveChangesAsync();
         }
+
+        public async Task<List<CustomerBasket>> GetAllBasketsAsync()
+        {
+            return await _basketContext.Baskets
+                .Include(b => b.Items) 
+                .ToListAsync();
+        }
     }
 }
 //if (customerBasket != null)
