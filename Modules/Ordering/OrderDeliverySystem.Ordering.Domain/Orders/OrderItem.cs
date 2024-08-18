@@ -31,6 +31,7 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
         public string OptionItemName { get; private set; }
         public decimal OptionItemPrice { get; private set; }
+        public int OptionItemQuantity { get; private set; } = 1;
 
         private OrderItem() { }
 

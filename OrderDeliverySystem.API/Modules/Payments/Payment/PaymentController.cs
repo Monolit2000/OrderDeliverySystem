@@ -10,7 +10,7 @@ using OrderDeliverySystem.Payments.Application.Payments.GetPaymentHistory;
 
 namespace OrderDeliverySystem.API.Modules.Payments.Payment
 {
-    [Route("api/Payment")]
+    [Route("api/Payments")]
     [ApiController]
     public class PaymentController : BaseController
     {

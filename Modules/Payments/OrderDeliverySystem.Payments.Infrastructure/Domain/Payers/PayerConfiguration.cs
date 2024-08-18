@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderDeliverySystem.Payments.Domain.Payers;
 
-namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
+namespace OrderDeliverySystem.Payments.Infrastructure.Domain.Payers
 {
     public class PayerConfiguration : IEntityTypeConfiguration<Payer>
     {
@@ -29,8 +29,8 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
                    .IsRequired();
 
             // Настройка навигационного свойства, если оно есть
-            // builder.HasMany(p => p.Payments) // Если у вас есть коллекция Payments в Payer
-            //        .WithOne() // Настройка связи с Payment
+            // builder.HasMany(p => p.Payments) // Если у вас есть коллекция Payments в Payers
+            //        .WithOne() // Настройка связи с Payments
             //        .HasForeignKey(p => p.PayerId);
         }
     }

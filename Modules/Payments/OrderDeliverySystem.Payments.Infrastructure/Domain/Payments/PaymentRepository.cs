@@ -4,7 +4,7 @@ using OrderDeliverySystem.Payments.Domain.Payments;
 using OrderDeliverySystem.Payments.Infrastructure.Persistence;
 
 
-namespace OrderDeliverySystem.Payments.Infrastructure.Domain
+namespace OrderDeliverySystem.Payments.Infrastructure.Domain.Payments
 {
     public class PaymentRepository : IPaymentRepository
     {

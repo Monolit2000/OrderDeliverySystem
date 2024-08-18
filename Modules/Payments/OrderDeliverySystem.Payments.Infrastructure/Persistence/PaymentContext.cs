@@ -14,7 +14,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Persistence
         public PaymentContext(DbContextOptions<PaymentContext> options) : base(options)
         { }
 
-        //public DbSet<Payer> Payers { get; set; }
+        //public DbSet<Payers> Payers { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

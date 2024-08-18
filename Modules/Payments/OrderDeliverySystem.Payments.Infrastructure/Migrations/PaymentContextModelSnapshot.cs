@@ -23,7 +23,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("OrderDeliverySystem.Payments.Domain.Payments.Payment", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Payments.Domain.Payments.Payments", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier")
@@ -44,7 +44,7 @@ namespace OrderDeliverySystem.Payments.Infrastructure.Migrations
                     b.ToTable("Payments", "payments");
                 });
 
-            modelBuilder.Entity("OrderDeliverySystem.Payments.Domain.Payments.Payment", b =>
+            modelBuilder.Entity("OrderDeliverySystem.Payments.Domain.Payments.Payments", b =>
                 {
                     b.OwnsOne("OrderDeliverySystem.Payments.Domain.Payments.OrderId", "OrderId", b1 =>
                         {

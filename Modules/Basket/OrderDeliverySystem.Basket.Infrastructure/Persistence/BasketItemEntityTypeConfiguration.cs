@@ -45,6 +45,7 @@ namespace OrderDeliverySystem.Basket.Infrastructure.Persistence
                 optionItem.Property(o => o.Name).HasColumnName("OptionItem_Name").IsRequired(false);
                 optionItem.Property(o => o.Description).HasColumnName("OptionItem_Description").IsRequired(false);
                 optionItem.Property(o => o.Price).HasColumnName("OptionItem_Price").HasColumnType("decimal(18,2)");
+                optionItem.Property(o => o.Quantity).HasColumnName("Quantity").IsRequired(false);
             });
 
 

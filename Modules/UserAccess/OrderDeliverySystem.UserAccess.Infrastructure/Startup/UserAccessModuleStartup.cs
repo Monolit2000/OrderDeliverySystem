@@ -38,7 +38,7 @@ namespace OrderDeliverySystem.UserAccess.Infrastructure.Startup
             {
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<IUserAccessApi, UserAccessApi>();

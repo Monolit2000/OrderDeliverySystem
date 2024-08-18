@@ -12,6 +12,11 @@ namespace OrderDeliverySystem.Payments.Domain.Payments
 
         public PaymentId Id { get; private set; }
         public decimal Amount { get; private set; }
+
+        public string BankPaymentId { get; private set; }
+
+        public string BankTransactionId { get; private set; }
+
         public PaymentStatus PaymentStatus { get; private set; }
         public DateTime Date { get; private set; }
 

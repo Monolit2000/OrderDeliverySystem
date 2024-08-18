@@ -90,11 +90,10 @@ namespace OrderDeliverySystem.Ordering.Domain.Orders
 
             return Result.Ok();
         }
-
         public decimal GetAmount()
         {
             return OrderItems.Sum(item =>
-                (item.UnitPrice - item.Discount) * item.Units +
+                (item.UnitPrice - item.Discount) * item.Units + 
                 (item.DeliveryOptions.IsSelfPickup ? 0 : 20) +
                 item.OptionItemPrice);
         }
